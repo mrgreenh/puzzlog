@@ -1,0 +1,8 @@
+<% provide :title, full_title("Home") %>
+
+<% if not isBlogInitialized? %>
+    <%=  render 'static_pages/initialize_blog' %>
+<%  else %>
+<h1>Home Page</h1>
+
+<% end %>

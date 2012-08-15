@@ -1,0 +1,16 @@
+<div id="flash_messages_container" class="offset3 span6">
+	<% if flash
+			if not flash[:success].nil? %>
+				<div class="alert alert-success">
+					<%= flash[:success] %>
+					<% flash[:success] = nil %>
+				</div>	
+	<% 		end
+			if not flash[:errors].nil? %>
+			<div class="alert alert-error">
+				<%= flash[:errors] %>
+				<% flash[:errors] = nil %>
+			</div>
+			<% end %>
+	<%	end %>
+</div>

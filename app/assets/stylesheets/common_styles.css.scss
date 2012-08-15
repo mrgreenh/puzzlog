@@ -1,0 +1,90 @@
+@import "bootstrap";
+body { padding-top: 60px; }
+@import "bootstrap-responsive";
+@import "variables";
+
+/*----------------------------Mixins--------------*/
+@mixin centered_content{
+  margin:auto auto;
+  text-align:center;
+}
+
+/*---------------------------Styles---------------*/
+
+.centered_content {
+  @include centered_content
+}
+
+.expanded-centered {
+  @include centered_content;
+  width:100%;
+  
+}
+
+.gentle-shade {
+  -webkit-box-shadow:  5px 5px 7px 3px rgba(0, 0, 0, 0.3);     
+   box-shadow:  5px 5px 7px 3px rgba(0, 0, 0, 0.3);
+}
+
+/*images*/
+img.thumb {
+  min-width:$thumb_size;
+  min-height:$thumb_size;
+}
+img.medium{
+  min-width:$medium_size;
+  min-height:$medium_size;
+}
+
+/*--------------------------Popups */
+.popover-inner {
+  width:150px;
+  position:relative;
+  .close {
+    position:absolute;
+    right:4px;
+    top:0px;
+  }
+}
+
+h3.popover-title{
+  display:none;
+}
+
+/*------------------------controls */
+
+.popover-inner, .user-info-container {
+  ul.controls, ul.user-works {
+    list-style-type:none;
+    margin:10px auto;
+    overflow:hidden;
+  }
+  ul.controls a{
+    width:80px;
+    margin:3px 5px;
+    float:left;
+  }
+}
+
+/*--------------------------Partials */
+/* Roles */
+.role-check-cell {
+  min-width:20px;
+}
+
+.role-button-cell .btn{
+  min-width:70px;
+}
+
+/*---------------------------Header*/
+#signin-form{
+  input{
+    width:auto;
+  }
+  label{
+    margin: auto 5px;
+  }
+  input#login-submit {
+    clear: left;
+  }
+}

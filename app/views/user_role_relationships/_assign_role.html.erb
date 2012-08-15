@@ -1,0 +1,5 @@
+<% user ||= @user %>
+<% role ||= @role %>
+<%= link_to user_role_relationships_path(role_id:role.id,user_id:user.id), remote:true, method: :post, class:'btn btn-small btn-success', id: "user#{user.id}-role#{role.id}-button" do %>
+	<i class="icon-off icon-white"></i> Grant
+<% end %>

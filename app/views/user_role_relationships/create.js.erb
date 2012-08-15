@@ -1,0 +1,4 @@
+$("#user<%= @user.id %>-role<%= @role.id %>-button").parent("td").html(
+'<%= escape_javascript(render('user_role_relationships/unassign_role', user:@user, role:@role)) %>'
+);
+$("#user<%= @user.id %>-role<%= @role.id %>-check").removeClass('hide');

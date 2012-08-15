@@ -1,0 +1,9 @@
+<% user ||= @user 
+role ||= @role 
+
+relationship = UserRoleRelationship.where(role_id:role.id, user_id:user.id).first
+%>
+
+<%= link_to user_role_relationship_path(id:relationship.id), remote:true, method: :delete, class:'btn btn-small btn-danger', id: "user#{user.id}-role#{role.id}-button" do %>
+	<i class="icon-remove icon-white"></i> Remove
+<% end %>

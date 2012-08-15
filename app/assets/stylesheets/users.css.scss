@@ -1,0 +1,22 @@
+@import "bootstrap";
+@import "bootstrap-responsive";
+@import "variables";
+
+.user-info-container p{
+  font-size:1.3em;
+  line-height:20px;
+}
+
+.user-bio p{
+  max-height: $thumb_size - 36px;
+  overflow:hidden;
+  font-size:1.2em;
+}
+/* partials */
+.user_partial:hover {
+  background-color: darken($bodyBackground, 10%);
+}
+.user-works span{
+  float:left;
+  margin:3px;
+}

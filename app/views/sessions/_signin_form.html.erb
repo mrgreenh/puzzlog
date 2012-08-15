@@ -1,0 +1,10 @@
+<%= form_tag '/sessions', method: :post, class:'well', id: 'signin-form' do %>
+	<%= label_tag 'name', 'Name:' %>
+	<%= text_field_tag 'name', nil, placeholder:'Your name goes here...', autofocus:true %>
+	
+	<%= label_tag 'password', 'Password:' %>
+	<%= password_field_tag 'password', nil, placeholder:'...and your password here.' %>
+	
+	<%= submit_tag "Login", class:'btn btn-primary', id: 'signin-submit' %>
+<% end #fine del form
+%>

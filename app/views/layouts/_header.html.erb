@@ -1,0 +1,80 @@
+<% if is_blog_initialized? %> <% #menù vuoto se blog non inizializzato 
+	%>
+<header class="navbar navbar-fixed-top">
+	<nav class="navbar-inner">
+        <div class="container">
+        	<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+		      <span class="icon-bar"></span>
+		      <span class="icon-bar"></span>
+		      <span class="icon-bar"></span>
+		    </a>
+        	<%= link_to 'Puzzle', root_path, class: 'brand' %>
+        	<div class="nav-collapse">
+				<ul class="nav">
+					<li>
+						<%= link_to 'Staff', users_path %>
+					</li>
+					<li class="divider-vertical"></li>
+				  <% if not signed_in? %>
+				  <li><a data-toggle="modal" href="#modalLogin" ><i class="icon-user icon-white"></i></a></li>
+				  
+				<% else signed_in?
+				# TODO form per il microblogging dell'utente loggato
+				%>
+					<li class="dropdown">
+					    <a href="#"
+					          class="dropdown-toggle"
+					          data-toggle="dropdown">
+					          <i class="icon-cog icon-white"></i>
+					          <b class="caret"></b>
+					    </a>
+					    <ul class="dropdown-menu">
+					      <% # TODO Fari si che venga mostrato solo a chi può scrivere articoli 
+					      %>
+					      <li class="nav-header">
+					      	Articles
+					      </li>
+					      <li>
+					      	<a href="#">Create</a>
+					      </li>
+					      <li>
+					      	<a href="#">Manage</a>
+					      </li>
+					      <li class="divider"></li>
+					      
+					      <% if can_create_users? %>
+						      <li class="nav-header">
+						      	Users
+						      </li>
+						      <li>
+						      	<%= link_to 'Create', new_user_path %>
+						      </li>
+						      <li>
+						      	<%= link_to 'Manage', users_path %>
+						      </li>
+						      <li class="divider"></class>
+					      <% end %>
+					      <% if can_modify_blog? %>
+								<li>
+						      		<a href="#">Blog Preferences</a>
+						      	</li>
+						  <% end %>
+					      <li>
+					      	<%= link_to 'Profile', user_path(current_user) %>
+					      </li>
+					      <li>
+					      	<%= link_to 'Signout', signout_path, method: "delete" %>
+					      </li>
+					    </ul>
+					 </li>
+				<% end %>
+				</ul>
+			</div>
+        </div>
+      </nav>
+</header>
+<% end %>
+
+
+
+
