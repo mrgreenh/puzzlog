@@ -4,13 +4,16 @@ gem 'rails', '3.2.6'
 gem 'sqlite3'
 gem 'json'
 gem 'jquery-rails'
-gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby', '~> 3.0.1'
 gem 'pg'
 gem 'faker'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'paperclip', "~> 3.0"
 gem 'rmagick', '2.13.1'
+gem 'bootstrap-sass', '~> 2.0.4.0'
+gem 'dynamic_form'
+gem 'aws-sdk', '~> 1.3.4'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

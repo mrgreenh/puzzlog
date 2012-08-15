@@ -1,0 +1,21 @@
+<ul class="controls user-controls expanded-centered">
+	<%if can_edit_user?(user)%>
+		<li>
+			<%= link_to edit_user_path(user), class:'btn btn-small btn-info' do %>
+				<i class='icon-pencil icon-white'></i> Edit
+			<% end %>
+		</li>
+	<%end%>
+	
+	<% if can_edit_user_priviledges?(user) %>
+	<li><a data-toggle="modal" href="#priviledges-<%= user.id %>" class="btn btn-small btn-info"><i class="icon-lock icon-white"></i> Priviledges</a></li>
+	<% end %>
+	
+	<%if can_destroy_user?(user)%>
+		<li>
+			<%= link_to user_path(user), remote:remote_bool, method: :delete, confirm: "Sei sicuro di voler eliminare #{user.name}?", class:'btn btn-small btn-danger' do %>
+				<i class="icon-trash icon-white"></i> Delete
+			<% end %>
+		</li>
+	<%end%>
+</ul>

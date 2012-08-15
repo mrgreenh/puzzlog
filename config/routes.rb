@@ -1,7 +1,20 @@
 FragmentsProject::Application.routes.draw do
+  get "user_role_relationships/create"
+
+  get "user_role_relationships/destroy"
+
+  root to: 'static_pages#home'
   
+  resources :users
+  resources :user_role_relationships, only: [:create, :destroy]
+  resources :sessions, only:[:new,:create,:destroy]
   
+  match '/staff', to: 'users#index'
   
+  match '/signup', to: 'users#new'
+  match '/signin', to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy', via: :delete
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

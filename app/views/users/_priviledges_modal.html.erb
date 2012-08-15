@@ -1,0 +1,32 @@
+<% user ||= @user %>
+<div class="hide modal fade" id="priviledges-<%= user.id %>">
+		  <div class="modal-header">
+		    <button type="button" class="close" data-dismiss="modal">×</button>
+		    <h3><%= user.name %>'s superpowers:</h3>
+		  </div>
+		  <div class="modal-body">
+		    <table class="expanded-centered table table-striped">
+		    		<tbody>
+		    			<% Role.all.each do |role| %>
+		    			<tr>
+		    				<td class="role-check-cell">
+		    					<i id="user<%= user.id %>-role<%= role.id %>-check" class="icon-ok <%= has_role?(role.name,user) ? '' : 'hide' %>"></i>
+		    				</td>
+		    				<td><Prova><strong><%= role.name.capitalize %></strong></td><td><em><%= role.description %></em></td>
+		    				<td class="role-button-cell">
+		    					<% if has_role?(role.name,user)
+		    					%>
+		    						<%= render 'user_role_relationships/unassign_role', role:role, user:user %>
+		    					<% else %>
+		    						<%= render 'user_role_relationships/assign_role', role:role, user:user %>
+		    					<%end%>
+		    				</td>
+		    				</tr>
+		    			<% end %>
+		    		</tbody>
+		    </table>
+		  </div>
+		  <div class="modal-footer">
+		    <a href="#" class="btn" data-dismiss="modal">Close</a>
+		  </div>
+	</div>

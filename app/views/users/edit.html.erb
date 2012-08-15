@@ -1,0 +1,64 @@
+<% provide :title, "Edit #{@user.name}"%>
+
+<script>
+	$(function(){
+		$("#edit_user_<%= @user.id %>").validate({
+			errorClass: "help-block",
+			submitHandler: function(form) {
+				stateful_loading();
+				form.submit();
+			  },
+			rules: {
+				name: {
+					minlength: 3
+				},
+				bio: {
+					maxlength:500
+				}
+			},
+			highlight: function(element, errorClass, validClass) {
+			     $(element).parent('fieldset').addClass('error');
+			  },
+			  unhighlight: function(element, errorClass, validClass) {
+			    $(element).parent('fieldset').removeClass('error');
+			  }
+		});
+	});
+</script>
+
+<div class="row">
+	<div class="offset3 span6">
+		<h1>Edit <%= @user.name %>'s profile:</h1>
+	</div>
+</div>
+<div class="row">
+	<div class="offset3 span6 well">
+	<%= form_for @user, html:{multipart: true}, validate:true do |object| %>
+	<div class="row">
+		<div class="span3">
+			<fieldset class='control-group <%= @user.errors[:name].any? ? 'error' : '' %>'>
+			<%= label_tag 'name', 'Name:' %>
+			<%= text_field_tag 'name', @user.name, placeholder:'Your name goes here', class:'required name' %>
+			<span class='help-inline'><%= @user.errors[:name].any? ? @user.errors[:name].first.capitalize : '' %></span>
+			</fieldset>
+		
+			<fieldset class='control-group <%= @user.errors[:bio].any? ? 'error' : '' %>'>
+			<%= label_tag 'bio', 'Short story of your life:' %>
+			<%= text_area_tag 'bio', @user.bio, placeholder:'I was born long time ago in a galaxy far far away...', class:'required bio' %>
+			<span class='help-inline'><%= @user.errors[:bio].any? ? @user.errors[:bio].first.capitalize : '' %></span>
+			</fieldset>
+		</div>
+		<div class="span2">
+			<%= image_tag @user.avatar.url(:thumb), class:'thumb' %>
+			<%= object.label :avatar, 'Sostituisci con:' %>
+			<%= object.file_field :avatar %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span6 centered_content">
+			<%= submit_tag 'Salva', class:'btn btn-primary stateful_loading', "data-loading-text" => 'Loading...', id:'submit_button' %>
+		</div>
+	</div>
+	<%end%>
+	</div>
+</div>

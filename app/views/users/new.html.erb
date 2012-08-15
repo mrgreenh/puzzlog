@@ -1,0 +1,95 @@
+<% provide :title, full_title("New User") %>
+
+<script>
+	$(function(){
+		$("#new_user").validate({
+			errorClass: "help-block",
+			submitHandler: function(form) {
+				stateful_loading();
+				form.submit();
+			  },
+			rules: {
+				name: {
+					minlength: 3
+				},
+				password: {
+					minlength:6
+				},
+				password_confirmation: {
+					equalTo: "#password"
+				},
+				bio: {
+					maxlength:500
+				}
+			},
+			highlight: function(element, errorClass, validClass) {
+			     $(element).parent('fieldset').addClass('error');
+			  },
+			  unhighlight: function(element, errorClass, validClass) {
+			    $(element).parent('fieldset').removeClass('error');
+			  }
+		});
+	});
+</script>
+<div class="row">
+	<div class="offset3 span6">
+		<% if not isBlogInitialized? %>
+			<h1>Hi boss,</h1>
+			<h2>fill the form and create your administrator account.</h2>
+		<% else %>
+			<h1>Create a new user,</h1>
+			<h2>by filling the following form.</h2>
+		<% end %>
+	</div>
+</div>
+<div class="row">
+	<div class="offset3 span6 well">
+		<%= form_for @user, multipart: true, validate:true do |object| %>
+			<div class="row">
+				<div class="span3">
+					<fieldset class='control-group <%= @user.errors[:name].any? ? 'error' : '' %>'>
+					<%= label_tag 'name', 'Name:' %>
+					<%= text_field_tag 'name', @user.name, placeholder:'Your name goes here', class:'required name' %>
+					<span class='help-inline'><%= @user.errors[:name].any? ? @user.errors[:name].first.capitalize : '' %></span>
+					</fieldset>
+					
+					<fieldset class='control-group <%= @user.errors[:email].any? ? 'error' : '' %>'>
+					<%= label_tag 'email', 'Email:' %>
+					<%= text_field_tag 'email', @user.email, placeholder:'...and your email here', class:'required email' %>
+					<span class='help-inline'><%= @user.errors[:email].any? ? @user.errors[:email].first.capitalize : '' %></span>
+					</fieldset>
+					
+					<fieldset class='control-group <%= @user.errors[:bio].any? ? 'error' : '' %>'>
+					<%= label_tag 'bio', 'Short story of your life:' %>
+					<%= text_area_tag 'bio', @user.name, placeholder:'I was born long time ago in a galaxy far far away...', class:'required bio' %>
+					<span class='help-inline'><%= @user.errors[:bio].any? ? @user.errors[:bio].first.capitalize : '' %></span>
+					</fieldset>
+					
+					<fieldset class='control-group <%= @user.errors[:password].any? ? 'error' : '' %>'>
+					<%= label_tag 'password', 'Password:' %>
+					<%= password_field_tag 'password', nil, class:'required' %>
+					<span class='help-inline'><%= @user.errors[:password].any? ? @user.errors[:password].first.capitalize : '' %></span>
+					</fieldset>
+					
+					<fieldset class='control-group <%= @user.errors[:password_confirmation].any? ? 'error' : '' %>'>
+					<%= label_tag 'password_confirmation', 'Repeat password:' %>
+					<%= password_field_tag 'password_confirmation', nil, class:'required' %>
+					<span class='help-inline'><%= @user.errors[:password_confirmation].any? ? @user.errors[:password_confirmation].first.capitalize : '' %></span>
+					</fieldset>
+					
+					<span class="help-block">Your password has to be at least 6 characters long</span>
+				</div>
+				
+				<div class="span2">
+					<%= object.label :avatar, 'Una foto di te:' %>
+					<%= object.file_field :avatar %>
+				</div>
+			</div>
+			<div class="row">
+					<div class="span6 centered_content">
+					<%= submit_tag 'Salva', class:'btn btn-primary stateful_loading', "data-loading-text" => "Loading..." %>
+					</div>
+				</div>
+		<% end %>
+	</div>
+</div>

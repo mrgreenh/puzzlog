@@ -1,0 +1,33 @@
+<% user ||= @user
+remote_bool = true
+%>
+<div class="row user_partial" class="user" id="user_<%= user.id %>">
+	<div class="span2">
+		<%= image_tag user.avatar.url(:thumb), class: 'thumb' %>
+	</div>
+	<div class="span4">
+		<div class="row">
+			<div class="span2"><h3><%= link_to user.name, user_path(user) %></h3></div>
+			<div class="user-works span2">
+				<%
+				# TODO Da implementare quando ci sono le relazioni
+				%>
+				<span class="label label-info">13 articoli</span>
+				<span class="label">45 tasselli</span>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<div class="row">
+			<div class="span4 user-bio">
+				<p>
+					<%= user.bio %>
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="hide <%= can_edit_user?(user)||can_edit_user_priviledges?(user)||can_destroy_user?(user) ? 'tooltip_content' : '' %>">
+		<a class="close">&times;</a>
+		<%= render 'users/user_controls', user:user, remote_bool: true%>
+	</div>
+</div>
+<%= render 'users/priviledges_modal', user: user%>
