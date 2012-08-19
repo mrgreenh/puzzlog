@@ -61,7 +61,7 @@
 					
 					<fieldset class='control-group <%= @user.errors[:bio].any? ? 'error' : '' %>'>
 					<%= label_tag 'bio', 'Short story of your life:' %>
-					<%= text_area_tag 'bio', @user.name, placeholder:'I was born long time ago in a galaxy far far away...', class:'required bio' %>
+					<%= text_area_tag 'bio', @user.bio, placeholder:'I was born long time ago in a galaxy far far away...', class:'required bio' %>
 					<span class='help-inline'><%= @user.errors[:bio].any? ? @user.errors[:bio].first.capitalize : '' %></span>
 					</fieldset>
 					

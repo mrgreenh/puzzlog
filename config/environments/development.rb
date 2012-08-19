@@ -34,4 +34,6 @@ FragmentsProject::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+  
+  config.paperclip_defaults = {url: "/images/uploads/avatars/:id/:style/:filename", :path => ":rails_root/public/images/uploads/avatars/:id/:style/:filename"}
 end
