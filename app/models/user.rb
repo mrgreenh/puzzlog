@@ -4,7 +4,13 @@ class User < ActiveRecord::Base
   before_save { |user| user.email = email.downcase }
   has_secure_password
   
-  has_attached_file :avatar,:styles => {:medium => "400x400>", :thumb => "128x128>" }, :source_file_options => { :all => '-auto-orient' },url: "/images/uploads/avatars/:id/:style/:filename", :path => ":rails_root/public/images/uploads/avatars/:id/:style/:filename", :default_url=>"/images/application/missing_avatar.png"
+  #has_attached_file :avatar,:styles => {:medium => "400x400>", :thumb => "128x128>" }, :source_file_options => { :all => '-auto-orient' },url: "/images/uploads/avatars/:id/:style/:filename", :path => ":rails_root/public/images/uploads/avatars/:id/:style/:filename", :default_url=>"/images/application/missing_avatar.png"
+  has_attached_file :avatar,:styles => {:medium => "400x400>", :thumb => "128x128>" }, :source_file_options => { :all => '-auto-orient' }, :default_url=>"/images/application/missing_avatar.png", :storage => :s3,
+    :s3_credentials => {
+      :bucket            => ENV['S3_BUCKET_NAME'],
+      :access_key_id     => ENV['AWS_ACCESS_KEY_ID'],
+      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+    }
   
   validates :password, presence:true, length:{minimum:6}, on: :create
   validates :password_confirmation, presence:true, on: :create
