@@ -10,7 +10,7 @@
 #Devono rispecchiare quelli nella migrazione
 Role.find_or_create_by_name('superadmin', description: 'He can do simply everything.')
 Role.find_or_create_by_name('writer', description: 'He can write posts but he cannot publish them.')
-Role.find_or_create_by_name('trustedwriter', description: 'He can write and publish posts.')
+Role.find_or_create_by_name('publisher', description: 'He can approve (publish) posts.')
 Role.find_or_create_by_name('newbie', description: 'He can edit his own profile.')
 
 

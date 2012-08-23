@@ -3,6 +3,15 @@
 <% if not isBlogInitialized? %>
     <%=  render 'static_pages/initialize_blog' %>
 <%  else %>
-<h1>Home Page</h1>
-
+<div class="row">
+	<div class="span6 offset3">
+		<h1>Home Page</h1>
+		<h2>Streamline provvisoria</h2>
+	</div>
+</div>
+<div class="row">
+	<div class="offset3 span6">
+		<%= render @articles %>
+	</div>
+</div>
 <% end %>

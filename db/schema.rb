@@ -11,7 +11,60 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120813134253) do
+ActiveRecord::Schema.define(:version => 20120822202656) do
+
+  create_table "articles", :force => true do |t|
+    t.string   "title"
+    t.boolean  "public"
+    t.datetime "publication_date"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "user_id"
+  end
+
+  add_index "articles", ["title"], :name => "index_articles_on_title", :unique => true
+
+  create_table "fragment_types", :force => true do |t|
+    t.string   "name"
+    t.text     "edit_script"
+    t.text     "view_script"
+    t.text     "edit_elements"
+    t.text     "view_elements"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.text     "stylesheet"
+    t.text     "default_data"
+  end
+
+  create_table "fragments", :force => true do |t|
+    t.integer  "fragment_type_id"
+    t.string   "name"
+    t.boolean  "stand_alone"
+    t.text     "data"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "user_id"
+    t.datetime "publication_date"
+    t.boolean  "public"
+  end
+
+  create_table "page_fragment_relationships", :force => true do |t|
+    t.integer  "page_id"
+    t.integer  "fragment_id"
+    t.integer  "ordering_number"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "pages", :force => true do |t|
+    t.integer  "number"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "article_id"
+    t.string   "foreground_color"
+    t.string   "background_color"
+    t.string   "third_color"
+  end
 
   create_table "roles", :force => true do |t|
     t.string   "name"

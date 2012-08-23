@@ -1,4 +1,4 @@
-<!-- Finestra modale -->
+<!-- login modale -->
 <div class="modal hide fade" id="modalLogin">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal">×</button>
@@ -7,5 +7,17 @@
   <div class="modal-body"> 	
   		<%= render 'layouts/flash_messages' %>
     	<%= render 'sessions/signin_form' %>
+  </div>
+</div>
+
+<!-- creazione articolo modale -->
+<div class="modal hide fade" id="modalNewArticle">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h3>Insert your title:</h3>
+  </div>
+  <div class="modal-body"> 	
+  		<%= render 'layouts/flash_messages' %>
+    	<%= render 'articles/new_article_form' %>
   </div>
 </div>

@@ -1,6 +1,5 @@
 class StaticPagesController < ApplicationController
-include ApplicationHelper
   def home
-    
+    @articles = Article.order(:updated_at) # TODO sarà publication_date
   end
 end

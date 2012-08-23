@@ -19,6 +19,9 @@ class User < ActiveRecord::Base
 
   has_many :user_role_relationships, dependent: :destroy
   has_many :roles, through: :user_role_relationships, source: :role
+  
+  has_many :fragments
+  has_many :articles
 
   def create_remember_token
     self.update_attribute(:remember_token, SecureRandom.urlsafe_base64)

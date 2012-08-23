@@ -1,13 +1,23 @@
 FragmentsProject::Application.routes.draw do
-  get "user_role_relationships/create"
+  get "fragments/new"
 
-  get "user_role_relationships/destroy"
+  get "fragments/create"
+
+  get "fragments/edit"
+
+  get "fragments/update"
+
+  get "fragments/index"
+
+  get "fragments/show"
 
   root to: 'static_pages#home'
   
   resources :users
   resources :user_role_relationships, only: [:create, :destroy]
   resources :sessions, only:[:new,:create,:destroy]
+  resources :articles
+  resources :fragments
   
   match '/staff', to: 'users#index'
   

@@ -22,7 +22,7 @@ module UsersHelper
   end
   
   def can_edit_user?(user=User.find(params[:id]))
-    (current_user?(user)&&is_newbie?)||is_superadmin? # TODO non funziona se non loggato
+    (current_user?(user)&&is_newbie?)||is_superadmin?
   end
   
   def can_view_user?(user=User.find(params[:id]))

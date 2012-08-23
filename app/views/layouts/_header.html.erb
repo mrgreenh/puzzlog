@@ -18,9 +18,24 @@
 				  <% if not signed_in? %>
 				  <li><a data-toggle="modal" href="#modalLogin" ><i class="icon-user icon-white"></i></a></li>
 				  
-				<% else signed_in?
-				# TODO form per il microblogging dell'utente loggato
-				%>
+				<% else signed_in? %>
+					<% if can_create_articles? %>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<i class="icon icon-white icon-comment"></i>
+							</a>
+							<ul class="dropdown-menu"> 
+								<%
+									# TODO qui ci andrà una query per avere i tipi di frammento più usati
+									# TODO usare le iconcine dei tipi di frammento quando saranno pronte
+								%>
+								<% FragmentType.all.each do |type|%>
+								<li><%= link_to type.name, new_fragment_path(fragment_type_id:type.id) %></li>
+								<% end %>
+								<li><a href="#">More...</a></li>
+							</ul>
+						</li>
+					<% end %>
 					<li class="dropdown">
 					    <a href="#"
 					          class="dropdown-toggle"
@@ -29,19 +44,21 @@
 					          <b class="caret"></b>
 					    </a>
 					    <ul class="dropdown-menu">
-					      <% # TODO Fari si che venga mostrato solo a chi può scrivere articoli 
+					      <% if can_create_articles?
 					      %>
-					      <li class="nav-header">
-					      	Articles
-					      </li>
-					      <li>
-					      	<a href="#">Create</a>
-					      </li>
-					      <li>
-					      	<a href="#">Manage</a>
-					      </li>
-					      <li class="divider"></li>
-					      
+						      <li class="nav-header">
+						      	Articles
+						      </li>
+						      <li>
+						      	<% # TODO perchè funzioni correttamente questo deve essere un link remoto al controller che risponde col javascript che renderizza e apre la finestra! 
+						      	%>
+						      	<%= link_to 'Create', "#modalNewArticle", "data-toggle" => "modal" %>
+						      </li>
+						      <li>
+						      	<%= link_to 'Manage', articles_path %>
+						      </li>
+						      <li class="divider"></li>
+					      <% end %>
 					      <% if can_create_users? %>
 						      <li class="nav-header">
 						      	Users

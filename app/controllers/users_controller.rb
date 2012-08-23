@@ -1,7 +1,6 @@
 # coding: utf-8
 class UsersController < ApplicationController
   include UsersHelper
-  include ApplicationHelper
   
   #--------------------------------------------Priviledges
   before_filter :user_create_filter, only:[:new,:create]

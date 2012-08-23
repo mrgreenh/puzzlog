@@ -18,7 +18,7 @@ module ApplicationHelper
   
   #------------------------------------Priviledges
   def has_role?(name, user=current_user)
-    user.roles.find_all_by_name(name).any?
+    !user.nil? && user.roles.find_all_by_name(name).any?
   end
   
   def can_modify_blog?

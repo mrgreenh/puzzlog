@@ -1,7 +1,5 @@
 class UserRoleRelationshipsController < ApplicationController
-  include ApplicationHelper
   include UserRoleRelationshipsHelper
-  # TODO implementare i filtri
   
   before_filter :create_filter, only: :create
   before_filter :destroy_filter, only: :destroy
