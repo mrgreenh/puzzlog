@@ -1,0 +1,24 @@
+<% article ||= @article
+remote_bool = true
+%>
+<div class="row article_partial" class="user" id="article_<%= article.id %>">
+	<div class="span6">
+		<div class="row">
+			<div class="span2"><h3><%= link_to article.title, article_path(article) %></h3></div>
+		</div>
+		<div class="row">
+			<div class="span6 article-summary">
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dapibus adipiscing consequat. Vestibulum porta erat eu odio fermentum tempus. Vivamus aliquam tincidunt nunc, at porta lorem dapibus at. Morbi dapibus gravida pellentesque. Ut id sapien nibh. Pellentesque vehicula dui nec ante placerat accumsan. Cras bibendum massa sed risus scelerisque id ullamcorper ligula congue. Curabitur sed ligula id dolor lacinia porttitor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam cursus eros adipiscing lacus facilisis posuere. Integer dui mauris, pellentesque varius pretium et, luctus non ligula.
+					<% # TODO da implementare quando ci saranno i frammenti di tipo testo
+					%>
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="hide <%= can_edit_article?(article)||can_destroy_article?(article) ? 'tooltip_content' : '' %>">
+		<a class="close">&times;</a>
+		<%#= render 'users/user_controls', user:user, remote_bool: true
+		%>
+	</div>
+</div>

@@ -1,0 +1,14 @@
+<% fragment ||= @fragment %>
+
+<ul class="nav nav-tabs" id="fragment_<%=fragment.id%>_tab">
+  <li class="active"><a href="#fragment_<%=fragment.id%>_view" class="view_tab_link" data-toggle="tab">View</a></li>
+  <li><a href="#fragment_<%=fragment.id%>_edit" data-toggle="tab">Edit</a></li>
+</ul>
+<div class="tab-content">
+	<div class="tab-pane active fragment_type_<%= fragment.fragment_type.id %> fragment_view" id="fragment_<%=fragment.id%>_view">
+		<%= raw(fragment.fragment_type.view_elements) %>
+	</div>
+	<div class="tab-pane fragment_type_<%= fragment.fragment_type.id %> fragment_edit" id="fragment_<%=fragment.id%>_edit">
+		<%= raw(fragment.fragment_type.edit_elements) %>
+	</div>
+</div>

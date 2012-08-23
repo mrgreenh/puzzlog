@@ -52,7 +52,7 @@
 						      <li>
 						      	<% # TODO perchè funzioni correttamente questo deve essere un link remoto al controller che risponde col javascript che renderizza e apre la finestra! 
 						      	%>
-						      	<%= link_to 'Create', "#modalNewArticle", "data-toggle" => "modal" %>
+						      	<%= link_to 'Create', new_article_path, remote: true %>
 						      </li>
 						      <li>
 						      	<%= link_to 'Manage', articles_path %>

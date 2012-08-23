@@ -1,0 +1,5 @@
+<% fragment ||= @fragment %>
+<div class="fragment_type_<%= fragment.fragment_type.id %> fragment_view" id="fragment_<%= fragment.id %>_view">
+	<%= raw(fragment.fragment_type.view_elements) %>
+</div>
+

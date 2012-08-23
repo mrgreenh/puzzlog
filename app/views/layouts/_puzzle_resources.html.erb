@@ -1,0 +1,29 @@
+<% if @fragments %>
+  	<script>
+  		fragments = <%= raw(@fragments.to_json) %>
+  		<%
+  			# TODO trovare un modo di passare del JSON con dentro le funzioni senza questo workaround della vergogna
+  		%>
+  		var fragments_methods = {
+  			<% @fragment_types.each do |k,frag_type| %>
+  				<%= k %>: {
+  					view:function(fragment){<%= raw(frag_type.view_script.to_s) %>},
+  					edit:function(fragment){<%= raw(frag_type.edit_script.to_s) %>},
+  				},
+  			<% end %>
+  		};
+  		
+  	</script>
+  	
+  	<style type="text/css">
+	  	<%
+	  	 # TODO di nuovo workaround della vergogna perchè in effetti era comodo
+	  	%>
+  		<% scss_variables = "$reddish: #885555;"
+  		@fragment_types.each do |k,frag_type|
+			scss_string = "#{scss_variables} .fragment_type_#{k} { #{frag_type.stylesheet}}"
+  			sass_engine = Sass::Engine.new(scss_string,:syntax => :scss) %>
+  			<%= sass_engine.render %>
+  		<% end %>
+  	</style>
+  <% end %>

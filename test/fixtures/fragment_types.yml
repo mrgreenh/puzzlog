@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  edit_script: MyText
+  view_script: MyText
+  edit_elements: MyText
+  view_elements: MyText
+
+two:
+  name: MyString
+  edit_script: MyText
+  view_script: MyText
+  edit_elements: MyText
+  view_elements: MyText

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  fragment_type_id: 1
+  title: MyString
+  stand_alone: false
+  data: MyText
+
+two:
+  fragment_type_id: 1
+  title: MyString
+  stand_alone: false
+  data: MyText

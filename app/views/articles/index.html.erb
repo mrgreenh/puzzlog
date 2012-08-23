@@ -1,0 +1,13 @@
+<% provide :title, full_title("Your Articles") %>
+<div class="row">
+	<div class="offset3 span6">
+		<h1>Your articles and lonely fragments</h1>
+	</div>
+</div>
+<div class="row">
+	<div class="offset3 span6">
+		<div class="centered_content"><%= will_paginate @articles %></div>
+			<%= render @articles %>
+		<div class="centered_content"><%= will_paginate @articles %></div>
+	</div>
+</div>

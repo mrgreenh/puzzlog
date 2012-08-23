@@ -1,0 +1,13 @@
+<%
+fragment ||= @fragment
+edit ||= false
+	
+if not edit %>
+
+<%= render 'fragments/fragment_view', fragment: fragment %>
+
+<% else %>
+
+<%= render 'fragments/fragment_edit', fragment: fragment %>
+
+<% end %>

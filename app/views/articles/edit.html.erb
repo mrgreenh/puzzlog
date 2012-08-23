@@ -1,0 +1,19 @@
+<% provide :title, "Edit #{@article.title}" %>
+
+<div class="row">
+	<div class="span3">
+		Controlli a sinistra
+	</div>
+	<div class="span6">
+		<header>
+			<h1><%= @article.title %></h1> <% # Lo stesso form del titolo funziona da update se chiamato da qui!
+			%>
+			<em><%= @article.public ? 'Article already published' : 'Not published yet' %></em>
+		</header>
+	</div>
+	<div class="span3">
+		Controlli a destra
+	</div>
+</div>
+
+<!-- Finestre modali -->
