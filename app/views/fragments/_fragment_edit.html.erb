@@ -1,14 +1,36 @@
 <% fragment ||= @fragment %>
-
+<script>
+	var publication_enabled = <%= can_publish_fragment?(fragment) %>;
+</script>
 <ul class="nav nav-tabs" id="fragment_<%=fragment.id%>_tab">
   <li class="active"><a href="#fragment_<%=fragment.id%>_view" class="view_tab_link" data-toggle="tab">View</a></li>
   <li><a href="#fragment_<%=fragment.id%>_edit" data-toggle="tab">Edit</a></li>
 </ul>
 <div class="tab-content">
-	<div class="tab-pane active fragment_type_<%= fragment.fragment_type.id %> fragment_view" id="fragment_<%=fragment.id%>_view">
+	<div class="tab-pane fade in active fragment_type_<%= fragment.fragment_type.id %> fragment_view" id="fragment_<%=fragment.id%>_view">
 		<%= raw(fragment.fragment_type.view_elements) %>
 	</div>
-	<div class="tab-pane fragment_type_<%= fragment.fragment_type.id %> fragment_edit" id="fragment_<%=fragment.id%>_edit">
+	<div class="tab-pane fade fragment_type_<%= fragment.fragment_type.id %> fragment_edit" id="fragment_<%=fragment.id%>_edit">
 		<%= raw(fragment.fragment_type.edit_elements) %>
 	</div>
 </div>
+<%= form_for fragment, validate: true do |form| %>
+	<%= form.hidden_field :fragment_type_id %>
+	<%= form.hidden_field :stand_alone, value: false %>
+	<%= form.hidden_field :public, value:false %>
+	<%= form.hidden_field :data %>
+	<div class="fragment_controls form-actions well" id="fragment_<%=fragment.id%>_controls">
+		<div class="hide form-horizontal" id="name_fragment_<%=fragment.id%>">
+			<div class="control-group">
+				<%= form.label :name, 'Name it (if you want):', class:'control-label' %>
+				<%= form.text_field :name %>
+				<span class="help-inline">It might help you keep your work organized...</span>
+			</div>
+		</div>
+		<%= form.submit "Save for later", name:'save_it_submit', class:'btn btn-info hide', id: "save_fragment_#{fragment.id}"%>
+		<%= link_to "Keep it for later", '#', class:'btn btn-primary keep_it_button', fragment_id: fragment.id, rel:'tooltip', title:'You can keep working on it or use it in an article!' %>
+		<% if can_publish_fragment?(fragment) %>
+		<%= form.submit "Publish!", name:'publish_submit', class:'btn btn-success'%>
+		<% end %>
+	</div>
+<% end %>

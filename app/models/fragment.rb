@@ -4,7 +4,6 @@ class Fragment < ActiveRecord::Base
   validates_presence_of :data
   validates_presence_of :fragment_type_id
   
-  
   has_many :page_fragment_relationships, dependent: :destroy
   has_many :pages, through: :page_fragment_relationships, source: :page
   

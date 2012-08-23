@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   include ArticlesHelper
+  include FragmentsHelper
  
   
   #-----------------------------------------------------Privileges
@@ -37,8 +38,10 @@ class ArticlesController < ApplicationController
   end
 
   def index
-    #Per ora mostra tutti gli articoli, bisognerò mettere il filtro per quelli editabili dall'utente
-    @articles = current_user.articles.order(:updated_at).paginate(:page => params[:page], :per_page => 4)
+    @articles = current_user.articles.order('updated_at desc').paginate(:page => params[:page], :per_page => 4)
+    # TODO togliere i frammenti da qui
+    @fragments = current_user.fragments.order('updated_at desc').paginate(:page => params[:page], :per_page => 4) 
+    @fragment_types = getFragmentTypes(@fragments)
   end
 
   def show
@@ -46,6 +49,7 @@ class ArticlesController < ApplicationController
   end
   
   def publish
+    
   end
   
   private
