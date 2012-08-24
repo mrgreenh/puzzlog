@@ -35,6 +35,7 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
+    
   end
 
   def index

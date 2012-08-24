@@ -1,12 +1,16 @@
-<%
+<% # TODO da modificare perchè sia un sommario, con popover sempre attivi
 fragment ||= @fragment
-edit ||= false %>
-	<% if not edit %>
-	
+edit ||= false
+popover_controls ||= false
+@popover_controls ||= popover_controls
+ %>
+ <%= link_to fragment.name, fragment_path(fragment) %>
+<% if not edit %>
+
 	<%= render 'fragments/fragment_view', fragment: fragment %>
-	
-	<% else %>
+
+<% else %>
 	
 	<%= render 'fragments/fragment_edit', fragment: fragment %>
-	
-	<% end %>
+
+<% end %>

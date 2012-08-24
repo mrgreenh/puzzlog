@@ -1,7 +1,7 @@
 <% @article ||= Article.new %>
 <%= form_for @article, validate:true do |object| %>
 					<fieldset class='control-group <%= @article.errors[:title].any? ? 'error' : '' %>'>
-					<%= text_field_tag 'title', @article.title, placeholder:'Your title goes here.', class:'required name' %>
+					<%= text_field_tag 'title', @article.title, placeholder:'Your title goes here.', class:'required name', autofocus:true %>
 					<span class='help-inline'><%= @article.errors[:title].any? ? @article.errors[:title].first.capitalize : '' %></span>
 					</fieldset>
 

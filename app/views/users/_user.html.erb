@@ -9,11 +9,8 @@ remote_bool = true
 		<div class="row">
 			<div class="span2"><h3><%= link_to user.name, user_path(user) %></h3></div>
 			<div class="user-works span2">
-				<%
-				# TODO Da implementare quando ci sono le relazioni
-				%>
-				<span class="label label-info">13 articoli</span>
-				<span class="label">45 tasselli</span>
+				<span class="label label-info"><%= pluralize(user.articles.count, "article") %></span>
+				<span class="label"><%= pluralize(user.fragments.count, "fragment") %></span>
 			</div>
 			<div class="clearfix"></div>
 		</div>

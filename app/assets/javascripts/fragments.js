@@ -42,8 +42,9 @@ $(function(){
 		});
 	});
 	
-	//Controllo dei parametri al submit a seconda del bottone
-	$("#new_fragment").submit(function(){
-		$("#new_fragment #fragment_data").val(JSON.stringify(fragments[0].data));
+	//Aggiornamento campo data al submit
+	$("#new_fragment, .edit_fragment").submit(function(){
+		$("#new_fragment #fragment_data, .edit_fragment #fragment_data").val(JSON.stringify(fragments[0].data));
 	});
+
 });

@@ -20,14 +20,12 @@ class FragmentsController < ApplicationController
     if params.has_key?(:save_it_submit)
       logger.debug "Hai salvato!"
       @fragment.stand_alone = true
-    elsif params.has_key?(:publish_submit)&&can_publish_fragment?(@fragment)
+    elsif params.has_key?(:publish_submit)
       logger.debug "Hai pubblicato!"
       @fragment.public = true
       @fragment.publication_date = Time::now
-    elsif params.has_key?(:publish_submit)&&!can_publish_fragment?(@fragment)
-      flash[:errors] = "You can't publish fragments!"
-      render 'edit'
     end
+    
     if @fragment.save
       @fragments = [@fragment]
       @fragment_types = getFragmentTypes(@fragments)
@@ -39,10 +37,22 @@ class FragmentsController < ApplicationController
   end
 
   def edit
+    @fragment = Fragment.find(params[:id])
+    @fragments = [@fragment]
+    @fragment_types = getFragmentTypes(@fragments)
   end
 
   def update
-    #Prima meglio rivedere i permessi!
+    @fragment = Fragment.find(params[:id])
+    @fragment.assign_attributes(params[:fragment])
+    if @fragment.save
+      @fragments = [@fragment]
+      @fragment_types = getFragmentTypes(@fragments)
+      render 'show'
+    else
+      flash[:errors] = "An error has occurred. Try again until you get tired of it."
+      render 'edit'
+    end
   end
 
   def index
@@ -50,8 +60,21 @@ class FragmentsController < ApplicationController
   end
 
   def show
-    @fragments = [Fragment.find(params[:id])]
+    @fragment = Fragment.find(params[:id])
+    @fragments = [@fragment]
     @fragment_types = getFragmentTypes(@fragments)
+  end
+  
+  def destroy
+    @fragment = Fragment.find(params[:id])
+    if @fragment.destroy
+      respond_to do |format|
+        format.js
+        format.html {
+          flash[:success] = "Frammento eliminato..."
+          redirect_to fragments_path}
+      end
+    end
   end
   
   private

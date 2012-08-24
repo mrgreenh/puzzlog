@@ -1,0 +1,20 @@
+<% fragment ||= @fragment %>
+<% # TODO aggiungere PUBLISH || UNPUBLISH, REPUBLISH, possibile farli anche con delle azioni apposite del controller per fare prima!
+%>
+<ul class="controls fragment-controls expanded-centered">
+	<%if can_edit_fragment?(fragment)%>
+		<li>
+			<%= link_to edit_fragment_path(fragment), class:'btn btn-small btn-info' do %>
+				<i class='icon-pencil icon-white'></i> Edit
+			<% end %>
+		</li>
+	<%end%>
+	
+	<%if can_destroy_fragment?(fragment)%>
+		<li>
+			<%= link_to fragment_path(fragment), remote:remote_bool, method: :delete, confirm: "QUESTO FRAMMENTO VERRà RIMOSSO ANCHE DAGLI ARTICOLI IN CUI APPARE. Sei sicuro di volerlo eliminare?", class:'btn btn-small btn-danger' do %>
+				<i class="icon-trash icon-white"></i> Delete
+			<% end %>
+		</li>
+	<%end%>
+</ul>
