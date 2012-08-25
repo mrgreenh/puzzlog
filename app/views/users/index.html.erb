@@ -1,18 +1,4 @@
 <% provide :title, full_title("Staff") %>
-<script>
-$(function(){
-	$("#experiment").click(function(){
-		modalWindow("Immagine cross domain:",'<%= image_tag "http://s3.amazonaws.com/fragments_project/users/avatars/000/000/001/medium/Pirates.JPG?1345888941" %><canvas id="canvas_image" width=500 height=500>');
-		var ctx = document.getElementById('canvas_image').getContext('2d');
-		var img = new Image();
-		img.src = 'http://s3.amazonaws.com/fragments_project/users/avatars/000/000/001/medium/Pirates.JPG?1345888941';
-		img.onload = function(){
-		  ctx.drawImage(img,0,0);
-		 }
-	});
-});
-</script>
-<button id="experiment">Click to load image</button>
 <div class="row">
 	<div class="offset3 span6">
 		<div class="centered_content"><%= will_paginate @users %></div>
