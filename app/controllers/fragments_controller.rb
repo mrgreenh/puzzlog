@@ -17,11 +17,7 @@ class FragmentsController < ApplicationController
 
   def create
     @fragment = current_user.fragments.build(params[:fragment])
-    if params.has_key?(:save_it_submit)
-      logger.debug "Hai salvato!"
-      @fragment.stand_alone = true
-    elsif params.has_key?(:publish_submit)
-      logger.debug "Hai pubblicato!"
+    if params.has_key?(:publish_submit)
       @fragment.public = true
       @fragment.publication_date = Time::now
     end
@@ -45,13 +41,31 @@ class FragmentsController < ApplicationController
   def update
     @fragment = Fragment.find(params[:id])
     @fragment.assign_attributes(params[:fragment])
+    if params.has_key?(:publish_submit)
+      @fragment.public = true
+      @fragment.publication_date = Time::now
+      flash[:success] = "Fragment published!"
+    elsif params.has_key?(:unpublish_submit)
+      flash[:success] = "Fragment unpublished!"
+    elsif params.has_key?(:add_puzzle_box)
+      flash[:success] = "Fragment added to the puzzle box!"
+    end
+    
     if @fragment.save
       @fragments = [@fragment]
       @fragment_types = getFragmentTypes(@fragments)
-      render 'show'
+      
+      respond_to do |format|
+        format.js
+        format.html {render 'show'}
+      end
     else
       flash[:errors] = "An error has occurred. Try again until you get tired of it."
-      render 'edit'
+      flash[:success] = nil
+      respond_to do |format|
+        format.js
+        format.html {redirect_to request.referer}
+      end
     end
   end
 
@@ -75,6 +89,30 @@ class FragmentsController < ApplicationController
           redirect_to fragments_path}
       end
     end
+  end
+  
+  def add_to_puzzle_box
+    @fragment = Fragment.find(params[:id])
+    
+    if @fragment.update_attributes(stand_alone:true)
+       respond_to do |format|
+          format.js do
+            flash[:success] = "This fragment has been added to your puzzle box. Use the form below to choose a name for it, this will help you keep your box organised."
+            render 'add_to_puzzle_box'
+          end
+          format.html do
+            @fragments = [@fragment]
+            @fragment_types = getFragmentTypes(@fragments)
+            flash[:success] = "This fragment has been added to your puzzle box. Use the form below to choose a name for it, this will help you keep your box organised."
+            render 'edit'
+          end
+        end
+    else
+      flash[:errors] = "There has been a problem, try later."
+      rendirect_to request.referer
+    end
+    
+   
   end
   
   private
@@ -108,7 +146,7 @@ class FragmentsController < ApplicationController
       end
     
       def fragment_publish_filter
-        if !can_publish_fragment?(Fragment.new(params[:fragment]))&&params.has_key?(:pubish_submit)
+        if !can_publish_fragment?(Fragment.new(params[:fragment]))&&(params.has_key?(:pubish_submit)||params[:fragment].has_key?(:public))
           flash[:errors] = "You can't publish fragments"
           redirect_to root_path
         end

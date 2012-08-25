@@ -1,23 +1,13 @@
 FragmentsProject::Application.routes.draw do
-  get "fragments/new"
-
-  get "fragments/create"
-
-  get "fragments/edit"
-
-  get "fragments/update"
-
-  get "fragments/index"
-
-  get "fragments/show"
-
   root to: 'static_pages#home'
   
   resources :users
   resources :user_role_relationships, only: [:create, :destroy]
   resources :sessions, only:[:new,:create,:destroy]
   resources :articles
+  #Fragments
   resources :fragments
+  match 'fragments/add_to_puzzle_box/:id', to:'fragments#add_to_puzzle_box', as: 'add_fragment_to_puzzle_box'
   
   match '/staff', to: 'users#index'
   

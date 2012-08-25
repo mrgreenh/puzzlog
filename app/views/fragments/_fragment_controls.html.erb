@@ -1,11 +1,45 @@
 <% fragment ||= @fragment %>
-<% # TODO aggiungere PUBLISH || UNPUBLISH, REPUBLISH, possibile farli anche con delle azioni apposite del controller per fare prima!
+<% # TODO Substitute every confirm message with that stuff suggested by the deprecation warning
 %>
 <ul class="controls fragment-controls expanded-centered">
+	<% if !fragment.public&&can_publish_fragment?(fragment) %>
+		<li>
+			<%= form_for fragment, remote:remote_bool do |form| %>
+				<%= button_tag name:'publish_submit', class:'btn btn-small btn-success' do %>
+					<i class='icon-check icon-white'></i> Publish
+				<% end %>
+			<% end %>
+		</li>
+	<% elsif fragment.public&&can_publish_fragment?(fragment) %>
+		<li>
+			<%= form_for fragment, remote:remote_bool do |form| %>
+				<%= button_tag "Republish", name:"publish_submit", class:'btn btn-small btn-info' do %>
+					<i class='icon-repeat icon-white'></i> Republish
+				<% end %>
+			<% end %>
+		</li>
+		<li>
+			<%= form_for fragment, remote:remote_bool do |form| %>
+				<%= form.hidden_field :public, value:false %>
+				<%= button_tag 'Unpublish', name:"unpublish_submit", class:'btn btn-small btn-warning' do %>
+					<i class='icon-eye-close icon-white'></i> Unpublish
+				<% end %>
+			<% end %>
+		</li>
+	<% end %>
+	
+	<%if !fragment.stand_alone %>
+		<li>
+			<%= link_to add_fragment_to_puzzle_box_path(fragment), class:'btn btn-small btn-primary', remote: remote_bool do %>
+				<i class='icon-plus icon-white'></i> PuzzleBox
+			<% end %>
+		</li>
+	<%end%>
+	
 	<%if can_edit_fragment?(fragment)%>
 		<li>
 			<%= link_to edit_fragment_path(fragment), class:'btn btn-small btn-info' do %>
-				<i class='icon-pencil icon-white'></i> Edit
+				<i class='icon-edit icon-white'></i> Edit
 			<% end %>
 		</li>
 	<%end%>

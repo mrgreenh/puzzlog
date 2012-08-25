@@ -1,3 +1,1 @@
-$("#modalNewArticle .modal-body").html("<%= escape_javascript(render 'layouts/flash_messages') %><%= escape_javascript(render 'articles/new_article_form') %>");
-
-$("#modalNewArticle").modal('show');
+modalWindow("Insert your title:","<%= escape_javascript(render 'layouts/flash_messages') %><%= escape_javascript(render 'articles/new_article_form') %>");

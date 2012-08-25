@@ -17,7 +17,11 @@
 <body>
 	
 <%= render 'layouts/header' %>
-<%= render 'layouts/flash_messages' %>
+<div class="row">
+	<div id="flash_messages_container" class="offset3 span6">
+		<%= render 'layouts/flash_messages' %>
+	</div>
+</div>
 
 <%= yield %>
 

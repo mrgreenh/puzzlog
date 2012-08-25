@@ -1,5 +1,17 @@
 
 var fragments = null;
+
+//Add To Box button -------- Lo lascio nel caso serva vedere come cambiare il contenuto della popup al volo
+	// function addToBoxPopover(){
+		// $(".add_to_box_button").unbind('click').click(function(){
+			// var popover_content = $(this).next("#add_to_box_popover").html();
+			// $(this).parents(".popover-content").html(popover_content);
+			// $(".popover .form_container button").click(function(){
+				// $(this).parents(".popover").hide();
+			// });
+		// });
+	// }
+	
 $(function(){ 
 	//---------------------------------------Fragments initializer
 	if(fragments!=null){
@@ -25,20 +37,19 @@ $(function(){
 	
 	//------------------------------------Fragment controls
 	
+	//-------------------New Fragment
 	//Controllo del meccanismo di nominazione frammento
-	$('.fragment_controls .keep_it_button').tooltip({placement:'bottom'});
-	$('.fragment_controls .keep_it_button').popover({
+	$('#new_fragment .fragment_controls .keep_it_button').tooltip({placement:'bottom'});
+	$('#new_fragment .fragment_controls .keep_it_button').popover({
 			content: $(this).find(".name_it_tooltip").html(),
 			placement: 'top',
 			trigger:'manual'
 		});
-	$('.fragment_controls .keep_it_button').click(function(){
-		var id = null;
-		id = $(this).attr("fragment_id");
-		if(id==null) id='';
-		$("#name_fragment_"+id).slideDown();
+	$('#new_fragment .fragment_controls .keep_it_button').click(function(){
+		$("#new_fragment #fragment_stand_alone").val(true);
+		$("#name_fragment").slideDown();
 		$(this).fadeOut(function(){
-			$("#save_fragment_"+id).fadeIn();
+			$("#save_fragment").fadeIn();
 		});
 	});
 	

@@ -57,18 +57,32 @@ h3.popover-title{
 
 /*------------------------controls */
 
-.popover-inner, .user-info-container {
-  ul.controls, ul.user-works {
+ ul.controls, ul.user-works {
     list-style-type:none;
     margin:10px auto;
     overflow:hidden;
   }
-  ul.controls a{
-    width:80px;
-    margin:3px 5px;
-    float:left;
+  ul.controls {
+    li{
+      float:left;
+    }
+    .popover &{
+      width: 110px;
+    }
+    a, button.btn{
+      margin:3px 5px;
+      float:left;
+    }
+    a {
+      width:80px;
+    }
+    button.btn {
+      width:100px;
+    }
+    form {
+      margin: 0px;
+    }
   }
-}
 
 /*--------------------------Partials */
 /* Roles */

@@ -1,4 +1,12 @@
 <% provide :title, full_title("Staff") %>
+<script>
+$(function(){
+	$("#experiment").click(function(){
+		
+	});
+});
+</script>
+<button id="experiment">Click to load image</button>
 <div class="row">
 	<div class="offset3 span6">
 		<div class="centered_content"><%= will_paginate @users %></div>

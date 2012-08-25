@@ -1,0 +1,2 @@
+modalWindow("","<%= escape_javascript(render 'layouts/flash_messages') %>");
+$("#fragment_<%= @fragment.id %>_view .tooltip_content").html("<a class='close'>&times;</a><%= escape_javascript(render 'fragments/fragment_controls', remote_bool: true, fragment:@fragment) %>");

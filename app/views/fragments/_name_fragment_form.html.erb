@@ -1,0 +1,8 @@
+<% fragment ||= @fragment %>
+<div class="well form-inline">
+<%= form_for fragment, remote:remote_bool do |form| %>
+	<%= form.hidden_field :stand_alone, value:true %>
+	<%= form.text_field :name %>
+	<%= form.button 'Save', name:"add_puzzle_box", class:'btn btn-small btn-primary' %>
+<% end %>
+</div>
