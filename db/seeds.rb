@@ -10,7 +10,7 @@ include FragmentTypes::FragmentTypeTitleParagraph
 include ActionView::Helpers::JavaScriptHelper
 
 def randomDateTime
-  DateTime::parse(Integer(rand(1..12)).to_s+'/'+Integer(rand(1..12)).to_s+'/'+Integer(rand(2010..2013)).to_s+' 20:30')
+  DateTime::parse(rand(1..12).to_s+'/'+rand(1..12).to_s+'/'+rand(2010..2013).to_s+' 20:30')
 end
 #------------------------------------------------Priviledges
 #Devono rispecchiare quelli nella migrazione
