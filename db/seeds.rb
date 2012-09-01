@@ -7,6 +7,7 @@
 #   Mayor.create(:name => 'Emanuel', :city => cities.first)
 
 include FragmentTypes::FragmentTypeTitleParagraph
+include FragmentTypes::FragmentTypeImagesGallery
 include ActionView::Helpers::JavaScriptHelper
 
 def randomDateTime
@@ -50,6 +51,7 @@ end
   user.user_role_relationships.create(role_id:Role.find_by_name('newbie').id)        
 end
 
+# TODO i tipi di frammento da installare con l'applicazione saranno da includere in una migrazione o simili
 #--------------------------------------------Tipi frammento (implementare moduli sopra)
 FragmentType.create(edit_elements:FragmentTypes::FragmentTypeTitleParagraph.edit_elements,
                     view_elements:FragmentTypes::FragmentTypeTitleParagraph.view_elements,
@@ -57,6 +59,14 @@ FragmentType.create(edit_elements:FragmentTypes::FragmentTypeTitleParagraph.edit
                     view_script:FragmentTypes::FragmentTypeTitleParagraph.view_script,
                     stylesheet:FragmentTypes::FragmentTypeTitleParagraph.stylesheet,
                     default_data:FragmentTypes::FragmentTypeTitleParagraph.default_data,
+                    name:"Title and Paragraph");
+
+FragmentType.create(edit_elements:FragmentTypes::FragmentTypeImagesGallery.edit_elements,
+                    view_elements:FragmentTypes::FragmentTypeImagesGallery.view_elements,
+                    edit_script:FragmentTypes::FragmentTypeImagesGallery.edit_script,
+                    view_script:FragmentTypes::FragmentTypeImagesGallery.view_script,
+                    stylesheet:FragmentTypes::FragmentTypeImagesGallery.stylesheet,
+                    default_data:FragmentTypes::FragmentTypeImagesGallery.default_data,
                     name:"Title and Paragraph");
 
 #--------------------------------------------Articoli e frammenti slegati

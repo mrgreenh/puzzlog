@@ -1,0 +1,31 @@
+<div id="puzzle-box-nav-container" class="row">
+	<div class="span2">
+		<ul class="nav nav-list" id="puzzle-box-nav" data-spy="affix" data-offset-tp="300">
+		    <li class="<%= active=='fragments' ? 'active' : '' %>">
+		       <%= link_to fragments_path  do%><i class="icon icon-th-large"></i> Fragments<%end%>
+		    </li>
+		    <li class="divider-vertical"></li>
+		
+		    <li class="<%= active=='images' ? 'active' : '' %>">
+				<%= link_to fragment_images_path do%><i class="icon icon-picture"></i> Images<%end%>
+		    </li>
+		    <li class="divider-vertical"></li>
+		
+		    <li class="<%= active=='sounds' ? 'active' : '' %>">
+				<%= link_to '#' do%><i class="icon icon-music"></i> Sounds<%end%>
+		    </li>
+		    <li class="divider-vertical"></li>
+		
+		    <li class="<%= active=='videos' ? 'active' : '' %>">
+				<%= link_to '#' do%><i class="icon icon-film"></i> Videos<%end%>
+		    </li>
+		    <li class="divider-vertical"></li>
+		
+		    <li class="<%= active=='attachments' ? 'active' : '' %>">
+				<%= link_to '#' do%><i class="icon icon-file"></i> Attachments<%end%>
+		    </li>
+		    <li class="divider-vertical"></li>
+		</ul>
+	</div>
+	
+</div>

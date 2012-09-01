@@ -81,8 +81,11 @@
 				</div>
 				
 				<div class="span2">
-					<%= object.label :avatar, 'Una foto di te:' %>
-					<%= object.file_field :avatar %>
+					<fieldset class='control-group <%= @user.errors[:avatar_file_size].any? ? 'error' : '' %>'>
+						<%= object.label :avatar, 'Una foto di te:' %>
+						<%= object.file_field :avatar %>
+						<span class='help-inline'><%= @user.errors[:avatar_file_size].any? ? @user.errors[:avatar_file_size].first.capitalize : '' %></span>
+					</fieldset>
 				</div>
 			</div>
 			<div class="row">

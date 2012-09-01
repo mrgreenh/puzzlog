@@ -2,15 +2,21 @@
 fragment ||= @fragment
 edit ||= false
 popover_controls ||= false
-@popover_controls ||= popover_controls
- %>
- <%= link_to fragment.name, fragment_path(fragment) %>
-<% if not edit %>
-
-	<%= render 'fragments/fragment_view', fragment: fragment %>
-
-<% else %>
+%>
+<div id="fragment_<%=fragment.id %>" class="fragment_container">
+	<% if not edit %>
 	
-	<%= render 'fragments/fragment_edit', fragment: fragment %>
-
-<% end %>
+		<%= render 'fragments/fragment_view', fragment: fragment %>
+	
+	<% else %>
+		
+		<%= render 'fragments/fragment_edit', fragment: fragment %>
+	
+	<% end %>
+	
+	<%= render 'fragments/popover_controls', fragment: fragment, popover_controls: popover_controls %>
+	
+	<%
+	# TODO rendering delle risorse
+	%>
+</div>

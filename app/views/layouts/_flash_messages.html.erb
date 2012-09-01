@@ -7,7 +7,15 @@
 <% 		end
 		if not flash[:errors].nil? %>
 		<div class="alert alert-error">
-			<%= flash[:errors] %>
+			<% if flash[:errors].respond_to?(:each) %>
+				<ul>
+				<% flash[:errors].each do |k,v| %>
+					<li><%= v %></li>
+				<% end %>
+				</ul>
+			<% else %>
+				<%= flash[:errors] %>
+			<% end %>
 			<% flash[:errors] = nil %>
 		</div>
 		<% end %>

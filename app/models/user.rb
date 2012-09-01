@@ -16,12 +16,20 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false, message:"Somebody else is already using this email" }
                     
   validates :bio, presence:true, length:{maximum:500}
+  
+  validates_attachment :avatar, size: { :in => 0..4.megabytes, message: "The image you uploaded is too heavy! Try with a smaller version." }
 
   has_many :user_role_relationships, dependent: :destroy
   has_many :roles, through: :user_role_relationships, source: :role
   
   has_many :fragments
   has_many :articles
+
+#Fragment resources
+  has_many :fragment_images
+  has_many :fragment_sounds
+  has_many :fragment_videos
+  has_many :fragment_untyped_attachments
 
   def create_remember_token
     self.update_attribute(:remember_token, SecureRandom.urlsafe_base64)

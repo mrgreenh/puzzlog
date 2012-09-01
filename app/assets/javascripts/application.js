@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap
+//= require bootstrap.min.js
 //= require jquery.validate.min
 //= require jquery.dotdotdot-1.5.1.js
 //= require_tree .

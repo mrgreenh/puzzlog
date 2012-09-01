@@ -59,7 +59,6 @@ class UsersController < ApplicationController
     if @user.save
       render 'show'
     else
-      flash[:errors] = "An error has occurred. Try again until you get tired of it."
       render 'edit'
     end
   end

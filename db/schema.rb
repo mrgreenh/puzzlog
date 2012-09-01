@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120822202656) do
+ActiveRecord::Schema.define(:version => 20120901104412) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -24,16 +24,100 @@ ActiveRecord::Schema.define(:version => 20120822202656) do
 
   add_index "articles", ["title"], :name => "index_articles_on_title", :unique => true
 
+  create_table "fragment_image_relationships", :force => true do |t|
+    t.integer  "fragment_id"
+    t.integer  "fragment_image_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  create_table "fragment_images", :force => true do |t|
+    t.string   "description"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.integer  "user_id"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+  end
+
+  create_table "fragment_sound_relationships", :force => true do |t|
+    t.integer  "fragment_id"
+    t.integer  "fragment_sound_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  create_table "fragment_sounds", :force => true do |t|
+    t.string   "description"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.integer  "user_id"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+  end
+
+  create_table "fragment_sounds_relationships", :force => true do |t|
+    t.integer  "fragment_id"
+    t.integer  "fragment_sound_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
   create_table "fragment_types", :force => true do |t|
     t.string   "name"
     t.text     "edit_script"
     t.text     "view_script"
     t.text     "edit_elements"
     t.text     "view_elements"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.text     "stylesheet"
     t.text     "default_data"
+    t.integer  "images"
+    t.integer  "sounds"
+    t.integer  "videos"
+    t.integer  "untyped_attachments"
+    t.string   "summary_fields"
+  end
+
+  create_table "fragment_untyped_attachment_relationships", :force => true do |t|
+    t.integer  "fragment_id"
+    t.integer  "fragment_untyped_attachment_id"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
+
+  create_table "fragment_untyped_attachments", :force => true do |t|
+    t.string   "description"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.integer  "user_id"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+  end
+
+  create_table "fragment_video_relationships", :force => true do |t|
+    t.integer  "fragment_id"
+    t.integer  "fragment_video_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  create_table "fragment_videos", :force => true do |t|
+    t.string   "description"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.integer  "user_id"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
   end
 
   create_table "fragments", :force => true do |t|

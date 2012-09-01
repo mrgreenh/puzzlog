@@ -1,2 +1,11 @@
-<h1>Fragments#index</h1>
-<p>Find me in app/views/fragments/index.html.erb</p>
+<% provide :title, "Puzzle Box | Fragments" %>
+<div class="container-fluid puzzle_box_container" id="puzzle_box_fragments_container">
+		<div class="span2">
+			<%= render 'layouts/puzzle_box_nav', active:'fragments' %>
+		</div>
+		<div class="offset1 span6">
+			<% @summary_fragments.each do|fragment| %>
+				<%= render 'fragments/fragment_summary', fragment: fragment %>
+			<% end %>
+		</div>
+</div>

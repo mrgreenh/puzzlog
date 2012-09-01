@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  fragment_id: 1
+  fragment_untyped_attachment_id: 1
+
+two:
+  fragment_id: 1
+  fragment_untyped_attachment_id: 1

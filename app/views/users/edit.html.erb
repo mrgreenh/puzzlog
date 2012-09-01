@@ -49,9 +49,12 @@
 			</fieldset>
 		</div>
 		<div class="span2">
-			<%= image_tag @user.avatar.url(:thumb), class:'thumb' %>
-			<%= object.label :avatar, 'Sostituisci con:' %>
-			<%= object.file_field :avatar %>
+			<fieldset class='control-group <%= @user.errors[:avatar_file_size].any? ? 'error' : '' %>'>
+				<%= image_tag @user.avatar.url(:thumb), class:'thumb' %>
+				<%= object.label :avatar, 'Sostituisci con:' %>
+				<%= object.file_field :avatar %>
+				<span class='help-inline'><%= @user.errors[:avatar_file_size].any? ? @user.errors[:avatar_file_size].first.capitalize : '' %></span>
+			</fieldset>
 		</div>
 	</div>
 	<div class="row">

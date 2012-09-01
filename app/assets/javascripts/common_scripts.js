@@ -15,9 +15,9 @@ function modalWindow(title,content){
 
 //Popover with partial's controls
 function initializeControlsPopovers(){
-	$(".fragment_view,.fragment_summary,.user_partial").each(function(){
+	$(".fragment_container,.fragment_summary,.user_partial").each(function(){
       $(this).popover({
-      placement:'left',
+      placement:'right',
       animation:false,
       trigger: 'manual',
       content: function(){
@@ -25,7 +25,7 @@ function initializeControlsPopovers(){
       }
     }).click(function(){
     	
-	      $(".fragment_view,.fragment_summary,.user_partial").each(function(){
+	      $(".fragment_container,.fragment_summary,.user_partial").each(function(){
 	        $(this).popover('hide');
 	      });
 	      $(this).popover('toggle');
@@ -39,6 +39,4 @@ function initializeControlsPopovers(){
 
 $(function(){
 	initializeControlsPopovers();
-  
-  
 });

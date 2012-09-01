@@ -1,4 +1,4 @@
-<%= form_tag '/sessions', method: :post, class:'well', id: 'signin-form' do %>
+<%= form_tag '/sessions', method: :post, class:'well form-inline', id: 'signin-form' do %>
 	<%= label_tag 'name', 'Name:' %>
 	<%= text_field_tag 'name', nil, placeholder:'Your name goes here...', autofocus:true %>
 	

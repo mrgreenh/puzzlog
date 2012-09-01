@@ -2,12 +2,11 @@ class FragmentsController < ApplicationController
   include ApplicationHelper
   include FragmentsHelper
   
-  # TODO -----------------------------------------------------Privileges
   before_filter :fragment_create_filter, only:[:new,:create]
   before_filter :fragment_destroy_filter, only: :destroy
   before_filter :fragment_edit_filter, only: [:edit, :update]
   before_filter :fragment_view_filter, only: [:show]
-  before_filter :fragment_publish_filter, only: [:create,:edit,:update]
+  before_filter :fragment_publish_filter, only: [:create,:update]
   
   def new
     @fragment = Fragment.new(fragment_type_id:params[:fragment_type_id],data:FragmentType.find(params[:fragment_type_id]).default_data)
@@ -70,7 +69,11 @@ class FragmentsController < ApplicationController
   end
 
   def index
+    @summary_fragments = current_user.fragments.where("stand_alone=?", true).order('updated_at DESC')
   
+    respond_to do |format|
+      format.html
+    end
   end
 
   def show
@@ -146,7 +149,8 @@ class FragmentsController < ApplicationController
       end
     
       def fragment_publish_filter
-        if !can_publish_fragment?(Fragment.new(params[:fragment]))&&(params.has_key?(:pubish_submit)||params[:fragment].has_key?(:public))
+        #Qua va detto che il public deve essere diverso da prima, o true se si tratta di un nuovo frammento!
+        if !can_publish_fragment?(Fragment.new(params[:fragment]))&&(params.has_key?(:pubish_submit)||fragment_public_state_change?(params)) 
           flash[:errors] = "You can't publish fragments"
           redirect_to root_path
         end

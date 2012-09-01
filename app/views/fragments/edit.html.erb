@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="offset3 span6">
-		<%= render 'fragments/fragment_edit', fragment: @fragment %>
+		<%= render 'fragments/fragment', fragment: @fragment, edit:true %>
 		<%= form_for @fragment, validate: true do |form| %>
 			<%= form.hidden_field :data %>
 			<div class="fragment_controls form-actions well" id="fragment_<%=@fragment.id%>_controls">

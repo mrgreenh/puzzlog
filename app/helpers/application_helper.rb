@@ -7,7 +7,7 @@ module ApplicationHelper
   end
   
   def full_title(custom_title)
-    base_title = "Fragments"
+    base_title = "PuzzLog"
     if custom_title.empty?
       base_title
     else

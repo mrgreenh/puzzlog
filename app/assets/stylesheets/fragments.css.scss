@@ -2,3 +2,18 @@
   text-align:right;
 }
 
+.fragment_container{
+  border-style:solid;
+  border-width:1px;
+  border-color:#dddddd;
+  margin:10px auto;
+}
+
+.fragment_summary{
+  td.table-value, td.table-key{
+    p{
+      max-height:50px;
+      overflow:hidden;
+    }
+  }
+}

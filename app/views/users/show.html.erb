@@ -9,7 +9,7 @@
 		  	<div class="span6"><h2><%= pluralize(@user.articles.count, "article") %>, <%= pluralize(@user.fragments.count, "fragment") %></h2></div>	
 		  </div>
 		  <div class="row">
-		  	<div class="span3"><%= image_tag @user.avatar.url(:medium), class: 'gentle-shade' %></div><div class="span3"><p><%= @user.bio %></p></div>
+		  	<div class="span3"><%= image_tag @user.avatar.url(:medium), class: @user.avatar.exists? ? 'gentle-shade' : '' %></div><div class="span3"><p><%= @user.bio %></p></div>
 		  </div>
 		  <div class="row">
 		  	<div class="offset1 span4">

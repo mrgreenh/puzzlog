@@ -13,6 +13,10 @@ var fragments = null;
 	// }
 	
 $(function(){ 
+	//Affix
+	$('#puzzle-box-nav').affix()
+	//---------------------------------------Dot dot dot
+	$(".fragment_summary td.table-value p,.fragment_summary td.table-key p").dotdotdot();
 	//---------------------------------------Fragments initializer
 	if(fragments!=null){
 		//Quando la pagina è renderizzata viene letto l'hash con gli oggetti di ogni frammento, e a seconda del tipo vi associa un oggetto contenente i metodi necessari

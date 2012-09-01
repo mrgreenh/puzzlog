@@ -8,7 +8,7 @@
 		      <span class="icon-bar"></span>
 		      <span class="icon-bar"></span>
 		    </a>
-        	<%= link_to 'Puzzle', root_path, class: 'brand' %>
+        	<%= link_to 'PuzzLog', root_path, class: 'brand' %>
         	<div class="nav-collapse">
 				<ul class="nav">
 					<li>
@@ -19,10 +19,24 @@
 				  <li><a data-toggle="modal" href="#modalLogin" ><i class="icon-user icon-white"></i></a></li>
 				  
 				<% else signed_in? %>
-					<% if can_create_fragments? %>
+					<% if can_create_fragments? %> <!-- allora mostro creazione frammenti e puzzle box -->
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								<i class="icon icon-white icon-comment"></i>
+								<b class="caret"></b>
+								<i class="icon icon-white icon-folder-open"></i> Puzzle Box
+							</a>
+							<ul class="dropdown-menu"> 
+								<li><%= link_to fragments_path  do%><i class="icon icon-th-large"></i> Fragments<%end%></li>
+								<li><%= link_to fragment_images_path do%><i class="icon icon-picture"></i> Images<%end%></li>
+								<li><%= link_to '#' do%><i class="icon icon-music"></i> Sounds<%end%></li>
+								<li><%= link_to '#' do%><i class="icon icon-film"></i> Videos<%end%></li>
+								<li><%= link_to '#' do%><i class="icon icon-file"></i> Attachments<%end%></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<b class="caret"></b>
+								<i class="icon icon-white icon-comment"></i> New Fragment
 							</a>
 							<ul class="dropdown-menu"> 
 								<%
@@ -30,7 +44,12 @@
 									# TODO usare le iconcine dei tipi di frammento quando saranno pronte
 								%>
 								<% FragmentType.all.each do |type|%>
-								<li><%= link_to type.name, new_fragment_path(fragment_type_id:type.id) %></li>
+								<li>
+									<%= link_to new_fragment_path(fragment_type_id:type.id) do %>
+										<img src="<%= getFragmentTypeIconThumb(type) %>" title="<%= type.name %>"> <%= type.name %>
+										<li class="divider"></li>
+									<% end %>
+								</li>
 								<% end %>
 								<li><a href="#">More...</a></li>
 							</ul>
@@ -40,8 +59,8 @@
 					    <a href="#"
 					          class="dropdown-toggle"
 					          data-toggle="dropdown">
-					          <i class="icon-cog icon-white"></i>
 					          <b class="caret"></b>
+					          <i class="icon-cog icon-white"></i> Manage
 					    </a>
 					    <ul class="dropdown-menu">
 					      <% if can_create_articles?
