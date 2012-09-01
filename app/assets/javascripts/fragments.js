@@ -13,8 +13,6 @@ var fragments = null;
 	// }
 	
 $(function(){ 
-	//Affix
-	$('#puzzle-box-nav').affix()
 	//---------------------------------------Dot dot dot
 	$(".fragment_summary td.table-value p,.fragment_summary td.table-key p").dotdotdot();
 	//---------------------------------------Fragments initializer

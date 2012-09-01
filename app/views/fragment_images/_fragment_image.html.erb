@@ -1,0 +1,13 @@
+<% # TODO da modificare perchè sia un sommario, con popover sempre attivi
+fragment_image ||= @fragment_image
+popover_controls ||= false
+%>
+ <li class="span2">
+    <div class="thumbnail">
+        <%= image_tag fragment_image.fragment_image_file.url(:thumb), alt:fragment_image.description %>
+        <p><%= fragment_image.description %></p>
+        <div>
+            Image controls
+        </div>
+    </div>
+</li>

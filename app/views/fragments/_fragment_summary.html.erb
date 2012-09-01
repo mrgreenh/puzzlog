@@ -1,7 +1,10 @@
 <div class="row">
 	<div class="span6 fragment_summary" id="fragment_<%= fragment.id %>">
 		<div class="row">
-			<div class="span2"><img src="<%= getFragmentTypeIcon(fragment.fragment_type) %>" title="<%= fragment.fragment_type.name %>"></div>
+			<div class="span2">
+				<img src="<%= getFragmentTypeIcon(fragment.fragment_type) %>" title="<%= fragment.fragment_type.name %>" class="fragment_type_image hidden-phone">
+				<img src="<%= getFragmentTypeIconThumb(fragment.fragment_type) %>" title="<%= fragment.fragment_type.name %>" class="fragment_type_image visible-phone">
+			</div>
 			<div class="span4">
 				<div class="row">
 					<div class="span4">
@@ -24,7 +27,9 @@
 				</div>
 			</div>	
 		</div>
-		
+		<%
+		# TODO mostrare alcune risorse del frammento
+		%>
 		<%= render 'fragments/popover_controls', fragment: fragment, popover_controls: true %>
 	</div>
 </div>

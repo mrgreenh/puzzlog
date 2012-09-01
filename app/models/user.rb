@@ -4,7 +4,10 @@ class User < ActiveRecord::Base
   before_save { |user| user.email = email.downcase }
   has_secure_password
   
-  has_attached_file :avatar,:styles => {:medium => "400x400>", :thumb => "128x128>" }, :source_file_options => { :all => '-auto-orient' }, :default_url=>"/images/application/missing_avatar.png"
+  has_attached_file :avatar,:styles => {:medium => "400x400>", :thumb => "128x128>" }, :source_file_options => { :all => '-auto-orient' },
+   :default_url=>"/images/application/missing_avatar.png",
+   :url => "/images/uploads/avatars/:id/:style/:filename",
+   :path => ":rails_root/public/images/uploads/avatars/:id/:style/:filename"
   
   validates :password, presence:true, length:{minimum:6}, on: :create
   validates :password_confirmation, presence:true, on: :create

@@ -1,0 +1,3 @@
+modalWindow("Upload some images to your Puzzle Box!","<%= escape_javascript(render 'fragment_images/upload_form') %>");
+
+$(".fragment_images_upload_container form").submit(stateful_loading);

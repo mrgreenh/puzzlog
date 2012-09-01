@@ -16,6 +16,7 @@ gem 'bootstrap-sass', '~> 2.0.4.1'
 gem 'dynamic_form'
 gem 'aws-sdk', '~> 1.3.4'
 gem 'heroku'
+gem "remotipart", "~> 1.0"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

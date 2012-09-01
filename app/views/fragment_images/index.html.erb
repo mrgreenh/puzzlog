@@ -1,4 +1,24 @@
 <% provide :title, "Puzzle Box | Images" %>
-<div class="container" id="puzzle_box_images_container">
-	<%= render 'layouts/puzzle_box_nav', active:'images' %>
+<div class="container-fluid puzzle_box_container" id="puzzle_box_images_container">
+	<div class="span2">
+			<%= render 'layouts/puzzle_box_nav', active:'images' %>
+	</div>
+	<div class="offset1 span6">
+		<div class="row resource_box_controls" id="fragment_images_box_controls">
+			<div class="well">
+				<%= link_to new_fragment_image_path, remote:true, class:"btn btn-success" do %>
+					<i class="icon icon-white icon-plus"></i> Add Images
+				<% end %>
+				<%= link_to '#', class:"btn btn-danger" do %>
+					<i class="icon icon-white icon-trash"></i> Delete Images
+				<% end %>
+			</div>
+		</div>
+		<div class="row">
+			<ul class="thumbnails">
+			 <%= render @fragment_images %>
+			</ul>
+		</div>
+	</div>
+
 </div>

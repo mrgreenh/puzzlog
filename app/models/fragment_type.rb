@@ -1,5 +1,5 @@
 class FragmentType < ActiveRecord::Base
-  attr_accessible :edit_elements, :edit_script, :name, :view_elements, :view_script, :stylesheet, :default_data, :images, :sounds, :videos, :untyped_attachments
+  attr_accessible :edit_elements, :edit_script, :name, :view_elements, :view_script, :stylesheet, :default_data, :images, :sounds, :videos, :untyped_attachments, :summary_fields
 
   has_many :fragments
   

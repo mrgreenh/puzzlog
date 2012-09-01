@@ -1,6 +1,12 @@
+# coding: utf-8
 module FragmentTypes
   module FragmentTypeTitleParagraph
-  def edit_script
+    
+  def self.summary_fields
+    "title,paragraph"
+  end
+  
+  def self.edit_script
     script=<<EOF
 $("#fragment_"+fragment.id+"_edit input.tit").val(fragment.data.title);
 $("#fragment_"+fragment.id+"_edit input.par").val(fragment.data.paragraph);
@@ -14,14 +20,14 @@ $("#fragment_"+fragment.id+"_edit input.par").keyup(function(){
 EOF
   end
   
-  def view_script
+  def self.view_script
     script=<<EOF
 $("#fragment_"+fragment.id+"_view p").html(fragment.data.paragraph);
 $("#fragment_"+fragment.id+"_view h1").html(fragment.data.title);
 EOF
   end
   
-  def edit_elements
+  def self.edit_elements
     elements =<<EOF
 <fieldset>Titolo: <input type="text" class="tit"></fieldset>
 <fieldset>Testo: <input type="text" class="par"></fieldset>
@@ -29,7 +35,7 @@ EOF
 
   end
   
-  def view_elements
+  def self.view_elements
     elements =<<EOF
 <h1></h1>
 <p>
@@ -37,7 +43,7 @@ EOF
 EOF
   end
   
-  def stylesheet
+  def self.stylesheet
     style=<<EOF
 &.fragment_view{
     color:$reddish;
@@ -56,14 +62,14 @@ EOF
 EOF
   end
   
-  def default_data
+  def self.default_data
     data=<<EOF
 {"title":"Titolo d'esempio","paragraph":"Contenuto paragrafo!"} 
 EOF
     
   end
   
-  def random_data
+  def self.random_data
     "{\"title\":\"#{Faker::Lorem.sentence(rand(1..5))}\",\"paragraph\":\"#{Faker::Lorem.sentence(rand(10..20))}\"}"
   end
 end
@@ -72,7 +78,12 @@ end
 #-----------------------------------------------------Image Gallery
 
 module FragmentTypeImagesGallery
-  def edit_script
+  
+  def self.summary_fields
+    "title"
+  end
+  
+  def self.edit_script
     script=<<EOF
 $("#fragment_"+fragment.id+"_edit input.tit").val(fragment.data.title);
         $("#fragment_"+fragment.id+"_edit input.tit").keyup(function(){
@@ -81,7 +92,7 @@ $("#fragment_"+fragment.id+"_edit input.tit").val(fragment.data.title);
 EOF
   end
   
-  def view_script
+  def self.view_script
     script=<<EOF
 $("#fragment_"+fragment.id+"_view .big_image").html($("#fragment_"+fragment.id+"_resources li").first().html());
         $("#fragment_"+fragment.id+"_view p").html($("#fragment_"+fragment.id+"_resources img").attr("title"));
@@ -105,7 +116,7 @@ $("#fragment_"+fragment.id+"_view .big_image").html($("#fragment_"+fragment.id+"
 EOF
   end
   
-  def edit_elements
+  def self.edit_elements
     elements =<<EOF
 <p>Titolo:</p>
     <input type="text" class="tit" />
@@ -113,7 +124,7 @@ EOF
 EOF
   end
   
-  def view_elements
+  def self.view_elements
     elements =<<EOF
 <h3></h3>
     <div class="big_image"></div>
@@ -124,7 +135,7 @@ EOF
 EOF
   end
   
-  def stylesheet
+  def self.stylesheet
     style=<<EOF
 .fragment_type_1.fragment_view{ /* In realtà il css del container non andrà toccato */
     border-style:solid;
@@ -169,14 +180,14 @@ EOF
 EOF
   end
   
-  def default_data
+  def self.default_data
     data=<<EOF
 {"title":"Untitled Gallery"}
 EOF
     
   end
   
-  def random_data
+  def self.random_data
     "{\"title\":\"#{Faker::Lorem.sentence(rand(1..5))}\"}"
   end
 end

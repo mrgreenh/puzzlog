@@ -1,18 +1,4 @@
 FragmentsProject::Application.routes.draw do
-  get "fragment_images/new"
-
-  get "fragment_images/create"
-
-  get "fragment_images/edit"
-
-  get "fragment_images/update"
-
-  get "fragment_images/destroy"
-
-  get "fragment_images/show"
-
-  get "fragment_images/index"
-
   root to: 'static_pages#home'
   
   resources :users
@@ -27,7 +13,7 @@ FragmentsProject::Application.routes.draw do
   
   match '/signup', to: 'users#new'
   match '/signin', to: 'sessions#new'
-  match '/signout', to: 'sessions#destroy', via: :delete
+  match '/signout', to: 'sessions#destroy'
   
   #Fragment Resources
   resources :fragment_images

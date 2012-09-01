@@ -53,36 +53,50 @@ end
 
 # TODO i tipi di frammento da installare con l'applicazione saranno da includere in una migrazione o simili
 #--------------------------------------------Tipi frammento (implementare moduli sopra)
-FragmentType.create(edit_elements:FragmentTypes::FragmentTypeTitleParagraph.edit_elements,
+titleandparagraph = FragmentType.new(edit_elements:FragmentTypes::FragmentTypeTitleParagraph.edit_elements,
                     view_elements:FragmentTypes::FragmentTypeTitleParagraph.view_elements,
                     edit_script:FragmentTypes::FragmentTypeTitleParagraph.edit_script,
                     view_script:FragmentTypes::FragmentTypeTitleParagraph.view_script,
                     stylesheet:FragmentTypes::FragmentTypeTitleParagraph.stylesheet,
                     default_data:FragmentTypes::FragmentTypeTitleParagraph.default_data,
-                    name:"Title and Paragraph");
+                    name:"Title and Paragraph",
+                    summary_fields: FragmentTypes::FragmentTypeTitleParagraph.summary_fields);
+titleandparagraph.save
 
-FragmentType.create(edit_elements:FragmentTypes::FragmentTypeImagesGallery.edit_elements,
+imagesgallery = FragmentType.new(edit_elements:FragmentTypes::FragmentTypeImagesGallery.edit_elements,
                     view_elements:FragmentTypes::FragmentTypeImagesGallery.view_elements,
                     edit_script:FragmentTypes::FragmentTypeImagesGallery.edit_script,
                     view_script:FragmentTypes::FragmentTypeImagesGallery.view_script,
                     stylesheet:FragmentTypes::FragmentTypeImagesGallery.stylesheet,
                     default_data:FragmentTypes::FragmentTypeImagesGallery.default_data,
-                    name:"Title and Paragraph");
+                    name:"Images Gallery",
+                    summary_fields: FragmentTypes::FragmentTypeImagesGallery.summary_fields);
+imagesgallery.save
 
 #--------------------------------------------Articoli e frammenti slegati
 User.all.each do |user|
-  rand(1..12).times do |n|
+  rand(1..6).times do |n|
     user.articles.create(title:Faker::Lorem.sentence(rand(1..6)))
   end
-  rand(1..12).times do |n|
+  rand(1..6).times do |n|
     datetime = randomDateTime
-    user.fragments.create(name:Faker::Lorem.sentence(rand(1..6)), fragment_type_id:FragmentType.first.id, stand_alone:false, public:false, data:FragmentTypes::FragmentTypeTitleParagraph.random_data)
+    user.fragments.create(name:Faker::Lorem.sentence(rand(1..6)), fragment_type_id:FragmentType.find_by_name('Title and Paragraph').id, stand_alone:false, public:false, data:FragmentTypes::FragmentTypeTitleParagraph.random_data)
     datetime = randomDateTime
-    user.fragments.create(name:Faker::Lorem.sentence(rand(1..6)), fragment_type_id:FragmentType.first.id, stand_alone:true, public:false, data:FragmentTypes::FragmentTypeTitleParagraph.random_data)
+    user.fragments.create(name:Faker::Lorem.sentence(rand(1..6)), fragment_type_id:FragmentType.find_by_name('Title and Paragraph').id, stand_alone:true, public:false, data:FragmentTypes::FragmentTypeTitleParagraph.random_data)
     datetime = randomDateTime
-    user.fragments.create(name:Faker::Lorem.sentence(rand(1..6)), fragment_type_id:FragmentType.first.id, stand_alone:false, public:true, publication_date:datetime, data:FragmentTypes::FragmentTypeTitleParagraph.random_data)
+    user.fragments.create(name:Faker::Lorem.sentence(rand(1..6)), fragment_type_id:FragmentType.find_by_name('Title and Paragraph').id, stand_alone:false, public:true, publication_date:datetime, data:FragmentTypes::FragmentTypeTitleParagraph.random_data)
     datetime = randomDateTime
-    user.fragments.create(name:Faker::Lorem.sentence(rand(1..6)), fragment_type_id:FragmentType.first.id, stand_alone:false, public:false, publication_date:datetime, data:FragmentTypes::FragmentTypeTitleParagraph.random_data)
+    user.fragments.create(name:Faker::Lorem.sentence(rand(1..6)), fragment_type_id:FragmentType.find_by_name('Title and Paragraph').id, stand_alone:false, public:false, publication_date:datetime, data:FragmentTypes::FragmentTypeTitleParagraph.random_data)
+  end
+  rand(1..6).times do |n|
+    datetime = randomDateTime
+    user.fragments.create(name:Faker::Lorem.sentence(rand(1..6)), fragment_type_id:FragmentType.find_by_name('Images Gallery').id, stand_alone:false, public:false, data:FragmentTypes::FragmentTypeImagesGallery.random_data)
+    datetime = randomDateTime
+    user.fragments.create(name:Faker::Lorem.sentence(rand(1..6)), fragment_type_id:FragmentType.find_by_name('Images Gallery').id, stand_alone:true, public:false, data:FragmentTypes::FragmentTypeImagesGallery.random_data)
+    datetime = randomDateTime
+    user.fragments.create(name:Faker::Lorem.sentence(rand(1..6)), fragment_type_id:FragmentType.find_by_name('Images Gallery').id, stand_alone:false, public:true, publication_date:datetime, data:FragmentTypes::FragmentTypeImagesGallery.random_data)
+    datetime = randomDateTime
+    user.fragments.create(name:Faker::Lorem.sentence(rand(1..6)), fragment_type_id:FragmentType.find_by_name('Images Gallery').id, stand_alone:false, public:false, publication_date:datetime, data:FragmentTypes::FragmentTypeImagesGallery.random_data)
   end
 end
 

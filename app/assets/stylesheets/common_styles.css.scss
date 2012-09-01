@@ -114,8 +114,23 @@ table .table-key{
 }
 
 /*----------------------Affix*/
-
-.affix-top{
-  top:200px;
+#puzzle-box-nav-container{
+  min-height:1px;
 }
 
+#puzzle-box-nav{
+  width:140px;
+}
+
+.affix{
+  position:fixed;
+}
+
+/*-------------------Puzzle Box*/
+.resource_box_controls {
+  text-align:center;
+}
+
+ul.resource_uploading_fields {
+  list-style-type: none;
+}

@@ -1,0 +1,23 @@
+<div class="fragment_images_upload_container">	
+	<%= form_tag fragment_images_path, method: :post, remote:true, multipart:true, class:'well' do %>
+	<ul class="resource_uploading_fields">
+		<li>
+			<%= text_field_tag 'fragment_resource[0][description]', nil, placeholder: 'Describe your image' %>
+			<%= file_field_tag 'fragment_resource[0][file]' %>
+		</li>
+		<li>
+			<%= text_field_tag 'fragment_resource[1][description]', nil, placeholder: 'Describe your image' %>
+			<%= file_field_tag 'fragment_resource[1][file]' %>
+		</li>
+	</ul>
+	<div class="form-actions">
+		<%= submit_tag 'Start Uploading', class:'btn btn-primary stateful_loading', "data-loading-text" => "Uploading..." %>
+		<%= link_to '#', class:'add_file_field_link' do %>
+			<i class="icon icon-plus"></i> Aggiungi un'altra immagine
+		<% end %>
+		<%
+		# TODO link per aumentare il numero di campi non ancora funzionante
+		%>
+	</div>
+	<% end %>
+</div>
