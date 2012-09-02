@@ -70,7 +70,8 @@ imagesgallery = FragmentType.new(edit_elements:FragmentTypes::FragmentTypeImages
                     stylesheet:FragmentTypes::FragmentTypeImagesGallery.stylesheet,
                     default_data:FragmentTypes::FragmentTypeImagesGallery.default_data,
                     name:"Images Gallery",
-                    summary_fields: FragmentTypes::FragmentTypeImagesGallery.summary_fields);
+                    summary_fields: FragmentTypes::FragmentTypeImagesGallery.summary_fields,
+                    images:50);
 imagesgallery.save
 
 #--------------------------------------------Articoli e frammenti slegati

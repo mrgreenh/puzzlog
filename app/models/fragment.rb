@@ -1,6 +1,6 @@
 class Fragment < ActiveRecord::Base
   attr_accessible :data, :fragment_type_id, :stand_alone, :name, :public, :publication_date
-  # TODO aggiungo dei booleani "images", "sounds" e "videos" per associare l'uploader dei diversi tipi di file?
+
   validates_presence_of :data
   validates_presence_of :fragment_type_id
   

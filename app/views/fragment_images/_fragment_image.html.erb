@@ -1,13 +1,24 @@
-<% # TODO da modificare perchè sia un sommario, con popover sempre attivi
+<% # TODO Aggiungere permessi per creazione, distruzione, editing
 fragment_image ||= @fragment_image
 popover_controls ||= false
 %>
- <li class="span2">
-    <div class="thumbnail">
-        <%= image_tag fragment_image.fragment_image_file.url(:thumb), alt:fragment_image.description %>
-        <p><%= fragment_image.description %></p>
-        <div>
-            Image controls
+ <li class="span2" id="fragment_image_<%= fragment_image.id %>">
+    <div class="fragment_image thumbnail">
+        <%= image_tag fragment_image.fragment_resource_file.url(:thumb), alt:fragment_image.description %>
+        <p>
+        	<%= fragment_image.description %>
+        </p>
+        <div class="fragment_image_controls">
+        	<% if can_edit_fragment_resource?(fragment_image) %>
+	        	<%= link_to edit_fragment_image_path(fragment_image), remote:true  do %>
+	        		<i class="icon icon-edit"></i>
+	        	<% end %>
+        	<% end %>
+        	<% if can_destroy_fragment_resource?(fragment_image) %>
+	        	<%= link_to fragment_image_path(fragment_image), method: :delete, remote:true, data: { confirm: "THIS IMAGE WILL BE DELETED FROM EVERY ARTICLE AND FRAGMENT that uses it. Continue?"} do %>
+	        		<i class="icon icon-trash"></i>
+	        	<% end %>
+	        <% end %>
         </div>
     </div>
 </li>

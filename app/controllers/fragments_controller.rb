@@ -122,7 +122,7 @@ class FragmentsController < ApplicationController
     
     def fragment_create_filter
         if not can_create_fragments?
-          flash[:errors] = "You're not the boss, you can't create fragments."
+          flash[:errors] = "You can't create fragments."
           redirect_to root_path
         end
       end

@@ -5,19 +5,20 @@
 	</div>
 	<div class="offset1 span6">
 		<div class="row resource_box_controls" id="fragment_images_box_controls">
-			<div class="well">
-				<%= link_to new_fragment_image_path, remote:true, class:"btn btn-success" do %>
-					<i class="icon icon-white icon-plus"></i> Add Images
-				<% end %>
-				<%= link_to '#', class:"btn btn-danger" do %>
-					<i class="icon icon-white icon-trash"></i> Delete Images
+			<div class="span6">
+				<% if can_create_fragment_resources? %>
+					<%= link_to new_fragment_image_path, remote:true, class:"btn btn-success" do %>
+						<i class="icon icon-white icon-plus"></i> Add Images
+					<% end %>
 				<% end %>
 			</div>
 		</div>
 		<div class="row">
-			<ul class="thumbnails">
-			 <%= render @fragment_images %>
-			</ul>
+			<div class="span6">
+				<ul class="thumbnails">
+				 <%= render @fragment_images %>
+				</ul>
+			</div>
 		</div>
 	</div>
 

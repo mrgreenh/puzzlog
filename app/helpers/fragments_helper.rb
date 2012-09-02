@@ -39,7 +39,7 @@ module FragmentsHelper
   end
   
   def can_publish_fragment?(fragment=Fragment.find(params[:id]))
-    has_role?('superadmin') || has_role?('publisher')
+    has_role?('superadmin') || (has_role?('publisher')&&fragment.user == current_user)
   end
   
   def fragment_public_state_change?(params)

@@ -17,6 +17,6 @@ module ArticlesHelper
   end
   
   def can_publish_article?(article=Article.find(params[:id]))
-    has_role?('superadmin') || has_role?('publisher')
+    has_role?('superadmin') || (has_role?('publisher')&&article.user == current_user)
   end
 end

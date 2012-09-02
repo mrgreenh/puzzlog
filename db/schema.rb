@@ -33,13 +33,13 @@ ActiveRecord::Schema.define(:version => 20120901104412) do
 
   create_table "fragment_images", :force => true do |t|
     t.string   "description"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.integer  "user_id"
-    t.string   "fragment_image_file_file_name"
-    t.string   "fragment_image_file_content_type"
-    t.integer  "fragment_image_file_file_size"
-    t.datetime "fragment_image_file_updated_at"
+    t.string   "fragment_resource_file_file_name"
+    t.string   "fragment_resource_file_content_type"
+    t.integer  "fragment_resource_file_file_size"
+    t.datetime "fragment_resource_file_updated_at"
   end
 
   create_table "fragment_sound_relationships", :force => true do |t|
@@ -51,13 +51,13 @@ ActiveRecord::Schema.define(:version => 20120901104412) do
 
   create_table "fragment_sounds", :force => true do |t|
     t.string   "description"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.integer  "user_id"
-    t.string   "fragment_sound_file_file_name"
-    t.string   "fragment_sound_file_content_type"
-    t.integer  "fragment_sound_file_file_size"
-    t.datetime "fragment_sound_file_updated_at"
+    t.string   "fragment_resource_file_file_name"
+    t.string   "fragment_resource_file_content_type"
+    t.integer  "fragment_resource_file_file_size"
+    t.datetime "fragment_resource_file_updated_at"
   end
 
   create_table "fragment_sounds_relationships", :force => true do |t|
@@ -93,13 +93,13 @@ ActiveRecord::Schema.define(:version => 20120901104412) do
 
   create_table "fragment_untyped_attachments", :force => true do |t|
     t.string   "description"
-    t.datetime "created_at",                                    :null => false
-    t.datetime "updated_at",                                    :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.integer  "user_id"
-    t.string   "fragment_untyped_attachment_file_file_name"
-    t.string   "fragment_untyped_attachment_file_content_type"
-    t.integer  "fragment_untyped_attachment_file_file_size"
-    t.datetime "fragment_untyped_attachment_file_updated_at"
+    t.string   "fragment_resource_file_file_name"
+    t.string   "fragment_resource_file_content_type"
+    t.integer  "fragment_resource_file_file_size"
+    t.datetime "fragment_resource_file_updated_at"
   end
 
   create_table "fragment_video_relationships", :force => true do |t|
@@ -111,13 +111,13 @@ ActiveRecord::Schema.define(:version => 20120901104412) do
 
   create_table "fragment_videos", :force => true do |t|
     t.string   "description"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.integer  "user_id"
-    t.string   "fragment_video_file_file_name"
-    t.string   "fragment_video_file_content_type"
-    t.integer  "fragment_video_file_file_size"
-    t.datetime "fragment_video_file_updated_at"
+    t.string   "fragment_resource_file_file_name"
+    t.string   "fragment_resource_file_content_type"
+    t.integer  "fragment_resource_file_file_size"
+    t.datetime "fragment_resource_file_updated_at"
   end
 
   create_table "fragments", :force => true do |t|

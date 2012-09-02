@@ -1,0 +1,13 @@
+<div class="well">
+	<%= form_for @fragment_image, remote:true do |form| %>
+		<%= image_tag @fragment_image.fragment_resource_file.url(:thumb), alt:@fragment_image.description %>
+		<fieldset>
+			<%= form.label :description, 'Description:' %>
+			<%= form.text_field :description %>
+		</fieldset>
+		
+		<div class="form-actions">
+			<%= form.submit class:'btn btn-primary' %>
+		</div>
+	<% end %>
+</div>

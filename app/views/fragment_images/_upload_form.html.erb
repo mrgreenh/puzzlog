@@ -1,14 +1,7 @@
 <div class="fragment_images_upload_container">	
 	<%= form_tag fragment_images_path, method: :post, remote:true, multipart:true, class:'well' do %>
 	<ul class="resource_uploading_fields">
-		<li>
-			<%= text_field_tag 'fragment_resource[0][description]', nil, placeholder: 'Describe your image' %>
-			<%= file_field_tag 'fragment_resource[0][file]' %>
-		</li>
-		<li>
-			<%= text_field_tag 'fragment_resource[1][description]', nil, placeholder: 'Describe your image' %>
-			<%= file_field_tag 'fragment_resource[1][file]' %>
-		</li>
+		<%= render 'fragment_images/resource_uploader_field' %>
 	</ul>
 	<div class="form-actions">
 		<%= submit_tag 'Start Uploading', class:'btn btn-primary stateful_loading', "data-loading-text" => "Uploading..." %>
