@@ -2,7 +2,7 @@
 fragment_image ||= @fragment_image
 detach_button ||= false
 %>
- <li class="span2" id="fragment_image_<%= fragment_image.id %>" data-image-id="<%= fragment_image.id %>" data-image-json = "<%= fragment_image.as_json.to_json %>">
+ <li class="span2" id="fragment_image_<%= fragment_image.id %>" data-image-id="<%= fragment_image.id %>" data-image-json="<%= fragment_image.as_json.to_json %>">
     <div class="fragment_image thumbnail">
         <%= image_tag fragment_image.fragment_resource_file.url(:thumb), alt:fragment_image.description %>
         <p>
