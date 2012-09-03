@@ -30,7 +30,10 @@
 	<!-- Resources panels -->
 	<% if fragment.fragment_type.has_images? %>
 		<div class="tab-pane fade in fragment_images" id="fragment_<%=fragment.id%>_images">
-			<h2>Images</h2>
+			<%= render 'fragment_images/fragment_panel_controls', fragment: fragment %>
+			<ul class="thumbnails">
+			
+			</ul>
 		</div>
 	<% end %>
 	<% if fragment.fragment_type.has_sounds? %>

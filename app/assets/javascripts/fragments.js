@@ -1,5 +1,7 @@
 
 var fragments = null;
+var targetFragment = null;
+//Se questo non è nullo, la create della risorsa aggiorna l'hash contenuto nell'oggetto
 
 //Add To Box button -------- Lo lascio nel caso serva vedere come cambiare il contenuto della popup al volo
 	// function addToBoxPopover(){
@@ -11,7 +13,26 @@ var fragments = null;
 			// });
 		// });
 	// }
+//----------------------------------------------Inizializzazione frammento
+function updateResources(fragment){
+	$("#fragment_"+fragment.id+"_images .thumbnails").html("");
+	$.each(fragment.images, function(key,image){
+		console.log(image.description);
+		var controls = '<a class="close" data-image-id="'+image.id+'">&times;</a>';
+		var thumbnail = '<img alt="'+image.description+'" src="'+image.thumb+'"><p>'+image.description+'</p>';
+		var thumbnailContainer = '<li data-image-id="'+image.id+'" class="span2 fragment_editor_resource_container" id="fragment_image_'+image.id+'"><div class="fragment_image thumbnail">'+thumbnail+controls+'</div></li>';
+		$("#fragment_"+fragment.id+"_images .thumbnails").append(thumbnailContainer);
+	});
+	$("#fragment_"+fragment.id+"_images .close").click(function(){
+		var imageId = $(this).attr("data-image-id");
+		$(this).parents("li").slideUp(function(){
+			$(this).remove();
+		});
+		delete(fragment.images[imageId]);
+	});
 	
+}
+//Inizializzazione
 $(function(){ 
 	//---------------------------------------Dot dot dot
 	$(".fragment_summary td.table-value p,.fragment_summary td.table-key p").dotdotdot();
@@ -28,7 +49,17 @@ $(function(){
 			$("#fragment_"+fragment.id+"_tab a.view_tab_link").click(function(){
 				fragments_methods[type_id].view(fragment);
 			});
-			
+			$("#fragment_"+fragment.id+"_tab a.edit_tab_link").click(function(){
+				fragments_methods[type_id].edit(fragment);
+			});
+//-------------------Resources management initialization
+			updateResources(fragment);
+			//Images
+			if(fragment.has_images){
+				$("#fragment_"+fragment.id+"_images_upload_button").click(function(){
+					targetFragment = fragment;
+				});
+			}
 			//----Inizializzo le tab edit e view
 			$('#fragment_'+fragment.id+'_tab a').click(function (e) {
   				e.preventDefault();
@@ -58,6 +89,8 @@ $(function(){
 	//Aggiornamento campo data al submit
 	$("#new_fragment, .edit_fragment").submit(function(){
 		$("#new_fragment #fragment_data, .edit_fragment #fragment_data").val(JSON.stringify(fragments[0].data));
+		//Updating resources fields on submit TODO
+		
 	});
 
 });

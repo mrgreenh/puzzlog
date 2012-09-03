@@ -1,2 +1,10 @@
 modalWindow("","<%= escape_javascript(render 'layouts/flash_messages') %>");
-$("ul.thumbnails").html("<%= escape_javascript(render @fragment_images)%>");
+$("#puzzle_box_images_container ul.thumbnails").html("<%= escape_javascript(render @fragment_images)%>");
+
+//Aggiorno l'oggetto che potrebbe aver richiesto l'upload
+if(targetFragment!=undefined&&targetFragment!=null){
+	var createdImages = <%=@created_images.to_json%>;
+	$.extend(targetFragment.images, createdImages);
+	updateResources(targetFragment);
+	targetFragment = null;
+}

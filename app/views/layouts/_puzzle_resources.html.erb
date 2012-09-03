@@ -7,8 +7,14 @@
   		var fragments_methods = {
   			<% @fragment_types.each do |k,frag_type| %>
   				<%= k %>: {
-  					view:function(fragment){<%= raw(frag_type.view_script.to_s) %>},
-  					edit:function(fragment){<%= raw(frag_type.edit_script.to_s) %>},
+  					view:function(fragment){
+  						$("#fragment"+fragment.id+"view *").unbind();//Per evitare che all'aggiornamento della view si debba fare l'unbind di ogni evento per poi riassociarlo
+  						<%= raw(frag_type.view_script.to_s) %>
+  						},
+  					edit:function(fragment){
+  						$("#fragment"+fragment.id+"edit *").unbind();
+  						<%= raw(frag_type.edit_script.to_s) %>
+  						},
   				},
   			<% end %>
   		};

@@ -15,13 +15,14 @@ class FragmentImagesController < ApplicationController
   end
 
   def create
+    @created_images = Hash.new
     params[:fragment_resource].each do |image|
       fragment_image = FragmentImage.new(fragment_resource_file:image[1]["file"],user_id:current_user.id,description:image[1]["description"])
       if fragment_image.save
         flash[:success] = "Images saved!"
+        @created_images[fragment_image.id] = fragment_image.as_json(only: [:id,:description])
       else
-        flash[:success] = nil
-        flash[:errors] = fragment_image.errors
+        flash[:errors] = "There has been some problem with some images you uploaded."
       end
     end
     

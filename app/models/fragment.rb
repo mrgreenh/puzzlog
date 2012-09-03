@@ -28,6 +28,17 @@ class Fragment < ActiveRecord::Base
   def as_json(options={})
     result = super(options)
     result[:data] = ActiveSupport::JSON.decode(self.data)
+    
+    #Resources
+    result[:images] = Hash.new()
+    self.images.each do |image|
+      result[:images][image.id] = image.as_json
+    end
+    
+    result[:has_images] = self.fragment_type.has_images?
+    result[:has_sounds] = self.fragment_type.has_sounds?
+    result[:has_videos] = self.fragment_type.has_videos?
+    result[:has_untyped_attachments] = self.fragment_type.has_untyped_attachments?
     if self.id.nil?
       result[:id] = ''
     end

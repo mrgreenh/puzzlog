@@ -94,25 +94,40 @@ EOF
   
   def self.view_script
     script=<<EOF
-$("#fragment_"+fragment.id+"_view .big_image").html($("#fragment_"+fragment.id+"_resources li").first().html());
-        $("#fragment_"+fragment.id+"_view p").html($("#fragment_"+fragment.id+"_resources img").attr("title"));
+var images = [];
+        $.each(fragment.images, function(index,value){
+          images.push(value);
+        });
         $("#fragment_"+fragment.id+"_view h3").html(fragment.data.title);
         
-        var contatore = 0;
-        $("#fragment_"+fragment.id+"_view ul").html("");
-        $("#fragment_"+fragment.id+"_resources li").each(function(){
-          var image = $(this).html();
-          var classe = "";
-          if(contatore==0) classe = "selected";
-          $("#fragment_"+fragment.id+"_view ul").append("<li class='"+classe+"'>"+image+"</li>");
-          $("#fragment_"+fragment.id+"_view li").click(function(){
-            $("#fragment_"+fragment.id+"_view li").removeClass("selected");
-            $(this).addClass("selected");
-            $("#fragment_"+fragment.id+"_view .big_image").html($(this).html());
-            $("#fragment_"+fragment.id+"_view .image_description").html($(this).children("img").first().attr("title"));
+        
+        if(images.length>0){
+        $("#fragment_"+fragment.id+"_view .big_image img").attr("src",images[0].medium);
+        $("#fragment_"+fragment.id+"_view p").html(images[0].description);
+        }
+        
+        if(images.length>1){
+          var contatore = 0;
+          $("#fragment_"+fragment.id+"_view ul.thumbs").html("");
+          $(images).each(function(index,image){
+            var thumb = '<li id="fragment_thumb_'+image.id+'" class="fragment_image_thumb"><img src="" title=""></li>';
+            var classe = "";
+            if(contatore==0) classe = "selected";
+            
+            $("#fragment_"+fragment.id+"_view ul.thumbs").append(thumb);
+            
+            $("#fragment_thumb_"+image.id).addClass(classe);
+            $("#fragment_thumb_"+image.id+" img").attr("src",image.thumb);
+            $("#fragment_thumb_"+image.id+" img").attr("title",image.description);
+            $("#fragment_thumb_"+image.id).click(function(){
+              $("#fragment_"+fragment.id+"_view li.fragment_image_thumb").removeClass("selected");
+              $(this).addClass("selected");
+              $("#fragment_"+fragment.id+"_view .big_image img").attr("src",image.medium);
+              $("#fragment_"+fragment.id+"_view p").html(image.description);
+            });
+            contatore ++;
           });
-          contatore ++;
-        });
+        }
 EOF
   end
   
@@ -127,7 +142,7 @@ EOF
   def self.view_elements
     elements =<<EOF
 <h3></h3>
-    <div class="big_image"></div>
+    <div class="big_image"><img src="" title="" /></div>
     <p class="image_description"></p>
     <ul class="thumbs">
       
@@ -137,7 +152,7 @@ EOF
   
   def self.stylesheet
     style=<<EOF
-.fragment_type_1.fragment_view{ /* In realtà il css del container non andrà toccato */
+&.fragment_view{ /* In realtà il css del container non andrà toccato */
     border-style:solid;
     border-width:1px;
     border-color:#885555;
@@ -149,32 +164,32 @@ EOF
     overflow:hidden;
   }
   
-  .fragment_type_1 .big_image {
+  & .big_image {
     height:300px;
   }
   
-  .fragment_type_1 .big_image img{
+  & .big_image img{
     max-height:300px;
   }
   
-  .fragment_type_1 .thumbs li{
+  & .thumbs li{
     float:left;
     max-width:30%;
     overflow:hidden;
     height:80px;
   }
   
-  .fragment_type_1 .thumbs li.selected{
+  & .thumbs li.selected{
     border-style:solid;
     border-width:2px;
     border-color:red;
   }
   
-  .fragment_type_1 li img{
+  & li img{
     min-height:80px;
   }
   
-  .fragment_type_1.fragment_edit {
+  &.fragment_edit {
     color:green;
   }
 EOF

@@ -1,0 +1,12 @@
+<%
+	fragment ||= @fragment
+%>
+<div class="fragment_images_panel_controls fragment_resource_panel_controls">
+	<%= link_to '#', class:'btn btn-primary' do %>
+		<i class="icon icon-white icon-plus"></i> Add from Puzzle Box
+	<% end %>
+	
+	<%= link_to new_fragment_image_path, remote:true, id:"fragment_#{fragment.id}_images_upload_button", class:'btn btn-success' do %>
+		<i class="icon icon-white icon-arrow-up"></i> Upload Images
+	<% end %>
+</div>

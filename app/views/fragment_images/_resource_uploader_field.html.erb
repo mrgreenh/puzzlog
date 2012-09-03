@@ -1,6 +1,12 @@
+<%
+remove_button ||= false
+%>
+
 <li>
-	<%= link_to '#', class: 'remove_upload_button' do %>
-		<i class="icon icon-remove"></i>
+	<% if remove_button %>
+		<%= link_to '#', class: 'remove_upload_button' do %>
+			<i class="icon icon-remove"></i>
+		<% end %>
 	<% end %>
 	<%= text_field_tag 'fragment_resource[0][description]', nil, placeholder: 'Describe your image', class:'resource_description_field' %>
 	<%= file_field_tag 'fragment_resource[0][file]', class:'resource_file_field' %>

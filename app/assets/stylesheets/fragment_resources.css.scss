@@ -1,0 +1,18 @@
+.remove_upload_button {
+  margin-left: -18px;
+}
+
+.fragment_resource_panel_controls{
+  margin-bottom:10px;
+  text-align:center;
+}
+
+.fragment_editor_resource_container{
+  position:relative;
+  .close {
+    position:absolute;
+    top:0px;
+    left:5px;
+    color:black;
+  }
+}
