@@ -1,4 +1,8 @@
 FragmentsProject::Application.routes.draw do
+  get "fragment_types/index"
+
+  get "fragment_types_controller/index"
+
   root to: 'static_pages#home'
   
   resources :users
@@ -18,6 +22,7 @@ FragmentsProject::Application.routes.draw do
   #Fragment Resources
   resources :fragment_images
   resources :fragment_image_relationships, only: [:new]
+  resources :fragment_types, only: [:index, :show]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

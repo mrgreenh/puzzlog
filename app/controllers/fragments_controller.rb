@@ -71,7 +71,7 @@ class FragmentsController < ApplicationController
   end
 
   def index
-    @summary_fragments = current_user.fragments.where("stand_alone=?", true).order('updated_at DESC')
+    @summary_fragments = current_user.fragments.where("stand_alone=?", true).order('updated_at DESC').paginate(:page => params[:page], :per_page => 5)
   
     respond_to do |format|
       format.html

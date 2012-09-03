@@ -70,7 +70,7 @@ class FragmentImagesController < ApplicationController
   end
 
   def index
-    @fragment_images = current_user.fragment_images.all
+    @fragment_images = current_user.fragment_images.paginate(:page => params[:page], :per_page => 15)
     
     respond_to do |format|
       format.html

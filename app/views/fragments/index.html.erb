@@ -7,8 +7,17 @@
 			<%= render 'layouts/puzzle_box_nav', active:'fragments' %>
 		</div>
 		<div class="offset1 span6">
-			<% @summary_fragments.each do|fragment| %>
-				<%= render 'fragments/fragment_summary', fragment: fragment %>
-			<% end %>
+			<div class="row">
+				<div class="span6">
+					<% @summary_fragments.each do|fragment| %>
+						<%= render 'fragments/fragment_summary', fragment: fragment %>
+					<% end %>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span6 will_pagination">
+					<%= will_paginate @summary_fragments %>
+				</div>
+			</div>
 		</div>
 </div>

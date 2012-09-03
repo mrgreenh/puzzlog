@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120901104412) do
+ActiveRecord::Schema.define(:version => 20120903214021) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(:version => 20120901104412) do
     t.integer  "videos"
     t.integer  "untyped_attachments"
     t.string   "summary_fields"
+    t.text     "description"
   end
 
   create_table "fragment_untyped_attachment_relationships", :force => true do |t|

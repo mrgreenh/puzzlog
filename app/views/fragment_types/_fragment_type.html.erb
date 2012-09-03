@@ -1,0 +1,21 @@
+<%
+	fragment_type ||= @fragment_type
+	new_fragment_button ||= false
+	fragment_type_info_button ||= false
+%>
+
+<div class="fragment_type_container" id="fragment_type_<%=fragment_type.id %>">
+			<%= image_tag getFragmentTypeIconThumb(fragment_type) %>
+			<strong><%= fragment_type.name %></strong>
+			<% if new_fragment_button %>
+				<%= link_to new_fragment_path(fragment_type_id:fragment_type.id), class:'btn btn-success' do %>
+					<i class="icon icon-comment icon-white"></i>
+				<% end %>
+			<% end %>
+			
+			<% if fragment_type_info_button %>
+				<%= link_to fragment_type_path(fragment_type), class:'btn btn-info' do %>
+					<i class="icon icon-info-sign icon-white"></i>
+				<% end %>
+			<% end %>
+</div>

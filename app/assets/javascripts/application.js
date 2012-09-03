@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.remotipart.js
-//= require bootstrap.min.js
+//= require bootstrap
 //= require jquery.validate.min
 //= require jquery.dotdotdot-1.5.1.js
 //= require_tree .

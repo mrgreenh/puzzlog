@@ -60,7 +60,8 @@ titleandparagraph = FragmentType.new(edit_elements:FragmentTypes::FragmentTypeTi
                     stylesheet:FragmentTypes::FragmentTypeTitleParagraph.stylesheet,
                     default_data:FragmentTypes::FragmentTypeTitleParagraph.default_data,
                     name:"Title and Paragraph",
-                    summary_fields: FragmentTypes::FragmentTypeTitleParagraph.summary_fields);
+                    summary_fields: FragmentTypes::FragmentTypeTitleParagraph.summary_fields,
+                    description: Faker::Lorem.sentence(40));
 titleandparagraph.save
 
 imagesgallery = FragmentType.new(edit_elements:FragmentTypes::FragmentTypeImagesGallery.edit_elements,
@@ -71,7 +72,8 @@ imagesgallery = FragmentType.new(edit_elements:FragmentTypes::FragmentTypeImages
                     default_data:FragmentTypes::FragmentTypeImagesGallery.default_data,
                     name:"Images Gallery",
                     summary_fields: FragmentTypes::FragmentTypeImagesGallery.summary_fields,
-                    images:50);
+                    images:50,
+                    description: Faker::Lorem.sentence(40));
 imagesgallery.save
 
 #--------------------------------------------Articoli e frammenti slegati

@@ -43,7 +43,7 @@
 									# TODO qui ci andrà una query per avere i tipi di frammento più usati
 									# TODO usare le iconcine dei tipi di frammento quando saranno pronte
 								%>
-								<% FragmentType.all.each do |type|%>
+								<% FragmentType.most_used.limit(5).each do |type|%>
 								<li>
 									<%= link_to new_fragment_path(fragment_type_id:type.id) do %>
 										<img src="<%= getFragmentTypeIconThumb(type) %>" title="<%= type.name %>"> <%= type.name %>
@@ -51,7 +51,7 @@
 									<% end %>
 								</li>
 								<% end %>
-								<li><a href="#">More...</a></li>
+								<li><%= link_to 'More...', fragment_types_path(), remote:true %></li>
 							</ul>
 						</li>
 					<% end %>
