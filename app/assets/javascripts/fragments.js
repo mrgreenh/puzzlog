@@ -14,17 +14,44 @@ var targetFragment = null;
 		// });
 	// }
 //----------------------------------------------Inizializzazione frammento
+//------------------------------Resources
+//Images
+function fragmentImageThumbnail(image){
+	var controls = '<a class="detach" data-image-id="'+image.id+'"><i class="icon icon-remove"></i></a>';
+	var thumbnail = '<img alt="'+image.description+'" src="'+image.thumb+'"><p>'+image.description+'</p>';
+	var thumbnailContainer = '<li data-image-id="'+image.id+'" class="span2 fragment_editor_resource_container" id="fragment_image_'+image.id+'"><div class="fragment_image thumbnail">'+thumbnail+controls+'</div></li>';
+	return thumbnailContainer;
+}
+function fragmentImagesInjection(createdImages){
+	if(targetFragment!=undefined&&targetFragment!=null){
+		$.extend(targetFragment.images, createdImages);
+		updateResources(targetFragment);
+		targetFragment = null;
+	}
+}
+function addImageInitialize(){
+	$(".modal_index .fragment_image").click(function(){
+		$(this).toggleClass("selected");
+	});
+	$(".modal-body .add_images_from_box_button").click(function(){
+		var images = new Object();
+		$(".modal_index .fragment_image.selected").each(function(){
+			var jsonData = JSON.parse($(this).parents("li").attr("data-image-json"));
+			images[jsonData.id] = jsonData;
+		});
+		fragmentImagesInjection(images);
+		closeModal();
+	});
+};
+
 function updateResources(fragment){
+	//-------------------------Images
 	$("#fragment_"+fragment.id+"_images .thumbnails").html("");
 	$.each(fragment.images, function(key,image){
-		console.log(image.description);
-		var controls = '<a class="close" data-image-id="'+image.id+'">&times;</a>';
-		var thumbnail = '<img alt="'+image.description+'" src="'+image.thumb+'"><p>'+image.description+'</p>';
-		var thumbnailContainer = '<li data-image-id="'+image.id+'" class="span2 fragment_editor_resource_container" id="fragment_image_'+image.id+'"><div class="fragment_image thumbnail">'+thumbnail+controls+'</div></li>';
-		$("#fragment_"+fragment.id+"_images .thumbnails").append(thumbnailContainer);
+		$("#fragment_"+fragment.id+"_images .thumbnails").append(fragmentImageThumbnail(image));
 	});
-	$("#fragment_"+fragment.id+"_images .close").click(function(){
-		var imageId = $(this).attr("data-image-id");
+	$("#fragment_"+fragment.id+"_images .detach").click(function(){
+		var imageId = $(this).parents("li").attr("data-image-id");
 		$(this).parents("li").slideUp(function(){
 			$(this).remove();
 		});
@@ -56,7 +83,7 @@ $(function(){
 			updateResources(fragment);
 			//Images
 			if(fragment.has_images){
-				$("#fragment_"+fragment.id+"_images_upload_button").click(function(){
+				$("#fragment_"+fragment.id+"_images_upload_button, #fragment_"+fragment.id+"_images_add_button").click(function(){
 					targetFragment = fragment;
 				});
 			}
@@ -89,8 +116,7 @@ $(function(){
 	//Aggiornamento campo data al submit
 	$("#new_fragment, .edit_fragment").submit(function(){
 		$("#new_fragment #fragment_data, .edit_fragment #fragment_data").val(JSON.stringify(fragments[0].data));
-		//Updating resources fields on submit TODO
-		
+		$("#new_fragment #fragment_resources_images, .edit_fragment #fragment_resources_images").val(JSON.stringify(fragments[0].images));
 	});
 
 });

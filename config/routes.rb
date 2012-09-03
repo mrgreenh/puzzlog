@@ -17,6 +17,7 @@ FragmentsProject::Application.routes.draw do
   
   #Fragment Resources
   resources :fragment_images
+  resources :fragment_image_relationships, only: [:new]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

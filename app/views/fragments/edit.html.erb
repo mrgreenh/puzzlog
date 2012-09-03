@@ -3,6 +3,20 @@
 		<%= render 'fragments/fragment', fragment: @fragment, edit:true %>
 		<%= form_for @fragment, validate: true do |form| %>
 			<%= form.hidden_field :data %>
+			<!-- Dati riguardanti le risorse -->
+			<% if @fragment.fragment_type.has_images? %>
+				<%= hidden_field_tag 'fragment_resources[images]' %>
+			<% end %>
+			<% if @fragment.fragment_type.has_sounds? %>
+				<%= hidden_field_tag 'fragment_resources[sounds]' %>
+			<% end %>
+			<% if @fragment.fragment_type.has_videos? %>
+				<%= hidden_field_tag 'fragment_resources[videos]' %>
+			<% end %>
+			<% if @fragment.fragment_type.has_untyped_attachments? %>
+				<%= hidden_field_tag 'fragment_resources[untyped_attachments]' %>
+			<% end %>
+			
 			<div class="fragment_controls form-actions well" id="fragment_<%=@fragment.id%>_controls">
 				<div class="form-horizontal" id="name_fragment_<%=@fragment.id%>">
 					<div class="control-group">

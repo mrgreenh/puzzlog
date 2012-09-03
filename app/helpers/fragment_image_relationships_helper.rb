@@ -1,0 +1,2 @@
+module FragmentImageRelationshipsHelper
+end

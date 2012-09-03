@@ -21,6 +21,15 @@
 							      <td class="table-value"><p><%= v %></p></td>
 							    </tr>
 						  	<% end %>
+						  	<% if fragment.fragment_type.has_images? %>
+						  		<tr>
+						  			<td colspan="2">
+						  				<% fragment.images.each do |image| %>
+						  					<%= image_tag image.fragment_resource_file.url(:mini) %>
+						  				<% end %>
+						  			</td>
+						  		</tr>
+						  	<% end %>
 						  </tbody>
 						</table>
 					</div>

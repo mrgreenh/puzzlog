@@ -9,10 +9,24 @@
 
 .fragment_editor_resource_container{
   position:relative;
-  .close {
+  .detach {
     position:absolute;
     top:0px;
     left:5px;
     color:black;
+  }
+}
+
+.modal-body{
+  .modal_index{
+  max-height:300px;
+  overflow: scroll;
+  .selected{
+    border-color:green;
+    background-color:#eeffee;
+  }
+  }
+  .choose_from_box_controls {
+    text-align:center;
   }
 }

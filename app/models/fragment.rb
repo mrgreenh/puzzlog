@@ -15,6 +15,18 @@ class Fragment < ActiveRecord::Base
   has_many :fragment_image_relationships, dependent: :destroy
   has_many :images, through: :fragment_image_relationships, source: :fragment_image
   
+  def buildResources(fragment_resources_params)
+    if self.fragment_type.has_images?
+      fragment_images = ActiveSupport::JSON.decode(fragment_resources_params[:images])
+      self.fragment_image_relationships.destroy_all
+      fragment_images.each do |id, image|
+        if FragmentImage.find(image["id"]).user == self.user||has_role?('superadmin') # TODO da aggiornare quando ci sarà la possibilità di collaborazione
+          self.fragment_image_relationships.create(fragment_image_id:image["id"])
+        end
+      end
+    end
+  end
+  
   def getSummaryHash
     keys = self.fragment_type.summary_fields.split(",")
     json_data = ActiveSupport::JSON.decode(self.data)

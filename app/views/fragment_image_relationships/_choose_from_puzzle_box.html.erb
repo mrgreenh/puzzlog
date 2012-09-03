@@ -1,0 +1,11 @@
+<%
+fragment_images ||= @fragment_images
+%>
+<ul class='thumbnails modal_index'>
+	<%= render @fragment_images %>
+</ul>
+<div class="well choose_from_box_controls">
+	<%= link_to '#', class:"btn btn-success add_images_from_box_button" do %>
+		<i class="icon icon-white icon-plus"></i> Add images to fragment
+	<% end %>	
+</div>

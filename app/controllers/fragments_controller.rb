@@ -22,6 +22,7 @@ class FragmentsController < ApplicationController
     end
     
     if @fragment.save
+      @fragment.buildResources(params[:fragment_resources]) unless params[:fragment_resources].nil?
       @fragments = [@fragment]
       @fragment_types = getFragmentTypes(@fragments)
       render 'show'
@@ -51,6 +52,7 @@ class FragmentsController < ApplicationController
     end
     
     if @fragment.save
+      @fragment.buildResources(params[:fragment_resources]) unless params[:fragment_resources].nil?
       @fragments = [@fragment]
       @fragment_types = getFragmentTypes(@fragments)
       

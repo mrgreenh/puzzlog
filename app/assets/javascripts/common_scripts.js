@@ -12,6 +12,9 @@ function modalWindow(title,content){
 	$("#genericModalWindow .modal-body").html(content);
 	$("#genericModalWindow").modal('show');
 }
+function closeModal(){
+	$("#genericModalWindow").modal('hide');
+}
 
 //Popover with partial's controls
 function initializeControlsPopovers(){

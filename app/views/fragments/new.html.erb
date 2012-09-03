@@ -2,26 +2,41 @@
 <h1><%= @fragment.name %></h1>
 <div class="row">
 	<div class="span6 offset3">
-		<%= render 'fragments/fragment_edit', fragment: @fragment %>
-		<%= form_for @fragment, validate: true do |form| %>
-			<%= form.hidden_field :fragment_type_id %>
-			<%= form.hidden_field :stand_alone, value: false %>
-			<%= form.hidden_field :public, value:false %>
-			<%= form.hidden_field :data %>
-			<div class="fragment_controls form-actions well" id="fragment_controls">
-				<div class="hide form-horizontal" id="name_fragment">
-					<div class="control-group">
-						<%= form.label :name, 'Name it (if you want):', class:'control-label' %>
-						<%= form.text_field :name %>
-						<span class="help-inline">It might help you keep your work organized...</span>
-					</div>
-				</div>
-				<%= form.submit "Save for later", name:'save_it_submit', class:'btn btn-info hide', id: "save_fragment"%>
-				<%= link_to "Put it in the puzzle box", '#', class:'btn btn-primary keep_it_button', rel:'tooltip', title:'You can use it for building an article later!' %>
-				<% if can_publish_fragment?(@fragment) %>
-				<%= form.submit "Publish!", name:'publish_submit', class:'btn btn-success'%>
+		<div class="fragment_container">
+			<%= render 'fragments/fragment_edit', fragment: @fragment %>
+		</div>
+			<%= form_for @fragment, validate: true do |form| %>
+				<%= form.hidden_field :fragment_type_id %>
+				<%= form.hidden_field :stand_alone, value: false %>
+				<%= form.hidden_field :public, value:false %>
+				<%= form.hidden_field :data %>
+				<!-- Dati riguardanti le risorse -->
+				<% if @fragment.fragment_type.has_images? %>
+					<%= hidden_field_tag 'fragment_resources[images]' %>
 				<% end %>
-			</div>
-		<% end %>
+				<% if @fragment.fragment_type.has_sounds? %>
+					<%= hidden_field_tag 'fragment_resources[sounds]' %>
+				<% end %>
+				<% if @fragment.fragment_type.has_videos? %>
+					<%= hidden_field_tag 'fragment_resources[videos]' %>
+				<% end %>
+				<% if @fragment.fragment_type.has_untyped_attachments? %>
+					<%= hidden_field_tag 'fragment_resources[untyped_attachments]' %>
+				<% end %>
+				<div class="fragment_controls form-actions well" id="fragment_controls">
+					<div class="hide form-horizontal" id="name_fragment">
+						<div class="control-group">
+							<%= form.label :name, 'Name it (if you want):', class:'control-label' %>
+							<%= form.text_field :name %>
+							<span class="help-inline">It might help you keep your work organized...</span>
+						</div>
+					</div>
+					<%= form.submit "Save for later", name:'save_it_submit', class:'btn btn-info hide', id: "save_fragment"%>
+					<%= link_to "Put it in the puzzle box", '#', class:'btn btn-primary keep_it_button', rel:'tooltip', title:'You can use it for building an article later!' %>
+					<% if can_publish_fragment?(@fragment) %>
+					<%= form.submit "Publish!", name:'publish_submit', class:'btn btn-success'%>
+					<% end %>
+				</div>
+			<% end %>
 	</div>
 </div>
