@@ -1,5 +1,5 @@
 class Fragment < ActiveRecord::Base
-  attr_accessible :data, :fragment_type_id, :stand_alone, :name, :public, :publication_date
+  attr_accessible :data, :fragment_type_id, :stand_alone, :name, :public, :publication_date, :user_id
 
   validates_presence_of :data
   validates_presence_of :fragment_type_id
@@ -18,6 +18,8 @@ class Fragment < ActiveRecord::Base
   def buildResources(fragment_resources_params)
     if self.fragment_type.has_images?
       fragment_images = ActiveSupport::JSON.decode(fragment_resources_params[:images])
+      logger.debug fragment_resources_params
+      logger.debug fragment_images
       self.fragment_image_relationships.destroy_all
       fragment_images.each do |id, image|
         if FragmentImage.find(image["id"]).user == self.user||has_role?('superadmin') # TODO da aggiornare quando ci sarà la possibilità di collaborazione

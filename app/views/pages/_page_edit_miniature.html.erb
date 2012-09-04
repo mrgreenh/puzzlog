@@ -1,0 +1,10 @@
+<%
+	page ||= @page
+%>
+<div class="page_miniature" data-page-id=<%= page.id %>>
+	<i class="icon icon-align-justify"></i>
+	<%= image_tag '/images/application/page_icons/page_miniature_thumb.png', alt:"Page #{page.number}"%>
+	<p class="page_miniature_name">
+		<strong>Page <%= page.number %></strong><%= page.name.blank? ? '' : ' - ' %><%= page.name %>
+	</p>
+</div>

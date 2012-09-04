@@ -1,0 +1,2 @@
+module PageFragmentRelationshipsHelper
+end

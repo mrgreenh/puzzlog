@@ -13,3 +13,69 @@
     height:30px;
   }
 }
+
+.article_edit_container {
+  form {
+    display:inline;
+  }
+  .article_buttons{
+    text-align:center;
+    margin-top:0px;
+    a,button {
+      margin:10px auto;
+    }
+  }
+  .title_edit_field, .page_name_edit_field{
+    font-size:2em;
+    text-align:center;
+    background-color:transparent;
+    border-style:none;
+    color:black;
+    height:1em;
+    width:100%;
+    -webkit-box-shadow:none;
+    -moz-box-shadow:none;
+  }
+  .page_name_edit_field {
+    font-size:1.4em;
+  }
+  .page_controls{
+    .page_fragments_controls{
+      text-align:center;
+      a{
+        width: 80%;
+        margin-top:10px;
+      }
+    }
+  }
+  
+  ul.pages_list{
+     list-style-type:none;
+  }
+  
+  .pages_list_container{
+    margin-top:55px;
+    padding:10px;
+    ul{
+      margin:0px;
+      text-align:center;
+    }
+    .page_miniature {
+      overflow:hidden;
+      height:120px;
+      width:100%;
+      i, img, .page_miniature_name{
+        float:left;
+      }
+      i, .page_miniature_name {
+        margin-top: 40px;
+      }
+      .page_miniature_name {
+        width:130px;
+      }
+    }
+    .page_list_controls {
+      text-align: center;
+    }
+  }
+}

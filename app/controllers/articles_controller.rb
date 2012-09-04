@@ -20,18 +20,34 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(title: params[:title], user_id: current_user.id)
+    @article = Article.create(title: params[:title], user_id: current_user.id)
+    @article.pages.build(number:1,foreground_color:"black",background_color:"white",third_color:"#555555")
     if @article.save
-      render 'edit'
+      redirect_to edit_article_path(@article)
     else
+      flash[:errors] = "There has been some problem creating your article."
       render 'new'
     end
   end
 
   def edit
+    @article = Article.find(params[:id])
+    @page = @article.pages.first
+    @fragments = @page.ordered_fragments
+    @fragment_types = getFragmentTypes(@fragments)
   end
 
   def update
+    @article = Article.find(params[:id])
+    params[:fragments].each do |id, fragment|
+      tempFrag = Fragment.find(id)
+      tempFrag.update_attributes(data:fragment[:data])
+      tempFrag.buildResources(fragment) unless fragment[:images].nil?
+    end unless params[:fragments].nil?
+    
+    respond_to do |format|
+      format.js
+    end
   end
 
   def destroy
@@ -50,6 +66,10 @@ class ArticlesController < ApplicationController
   end
   
   def publish
+    
+  end
+  
+  def rename
     
   end
   

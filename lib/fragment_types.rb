@@ -116,10 +116,10 @@ var images = [];
             
             $("#fragment_"+fragment.id+"_view ul.thumbs").append(thumb);
             
-            $("#fragment_thumb_"+image.id).addClass(classe);
-            $("#fragment_thumb_"+image.id+" img").attr("src",image.thumb);
-            $("#fragment_thumb_"+image.id+" img").attr("title",image.description);
-            $("#fragment_thumb_"+image.id).click(function(){
+            $("#fragment_"+fragment.id+"_view #fragment_thumb_"+image.id).addClass(classe);
+            $("#fragment_"+fragment.id+"_view #fragment_thumb_"+image.id+" img").attr("src",image.thumb);
+            $("#fragment_"+fragment.id+"_view #fragment_thumb_"+image.id+" img").attr("title",image.description);
+            $("#fragment_"+fragment.id+"_view #fragment_thumb_"+image.id).click(function(){
               $("#fragment_"+fragment.id+"_view li.fragment_image_thumb").removeClass("selected");
               $(this).addClass("selected");
               $("#fragment_"+fragment.id+"_view .big_image img").attr("src",image.medium);
@@ -172,6 +172,9 @@ EOF
     max-height:300px;
   }
   
+  & .thumbs{
+    overflow:hidden;
+  }
   & .thumbs li{
     float:left;
     max-width:30%;

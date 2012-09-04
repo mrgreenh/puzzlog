@@ -1,35 +1,37 @@
-<% if @fragments&&!@fragments.empty? %>
-  	<script>
-  		fragments = <%= raw(@fragments.to_json) %>
-  		<%
-  			# TODO trovare un modo di passare del JSON con dentro le funzioni senza questo workaround della vergogna
-  		%>
-  		var fragments_methods = {
-  			<% @fragment_types.each do |k,frag_type| %>
-  				<%= k %>: {
-  					view:function(fragment){
-  						$("#fragment"+fragment.id+"view *").unbind();//Per evitare che all'aggiornamento della view si debba fare l'unbind di ogni evento per poi riassociarlo
-  						<%= raw(frag_type.view_script.to_s) %>
-  						},
-  					edit:function(fragment){
-  						$("#fragment"+fragment.id+"edit *").unbind();
-  						<%= raw(frag_type.edit_script.to_s) %>
-  						},
-  				},
-  			<% end %>
-  		};
-  		
-  	</script>
-  	
-  	<style type="text/css">
-	  	<%
-	  	 # TODO di nuovo workaround della vergogna perchè in effetti era comodo
-	  	%>
-  		<% scss_variables = "$reddish: #885555;"
+<script>
+	<% if !@fragments.nil? %>
+		var fragments = <%= raw(@fragments.to_json) %>;
+	<% else %>
+		var fragments = [];
+	<% end %>
+	var fragments_methods = {};
+	
+	<% if !@fragment_types.nil? %>
+	fragments_methods = {
+		<% @fragment_types.each do |k,frag_type| %>
+			<%= k %>: {
+				view:function(fragment){
+					$("#fragment"+fragment.id+"view *").unbind();//Per evitare che all'aggiornamento della view si debba fare l'unbind di ogni evento per poi riassociarlo
+					<%= raw(frag_type.view_script.to_s) %>
+					},
+				edit:function(fragment){
+					$("#fragment"+fragment.id+"edit *").unbind();
+					<%= raw(frag_type.edit_script.to_s) %>
+					},
+			},
+		<% end %>
+	};
+	<% end %>
+	
+</script>
+
+<style type="text/css" id="fragments_styles">
+	<% scss_variables = "$reddish: #885555;"
+	if !@fragment_types.nil?
   		@fragment_types.each do |k,frag_type|
 			scss_string = "#{scss_variables} .fragment_type_#{k} { #{frag_type.stylesheet}}"
   			sass_engine = Sass::Engine.new(scss_string,:syntax => :scss) %>
   			<%= sass_engine.render %>
-  		<% end %>
-  	</style>
-  <% end %>
+	<% end
+	end %>
+</style>

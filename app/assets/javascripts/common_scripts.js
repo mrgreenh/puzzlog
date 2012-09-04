@@ -3,6 +3,7 @@ function stateful_loading(){
 	var bottone = $(".stateful_loading");
 	var text = bottone.attr("data-loading-text");
 	bottone.val(text);
+	bottone.html(text);
 	bottone.attr("disabled","disabled");
 }
 

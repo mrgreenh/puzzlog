@@ -1,0 +1,33 @@
+<%
+	frag_type = @fragment.fragment_type
+%>
+//Se fra i metodi non sono presenti quelli di questo tipo di frammento, aggiungo metodi e css
+if(fragments_methods[<%= frag_type.id %>]==undefined||fragments_methods[<%= frag_type.id %>]==null){
+	fragments_methods[<%= frag_type.id %>] = {
+					view:function(fragment){
+						$("#fragment"+fragment.id+"view *").unbind();//Per evitare che all'aggiornamento della view si debba fare l'unbind di ogni evento per poi riassociarlo
+						<%= raw(frag_type.view_script.to_s) %>
+						},
+					edit:function(fragment){
+						$("#fragment"+fragment.id+"edit *").unbind();
+						<%= raw(frag_type.edit_script.to_s) %>
+						},
+			};
+	
+	<%
+		scss_variables = "$reddish: #885555;"
+		scss_string = "#{scss_variables} .fragment_type_#{frag_type.id} { #{frag_type.stylesheet}}"
+		sass_engine = Sass::Engine.new(scss_string,:syntax => :scss)
+	%>
+	$("#fragments_styles").append("\n <%= escape_javascript(sass_engine.render) %>");
+}
+
+$(".article_edit_fragments_container").append("<%= escape_javascript(render @fragment, fragment:@fragment, edit:true) %>");
+
+var fragment = <%= raw(@fragment.to_json) %>;
+addFragmentHiddenFields(fragment);
+fragments.push(fragment);
+initializeFragment(fragment);
+
+
+closeModal();

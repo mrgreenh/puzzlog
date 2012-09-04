@@ -5,5 +5,7 @@ class Article < ActiveRecord::Base
   
   has_many :pages, dependent: :destroy
   
+  has_many :fragments, through: :pages, source: :fragments
+  
   belongs_to :user
 end

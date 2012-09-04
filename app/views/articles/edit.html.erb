@@ -1,19 +1,82 @@
 <% provide :title, "Edit #{@article.title}" %>
-
-<div class="row">
-	<div class="span3">
-		Controlli a sinistra
+<div class="container article_edit_container">
+	<div class="row">
+		<div class="span3">
+			<div class="article_buttons">
+				<% if can_publish_article?(@article) %>
+					<% if !@article.public? %>
+						<%= link_to '#', class:'btn btn-success btn-large' do %>
+							<i class="icon icon-white icon-globe"></i> Publish
+						<% end %>	
+					<% else %>
+						<%= link_to '#', class:'btn btn-warning btn-large' do %>
+							<i class="icon icon-white icon-eye-close"></i> Unpublish
+						<% end %>
+					<% end %>
+				<% end %>
+				<%= link_to '#', class:'btn btn-info btn-large article_save_button stateful_loading', "data-loading-text" => "Saving..." do %>
+						<i class="icon icon-white icon-ok"></i> Save
+				<% end %>
+			</div>
+			<aside class="page_controls well">
+				<%= text_field_tag "page[#{@page.id}][name]", @page.name, placeholder:'PuzzlePage Name', class:'page_name_edit_field' %>
+				<div class="page_fragments_controls">
+					<%= link_to new_page_fragment_relationship_path(page_id:@page.id), remote:true, class:'btn btn-success' do %>
+						<i class="icon icon-white icon-plus"></i> Add new fragment
+					<% end %>
+					<%= link_to '#', class:'btn btn-primary' do %>
+						<i class="icon icon-white icon-plus"></i> Fragment from PuzzleBox
+					<% end %>
+					<%= link_to '#', class:'btn btn-danger' do %>
+						<i class="icon icon-white icon-trash"></i> Delete page
+					<% end %>
+				</div>
+			</aside>
+		</div>
+		<div class="span6">
+			<div class="row">
+				<div class="span6">
+					<%= text_field_tag "article[#{@article.id}][title]", @article.title, placeholder:'Article title here', class:'title_edit_field' %>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span6">
+					<div class="article_edit_fragments_container">
+						<%= render @fragments, edit:true %>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="span3">
+			<aside class="well pages_list_container">
+				<ul class="pages_list">
+					<li>
+						<%= render 'pages/page_edit_miniature', collection: @article.pages %>
+					</li>
+				</ul>
+				<div class="page_list_controls">
+					<%= link_to '#', class:'btn btn-success' do %>
+						<i class="icon icon-white icon-plus"></i> New Page
+					<% end %>
+				</div>
+			</aside>
+		</div>
 	</div>
-	<div class="span6">
-		<header>
-			<h1><%= @article.title %></h1> <% # Lo stesso form del titolo funziona da update se chiamato da qui!
-			%>
-			<em><%= @article.public ? 'Article already published' : 'Not published yet' %></em>
-		</header>
-	</div>
-	<div class="span3">
-		Controlli a destra
-	</div>
+	<!------------------------------------------Form per il salvataggio -->
+	<%= form_for @article, remote:true do |submitted_form| %>
+		<!-------------------Hidden fields for fragments -->
+		<div class="fragments_hidden_fields">
+			<% @fragments.each do |frag| %>
+				<%= hidden_field_tag "fragments[#{frag.id}][data]", nil, id:"fragment_#{frag.id}_data" %>
+				<%= hidden_field_tag "fragments[#{frag.id}][images]", nil, id:"fragment_#{frag.id}_images"  if frag.fragment_type.has_images? %>
+			<% end %>
+		</div>
+		<!-------------------Hidden fields for page and article -->
+		<div class="article_hidden_fields">
+		
+		</div>
+		<div class="page_hidden_fields">
+		
+		</div>
+	<% end %>
 </div>
-
-<!-- Finestre modali -->

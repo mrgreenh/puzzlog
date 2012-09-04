@@ -1,7 +1,30 @@
 //Validazione form nuovo articolo
-
 $(function(){
-    $("#new_article").validate({
+	$(".article_save_button").click(function(){
+		saveArticle();
+	});
+    newArticleValidation(); //Validazione form articolo
+  });
+
+function saveArticle(){
+	stateful_loading(); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	//Occhio che viene applicato a tutti i bottoni presenti sulla pagina, va reso più specifico
+	$(fragments).each(function(){
+		$(".edit_article .fragments_hidden_fields #fragment_"+this.id+"_data").val(JSON.stringify(this.data));
+		$(".edit_article .fragments_hidden_fields #fragment_"+this.id+"_images").val(JSON.stringify(this.images));
+	});
+	$("form.edit_article").submit();
+}
+
+function addFragmentHiddenFields(fragment){
+	var hiddenDataField = "<input type='hidden' id='fragment_"+fragment.id+"_data' name='fragments["+fragment.id+"][data]'>"
+	var hiddenImagesField = "";
+	if(fragment.has_images) hiddenImagesField = "<input type='hidden' id='fragment_"+fragment.id+"_images' name='fragments["+fragment.id+"][images]'>";
+	$("form.edit_article .fragments_hidden_fields").append(hiddenDataField+hiddenImagesField);
+}
+
+function newArticleValidation(){
+	$("#new_article").validate({
       errorClass: "help-block",
       submitHandler: function(form) {
         stateful_loading();
@@ -14,4 +37,4 @@ $(function(){
           $(element).parent('fieldset').removeClass('error');
         }
     });
-  });
+}

@@ -14,6 +14,33 @@ var targetFragment = null;
 		// });
 	// }
 //----------------------------------------------Inizializzazione frammento
+function initializeFragment(fragment){
+	var type_id = fragment.fragment_type_id;
+	fragments_methods[type_id].edit(fragment);
+	fragments_methods[type_id].view(fragment);
+	
+	//Faccio si che la view venga aggiornata ad ogni click sulla relativa tab
+	$("#fragment_"+fragment.id+"_tab a.view_tab_link").click(function(){
+		fragments_methods[type_id].view(fragment);
+	});
+	$("#fragment_"+fragment.id+"_tab a.edit_tab_link").click(function(){
+		fragments_methods[type_id].edit(fragment);
+	});
+//-------------------Resources management initialization
+	updateResources(fragment);
+	//Images
+	if(fragment.has_images){
+		$("#fragment_"+fragment.id+"_images_upload_button, #fragment_"+fragment.id+"_images_add_button").click(function(){
+			targetFragment = fragment;
+		});
+	}
+	//----Inizializzo le tab edit e view
+	$('#fragment_'+fragment.id+'_tab a').click(function (e) {
+		e.preventDefault();
+		$(this).tab('show');
+	});
+}
+
 //------------------------------Resources
 //Images
 function fragmentImageThumbnail(image){
@@ -59,39 +86,16 @@ function updateResources(fragment){
 	});
 	
 }
+
 //Inizializzazione
 $(function(){ 
 	//---------------------------------------Dot dot dot
 	$(".fragment_summary td.table-value p,.fragment_summary td.table-key p").dotdotdot();
 	//---------------------------------------Fragments initializer
-	if(fragments!=null){
+	if(fragments[0]!=null&&fragments[0]!=undefined){
 		//Quando la pagina è renderizzata viene letto l'hash con gli oggetti di ogni frammento, e a seconda del tipo vi associa un oggetto contenente i metodi necessari
 		$(fragments).each(function(){
-			var type_id = this.fragment_type_id;
-			var fragment = this;
-			fragments_methods[type_id].edit(fragment);
-			fragments_methods[type_id].view(fragment);
-			
-			//Faccio si che la view venga aggiornata ad ogni click sulla relativa tab
-			$("#fragment_"+fragment.id+"_tab a.view_tab_link").click(function(){
-				fragments_methods[type_id].view(fragment);
-			});
-			$("#fragment_"+fragment.id+"_tab a.edit_tab_link").click(function(){
-				fragments_methods[type_id].edit(fragment);
-			});
-//-------------------Resources management initialization
-			updateResources(fragment);
-			//Images
-			if(fragment.has_images){
-				$("#fragment_"+fragment.id+"_images_upload_button, #fragment_"+fragment.id+"_images_add_button").click(function(){
-					targetFragment = fragment;
-				});
-			}
-			//----Inizializzo le tab edit e view
-			$('#fragment_'+fragment.id+'_tab a').click(function (e) {
-  				e.preventDefault();
-  				$(this).tab('show');
-			});
+			initializeFragment(this);
 		});
 	}
 	

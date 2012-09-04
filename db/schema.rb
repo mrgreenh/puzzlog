@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120903214021) do
+ActiveRecord::Schema.define(:version => 20120904093609) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -149,6 +149,7 @@ ActiveRecord::Schema.define(:version => 20120903214021) do
     t.string   "foreground_color"
     t.string   "background_color"
     t.string   "third_color"
+    t.string   "name"
   end
 
   create_table "roles", :force => true do |t|

@@ -9,7 +9,7 @@ class FragmentsController < ApplicationController
   before_filter :fragment_publish_filter, only: [:create,:update]
   
   def new
-    @fragment = Fragment.new(fragment_type_id:params[:fragment_type_id],data:FragmentType.find(params[:fragment_type_id]).default_data)
+    @fragment = Fragment.new(fragment_type_id:params[:fragment_type_id],data:FragmentType.find(params[:fragment_type_id]).default_data, user_id:current_user.id)
     @fragment_types = getFragmentTypes([@fragment])
     @fragments = [@fragment.as_json(only:[:id,:name,:fragment_type_id,:data])]
   end
@@ -23,9 +23,8 @@ class FragmentsController < ApplicationController
     
     if @fragment.save
       @fragment.buildResources(params[:fragment_resources]) unless params[:fragment_resources].nil?
-      @fragments = [@fragment]
-      @fragment_types = getFragmentTypes(@fragments)
-      render 'show'
+      
+      redirect_to fragment_path(@fragment)
     else
       flash[:errors] = "There has been a problem saving your fragment"
       render 'edit'
