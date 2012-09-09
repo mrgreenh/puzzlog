@@ -1,9 +1,11 @@
 //Validazione form nuovo articolo
 $(function(){
-	$(".article_save_button").click(function(){
+	$(".article_save_button").click(function(e){
+		e.preventDefault();
 		saveArticle();
 	});
     newArticleValidation(); //Validazione form articolo
+    initializeArticleFragmentEditControls();
   });
 
 function saveArticle(){
@@ -37,4 +39,11 @@ function newArticleValidation(){
           $(element).parent('fieldset').removeClass('error');
         }
     });
+}
+
+function initializeArticleFragmentEditControls(){
+	$(".article_edit_fragments_container .fragment_container").mouseover(function(){
+		$(".article_fragment_edit_controls").css("display","none");
+		$(this).find(".article_fragment_edit_controls").first().show();
+	});
 }

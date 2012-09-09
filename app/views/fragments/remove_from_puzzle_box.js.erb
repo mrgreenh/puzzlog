@@ -1,0 +1,8 @@
+if($("#puzzle_box_fragments_container").length > 0){
+	$("#puzzle_box_fragments_container #fragment_<%= @fragment.id %>").slideUp(function(){
+		$(this).remove();
+	});
+}else{
+	modalWindow("","<%= escape_javascript(render 'layouts/flash_messages') %>");
+	$("#fragment_<%= @fragment.id %> .tooltip_content").html("<a class='close'>&times;</a><%= escape_javascript(render 'fragments/fragment_controls', remote_bool: true, article_editing: true, fragment:@fragment) %>");
+}

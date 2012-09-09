@@ -1,0 +1,5 @@
+console.log("fragment_<%= @page_fragment_relationship.fragment.id %>");
+$("#fragment_<%= @page_fragment_relationship.fragment.id %>").slideUp(function(){
+	$(this).popover('hide');
+	$(this).remove();
+});

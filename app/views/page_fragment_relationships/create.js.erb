@@ -22,12 +22,14 @@ if(fragments_methods[<%= frag_type.id %>]==undefined||fragments_methods[<%= frag
 	$("#fragments_styles").append("\n <%= escape_javascript(sass_engine.render) %>");
 }
 
-$(".article_edit_fragments_container").append("<%= escape_javascript(render @fragment, fragment:@fragment, edit:true) %>");
+$(".article_edit_fragments_container").append("<%= escape_javascript(render @fragment, fragment:@fragment, edit:true, popover_controls: true, article_fragment_edit_controls:true) %>");
 
 var fragment = <%= raw(@fragment.to_json) %>;
 addFragmentHiddenFields(fragment);
 fragments.push(fragment);
 initializeFragment(fragment);
+initializeControlsPopovers();
+initializeArticleFragmentEditControls();
 
 
 closeModal();

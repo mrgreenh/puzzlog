@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120904093609) do
+ActiveRecord::Schema.define(:version => 20120909173324) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -140,6 +140,8 @@ ActiveRecord::Schema.define(:version => 20120904093609) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
+
+  add_index "page_fragment_relationships", ["fragment_id", "page_id"], :name => "index_page_fragment_relationships_on_fragment_id_and_page_id", :unique => true
 
   create_table "pages", :force => true do |t|
     t.integer  "number"

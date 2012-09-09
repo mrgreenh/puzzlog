@@ -4,7 +4,7 @@ class FragmentsController < ApplicationController
   
   before_filter :fragment_create_filter, only:[:new,:create]
   before_filter :fragment_destroy_filter, only: :destroy
-  before_filter :fragment_edit_filter, only: [:edit, :update]
+  before_filter :fragment_edit_filter, only: [:edit, :update, :add_to_puzzle_box, :remove_from_puzzle_box]
   before_filter :fragment_view_filter, only: [:show]
   before_filter :fragment_publish_filter, only: [:create,:update]
   
@@ -117,6 +117,21 @@ class FragmentsController < ApplicationController
     end
     
    
+  end
+  
+  def remove_from_puzzle_box
+    @fragment = Fragment.find(params[:id])
+    if @fragment.update_attributes(stand_alone:false)
+      flash[:success] = "Fragment removed from your puzzle box."
+       respond_to do |format|
+          format.js
+          format.html do
+            @fragments = [@fragment]
+            @fragment_types = getFragmentTypes(@fragments)
+            render 'show'
+          end
+        end
+    end
   end
   
   private

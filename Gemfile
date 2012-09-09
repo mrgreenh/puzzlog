@@ -12,7 +12,7 @@ gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'paperclip', "~> 3.0"
 gem 'rmagick', '2.13.1'
-gem 'bootstrap-sass', '~> 2.0.4.1'
+gem 'bootstrap-sass', '~> 2.1.0.0'
 gem 'dynamic_form'
 gem 'aws-sdk', '~> 1.3.4'
 gem 'heroku'

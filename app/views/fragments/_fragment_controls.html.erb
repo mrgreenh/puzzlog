@@ -1,4 +1,5 @@
-<% fragment ||= @fragment %>
+<% fragment ||= @fragment 
+%>
 <% # TODO Substitute every confirm message with that stuff suggested by the deprecation warning
 %>
 <ul class="controls fragment-controls expanded-centered">
@@ -28,17 +29,23 @@
 		</li>
 	<% end %>
 	
-	<%if !fragment.stand_alone %>
+	<%if !fragment.stand_alone&&can_edit_fragment?(fragment) %>
 		<li>
 			<%= link_to add_fragment_to_puzzle_box_path(fragment), class:'btn btn-small btn-primary', remote: remote_bool do %>
 				<i class='icon-plus icon-white'></i> PuzzleBox
 			<% end %>
 		</li>
-	<%end%>
+	<% elsif fragment.stand_alone&&can_edit_fragment?(fragment) %>
+		<li>
+			<%= link_to remove_fragment_from_puzzle_box_path(fragment), class:'btn btn-small btn-warning', remote: remote_bool do %>
+				<i class='icon-minus icon-white'></i> PuzzleBox
+			<% end %>
+		</li>
+	<% end %>
 	
 	<%if can_edit_fragment?(fragment)%>
 		<li>
-			<%= link_to edit_fragment_path(fragment), class:'btn btn-small btn-info' do %>
+			<%= link_to edit_fragment_path(fragment), class:'btn btn-small btn-info hidden_on_article_editing' do %>
 				<i class='icon-edit icon-white'></i> Edit
 			<% end %>
 		</li>
@@ -46,7 +53,7 @@
 	
 	<%if can_destroy_fragment?(fragment)%>
 		<li>
-			<%= link_to fragment_path(fragment), remote:remote_bool, method: :delete, confirm: "QUESTO FRAMMENTO VERRà RIMOSSO ANCHE DAGLI ARTICOLI IN CUI APPARE. Sei sicuro di volerlo eliminare?", class:'btn btn-small btn-danger' do %>
+			<%= link_to fragment_path(fragment), remote:remote_bool, method: :delete, confirm: "QUESTO FRAMMENTO VERRà RIMOSSO ANCHE DAGLI ARTICOLI IN CUI APPARE. Sei sicuro di volerlo eliminare?", class:'btn btn-small btn-danger hidden_on_article_editing' do %>
 				<i class="icon-trash icon-white"></i> Delete
 			<% end %>
 		</li>

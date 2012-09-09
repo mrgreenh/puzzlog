@@ -1,0 +1,10 @@
+<%
+summary_fragments ||= @summary_fragments
+%>
+<ul class='modal_index'>
+		<% @summary_fragments.each do|fragment| %>
+			<li>
+				<%= render 'fragments/fragment_summary', add_to_article:true, fragment: fragment %>
+			</li>
+		<% end %>
+</ul>

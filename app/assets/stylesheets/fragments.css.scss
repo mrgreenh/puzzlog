@@ -1,3 +1,5 @@
+@import 'variables';
+
 .fragment_controls {
   text-align:right;
 }
@@ -9,7 +11,19 @@
   margin:10px auto;
 }
 
+.modal_index .fragment_summary {
+  margin: 5px auto;
+  .add_fragment_button {
+    margin-top:80px;
+  }
+}
 .fragment_summary{
+  h4 {
+    display:inline;
+  }
+  img {
+    margin-right:15px;
+  }
   td.table-value, td.table-key{
     p{
       max-height:50px;

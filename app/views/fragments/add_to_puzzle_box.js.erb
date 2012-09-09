@@ -1,1 +1,2 @@
 modalWindow("Choose a name","<%= escape_javascript(render 'layouts/flash_messages') %><%= escape_javascript(render 'fragments/name_fragment_form', remote_bool:true) %>");
+$("#fragment_<%= @fragment.id %> .tooltip_content").html("<a class='close'>&times;</a><%= escape_javascript(render 'fragments/fragment_controls', remote_bool: true, article_editing: true, fragment:@fragment) %>");

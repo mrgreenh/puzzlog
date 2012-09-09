@@ -2,6 +2,7 @@
 fragment ||= @fragment
 edit ||= false
 popover_controls ||= false
+article_fragment_edit_controls ||= false
 %>
 <div id="fragment_<%=fragment.id %>" class="fragment_container">
 	<% if not edit %>
@@ -16,7 +17,28 @@ popover_controls ||= false
 	
 	<%= render 'fragments/popover_controls', fragment: fragment, popover_controls: popover_controls %>
 	
-	<%
-	# TODO rendering delle risorse
+	<% if article_fragment_edit_controls 
+		relationship = fragment.page_fragment_relationships.find_by_page_id(@page.id)
 	%>
+		<div class="article_fragment_edit_controls" id="article_fragment_<%= fragment.id %>_edit_controls">
+			<ul>
+				<li>
+					<%= link_to '#', class:'btn btn-small' do%>
+						<i class="icon icon-arrow-up"></i>
+					<%end%>
+				</li>
+				<li>
+					<%= link_to '#', class:'btn btn-small' do%>
+						<i class="icon icon-arrow-down"></i>
+					<%end%>
+				</li>
+				<li>
+					<%= link_to page_fragment_relationship_path(relationship), remote:true, method: :delete, class:'btn btn-small' do%>
+						<i class="icon icon-remove"></i>
+					<%end%>
+				</li>
+			</ul>
+		</div>
+	<% end %>
+	
 </div>

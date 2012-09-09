@@ -2,34 +2,48 @@
 <div class="container article_edit_container">
 	<div class="row">
 		<div class="span3">
-			<div class="article_buttons">
-				<% if can_publish_article?(@article) %>
-					<% if !@article.public? %>
-						<%= link_to '#', class:'btn btn-success btn-large' do %>
-							<i class="icon icon-white icon-globe"></i> Publish
-						<% end %>	
-					<% else %>
-						<%= link_to '#', class:'btn btn-warning btn-large' do %>
-							<i class="icon icon-white icon-eye-close"></i> Unpublish
+			<aside class="left_article_controls">
+				<div class="controls_container" data-spy="affix" data-offset-top="0">
+					<div class="article_buttons">
+						<% if can_publish_article?(@article) %>
+							<% if !@article.public? %>
+								<%= link_to '#', class:'btn btn-success btn-large' do %>
+									<i class="icon icon-white icon-globe"></i> Publish
+								<% end %>	
+							<% else %>
+								<%= link_to '#', class:'btn btn-warning btn-large' do %>
+									<i class="icon icon-white icon-eye-close"></i> Unpublish
+								<% end %>
+							<% end %>
 						<% end %>
-					<% end %>
-				<% end %>
-				<%= link_to '#', class:'btn btn-info btn-large article_save_button stateful_loading', "data-loading-text" => "Saving..." do %>
-						<i class="icon icon-white icon-ok"></i> Save
-				<% end %>
-			</div>
-			<aside class="page_controls well">
-				<%= text_field_tag "page[#{@page.id}][name]", @page.name, placeholder:'PuzzlePage Name', class:'page_name_edit_field' %>
-				<div class="page_fragments_controls">
-					<%= link_to new_page_fragment_relationship_path(page_id:@page.id), remote:true, class:'btn btn-success' do %>
-						<i class="icon icon-white icon-plus"></i> Add new fragment
-					<% end %>
-					<%= link_to '#', class:'btn btn-primary' do %>
-						<i class="icon icon-white icon-plus"></i> Fragment from PuzzleBox
-					<% end %>
-					<%= link_to '#', class:'btn btn-danger' do %>
-						<i class="icon icon-white icon-trash"></i> Delete page
-					<% end %>
+						<%= link_to '#', class:'btn btn-info btn-large article_save_button stateful_loading', "data-loading-text" => "Saving..." do %>
+								<i class="icon icon-white icon-ok"></i> Save
+						<% end %>
+					</div>
+					<div class="page_controls well">
+						<%= text_field_tag "page[#{@page.id}][name]", @page.name, placeholder:'PuzzlePage Name', class:'page_name_edit_field' %>
+						<div class="page_fragments_controls">
+							<div class="btn-group">
+                                <%= link_to new_page_fragment_relationship_path(page_id:@page.id), remote:true, class:'btn btn-success' do %>
+									<i class="icon icon-white icon-plus"></i> Add fragment
+								<% end %>
+                                <button class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                    	<%= link_to 'New', new_page_fragment_relationship_path(page_id:@page.id), remote:true %>
+                                    </li>
+                                    <li>
+                                    	<%= link_to 'PuzzleBox', new_page_fragment_relationship_path(page_id:@page.id,from_box:true), remote:true %>
+                                    </li>
+                                </ul>
+                            </div>
+							<%= link_to '#', class:'btn btn-danger' do %>
+								<i class="icon icon-white icon-trash"></i> Delete page
+							<% end %>
+						</div>
+					</div>
 				</div>
 			</aside>
 		</div>
@@ -42,22 +56,24 @@
 			<div class="row">
 				<div class="span6">
 					<div class="article_edit_fragments_container">
-						<%= render @fragments, edit:true %>
+						<%= render @fragments, edit:true, popover_controls: true, article_fragment_edit_controls: true %>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="span3">
-			<aside class="well pages_list_container">
-				<ul class="pages_list">
-					<li>
-						<%= render 'pages/page_edit_miniature', collection: @article.pages %>
-					</li>
-				</ul>
-				<div class="page_list_controls">
-					<%= link_to '#', class:'btn btn-success' do %>
-						<i class="icon icon-white icon-plus"></i> New Page
-					<% end %>
+			<aside class="article_right_controls">
+				<div class="well pages_list_container" data-spy="affix" data-offset-top="0">
+					<ul class="pages_list">
+						<li>
+							<%= render 'pages/page_edit_miniature', collection: @article.pages %>
+						</li>
+					</ul>
+					<div class="page_list_controls">
+						<%= link_to '#', class:'btn btn-success' do %>
+							<i class="icon icon-white icon-plus"></i> New Page
+						<% end %>
+					</div>
 				</div>
 			</aside>
 		</div>

@@ -12,6 +12,7 @@ function modalWindow(title,content){
 	$("#genericModalWindow h3").html(title);
 	$("#genericModalWindow .modal-body").html(content);
 	$("#genericModalWindow").modal('show');
+	$("*").popover('hide');
 }
 function closeModal(){
 	$("#genericModalWindow").modal('hide');
@@ -25,6 +26,9 @@ function initializeControlsPopovers(){
       animation:false,
       trigger: 'manual',
       content: function(){
+      	//Nascondo alcuni bottoni in determinate situazioni
+      	$(".article_edit_fragments_container .hidden_on_article_editing").css("display","none");
+      	
       	return $(this).find(".tooltip_content").html();
       }
     }).click(function(){

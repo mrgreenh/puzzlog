@@ -15,6 +15,12 @@
 }
 
 .article_edit_container {
+  aside{
+    min-height:1px;
+    .controls_container{
+      max-width:220px;
+    }
+  }
   form {
     display:inline;
   }
@@ -42,9 +48,17 @@
   .page_controls{
     .page_fragments_controls{
       text-align:center;
-      a{
-        width: 80%;
+      a.btn, button{
         margin-top:10px;
+        width:80%
+      }
+      .btn-group {
+        a.btn,button{
+          width:60%;
+        }
+        .dropdown-toggle{
+          width:20%;
+        }
       }
     }
   }
@@ -76,6 +90,19 @@
     }
     .page_list_controls {
       text-align: center;
+    }
+  }
+  
+  .fragment_container {
+    position:relative;
+    .article_fragment_edit_controls {
+      position:absolute;
+      left:-40px;
+      top:0px;
+      display:none;
+      a {
+        margin-top:3px;
+      }
     }
   }
 }

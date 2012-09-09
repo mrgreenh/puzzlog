@@ -9,12 +9,9 @@ class Page < ActiveRecord::Base
    Fragment.joins(:page_fragment_relationships).where('page_id=?',self.id).order('ordering_number ASC')
   end
   
-  def detachFragment(fragment)
-    # TODO logica che stabilisce se eliminarlo o eliminare solo la relazione
-  end
-  
   def destroy
     # TODO fare l'override per eliminare propri frammenti non pubblicati o stand_alone
+    super
   end
   
 end

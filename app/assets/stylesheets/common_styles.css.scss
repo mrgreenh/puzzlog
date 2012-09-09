@@ -30,6 +30,12 @@ body { padding-top: 60px; }
    box-shadow:  5px 5px 7px 3px rgba(0, 0, 0, 0.3);
 }
 
+ul {
+  list-style-type: none;
+  padding:0px;
+  margin:0px;
+}
+
 /*images*/
 img.thumb {
   min-width:$thumb_size;
