@@ -1,4 +1,3 @@
-
 var fragments = null;
 var targetFragment = null;
 //Se questo non è nullo, la create della risorsa aggiorna l'hash contenuto nell'oggetto

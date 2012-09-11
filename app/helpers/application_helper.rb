@@ -1,7 +1,4 @@
 module ApplicationHelper
-  def isBlogInitialized? # TODO devo trovare dove ho usato questo metodo e sostituirlo con quello sotto
-    is_blog_initialized?
-  end
   def is_blog_initialized?
     User.count != 0
   end

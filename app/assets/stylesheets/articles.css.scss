@@ -43,7 +43,8 @@
     -moz-box-shadow:none;
   }
   .page_name_edit_field {
-    font-size:1.4em;
+    font-size:1.1em;
+    line-height: 1.5em;
   }
   .page_controls{
     .page_fragments_controls{
@@ -73,21 +74,35 @@
     ul{
       margin:0px;
       text-align:center;
+      max-height: 480px;
+      overflow:scroll;
     }
     .page_miniature {
+      padding:5px;
+      border-width:1px;
       overflow:hidden;
-      height:120px;
-      width:100%;
-      i, img, .page_miniature_name{
+      height:100px;
+      margin: 5px auto;
+      width:220px;
+      &.current_page{
+        border-style:solid;
+        border-color:green;
+        background-color:#eeffee;
+      }
+      .btn, img, .page_miniature_name{
         float:left;
       }
-      i, .page_miniature_name {
+      .btn {
         margin-top: 40px;
       }
       .page_miniature_name {
-        width:130px;
+        margin-top: 20px;
+        width:80px;
+        height:50px;
+        font-style:italic;
       }
     }
+    
     .page_list_controls {
       text-align: center;
     }

@@ -1,5 +1,4 @@
 module ArticlesHelper
-  # TODO implementare meglio i permessi
   def can_create_articles?
     has_role?('superadmin')||has_role?('writer')
   end

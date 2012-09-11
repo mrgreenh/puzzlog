@@ -5,8 +5,9 @@ FragmentsProject::Application.routes.draw do
   resources :user_role_relationships, only: [:create, :destroy]
   resources :sessions, only:[:new,:create,:destroy]
   resources :articles
-  resources :pages, only: [:show]
-  resources :page_fragment_relationships
+  resources :pages, only: [:show,:create,:destroy,:update,:edit]
+  resources :page_fragment_relationships, only: [:new,:create,:update,:destroy]
+  match 'page_fragment_relationships/move_fragment_to_page', to:'page_fragment_relationships#move_fragment_to_page', as: 'move_fragment_to_page'
   #Fragments
   resources :fragments
   match 'fragments/add_to_puzzle_box/:id', to:'fragments#add_to_puzzle_box', as: 'add_fragment_to_puzzle_box'

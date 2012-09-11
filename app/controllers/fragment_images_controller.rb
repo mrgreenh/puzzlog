@@ -7,7 +7,7 @@ class FragmentImagesController < ApplicationController
   before_filter :fragment_resource_destroy_filter, only: :destroy
   before_filter :fragment_resource_edit_filter, only: [:edit, :update]
   before_filter :fragment_resource_view_filter, only: [:show]
-  # TODO bisogna impedire la creazione di relationship risorsa frammento se la risorsa non appartiene all'utente  
+  
   def new
     respond_to do |format|
       format.js

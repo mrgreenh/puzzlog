@@ -1,4 +1,12 @@
 class PageFragmentRelationshipsController < ApplicationController
+  include ArticlesHelper
+  include PageFragmentRelationshipsHelper
+  
+  #-----------------------------------------------------Privileges
+  before_filter :page_fragment_relationship_create_filter, only:[:new,:create]
+  before_filter :page_fragment_relationship_destroy_filter, only: :destroy
+  before_filter :page_fragment_relationship_edit_filter, only: :update
+  
   def new
     @page = Page.find(params[:page_id])
     if params[:from_box]
@@ -38,9 +46,53 @@ class PageFragmentRelationshipsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
+    @page_fragment_relationship = PageFragmentRelationship.find(params[:id])
+    ordering_number = @page_fragment_relationship.ordering_number
+    if params[:move]=='up'&&@page_fragment_relationship.ordering_number>1
+      @page_fragment_relationship_2 = PageFragmentRelationship.where('page_id=? AND ordering_number=?',@page_fragment_relationship.page.id,@page_fragment_relationship.ordering_number-1).first
+      @page_fragment_relationship_2.update_attributes(ordering_number: ordering_number)
+      @page_fragment_relationship.update_attributes(ordering_number: ordering_number-1)
+      @page_fragment_relationship.save
+      @page_fragment_relationship_2.save
+      @fragment1 = @page_fragment_relationship.fragment
+      @fragment2 = @page_fragment_relationship_2.fragment
+    elsif params[:move]=='down'&&@page_fragment_relationship.ordering_number<@page_fragment_relationship.page.page_fragment_relationships.count
+      @page_fragment_relationship_2 = PageFragmentRelationship.where('page_id=? AND ordering_number=?',@page_fragment_relationship.page.id,@page_fragment_relationship.ordering_number+1).first
+      @page_fragment_relationship_2.update_attributes(ordering_number: ordering_number)
+      @page_fragment_relationship.update_attributes(ordering_number: ordering_number+1)
+      @page_fragment_relationship.save
+      @page_fragment_relationship_2.save
+      @fragment1 = @page_fragment_relationship_2.fragment
+      @fragment2 = @page_fragment_relationship.fragment
+    end
+    
   end
+  
+  def move_fragment_to_page
+    
+  end
+  
+  private
+  
+    def page_fragment_relationship_create_filter
+      if not can_create_page_fragment_relationship?
+        flash[:errors] = "You're not allowed."
+        redirect_to root_path
+      end
+    end
+    
+    def page_fragment_relationship_edit_filter
+      if not can_edit_page_fragment_relationship?
+        flash[:errors] = "You can't edit this article"
+        redirect_to root_path
+      end
+    end
+    
+    def page_fragment_relationship_destroy_filter
+      if not can_destroy_page_fragment_relationship?
+        flash[:errors] = "You can't destroy this article"
+        redirect_to root_path
+      end
+    end
 end

@@ -1,5 +1,7 @@
 modalWindow("Upload some images to your Puzzle Box!","<%= escape_javascript(render 'fragment_images/upload_form') %>");
 
-$(".fragment_resources_upload_container form").submit(stateful_loading);
+$(".fragment_resources_upload_container form").submit(function(){
+	stateful_loading($(".fragment_resources_upload_container form .upload_button").first());
+});
 var uploaderField = "<%= escape_javascript(render 'fragment_images/resource_uploader_field', remove_button:true) %>"
 addResourceUploaderButton();

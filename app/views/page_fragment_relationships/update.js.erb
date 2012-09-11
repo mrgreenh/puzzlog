@@ -1,0 +1,7 @@
+<%if not @fragment1.nil?%>
+$("#fragment_<%= @page_fragment_relationship.fragment.id %>").slideUp(function(){
+	$("*").popover('hide');
+	$("#fragment_<%= @fragment2.id %>").before($("#fragment_<%= @fragment1.id %>"));	
+	$("#fragment_<%= @page_fragment_relationship.fragment.id %>").slideDown();
+});
+<%end%>

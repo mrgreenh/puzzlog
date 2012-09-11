@@ -16,12 +16,12 @@
 								<% end %>
 							<% end %>
 						<% end %>
-						<%= link_to '#', class:'btn btn-info btn-large article_save_button stateful_loading', "data-loading-text" => "Saving..." do %>
+						<%= link_to '#', class:'btn btn-info btn-large article_save_button', "data-loading-text" => "Saving..." do %>
 								<i class="icon icon-white icon-ok"></i> Save
 						<% end %>
 					</div>
-					<div class="page_controls well">
-						<%= text_field_tag "page[#{@page.id}][name]", @page.name, placeholder:'PuzzlePage Name', class:'page_name_edit_field' %>
+					<div class="page_controls well" data-current-page-id=<%= @page.id %>>
+						<%= text_area_tag "pages[#{@page.id}][name]", @page.name, placeholder:"Unnamed Page", class:'page_name_edit_field' %>
 						<div class="page_fragments_controls">
 							<div class="btn-group">
                                 <%= link_to new_page_fragment_relationship_path(page_id:@page.id), remote:true, class:'btn btn-success' do %>
@@ -32,14 +32,11 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li>
-                                    	<%= link_to 'New', new_page_fragment_relationship_path(page_id:@page.id), remote:true %>
-                                    </li>
-                                    <li>
-                                    	<%= link_to 'PuzzleBox', new_page_fragment_relationship_path(page_id:@page.id,from_box:true), remote:true %>
+                                    	<%= link_to 'From PuzzleBox', new_page_fragment_relationship_path(page_id:@page.id,from_box:true), remote:true %>
                                     </li>
                                 </ul>
                             </div>
-							<%= link_to '#', class:'btn btn-danger' do %>
+							<%= link_to page_path(@page), method: :delete, :data => { :confirm => 'ADD TO YOUR PUZZLE BOX ALL THE FRAGMENTS YOU WANT TO KEEP BEFORE DELETING THIS PAGE. Continue?' }, class:'btn btn-danger' do %>
 								<i class="icon icon-white icon-trash"></i> Delete page
 							<% end %>
 						</div>
@@ -50,7 +47,7 @@
 		<div class="span6">
 			<div class="row">
 				<div class="span6">
-					<%= text_field_tag "article[#{@article.id}][title]", @article.title, placeholder:'Article title here', class:'title_edit_field' %>
+					<%= text_area_tag "article[#{@article.id}][title]", @article.title, placeholder:'Article title here', class:'title_edit_field' %>
 				</div>
 			</div>
 			<div class="row">
@@ -65,12 +62,14 @@
 			<aside class="article_right_controls">
 				<div class="well pages_list_container" data-spy="affix" data-offset-top="0">
 					<ul class="pages_list">
+						<% @article.pages.order('number ASC').each do |page| %>
 						<li>
-							<%= render 'pages/page_edit_miniature', collection: @article.pages %>
+							<%= render 'pages/page_edit_miniature', page: page, edit_button: true %>
 						</li>
+						<%end%>
 					</ul>
 					<div class="page_list_controls">
-						<%= link_to '#', class:'btn btn-success' do %>
+						<%= link_to pages_path(article_id:@article.id), method: :post, class:'btn btn-success' do %>
 							<i class="icon icon-white icon-plus"></i> New Page
 						<% end %>
 					</div>
@@ -83,16 +82,19 @@
 		<!-------------------Hidden fields for fragments -->
 		<div class="fragments_hidden_fields">
 			<% @fragments.each do |frag| %>
-				<%= hidden_field_tag "fragments[#{frag.id}][data]", nil, id:"fragment_#{frag.id}_data" %>
-				<%= hidden_field_tag "fragments[#{frag.id}][images]", nil, id:"fragment_#{frag.id}_images"  if frag.fragment_type.has_images? %>
+				<%= hidden_field_tag "fragments[#{frag.id}][data]", nil, id:"fragment_#{frag.id}_data", class:"fragment_#{frag.id}_hidden_field" %>
+				<%= hidden_field_tag "fragments[#{frag.id}][images]", nil, id:"fragment_#{frag.id}_images", class:"fragment_#{frag.id}_hidden_field"  if frag.fragment_type.has_images? %>
 			<% end %>
 		</div>
 		<!-------------------Hidden fields for page and article -->
 		<div class="article_hidden_fields">
-		
+			<%= submitted_form.hidden_field :title, value: @article.title, class:"article_title_hidden_field" %>
 		</div>
 		<div class="page_hidden_fields">
-		
+			<% @article.pages.each do |page| %>
+				<%= hidden_field_tag "pages[#{page.id}][number]", page.number, id:"page_#{page.id}_number_field", class:"page_#{page.id}_hidden_field"%>
+				<%= hidden_field_tag "pages[#{page.id}][name]", page.name, id:"page_#{page.id}_name_field", class:"page_#{page.id}_hidden_field"%>
+			<% end %>
 		</div>
 	<% end %>
 </div>

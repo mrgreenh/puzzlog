@@ -1,6 +1,8 @@
 //Stateful loading buttons: classi .stateful_loading e attributo data-loading-text
-function stateful_loading(){
-	var bottone = $(".stateful_loading");
+function stateful_loading(element){
+	console.log(element);
+	var bottone = element;
+	console.log(bottone);
 	var text = bottone.attr("data-loading-text");
 	bottone.val(text);
 	bottone.html(text);
@@ -42,6 +44,15 @@ function initializeControlsPopovers(){
 	      });
 	      
     });
+  });
+}
+
+//Utility for disabling textarea carriage return
+function disableTextareaCarriageReturn(selector){
+	$(selector).keypress(function(event) {
+    if(event.which == '13') {
+      return false;
+    }
   });
 }
 

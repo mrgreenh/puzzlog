@@ -22,7 +22,7 @@ class Fragment < ActiveRecord::Base
       logger.debug fragment_images
       self.fragment_image_relationships.destroy_all
       fragment_images.each do |id, image|
-        if FragmentImage.find(image["id"]).user == self.user||has_role?('superadmin') # TODO da aggiornare quando ci sarà la possibilità di collaborazione
+        if FragmentImage.find(image["id"]).user == self.user||has_role?('superadmin') # TODO da aggiornare quando ci sarà la possibilità di collaborazione, potrebbe servire un modo più ordinato di salvare le risorse per poter usare i privilegi
           self.fragment_image_relationships.create(fragment_image_id:image["id"])
         end
       end

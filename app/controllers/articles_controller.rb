@@ -39,11 +39,21 @@ class ArticlesController < ApplicationController
 
   def update
     @article = Article.find(params[:id])
+    #salvataggio articolo
+    @article.update_attributes(title: params[:article][:title].gsub(/\r\n/," "))
+    flash[:errors] = @article.errors.messages unless @article.errors.empty?
+    #salvataggio frammenti    
     params[:fragments].each do |id, fragment|
       tempFrag = Fragment.find(id)
       tempFrag.update_attributes(data:fragment[:data])
       tempFrag.buildResources(fragment) unless fragment[:images].nil?
     end unless params[:fragments].nil?
+    #salvataggio pagine/parametri pagina
+    params[:pages].each do |id, page|
+      tempPage = Page.find(id)
+      tempPage.update_attributes(number:page[:number], name:page[:name].gsub(/\r\n/," "))
+      flash[:errors]= tempPage.errors.messages unless tempPage.errors.empty?
+    end
     
     respond_to do |format|
       format.js

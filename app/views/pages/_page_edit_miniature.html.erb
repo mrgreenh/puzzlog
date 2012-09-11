@@ -1,10 +1,14 @@
 <%
 	page ||= @page
+	edit_button ||= false
+	selection_button ||= false
 %>
-<div class="page_miniature" data-page-id=<%= page.id %>>
-	<i class="icon icon-align-justify"></i>
+<div class="page_miniature <%= page==@page ? 'current_page' : '' %>" data-page-id=<%= page.id %> id="page_<%= page.id %>_miniature">
+	<%= link_to edit_page_path(page), class:'btn btn-small' do %>
+		<i class="icon icon-edit"></i>
+	<% end %>
 	<%= image_tag '/images/application/page_icons/page_miniature_thumb.png', alt:"Page #{page.number}"%>
 	<p class="page_miniature_name">
-		<strong>Page <%= page.number %></strong><%= page.name.blank? ? '' : ' - ' %><%= page.name %>
+		<%= page.name.blank? ? '<em>Unnamed Page</em>'.html_safe : page.name %>
 	</p>
 </div>

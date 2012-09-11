@@ -1,4 +1,5 @@
 class FragmentImageRelationshipsController < ApplicationController
+  
   def new
     @fragment_images = current_user.fragment_images.all
     

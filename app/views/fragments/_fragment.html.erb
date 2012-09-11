@@ -17,23 +17,29 @@ article_fragment_edit_controls ||= false
 	
 	<%= render 'fragments/popover_controls', fragment: fragment, popover_controls: popover_controls %>
 	
+	<!--Controlli utilizzati nell'editing articolo -->
 	<% if article_fragment_edit_controls 
 		relationship = fragment.page_fragment_relationships.find_by_page_id(@page.id)
 	%>
 		<div class="article_fragment_edit_controls" id="article_fragment_<%= fragment.id %>_edit_controls">
 			<ul>
 				<li>
-					<%= link_to '#', class:'btn btn-small' do%>
+					<%= link_to page_fragment_relationship_path(id:relationship.id,move:'up'), remote:true, method: :put, class:'btn btn-small' do%>
 						<i class="icon icon-arrow-up"></i>
 					<%end%>
 				</li>
 				<li>
-					<%= link_to '#', class:'btn btn-small' do%>
+					<%= link_to page_fragment_relationship_path(id:relationship.id,move:'down'), remote:true, method: :put, class:'btn btn-small' do%>
 						<i class="icon icon-arrow-down"></i>
 					<%end%>
 				</li>
 				<li>
-					<%= link_to page_fragment_relationship_path(relationship), remote:true, method: :delete, class:'btn btn-small' do%>
+					<%= link_to move_fragment_to_page_path(), remote:true, title:"Move to another page", class:'btn btn-small' do%>
+						<i class="icon icon-share-alt"></i>
+					<%end%>
+				</li>
+				<li>
+					<%= link_to page_fragment_relationship_path(relationship), remote:true, method: :delete, class:'btn btn-small btn-warning' do%>
 						<i class="icon icon-remove"></i>
 					<%end%>
 				</li>

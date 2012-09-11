@@ -1,6 +1,6 @@
 <% provide :title, full_title("Home") %>
 
-<% if not isBlogInitialized? %>
+<% if not is_blog_initialized? %>
     <%=  render 'static_pages/initialize_blog' %>
 <%  else %>
 <div class="row">

@@ -14,7 +14,7 @@ module UsersHelper
   end
 #-------------------Priviledges
   def can_create_users?
-    is_superadmin?||!isBlogInitialized?
+    is_superadmin?||!is_blog_initialized?
   end
   
   def can_destroy_user?(user=User.find(params[:id]))

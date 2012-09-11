@@ -23,7 +23,7 @@ class UsersController < ApplicationController
                     email:params[:email],
                     bio:params[:bio])
                     
-    if !isBlogInitialized?
+    if !is_blog_initialized?
       @user.user_role_relationships.build(role_id:Role.find_by_name('superadmin').id)
     end
     

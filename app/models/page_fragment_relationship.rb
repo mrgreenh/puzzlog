@@ -5,16 +5,14 @@ class PageFragmentRelationship < ActiveRecord::Base
   belongs_to :page
   
   def destroy
-    logger.debug "Qui ci passo"
     no_other_relationships = self.fragment.page_fragment_relationships.count==1
-    logger.debug self.fragment.page_fragment_relationships.count
-    logger.debug no_other_relationships
-    logger.debug !self.fragment.stand_alone
-    logger.debug self.fragment.publication_date.nil?
     if no_other_relationships&&!self.fragment.stand_alone&&self.fragment.publication_date.nil?
-      logger.debug "frammento in distruzione"
       self.fragment.delete
-       logger.debug "frammento distrutto"
+    end
+    relationships = self.page.page_fragment_relationships.where('ordering_number>?',self.ordering_number).order('ordering_number ASC')
+    relationships.each do |rel|
+      rel.ordering_number -= 1
+      rel.save
     end
     super
   end
