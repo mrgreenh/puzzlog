@@ -8,6 +8,7 @@ $(function(){
 	disableTextareaCarriageReturn('.title_edit_field');
     newArticleValidation(); //Validazione form articolo
     initializeArticleFragmentEditControls();
+    //saveBeforeLeaving();
   });
 
 function saveArticle(){
@@ -29,7 +30,22 @@ function saveArticle(){
 		$("#page_"+id+"_number_field").val(counter);
 	});
 	
+	// $("form.edit_article").submit(function(e) {
+		// e.preventDefault();
+	    // $.ajax({
+	        // type: "POST",
+	        // url: $("form.edit_article").attr("action"),
+	        // data: $("form.edit_article").serializeArray(),
+	        // });
+	    // return false;
+	// });
+	
 	$("form.edit_article").submit();
+}
+
+//Fa si che tutti i link non remoti salvino la pagina prima di lasciarla
+function saveBeforeLeaving(){
+	$(window).bind('beforeunload', saveArticle);
 }
 
 function addFragmentHiddenFields(fragment){

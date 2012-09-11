@@ -2,7 +2,7 @@ class Page < ActiveRecord::Base
   attr_accessible :number, :name, :foreground_color, :background_color, :third_color, :article_id
   
   validates_presence_of :article_id
-  validates :name, length: {maximum:160, minimum:1, message: "Enter a page name between 1 and 160 characters."}
+  validates :name, length: {maximum:160, message: "Page name must be shorter of 160 chars."}
   
   belongs_to :article
   has_many :page_fragment_relationships, dependent: :destroy

@@ -10,7 +10,7 @@
 			<% if flash[:errors].respond_to?(:each) %>
 				<ul>
 				<% flash[:errors].each do |k,v| %>
-					<li><%= v %></li>
+					<li><%= v.join(", ") %></li>
 				<% end %>
 				</ul>
 			<% else %>

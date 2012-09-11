@@ -1,8 +1,6 @@
 //Stateful loading buttons: classi .stateful_loading e attributo data-loading-text
 function stateful_loading(element){
-	console.log(element);
 	var bottone = element;
-	console.log(bottone);
 	var text = bottone.attr("data-loading-text");
 	bottone.val(text);
 	bottone.html(text);

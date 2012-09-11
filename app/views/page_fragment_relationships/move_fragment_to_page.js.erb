@@ -1,0 +1,6 @@
+saveArticle();
+$("#fragment_<%= @relationship.fragment_id %>").slideUp(function(){
+	$("*").popover('hide');
+	$(this).remove();
+	removeFragmentHiddenFields(<%= @relationship.fragment_id %>);
+});

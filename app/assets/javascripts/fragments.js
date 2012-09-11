@@ -88,8 +88,9 @@ function updateResources(fragment){
 
 //Inizializzazione
 $(function(){ 
-	//---------------------------------------Dot dot dot
+	//---------------------------------------Dot dot dot e altre utility
 	$(".fragment_summary td.table-value p,.fragment_summary td.table-key p").dotdotdot();
+	$(".move_to_page_button, .detach_fragment_button").tooltip({placement:'right'});
 	//---------------------------------------Fragments initializer
 	if(fragments[0]!=null&&fragments[0]!=undefined){
 		//Quando la pagina è renderizzata viene letto l'hash con gli oggetti di ogni frammento, e a seconda del tipo vi associa un oggetto contenente i metodi necessari

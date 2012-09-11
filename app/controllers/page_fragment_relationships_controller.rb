@@ -70,7 +70,13 @@ class PageFragmentRelationshipsController < ApplicationController
   end
   
   def move_fragment_to_page
-    
+    @relationship = PageFragmentRelationship.find(params[:relationship_id])
+    @relationship.page_id = params[:page_id]
+    if @relationship.save
+      respond_to do |format|
+        format.js
+      end
+    end
   end
   
   private

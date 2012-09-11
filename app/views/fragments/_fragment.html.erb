@@ -34,12 +34,22 @@ article_fragment_edit_controls ||= false
 					<%end%>
 				</li>
 				<li>
-					<%= link_to move_fragment_to_page_path(), remote:true, title:"Move to another page", class:'btn btn-small' do%>
-						<i class="icon icon-share-alt"></i>
-					<%end%>
+					<div class="btn-group">
+                    <a class="btn btn-small dropdown-toggle move_to_page_button" rel="tooltip" title="Move fragment to another page" data-toggle="dropdown" href="#"><i class="icon icon-share-alt"></i></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                        	<% @page.article.pages.each do |p| %>
+		                        <%= link_to move_fragment_to_page_path(page_id:p.id,relationship_id:relationship.id), remote:true, title:"Move to page #{p.number}" do%>
+									<%= p.name.blank? ? "(Unnamed Page #{p.number})".html_safe : p.name %>
+								<%end unless p==@page%>
+							<% end %>
+						</li>
+                    </ul>
+                </div>
+					
 				</li>
 				<li>
-					<%= link_to page_fragment_relationship_path(relationship), remote:true, method: :delete, class:'btn btn-small btn-warning' do%>
+					<%= link_to page_fragment_relationship_path(relationship), remote:true, method: :delete, class:'btn btn-small btn-warning detach_fragment_button', rel:'tooltip', title:'Detach fragment from article. This will permanently delete fragments you didn\'t add to your PuzzleBox.' do%>
 						<i class="icon icon-remove"></i>
 					<%end%>
 				</li>

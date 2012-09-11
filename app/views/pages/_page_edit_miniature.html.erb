@@ -9,6 +9,6 @@
 	<% end %>
 	<%= image_tag '/images/application/page_icons/page_miniature_thumb.png', alt:"Page #{page.number}"%>
 	<p class="page_miniature_name">
-		<%= page.name.blank? ? '<em>Unnamed Page</em>'.html_safe : page.name %>
+		<%= page.name.blank? ? "<em>(Unnamed Page #{page.number})</em>".html_safe : page.name %>
 	</p>
 </div>

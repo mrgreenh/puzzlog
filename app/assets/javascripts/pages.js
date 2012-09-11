@@ -14,7 +14,9 @@ function initializePageListDragging(){
 function initializePageNaming(){
 	$(".page_miniature p").dotdotdot();
 	$(".page_name_edit_field").keyup(function(){
-		$(".page_miniature.current_page p").text($(this).val());
+		var page_name = $(this).val();
+		if(page_name.length==0) page_name = "Unnamed Page";
+		$(".page_miniature.current_page p").text(page_name);
 	});
 	$('.page_name_edit_field').autosize(); 
 }
