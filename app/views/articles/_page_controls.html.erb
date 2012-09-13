@@ -5,8 +5,26 @@
 	<%end%>
 	<%= text_field_tag "pages[#{@page.id}][name]", @page.name, placeholder:"(Unnamed Page #{@page.number})", class:'page_name_edit_field' %>
 </div>
-<div class="page_styling_controls">
-	
+<div class="page_styling_controls form-horizontal">
+	  <div class="control-group">
+	    <label class="control-label">Background</label>
+	    <div class="controls">
+	      <%= hidden_field_tag "pages[#{@page.id}][background_color]", @page.background_color, class:'span1', id:"page_background_color_edit_field" %>
+	    </div>
+	  </div>
+	  <div class="control-group">
+	    <label class="control-label">Foreground</label>
+	    <div class="controls">
+	      <%= hidden_field_tag "pages[#{@page.id}][foreground_color]", @page.foreground_color, class:'span1', id:"page_foreground_color_edit_field" %>
+	    </div>
+	  </div>
+	  <div class="control-group">
+	    <label class="control-label">Decorations</label>
+	    <div class="controls">
+	      <%= hidden_field_tag "pages[#{@page.id}][third_color]", @page.third_color, class:'span1', id:"page_third_color_edit_field" %>
+	    </div>
+	  </div>
+	<%= link_to 'Apply', edit_page_path(@page), remote:true, class:'btn btn-small page_styles_apply_button' %>
 </div>
 <div class="page_fragments_controls">
 	<div class="btn-group">

@@ -1,4 +1,8 @@
-<% scss_variables = "$reddish: #885555;"
+<% 
+	scss_variables = "$background_color: #ffffff;$foreground_color: #000000;$third_color: #555555;"
+	if @page
+		scss_variables = "$background_color: #{@page.background_color};$foreground_color: #{@page.foreground_color};$third_color: #{@page.third_color};"
+	end
 	if !@fragment_types.nil?
   		@fragment_types.each do |k,frag_type|
 			scss_string = "#{scss_variables} .fragment_type_#{k} { #{frag_type.stylesheet}}"

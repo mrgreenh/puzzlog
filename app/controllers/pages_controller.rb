@@ -6,7 +6,7 @@ class PagesController < ApplicationController
   # TODO gestire privilegi delle pagine e delle relazioni coi frammenti
   def create
     @article = Article.find(params[:article_id])
-    @page = @article.pages.build(number:@article.pages.count+1,foreground_color:"black",background_color:"white",third_color:"#555555")
+    @page = @article.pages.build(number:@article.pages.count+1,foreground_color:"#000000",background_color:"#ffffff",third_color:"#555555")
     
     if @article.save
       @fragments = @page.ordered_fragments

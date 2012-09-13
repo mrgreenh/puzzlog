@@ -1,6 +1,7 @@
 class PageFragmentRelationshipsController < ApplicationController
   include ArticlesHelper
   include PageFragmentRelationshipsHelper
+  include FragmentsHelper
   
   #-----------------------------------------------------Privileges
   before_filter :page_fragment_relationship_create_filter, only:[:new,:create]
@@ -32,6 +33,8 @@ class PageFragmentRelationshipsController < ApplicationController
     @page.page_fragment_relationships.build(fragment_id:@fragment.id,
                                             ordering_number:@page.page_fragment_relationships.count+1)
     @page.save
+    @fragments = @page.ordered_fragments
+    @fragment_types = getFragmentTypes(@fragments)
     respond_to do |format|
       format.js
     end

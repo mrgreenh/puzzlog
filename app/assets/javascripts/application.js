@@ -14,6 +14,8 @@
 //= require jquery_ujs
 //= require jquery.remotipart.js
 //= require bootstrap
+//= require bootstrap-colorpicker.js
+//= require jquery.miniColors.min.js
 //= require jquery.validate.min
 //= require jquery.dotdotdot-1.5.1.js
 //= require jquery.dragsort-0.5.1.min.js

@@ -10,22 +10,27 @@ $(function(){
 
 function saveArticle(callbackFunction){
 	stateful_loading($(".article_save_button"));
-	//Fragments
+	//---------------------------Fragments
 	$(fragments).each(function(){
 		$(".edit_article .fragments_hidden_fields #fragment_"+this.id+"_data").val(JSON.stringify(this.data));
 		$(".edit_article .fragments_hidden_fields #fragment_"+this.id+"_images").val(JSON.stringify(this.images));
 	});
-	//Article
+	//---------------------------Article
 	$(".edit_article .article_title_hidden_field").val($(".title_edit_field").val());
-	//Pages
+	//---------------------------Pages
 	var current_page_id = $(".page_controls").data("currentPageId");
 	$("#page_"+current_page_id+"_name_field").val($(".page_name_edit_field").val());
+	//Page ordering
 	var counter = 0;
 	$("ul.pages_list li").each(function(){
 		counter++;
 		var id = $(this).find(".page_miniature").data("pageId");
 		$("#page_"+id+"_number_field").val(counter);
 	});
+	//Page colors
+	$("#page_"+current_page_id+"_background_color_field").val($("#page_background_color_edit_field").val());
+	$("#page_"+current_page_id+"_foreground_color_field").val($("#page_foreground_color_edit_field").val());
+	$("#page_"+current_page_id+"_third_color_field").val($("#page_third_color_edit_field").val());
 	
 	$("form.edit_article").submit();
 
@@ -61,12 +66,13 @@ function newArticleValidation(){
 function initializeArticleEditingControls(){
 	initializeArticleNaming();
 	
-	$(".switch_page_button").click(function(){
+	$(".switch_page_button,.page_styles_apply_button").click(function(){
 		saveArticle();
 	});
 	
 	initializePageListDragging();
 	initializePageNaming();
+	initializePageStyling();
     
     newArticleValidation(); //Validazione form articolo
 }

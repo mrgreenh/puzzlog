@@ -12,7 +12,7 @@ function modalWindow(title,content){
 	$("#genericModalWindow h3").html(title);
 	$("#genericModalWindow .modal-body").html(content);
 	$("#genericModalWindow").modal('show');
-	$("*").popover('hide');
+	$("[data-original-title]").popover('hide');
 }
 function closeModal(){
 	$("#genericModalWindow").modal('hide');

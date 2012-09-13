@@ -3,6 +3,9 @@ class Page < ActiveRecord::Base
   
   validates_presence_of :article_id
   validates :name, length: {maximum:160, message: "Page name must be shorter of 160 chars."}
+  validates :background_color, length: {is:7}
+  validates :foreground_color, length: {is:7}
+  validates :third_color, length: {is:7}
   
   belongs_to :article
   has_many :page_fragment_relationships, dependent: :destroy

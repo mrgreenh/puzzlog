@@ -25,5 +25,6 @@ function initializePageNaming(){
 }
 
 function initializePageStyling(){
-	
+	$("#page_background_color_edit_field,#page_foreground_color_edit_field,#page_third_color_edit_field").miniColors('destroy');
+	$("#page_background_color_edit_field,#page_foreground_color_edit_field,#page_third_color_edit_field").miniColors();
 }

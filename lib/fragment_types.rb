@@ -46,19 +46,19 @@ EOF
   def self.stylesheet
     style=<<EOF
 &.fragment_view{
-    color:$reddish;
+    background-color: $background_color;
+    border-style:solid;
+    border-width:1px;
+    border-color:$third_color;
+    color:$foreground_color;
     margin:10px auto;
     text-align:center;
     width: auto;
     padding:20px;
-    h1 {
-      color:#00ff00;
-    }
   }
 &.fragment_edit {
     font-size:13px;
-    color:green;
-  } 
+  }
 EOF
   end
   
@@ -152,18 +152,17 @@ EOF
   
   def self.stylesheet
     style=<<EOF
-&.fragment_view{ /* In realtà il css del container non andrà toccato */
+&.fragment_view{
     border-style:solid;
+    background-color:$background_color;
     border-width:1px;
-    border-color:#885555;
-    color:#885555;
+    border-color:$third_color;
+    color:$foreground_color;
     margin:10px auto;
     text-align:center;
     width: 90%;
     padding:20px;
     overflow:hidden;
-  }
-  
   & .big_image {
     height:300px;
   }
@@ -185,15 +184,16 @@ EOF
   & .thumbs li.selected{
     border-style:solid;
     border-width:2px;
-    border-color:red;
+    border-color:$third_color;
   }
   
   & li img{
     min-height:80px;
   }
-  
+}
   &.fragment_edit {
-    color:green;
+    background-color:$background_color;
+    color:$foreground_color;
   }
 EOF
   end

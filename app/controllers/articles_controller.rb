@@ -21,7 +21,7 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.create(title: params[:title], user_id: current_user.id)
-    @article.pages.build(number:1,foreground_color:"black",background_color:"white",third_color:"#555555")
+    @article.pages.build(number:1,foreground_color:"#000000",background_color:"#ffffff",third_color:"#555555")
     if @article.save
       redirect_to edit_article_path(@article)
     else
@@ -51,7 +51,11 @@ class ArticlesController < ApplicationController
     #salvataggio pagine/parametri pagina
     params[:pages].each do |id, page|
       tempPage = Page.find(id)
-      tempPage.update_attributes(number:page[:number], name:page[:name].gsub(/\r\n/," "))
+      tempPage.update_attributes(number:page[:number],
+                                  name:page[:name].gsub(/\r\n/," "),
+                                  background_color: page[:background_color]||"#ffffff",
+                                  foreground_color: page[:foreground_color]||"#000000",
+                                  third_color: page[:third_color]||"#555555")
       flash[:errors] = tempPage.errors.messages unless tempPage.errors.empty?
     end
     
