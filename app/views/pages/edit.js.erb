@@ -1,0 +1,40 @@
+$(".article_right_controls .article_buttons").html("<%= escape_javascript(render 'articles/preview_button')%>");
+
+$(".pages_list_container, .page_controls").slideUp(function(){
+	$(".pages_list_container").html("<%= escape_javascript(render 'articles/pages_list')%>");
+	
+	$(".page_controls").html("<%= escape_javascript(render 'articles/page_controls')%>");
+	$(".page_controls").data('currentPageId',<%= @page.id %>);
+	
+	//Hidden fields
+	$(".fragments_hidden_fields").html("<%= escape_javascript(render 'articles/fragments_hidden_fields')%>");
+	$(".page_hidden_fields").html("<%= escape_javascript(render 'articles/page_hidden_fields')%>");		
+	
+	$(".pages_list_container, .page_controls").slideDown(function(){
+		//Controls initialization
+		initializeArticleEditingControls();
+	});
+});
+
+//--------------------------------------------------------Frammenti
+$(".article_edit_fragments_container").fadeOut(function(){
+	$(".article_edit_fragments_container .fragment_container").popover('hide');
+	$(".article_edit_fragments_container [rel='tooltip']").tooltip('hide');
+	
+	$(".article_edit_fragments_container").html("<%= escape_javascript(render @fragments, edit:true, popover_controls: true, article_fragment_edit_controls: true )%>");
+	
+	//Puzzle resources
+	<%= render 'fragments/fragments_filling_script' %>
+	$("#fragments_styles").html("<%= escape_javascript(render 'fragments/fragments_styles')%>");
+	
+	//Fragments initialization
+	initializeAllFragments();
+	
+	$(".article_edit_fragments_container").fadeIn(function(){
+		//Fragments controls initialization
+		initializeArticleFragmentEditControls();
+		initializeControlsPopovers();
+	});
+});
+
+

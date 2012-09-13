@@ -1,0 +1,8 @@
+<% scss_variables = "$reddish: #885555;"
+	if !@fragment_types.nil?
+  		@fragment_types.each do |k,frag_type|
+			scss_string = "#{scss_variables} .fragment_type_#{k} { #{frag_type.stylesheet}}"
+  			sass_engine = Sass::Engine.new(scss_string,:syntax => :scss) %>
+  			<%= sass_engine.render %>
+	<% end
+end %>

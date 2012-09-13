@@ -11,7 +11,10 @@ class PagesController < ApplicationController
     if @article.save
       @fragments = @page.ordered_fragments
       @fragment_types = getFragmentTypes(@fragments)
-      render 'articles/edit'
+      respond_to do |format|
+        format.html {render 'articles/edit'}
+        format.js { render 'edit' }
+      end
     end
   end
   
@@ -21,7 +24,10 @@ class PagesController < ApplicationController
     @fragments = @page.ordered_fragments
     @fragment_types = getFragmentTypes(@fragments)
     
-    render 'articles/edit'
+    respond_to do |format|
+      format.html {render 'articles/edit'}
+      format.js
+    end
   end
   
   def update
@@ -37,7 +43,13 @@ class PagesController < ApplicationController
         p.number-=1
         p.save
       end
-      redirect_to edit_article_path(@article)
+      @page = @article.pages.order('number ASC').first
+      @fragments = @page.ordered_fragments
+      @fragment_types = getFragmentTypes(@fragments)
+      respond_to do |format|
+        format.html {render 'articles/edit'}
+        format.js { render 'pages/edit' }
+      end
     end
   end
   

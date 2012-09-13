@@ -16,6 +16,5 @@
 //= require bootstrap
 //= require jquery.validate.min
 //= require jquery.dotdotdot-1.5.1.js
-//= require jquery.autosize-min.js
 //= require jquery.dragsort-0.5.1.min.js
 //= require_tree .

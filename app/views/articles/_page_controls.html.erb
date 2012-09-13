@@ -1,0 +1,28 @@
+<div class="page_name_editing_controls">
+	<h2 class="page_name"><%= !@page.name.blank? ? @page.name : "(Unnamed Page #{@page.number})" %></h2>
+	<%= link_to '#', class:'btn btn-small hide page_name_edit_button' do %>
+		<i class="icon icon-edit"></i>
+	<%end%>
+	<%= text_field_tag "pages[#{@page.id}][name]", @page.name, placeholder:"(Unnamed Page #{@page.number})", class:'page_name_edit_field' %>
+</div>
+<div class="page_styling_controls">
+	
+</div>
+<div class="page_fragments_controls">
+	<div class="btn-group">
+        <%= link_to new_page_fragment_relationship_path(page_id:@page.id), remote:true, class:'btn btn-success' do %>
+			<i class="icon icon-white icon-plus"></i> Add fragment
+		<% end %>
+        <button class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li>
+            	<%= link_to 'From PuzzleBox', new_page_fragment_relationship_path(page_id:@page.id,from_box:true), remote:true %>
+            </li>
+        </ul>
+    </div>
+	<%= link_to page_path(@page), remote:true, method: :delete, :data => { :confirm => 'ADD TO YOUR PUZZLE BOX ALL THE FRAGMENTS YOU WANT TO KEEP BEFORE DELETING THIS PAGE. Continue?' }, class:'btn btn-danger' do %>
+		<i class="icon icon-white icon-trash"></i> Delete page
+	<% end %>
+</div>

@@ -1,5 +1,6 @@
 $(".article_save_button").html('<i class="icon icon-white icon-ok"></i> Save');
 $(".article_save_button").removeAttr('disabled');
+if(saveCallbackFunction!=undefined) saveCallbackFunction();
 
 <% if !flash[:errors].nil? || !flash[:success].nil? %>
 	modalWindow("","<%= escape_javascript(render 'layouts/flash_messages', flash: flash)%>");

@@ -45,15 +45,6 @@ function initializeControlsPopovers(){
   });
 }
 
-//Utility for disabling textarea carriage return
-function disableTextareaCarriageReturn(selector){
-	$(selector).keypress(function(event) {
-    if(event.which == '13') {
-      return false;
-    }
-  });
-}
-
 $(function(){
 	initializeControlsPopovers();
 });

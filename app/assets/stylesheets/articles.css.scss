@@ -18,7 +18,7 @@
   aside{
     min-height:1px;
     .controls_container{
-      max-width:220px;
+      width:220px;
     }
   }
   form {
@@ -31,22 +31,37 @@
       margin:10px auto;
     }
   }
-  .title_edit_field, .page_name_edit_field{
-    font-size:2em;
+  .article_title_editing_controls {
+    position:relative;
+    .title_edit_field{
+    display:none;
+    font-size:1em;
     text-align:center;
-    background-color:transparent;
-    border-style:none;
-    color:black;
-    height:1em;
     width:100%;
-    -webkit-box-shadow:none;
-    -moz-box-shadow:none;
-  }
-  .page_name_edit_field {
-    font-size:1.3em;
-    line-height: 1.5em;
+    }
+    .article_title_edit_button {
+      position:absolute;
+      top:0px;
+    }
   }
   .page_controls{
+    .page_name_editing_controls{
+      position:relative;
+      .page_name {
+      font-size:1.3em;
+      line-height:1.3em;
+      width:100%;
+      word-wrap: break-word;
+      }
+      .page_name_edit_field{
+        width:100%;
+        display:none;
+      }
+      .page_name_edit_button {
+        position:absolute;
+        top:0px;
+      }
+    }
     .page_fragments_controls{
       text-align:center;
       a.btn, button{
@@ -80,9 +95,9 @@
       padding:5px;
       border-width:1px;
       overflow:hidden;
-      height:100px;
       margin: 5px auto;
-      width:220px;
+      height:50px;
+      width:180px;
       &.current_page{
         border-style:solid;
         border-color:green;
@@ -92,10 +107,10 @@
         float:left;
       }
       .btn {
-        margin-top: 40px;
+        margin-top: 10px;
       }
       .page_miniature_name {
-        margin-top: 20px;
+        margin-top: 5px;
         width:80px;
         height:50px;
         font-style:italic;

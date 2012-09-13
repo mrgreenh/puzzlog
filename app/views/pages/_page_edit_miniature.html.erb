@@ -4,7 +4,7 @@
 	selection_button ||= false
 %>
 <div class="page_miniature <%= page==@page ? 'current_page' : '' %>" data-page-id=<%= page.id %> id="page_<%= page.id %>_miniature">
-	<%= link_to edit_page_path(page), class:'btn btn-small' do %>
+	<%= link_to edit_page_path(page), remote: true, class:'btn btn-small switch_page_button' do %>
 		<i class="icon icon-edit"></i>
 	<% end %>
 	<%= image_tag '/images/application/page_icons/page_miniature_thumb.png', alt:"Page #{page.number}"%>

@@ -13,6 +13,14 @@ var targetFragment = null;
 		// });
 	// }
 //----------------------------------------------Inizializzazione frammento
+function initializeAllFragments(){
+	if(fragments[0]!=null&&fragments[0]!=undefined){
+		//Quando la pagina è renderizzata viene letto l'hash con gli oggetti di ogni frammento, e a seconda del tipo vi associa un oggetto contenente i metodi necessari
+		$(fragments).each(function(){
+			initializeFragment(this);
+		});
+	}
+}
 function initializeFragment(fragment){
 	var type_id = fragment.fragment_type_id;
 	fragments_methods[type_id].edit(fragment);
@@ -92,12 +100,7 @@ $(function(){
 	$(".fragment_summary td.table-value p,.fragment_summary td.table-key p").dotdotdot();
 	$(".move_to_page_button, .detach_fragment_button").tooltip({placement:'right'});
 	//---------------------------------------Fragments initializer
-	if(fragments[0]!=null&&fragments[0]!=undefined){
-		//Quando la pagina è renderizzata viene letto l'hash con gli oggetti di ogni frammento, e a seconda del tipo vi associa un oggetto contenente i metodi necessari
-		$(fragments).each(function(){
-			initializeFragment(this);
-		});
-	}
+	initializeAllFragments();
 	
 	//------------------------------------Fragment controls
 	

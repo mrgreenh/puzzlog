@@ -1,17 +1,14 @@
-//Validazione form nuovo articolo
+var saveCallbackFunction;//Funzione da chiamare quando il salvataggio è terminato
 $(function(){
 	$(".article_save_button").click(function(e){
 		e.preventDefault();
 		saveArticle();
 	});
-	$('.title_edit_field').autosize();
-	disableTextareaCarriageReturn('.title_edit_field');
-    newArticleValidation(); //Validazione form articolo
-    initializeArticleFragmentEditControls();
-    //saveBeforeLeaving();
+	initializeArticleEditingControls();
+	initializeArticleFragmentEditControls();
   });
 
-function saveArticle(){
+function saveArticle(callbackFunction){
 	stateful_loading($(".article_save_button"));
 	//Fragments
 	$(fragments).each(function(){
@@ -30,22 +27,9 @@ function saveArticle(){
 		$("#page_"+id+"_number_field").val(counter);
 	});
 	
-	// $("form.edit_article").submit(function(e) {
-		// e.preventDefault();
-	    // $.ajax({
-	        // type: "POST",
-	        // url: $("form.edit_article").attr("action"),
-	        // data: $("form.edit_article").serializeArray(),
-	        // });
-	    // return false;
-	// });
-	
 	$("form.edit_article").submit();
-}
 
-//Fa si che tutti i link non remoti salvino la pagina prima di lasciarla
-function saveBeforeLeaving(){
-	$(window).bind('beforeunload', saveArticle);
+	if(callbackFunction!=undefined) saveCallbackFunction = callbackFunction;
 }
 
 function addFragmentHiddenFields(fragment){
@@ -74,7 +58,36 @@ function newArticleValidation(){
     });
 }
 
+function initializeArticleEditingControls(){
+	initializeArticleNaming();
+	
+	$(".switch_page_button").click(function(){
+		saveArticle();
+	});
+	
+	initializePageListDragging();
+	initializePageNaming();
+    
+    newArticleValidation(); //Validazione form articolo
+}
+
+function initializeArticleNaming(){
+	$(".article_title, .article_title_edit_button").unbind();
+	$(".title_edit_field").keyup(function(){
+		var article_title = $(this).val();
+		if(article_title.length==0) article_title = "Untitled article";
+		$(".article_title").text(article_title);
+	});
+	$(".article_title, .article_title_edit_button").mouseover(function(){$(".article_title_edit_button").show();});
+	$(".article_title, .article_title_edit_button").mouseout(function(){$(".article_title_edit_button").hide();});
+	$(".article_title_edit_button").click(function(e){
+		e.preventDefault();
+		$(".title_edit_field").toggle();
+	});
+}
+
 function initializeArticleFragmentEditControls(){
+	$(".move_to_page_button, .detach_fragment_button").tooltip({placement:'right'});
 	$(".article_edit_fragments_container .fragment_container").mouseover(function(){
 		$(".article_fragment_edit_controls").css("display","none");
 		$(this).find(".article_fragment_edit_controls").first().show();

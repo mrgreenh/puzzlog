@@ -32,7 +32,7 @@ class ArticlesController < ApplicationController
 
   def edit
     @article = Article.find(params[:id])
-    @page = @article.pages.first
+    @page = @article.pages.order('number ASC').first
     @fragments = @page.ordered_fragments
     @fragment_types = getFragmentTypes(@fragments)
   end
@@ -40,7 +40,7 @@ class ArticlesController < ApplicationController
   def update
     @article = Article.find(params[:id])
     #salvataggio articolo
-    @article.update_attributes(title: params[:article][:title].gsub(/\r\n/," ").capitalize)
+    @article.update_attributes(title: params[:article][:title].gsub(/\r\n/," "))
     flash[:errors] = @article.errors.messages unless @article.errors.empty?
     #salvataggio frammenti    
     params[:fragments].each do |id, fragment|
@@ -51,7 +51,7 @@ class ArticlesController < ApplicationController
     #salvataggio pagine/parametri pagina
     params[:pages].each do |id, page|
       tempPage = Page.find(id)
-      tempPage.update_attributes(number:page[:number], name:page[:name].gsub(/\r\n/," ").capitalize)
+      tempPage.update_attributes(number:page[:number], name:page[:name].gsub(/\r\n/," "))
       flash[:errors] = tempPage.errors.messages unless tempPage.errors.empty?
     end
     
@@ -76,10 +76,6 @@ class ArticlesController < ApplicationController
   end
   
   def publish
-    
-  end
-  
-  def rename
     
   end
   

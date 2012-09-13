@@ -1,0 +1,12 @@
+<ul class="pages_list">
+	<% @article.pages.order('number ASC').each do |p| %>
+	<li>
+		<%= render 'pages/page_edit_miniature', page: p, edit_button: true %>
+	</li>
+	<%end%>
+</ul>
+<div class="page_list_controls">
+	<%= link_to pages_path(article_id:@article.id), remote:true, method: :post, class:'btn btn-success' do %>
+		<i class="icon icon-white icon-plus"></i> New Page
+	<% end %>
+</div>

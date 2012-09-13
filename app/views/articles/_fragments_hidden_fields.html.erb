@@ -1,0 +1,4 @@
+<% @fragments.each do |frag| %>
+	<%= hidden_field_tag "fragments[#{frag.id}][data]", nil, id:"fragment_#{frag.id}_data", class:"fragment_#{frag.id}_hidden_field" %>
+	<%= hidden_field_tag "fragments[#{frag.id}][images]", nil, id:"fragment_#{frag.id}_images", class:"fragment_#{frag.id}_hidden_field"  if frag.fragment_type.has_images? %>
+<% end %>

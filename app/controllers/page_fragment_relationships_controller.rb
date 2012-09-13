@@ -39,14 +39,17 @@ class PageFragmentRelationshipsController < ApplicationController
 
   def destroy
     @page_fragment_relationship = PageFragmentRelationship.find(params[:id])
+    missing_ordering_number = @page_fragment_relationship.ordering_number
+    page = @page_fragment_relationship.page
     if @page_fragment_relationship.destroy
+      update_ordering_numbers_after(missing_ordering_number, page)
       respond_to do |format|
         format.js
       end
     end
   end
 
-  def update
+  def update #which actually is just a reordering
     @page_fragment_relationship = PageFragmentRelationship.find(params[:id])
     ordering_number = @page_fragment_relationship.ordering_number
     if params[:move]=='up'&&@page_fragment_relationship.ordering_number>1
@@ -71,8 +74,13 @@ class PageFragmentRelationshipsController < ApplicationController
   
   def move_fragment_to_page
     @relationship = PageFragmentRelationship.find(params[:relationship_id])
-    @relationship.page_id = params[:page_id]
+    page = Page.find(params[:page_id])
+    old_page = @relationship.page
+    old_ordering_number = @relationship.ordering_number
+    logger.debug page.page_fragment_relationships.count+1
+    @relationship.update_attributes(page_id:page.id,ordering_number:page.page_fragment_relationships.count+1)
     if @relationship.save
+      update_ordering_numbers_after(old_ordering_number, old_page)
       respond_to do |format|
         format.js
       end
