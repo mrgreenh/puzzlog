@@ -20,7 +20,7 @@ function closeModal(){
 
 //Popover with partial's controls
 function initializeControlsPopovers(){
-	$(".fragment_container,.fragment_summary,.user_partial").each(function(){
+	$(".fragment_container,.fragment_summary,.user_partial,.article_partial").each(function(){
       $(this).popover({
       placement:'right',
       animation:false,

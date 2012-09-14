@@ -10,11 +10,12 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require jquery
+//= require jquery-1.8.0.min.js
+//= require jquery-ui-1.8.23.custom.min.js
 //= require jquery_ujs
+//= require jquery.xcolor.min.js
 //= require jquery.remotipart.js
 //= require bootstrap
-//= require bootstrap-colorpicker.js
 //= require jquery.miniColors.min.js
 //= require jquery.validate.min
 //= require jquery.dotdotdot-1.5.1.js

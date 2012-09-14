@@ -3,4 +3,7 @@ popover_controls ||= false
 %>
 <div class="fragment_type_<%= fragment.fragment_type.id %> fragment_view" id="fragment_<%= fragment.id %>_view">
 	<%= raw(fragment.fragment_type.view_elements) %>
+	<noscript>
+		<%= render 'fragments/fragment_summary', fragment: fragment %>
+	</noscript>
 </div>

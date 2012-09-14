@@ -4,10 +4,16 @@ FragmentsProject::Application.routes.draw do
   resources :users
   resources :user_role_relationships, only: [:create, :destroy]
   resources :sessions, only:[:new,:create,:destroy]
+  
   resources :articles
-  resources :pages, only: [:show,:create,:destroy,:update,:edit]
+  match 'articles/:id/publish', to: 'articles#publish', as: 'publish_article'
+  match 'articles/:id/unpublish', to: 'articles#unpublish', as: 'unpublish_article'
+  
+  resources :pages, only: [:show,:create,:destroy,:edit]
   resources :page_fragment_relationships, only: [:new,:create,:update,:destroy]
-  match 'page_fragment_relationships/move_fragment_to_page', to:'page_fragment_relationships#move_fragment_to_page', as: 'move_fragment_to_page'
+  match 'page_fragment_relationships/move_fragment_to_page', to: 'page_fragment_relationships#move_fragment_to_page', as: 'move_fragment_to_page'
+  match 'articles/:article_id/:page_number', to: 'pages#show'
+  
   #Fragments
   resources :fragments
   match 'fragments/add_to_puzzle_box/:id', to:'fragments#add_to_puzzle_box', as: 'add_fragment_to_puzzle_box'

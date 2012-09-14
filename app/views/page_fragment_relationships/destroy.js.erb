@@ -1,6 +1,6 @@
 $("#fragment_<%= @page_fragment_relationship.fragment.id %>").slideUp(function(){
 	$(this).popover('hide');
-	$("*").tooltip('hide');
+	$(".tooltip").remove();
 	$(this).remove();
 });
 removeFragmentHiddenFields(<%= @page_fragment_relationship.fragment.id %>);

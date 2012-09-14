@@ -1,22 +1,18 @@
 <% provide :title, "Edit #{@article.title}" %>
 <div class="container article_edit_container">
 	<div class="row">
-		<div class="span3">
+		<div class="span2">
 			<aside class="left_article_controls">
 				<div class="controls_container" data-spy="affix" data-offset-top="0">
 					<div class="article_buttons">
 						<% if can_publish_article?(@article) %>
 							<% if !@article.public? %>
-								<%= link_to '#', class:'btn btn-success btn-large' do %>
-									<i class="icon icon-white icon-globe"></i> Publish
-								<% end %>	
+								<%= render 'articles/publish_article_button'%>	
 							<% else %>
-								<%= link_to '#', class:'btn btn-warning btn-large' do %>
-									<i class="icon icon-white icon-eye-close"></i> Unpublish
-								<% end %>
+								<%= render 'articles/unpublish_article_button' %>
 							<% end %>
 						<% end %>
-						<%= link_to '#', class:'btn btn-info btn-large article_save_button', "data-loading-text" => "Saving..." do %>
+						<%= link_to '#', class:'btn btn-info article_save_button', "data-loading-text" => "Saving..." do %>
 								<i class="icon icon-white icon-ok"></i> Save
 						<% end %>
 					</div>
@@ -26,9 +22,9 @@
 				</div>
 			</aside>
 		</div>
-		<div class="span6">
+		<div class="span7">
 			<div class="row">
-				<div class="span6">
+				<div class="span7">
 					<div class="article_title_editing_controls">
 						<h1 class="article_title"><%= @article.title %></h1>
 						<%= link_to '#', class:'btn btn-small hide article_title_edit_button' do %>
@@ -39,7 +35,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="span6">
+				<div class="span7">
 					<div class="article_edit_fragments_container">
 						<%= render @fragments, edit:true, popover_controls: true, article_fragment_edit_controls: true %>
 					</div>

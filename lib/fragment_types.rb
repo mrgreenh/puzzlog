@@ -47,12 +47,9 @@ EOF
     style=<<EOF
 &.fragment_view{
     background-color: $background_color;
-    border-style:solid;
-    border-width:1px;
-    border-color:$third_color;
     color:$foreground_color;
-    margin:10px auto;
-    text-align:center;
+    margin:0px auto;
+    text-align:left;
     width: auto;
     padding:20px;
   }
@@ -153,12 +150,9 @@ EOF
   def self.stylesheet
     style=<<EOF
 &.fragment_view{
-    border-style:solid;
     background-color:$background_color;
-    border-width:1px;
-    border-color:$third_color;
     color:$foreground_color;
-    margin:10px auto;
+    margin:0px auto;
     text-align:center;
     width: 90%;
     padding:20px;

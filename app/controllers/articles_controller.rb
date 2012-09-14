@@ -65,6 +65,15 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
+    # TODO completare
+    @article = Article.find(params[:id])
+    if @article.destroy
+      flash[:success] = "Your article has been deleted"
+      respond_to do |format|
+        format.js
+        format.html
+      end
+    end
     
   end
 
@@ -77,10 +86,34 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
+    @page = @article.pages.find_by_number(params[:page_number])||@article.pages.order('number ASC').first
+    @fragments = @page.ordered_fragments
+    @fragment_types = getFragmentTypes(@fragments)
+    
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
   
   def publish
-    
+    @article = Article.find(params[:id])
+    if @article.update_attributes(public:true, publication_date:Time::now)
+      flash[:success] = "#{@article.title} published!"
+      respond_to do |format|
+        format.js
+      end
+    end
+  end
+  
+  def unpublish
+    @article = Article.find(params[:id])
+    if @article.update_attributes(public:false)
+      flash[:success] = "#{@article.title} unpublished!"
+      respond_to do |format|
+        format.js
+      end
+    end
   end
   
   private

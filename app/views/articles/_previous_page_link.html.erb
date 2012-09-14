@@ -1,0 +1,8 @@
+<%
+	if @page!=@article.pages.order('number ASC').first
+		@previous_page = @article.pages.find_by_number(@page.number-1)
+%>
+	<%= link_to page_path(page_id:@previous_page.id), remote:true, title:"View previous page", class:"previous_page_link" do %>
+		<i class="icon icon-chevron-left"></i> Previous
+	<% end %>
+<% end %>

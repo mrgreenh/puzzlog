@@ -3,13 +3,17 @@ class PagesController < ApplicationController
   include PagesHelper
   include FragmentsHelper
   
-  # TODO gestire privilegi delle pagine e delle relazioni coi frammenti
+  before_filter :page_create_filter, only:[:create]
+  before_filter :page_destroy_filter, only: :destroy
+  before_filter :page_edit_filter, only: [:edit]
+  before_filter :page_view_filter, only: [:show]
   def create
     @article = Article.find(params[:article_id])
-    @page = @article.pages.build(number:@article.pages.count+1,foreground_color:"#000000",background_color:"#ffffff",third_color:"#555555")
+    page = @article.pages.build(number:@article.pages.count+1,foreground_color:"#000000",background_color:"#ffffff",third_color:"#555555")
     
     if @article.save
-      @fragments = @page.ordered_fragments
+      @page = @article.pages.order('number ASC').last
+      @fragments = page.ordered_fragments
       @fragment_types = getFragmentTypes(@fragments)
       respond_to do |format|
         format.html {render 'articles/edit'}
@@ -28,10 +32,6 @@ class PagesController < ApplicationController
       format.html {render 'articles/edit'}
       format.js
     end
-  end
-  
-  def update
-    
   end
   
   def destroy
@@ -54,5 +54,47 @@ class PagesController < ApplicationController
   end
   
   def show
+    @article = Article.find(params[:article_id]) if params[:page_id].nil?
+    @page = Page.find(params[:page_id])||@article.pages.find_by_number(params[:page_number])
+    @article = @page.article unless params[:page_id].nil?
+    
+    @fragments = @page.ordered_fragments
+    @fragment_types = getFragmentTypes(@fragments)
+    
+    respond_to do |format|
+      format.js { render 'articles/show' }
+      format.html { render 'articles/show' }
+    end
   end
+  
+  private
+  
+    def page_create_filter
+      if not can_create_pages?
+        flash[:errors] = "Not allowed."
+        redirect_to root_path
+      end
+    end
+    
+    def page_edit_filter
+      if not can_edit_page?
+        flash[:errors] = "Not allowed."
+        redirect_to root_path
+      end
+    end
+    
+    def page_destroy_filter
+      if not can_destroy_page?
+        flash[:errors] = "Not allowed."
+        redirect_to root_path
+      end
+    end
+    
+    def page_view_filter
+      if not can_view_page?
+        flash[:errors] = "Not allowed."
+        redirect_to root_path
+      end
+    end
+  
 end

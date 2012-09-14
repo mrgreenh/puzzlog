@@ -1,3 +1,39 @@
-<% provide :title, @article.title %>
-<h1><%= @article.title %></h1>
-<p>Find me in app/views/articles/show.html.erb</p>
+<% provide :title, "#{@article.title} | #{@page.number}" %>
+<div class="container-fluid article_view_container">
+	<div class="row">
+		<div class="span2">
+			<aside class="left_article_controls">
+				<div class="controls_container span2 hidden-phone" data-spy="affix" data-offset-top="0">
+					<ul class="pager">
+					  <li class="previous_page_link_container"><%= render 'articles/previous_page_link'%></li>
+					</ul>
+				</div>
+			</aside>
+		</div>
+		<div class="span7 article_content_container">
+			<div class="row">
+				<div class="span7">
+					<header>
+						<h1><%= @article.title %></h1>
+					</header>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span7">
+					<div class="article_view_fragments_container">
+						<%= render @fragments, popover_controls: true %>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="span3">
+			<aside class="right_article_controls">
+				<div class="controls_container span2 hidden-phone" data-spy="affix" data-offset-top="0">
+					<ul class="pager">
+					  <li class="next_page_link_container"><%= render 'articles/next_page_link'%></li>
+					</ul>
+				</div>
+			</aside>
+		</div>
+	</div>
+</div>

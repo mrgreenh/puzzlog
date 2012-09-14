@@ -69,6 +69,12 @@ function initializeArticleEditingControls(){
 	$(".switch_page_button,.page_styles_apply_button").click(function(){
 		saveArticle();
 	});
+	$(".article_preview_button").click(function(e){
+		e.preventDefault();
+		saveArticle(function(){
+			window.location = $(".article_preview_button").attr("href");
+		});
+	});
 	
 	initializePageListDragging();
 	initializePageNaming();

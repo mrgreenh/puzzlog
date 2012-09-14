@@ -2,6 +2,7 @@
 body { padding-top: 60px; }
 @import "bootstrap-responsive";
 @import "variables";
+@import "mixins";
 
 /*----------------------------Mixins--------------*/
 @mixin centered_content{
@@ -29,8 +30,7 @@ textarea{
 }
 
 .gentle-shade {
-  -webkit-box-shadow:  5px 5px 7px 3px rgba(0, 0, 0, 0.3);     
-   box-shadow:  5px 5px 7px 3px rgba(0, 0, 0, 0.3);
+  @include gentle_shade;
 }
 
 ul {
