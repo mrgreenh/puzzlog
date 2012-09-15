@@ -1,9 +1,7 @@
 <% provide :title, @fragment.name %>
-<% # TODO bisogna mettere i maledetti titoliiiii 
-%>
 <div class="row">
-	<div class="offset3 span6">
-		<%= render 'fragments/fragment', fragment: @fragment, popover_controls:false, edit:false %>
+	<div class="offset2 span7 view_article_container hanging_container">
+		<%= render 'fragments/fragment', fragment: @fragment, popover_controls:false, edit:false, fragment_header:true %>
 		<%= render 'fragments/fragment_controls', remote_bool:false %>
 	</div>
 </div>

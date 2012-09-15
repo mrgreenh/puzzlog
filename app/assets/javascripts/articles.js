@@ -6,6 +6,7 @@ $(function(){
 	});
 	initializeArticleEditingControls();
 	initializeArticleFragmentEditControls();
+	initializeArticleViewControls();
   });
 
 function saveArticle(callbackFunction){
@@ -103,5 +104,12 @@ function initializeArticleFragmentEditControls(){
 	$(".article_edit_fragments_container .fragment_container").mouseover(function(){
 		$(".article_fragment_edit_controls").css("display","none");
 		$(this).find(".article_fragment_edit_controls").first().show();
+	});
+}
+
+function initializeArticleViewControls(){
+	$(".next_page_link,.previous_page_link").unbind('click');
+	$(".next_page_link,.previous_page_link").click(function(){
+		$(this).text("Loading...");
 	});
 }

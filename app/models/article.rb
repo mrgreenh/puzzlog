@@ -13,4 +13,5 @@ class Article < ActiveRecord::Base
   def first_fragment
     self.pages.order('number ASC').first.fragments.order('ordering_number ASC').first
   end
+  
 end

@@ -21,6 +21,10 @@ module FragmentsHelper
     return fragment_types
   end
   
+  def fragments_streamline(index=1,number=8)
+    Fragment.where('public=?',true).order('publication_date DESC').offset((index.to_i-1)*number.to_i).limit(index.to_i*number.to_i)
+  end
+  
   #---------------------------------------Privileges
   def can_create_fragments?
     can_create_articles?

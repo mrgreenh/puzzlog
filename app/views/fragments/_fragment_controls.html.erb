@@ -1,7 +1,5 @@
 <% fragment ||= @fragment 
 %>
-<% # TODO Substitute every confirm message with that stuff suggested by the deprecation warning
-%>
 <ul class="controls fragment-controls expanded-centered">
 	<% if !fragment.public&&can_publish_fragment?(fragment) %>
 		<li>
@@ -53,7 +51,7 @@
 	
 	<%if can_destroy_fragment?(fragment)%>
 		<li>
-			<%= link_to fragment_path(fragment), remote:remote_bool, method: :delete, confirm: "QUESTO FRAMMENTO VERRà RIMOSSO ANCHE DAGLI ARTICOLI IN CUI APPARE. Sei sicuro di volerlo eliminare?", class:'btn btn-small btn-danger hidden_on_article_editing' do %>
+			<%= link_to fragment_path(fragment), remote:remote_bool, method: :delete, data: {confirm: "QUESTO FRAMMENTO VERRà RIMOSSO ANCHE DAGLI ARTICOLI IN CUI APPARE. Sei sicuro di volerlo eliminare?"}, class:'btn btn-small btn-danger hidden_on_article_editing' do %>
 				<i class="icon-trash icon-white"></i> Delete
 			<% end %>
 		</li>

@@ -9,7 +9,7 @@ body {
 }
 .article_content_container {
 	background-color: $background_color;
-}
+	}
 EOF
 		scss_string = "#{scss_variables} #{page_css}"
 		sass_engine = Sass::Engine.new(scss_string,:syntax => :scss) %>
@@ -21,4 +21,11 @@ EOF
   			sass_engine = Sass::Engine.new(scss_string,:syntax => :scss) %>
   			<%= sass_engine.render %>
 	<% end
-end %>
+end
+
+if !@articles.nil?
+	@articles.each do |article| %>
+			<%= render 'articles/article_summaries_styles', article: article %>
+	<% end	
+end
+%>

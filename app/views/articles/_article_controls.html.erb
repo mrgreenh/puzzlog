@@ -1,1 +1,34 @@
-Controlli dell'articolo!
+<%
+	article ||= @article
+	remote_bool = false unless !remote_bool.nil?
+%>
+<ul class="controls article_controls expanded-centered">
+	<% if !article.public&&can_publish_article?(article) %>
+		<li>
+			<%= render 'articles/publish_article_button', remote_bool:remote_bool, btn_small:true, article:article%>
+		</li>
+	<% elsif article.public&&can_publish_article?(article) %>
+		<li>
+			<%= render 'articles/publish_article_button', remote_bool:remote_bool, btn_small:true, republish:true, article:article%>
+		</li>
+		<li>
+			<%= render 'articles/unpublish_article_button', remote_bool:remote_bool, btn_small:true, article:article%>
+		</li>
+	<% end %>
+	
+	<%if can_edit_article?(article)%>
+		<li>
+			<%= link_to edit_article_path(article), class:'btn btn-small btn-info' do %>
+				<i class='icon-edit icon-white'></i> Edit
+			<% end %>
+		</li>
+	<%end%>
+	
+	<%if can_destroy_article?(article)%>
+		<li>
+			<%= link_to article_path(article), remote:remote_bool, method: :delete, data: {confirm: "TUTTI I FRAMMENTI DI QUESTO ARTICOLO CHE VUOI CONSERVARE DEVONO ESSERE PRIMA AGGIUNTI AL PUZZLE BOX. Vuoi eliminarlo ora?"}, class:'btn btn-small btn-danger hidden_on_article_editing' do %>
+				<i class="icon-trash icon-white"></i> Delete
+			<% end %>
+		</li>
+	<%end%>
+</ul>

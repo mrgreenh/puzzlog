@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'mixins';
 
 .fragment_controls {
   text-align:right;
@@ -7,6 +8,37 @@
 .fragment_container{
   width:100%;
   margin:0px auto;
+  &.streamlined_fragment{
+    @include small-diffuse-shade;
+    @include smaller_rounded_corners;
+    padding:10px 0px;
+    margin: 0px 0px 30px 0px;
+  }
+  header {
+    font-size:1em;
+    overflow:hidden;
+    background-color:$header_dark_grey;
+    color:$header_light_grey;
+    padding:0px 10px;
+    a{
+      float:left;
+      margin:7px;
+    }
+    p {
+      float:left;
+      line-height:1em;
+      margin:10px 20px;
+      max-width:35%;
+    }
+    h1{
+      font-style:italic;
+      float:left;
+      line-height:1.2em;
+      max-width:50%;
+      font-size:1em;
+      font-weight:normal;
+    }
+  }
 }
 
 .modal_index .fragment_summary {

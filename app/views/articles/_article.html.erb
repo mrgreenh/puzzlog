@@ -1,16 +1,18 @@
 <% article ||= @article
 remote_bool = true
 %>
-<div class="article_partial" class="user" id="article_<%= article.id %>">
-	<h1><%= article.title %></h1>
+<section class="article_partial" class="user" id="article_<%= article.id %>">
+	<%= render 'articles/article_header', article:article, page_name: false %>
 	<div class="article-summary">
 		<%= render 'fragments/fragment', fragment: article.first_fragment unless article.pages.count==0%>
 	</div>
-	<%= link_to article_path(article), class:'read_more_link' do %>
-		<%= image_tag '/images/application/page_icons/page_miniature_thumb.png' %> Read more...
-	<% end %>
+	<footer>
+		<%= link_to article_path(article), class:'read_more_link' do %>
+			<%= image_tag '/images/application/page_icons/page_miniature_thumb.png' %> Read more...
+		<% end %>
+	</footer>
 	<div class="hide <%= can_edit_article?(article)||can_destroy_article?(article)||can_publish_article?(article) ? 'tooltip_content' : '' %>">
 		<a class="close">&times;</a>
 		<%= render 'articles/article_controls', article:article, remote_bool: true %>
 	</div>
-</div>
+</section>

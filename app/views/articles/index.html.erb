@@ -1,8 +1,10 @@
 <% provide :title, full_title("Your Articles") %>
+<% # TODO fare un parziale articles styles che prende il colore della prima pagina e ci compila lo stile del primo frammento di ogni articolo, da usare per renderizzare il sommario dell'articolo
+%>
 <div class="row">
-	<div class="offset2 span7">
-		<h1>Your articles...</h1>
-	</div>
+	<header class="offset2 span7">
+		<%= pluralize(current_user.articles.count,'article') %>.
+	</header>
 </div>
 <div class="row">
 	<div class="offset2 span7">

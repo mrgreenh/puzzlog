@@ -1,3 +1,8 @@
-<%= link_to unpublish_article_path(@article), class:'btn btn-warning unpublish_article_button', remote:true do %>
+<%
+	article ||= @article
+	btn_small ||= false
+	remote_bool = true if remote_bool.nil?
+%>
+<%= link_to unpublish_article_path(article), remote:remote_bool, class:"btn btn-warning #{btn_small ? 'btn-small' : ''} unpublish_article_button" do %>
 	Unpublish
 <% end %>

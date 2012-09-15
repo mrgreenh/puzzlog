@@ -10,19 +10,18 @@
 				</div>
 			</aside>
 		</div>
-		<div class="span7 article_content_container">
+		<div class="span7 article_content_container hanging_container">
 			<div class="row">
 				<div class="span7">
-					<header>
-						<h1><%= @article.title %></h1>
-					</header>
+					<%= render 'articles/article_controls' %>
+					<%= render 'articles/article_header'%>
 				</div>
 			</div>
 			<div class="row">
 				<div class="span7">
-					<div class="article_view_fragments_container">
+					<article class="article_view_fragments_container">
 						<%= render @fragments, popover_controls: true %>
-					</div>
+					</article>
 				</div>
 			</div>
 		</div>

@@ -1,4 +1,5 @@
 @import "mixins";
+@import 'variables';
 
 #new_article {
   text-align:center;
@@ -15,19 +16,62 @@
     height:30px;
   }
 }
+
+.article_header{
+  overflow:hidden;
+  background-color:$header_dark_grey;
+  color:$header_light_grey;
+  p {
+    font-size: 0.7em;
+    text-align:right;
+    margin:0px auto;
+    float:left;
+    width:40%;
+  }
+  h1 {
+    font-size:1.5em;
+    line-height:1.2em;
+    max-width:60%;
+    float:left;
+    margin:0px auto;
+  }
+  h2 {
+    margin-top:10px;
+    float:left;
+    max-width:40%;
+    color:black;
+    line-height:1em;
+  }
+}
+
 .article_partial {
-  .read_more_link{
-    font-size:1.4em;
-    &:hover{
-      text-decoration:none;
+  @include small-diffuse-shade;
+  @include rounded_corners;
+  padding:30px 0px;
+  margin: 0px 0px 30px 0px;
+  header {
+    h1{
+      font-size:1.3em;
+      line-height:1.2em;
+    }
+  }
+  footer {
+    text-align:center;
+    
+    .read_more_link{
+      img {
+        margin:5px auto;
+       }
+      font-size:1.4em;
+      &:hover{
+        text-decoration:none;
+      }
     }
   }
 }
 .article_view_container {
   header{
-    h1{
-      text-align:center;
-    }
+    margin-top:20px;
   }
   aside{
     min-height:1px;
@@ -42,10 +86,6 @@
     .next_page_link_container a, .previous_page_link_container a{
       width:100px;
     }
-  }
-  .article_content_container {
-    @include diffuse_shade;
-    margin-top:-20px;
   }
   
 }

@@ -1,0 +1,11 @@
+<%
+	article ||= @article
+	page ||= @page||article.pages.order('number ASC').first
+	page_name = true if page_name.nil?
+	small_title ||= false
+%>
+<header class="article_header">
+	<h1><%= article.title %></h1>
+	<p><%= time_tag article.publication_date %></p><p><strong><%= article.user.name %></strong></p>
+	<h2><%= "."+page.name unless page.name.nil?||page.name.blank?||!page_name %></h2>
+</header>

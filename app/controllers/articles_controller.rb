@@ -68,10 +68,12 @@ class ArticlesController < ApplicationController
     # TODO completare
     @article = Article.find(params[:id])
     if @article.destroy
-      flash[:success] = "Your article has been deleted"
       respond_to do |format|
         format.js
-        format.html
+        format.html do
+          flash[:success] = "Your article has been deleted"
+          redirect_to articles_path
+        end
       end
     end
     
@@ -79,8 +81,8 @@ class ArticlesController < ApplicationController
 
   def index
     @articles = current_user.articles.order('updated_at desc').paginate(:page => params[:page], :per_page => 4)
-    # TODO togliere i frammenti da qui
-    @fragments = current_user.fragments.order('updated_at desc').paginate(:page => params[:page], :per_page => 4) 
+    
+    @fragments = article_summaries_fragments(@articles)
     @fragment_types = getFragmentTypes(@fragments)
   end
 
@@ -101,6 +103,12 @@ class ArticlesController < ApplicationController
     if @article.update_attributes(public:true, publication_date:Time::now)
       flash[:success] = "#{@article.title} published!"
       respond_to do |format|
+        format.html do
+          @page = @article.pages.find_by_number(params[:page_number])||@article.pages.order('number ASC').first
+          @fragments = @page.ordered_fragments
+          @fragment_types = getFragmentTypes(@fragments)
+          render 'show'
+        end
         format.js
       end
     end
@@ -111,6 +119,12 @@ class ArticlesController < ApplicationController
     if @article.update_attributes(public:false)
       flash[:success] = "#{@article.title} unpublished!"
       respond_to do |format|
+        format.html do
+          @page = @article.pages.find_by_number(params[:page_number])||@article.pages.order('number ASC').first
+          @fragments = @page.ordered_fragments
+          @fragment_types = getFragmentTypes(@fragments)
+          render 'show'
+        end
         format.js
       end
     end

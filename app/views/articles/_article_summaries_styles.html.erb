@@ -1,0 +1,26 @@
+<%
+	article ||= @article
+	page = article.pages.order('number ASC').first
+	if not page.nil?
+		fragment = article.first_fragment
+		frag_type = fragment.fragment_type
+		 
+		scss_variables = "$background_color: #ffffff;$foreground_color: #000000;$third_color: #555555;"
+		scss_variables = getScssVariables(page)
+		scss_string =<<EOF
+#{scss_variables}
+#article_#{article.id} {
+	background-color: $background_color;
+	color: $foreground_color;
+	a {
+		color:$third_color;
+	}
+	.fragment_container {
+		background-color: $background_color;
+	}
+	.fragment_type_#{frag_type.id} { #{frag_type.stylesheet}}
+}
+EOF
+		sass_engine = Sass::Engine.new(scss_string,:syntax => :scss) %>
+		<%= sass_engine.render %>
+<% end %>

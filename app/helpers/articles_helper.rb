@@ -1,4 +1,15 @@
 module ArticlesHelper
+  def self.streamline(index=1,number=8)
+    Article.where('public=?', true).order('publication_date DESC').offset((index.to_i-1)*number.to_i).limit(index.to_i*number.to_i)
+  end
+  
+  def article_summaries_fragments(articles)
+    fragments = []
+    articles.each do |a|
+      fragments = fragments+[a.first_fragment]
+    end
+    return fragments
+  end
   #privileges
   def can_create_articles?
     has_role?('superadmin')||has_role?('writer')

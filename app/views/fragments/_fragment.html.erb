@@ -3,8 +3,12 @@ fragment ||= @fragment
 edit ||= false
 popover_controls ||= false
 article_fragment_edit_controls ||= false
+streamlined_fragment ||= false
+fragment_header ||= false
 %>
-<div id="fragment_<%=fragment.id %>" class="fragment_container">
+<div id="fragment_<%=fragment.id %>" class="fragment_container <%= streamlined_fragment ? 'streamlined_fragment' : '' %>">
+	<%= render 'fragments/fragment_header', fragment: fragment if fragment_header %>
+	
 	<% if not edit %>
 	
 		<%= render 'fragments/fragment_view', fragment: fragment %>
