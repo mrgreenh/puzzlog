@@ -11,7 +11,9 @@ class Article < ActiveRecord::Base
   belongs_to :user
   
   def first_fragment
-    self.pages.order('number ASC').first.fragments.order('ordering_number ASC').first
+    if self.pages.any?
+      self.pages.order('number ASC').first.fragments.order('ordering_number ASC').first
+    end
   end
   
 end
