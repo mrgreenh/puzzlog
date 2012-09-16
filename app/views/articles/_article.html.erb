@@ -4,7 +4,7 @@ remote_bool = true
 <section class="article_partial" class="user" id="article_<%= article.id %>">
 	<%= render 'articles/article_header', article:article, page_name: false %>
 	<div class="article-summary">
-		<%= render 'fragments/fragment', fragment: article.first_fragment unless article.pages.count==0%>
+		<%= render 'fragments/fragment', fragment: article.first_fragment unless article.pages.count==0||article.first_fragment.nil?%>
 	</div>
 	<footer>
 		<%= link_to article_path(article), class:'read_more_link' do %>

@@ -1,7 +1,7 @@
 <%
 	article ||= @article
 	page = article.pages.order('number ASC').first
-	if not page.nil?
+	if !page.nil?&&page.fragments.count>0
 		fragment = article.first_fragment
 		frag_type = fragment.fragment_type
 		 

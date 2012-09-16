@@ -6,7 +6,7 @@
 	<% if not fragment.name.blank? %>
 		<h1>"<%= fragment.name %>"</h1>
 	<% end %>
-	<% if not fragment.publication_date.nil? %>
+	<% if not fragment.publication_date.nil?||fragment.publication_date.blank? %>
 	<p><strong><%= fragment.user.name %></strong>, <%= time_tag fragment.publication_date %></p>
 	<% end %>
 </header>
