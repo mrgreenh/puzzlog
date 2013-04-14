@@ -1,0 +1,83 @@
+<div class="row">
+	<div class="offset2 span8 coding_areas_container">
+		<% #Changing some form parameters according to 'new' or 'update' cases
+			if not @fragment_type.id.nil?
+				action_path = fragment_type_path(@fragment_type.id)
+				submission_method = 'put'
+			else
+				action_path = fragment_types_path
+				submission_method = 'post'
+			end
+		%>
+		<%= form_tag action_path, method:submission_method, id:"fragment_type_form" do %>
+			<%= submit_tag "Save and preview", class:"btn btn-success btn-primary submit_button" %>
+			<fieldset class="form-inline">
+				<%= label_tag 'name', 'Fragment type\'s name:' %>
+				<%= text_field_tag 'name',@fragment_type.name, placeholder:"!!!Not validated!!!" %>
+			</fieldset>
+		
+			<!-- Scripting tabs -->
+			<ul class="nav nav-tabs">
+				<li class="active">
+					<a href="#edit_script_editor" data-toggle="tab">Edit Script</a>
+				</li>
+				<li>
+					<a href="#view_script_editor" data-toggle="tab">View Script</a>
+				</li>
+			</ul>
+			
+			<div class="tab-content">
+				<div id="edit_script_editor" class="tab-pane fade in active coding_area javascript_code"></div>
+				<div id="view_script_editor" class="tab-pane fade in coding_area javascript_code"></div>
+			</div>
+			<!-- Markup tabs -->
+			<ul class="nav nav-tabs">
+				<li class="active">
+					<a href="#edit_html_editor" data-toggle="tab">Edit HTML</a>
+				</li>
+				<li>
+					<a href="#view_html_editor" data-toggle="tab">View HTML</a>
+				</li>
+				<li>
+					<a href="#scss_editor" data-toggle="tab">SCSS</a>
+				</li>
+			</ul>
+			
+			<div class="tab-content">
+				<div id="edit_html_editor" class="tab-pane fade in active coding_area html_code"></div>
+				<div id="view_html_editor" class="tab-pane fade in coding_area html_code"></div>
+				<div id="scss_editor" class="tab-pane fade in coding_area scss_code"></div>
+			</div>
+			
+			<!-- Hidden fields gathering scripts -->
+			<%= hidden_field_tag 'edit_script', @fragment_type.edit_script %>
+			<%= hidden_field_tag 'view_script', @fragment_type.view_script %>
+			<%= hidden_field_tag 'edit_elements', @fragment_type.edit_elements %>
+			<%= hidden_field_tag 'view_elements', @fragment_type.view_elements %>
+			<%= hidden_field_tag 'stylesheet', @fragment_type.stylesheet %>
+			<%= hidden_field_tag 'default_data', @fragment_type.default_data %>
+			<%= hidden_field_tag 'sample_images', @sample_images %>
+			
+			<!-- Other options and data faking -->
+			<h3>Default DATA:</h3>
+			<div id="default_data_editor" class="coding_area json_code"></div>
+			<fieldset class="form-inline">
+				<%= label_tag 'summary_fields', 'Data\'s fields to be displayed in <noscript>:' %>
+				<%= text_field_tag 'summary_fields', @fragment_type.summary_fields, placeholder: "Separated by comma" %>
+			</fieldset>
+			
+			<h3>Sample images:</h3>
+			<fieldset class="form-inline">
+				<%= label_tag 'images', 'Number of images the user can use:' %>
+				<%= text_field_tag 'images',(@fragment_type.images || "0"), class:"resources_quantity_field" %>
+				<%= link_to "Capture", "", id:"capture_images_button", class:"btn btn-small btn-primary" %>
+			</fieldset>
+			<div id="sample_images_editor" class="coding_area json_code resource_code_editor"></div>
+		<fieldset>
+			<%= label_tag 'description', 'Type a description of this fragment type:' %>
+			<%= text_area_tag 'description',@fragment_type.description %>
+		</fieldset>
+		<%= submit_tag "Save and preview", class:"btn btn-success btn-primary submit_button" %>
+		<% end %>
+	</div>
+</div>

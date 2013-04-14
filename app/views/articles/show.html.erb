@@ -17,12 +17,12 @@
 					<%= render 'articles/article_header'%>
 				</div>
 			</div>
-			<div class="row">
-				<div class="span7">
-					<article class="article_view_fragments_container">
-						<%= render @fragments, popover_controls: true %>
-					</article>
-				</div>
+			<article class="article_view_fragments_container row">
+				<%= render 'articles/fragments_with_contextual', fragments: @fragments %>
+				
+			</article>
+			<div class="span3">
+				
 			</div>
 		</div>
 		<div class="span3">

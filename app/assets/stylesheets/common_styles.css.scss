@@ -87,6 +87,13 @@ h3.popover-title{
 
 /*------------------------controls */
 
+.editing_header{
+  text-align:right;
+  a{
+    cursor:pointer;
+  }
+}
+
  ul.controls, ul.user-works {
     list-style-type:none;
     margin:10px auto;
@@ -114,7 +121,31 @@ h3.popover-title{
     }
   }
 
+.popover_overlay{
+  z-index:1000;
+  color:white;
+  position:absolute;
+  display:none;
+  width:100%;
+  .overlay_content{
+    @include smaller_rounded_corners;
+    background-color:rgba(0,0,0,0.7);
+    padding:15px;
+    width:120px;
+    margin:10px auto;
+    .close{
+      color:white;
+      opacity: 1;
+    } 
+  }
+}
+
 /*--------------------------Partials */
+/*Partials with editing buttons*/
+.resource_partial{
+  position:relative;
+}
+
 /* Roles */
 .role-check-cell {
   min-width:20px;

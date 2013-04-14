@@ -21,7 +21,6 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.create(title: params[:title], user_id: current_user.id)
-    @article.pages.build(number:1,foreground_color:"#000000",background_color:"#ffffff",third_color:"#555555")
     if @article.save
       redirect_to edit_article_path(@article)
     else

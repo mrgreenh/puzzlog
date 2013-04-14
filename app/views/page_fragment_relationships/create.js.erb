@@ -17,7 +17,7 @@ fragments_methods = {
 	<% end %>
 };
 
-$("#fragments_styles").html("<%= escape_javascript(render 'fragments/fragments_styles')%>");
+$("#fragments_styles").html("<%= escape_javascript(render 'common_partials/customizable_styles')%>");
 
 
 $(".article_edit_fragments_container").append("<%= escape_javascript(render @fragment, fragment:@fragment, edit:true, popover_controls: true, article_fragment_edit_controls:true) %>");

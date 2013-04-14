@@ -5,7 +5,7 @@ $(".article_view_container").fadeOut(function(){
 		$(".article_view_fragments_container .fragment_container").popover('hide');
 	
 		//Updating contents
-		$(".article_view_fragments_container").html("<%= escape_javascript(render @fragments, popover_controls: true )%>");
+		$(".article_view_fragments_container").html("<%= escape_javascript(render 'articles/fragments_with_contextual', fragments: @fragments)%>");
 		$(".article_header").replaceWith("<%= escape_javascript(render 'articles/article_header') %>");
 		
 		$(".previous_page_link_container").html("<%= escape_javascript(render 'articles/previous_page_link')%>");
@@ -13,7 +13,7 @@ $(".article_view_container").fadeOut(function(){
 		
 		//Puzzle resources
 		<%= render 'fragments/fragments_filling_script' %>
-		$("#fragments_styles").html("<%= escape_javascript(render 'fragments/fragments_styles')%>");
+		$("#fragments_styles").html("<%= escape_javascript(render 'common_partials/customizable_styles')%>");
 		
 		//Fragments initialization
 		initializeAllFragments();

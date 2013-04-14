@@ -3,6 +3,8 @@ class FragmentType < ActiveRecord::Base
 
   has_many :fragments
   
+  validates :name, presence: true, uniqueness: { case_sensitive:false, message:"This name has already been used" }
+  
   scope :most_used, :select => 'fragment_types.*',
         :joins => :fragments,
         :group => 'fragment_types.id',

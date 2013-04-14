@@ -16,4 +16,9 @@ class Article < ActiveRecord::Base
     end
   end
   
+  def create
+    self.pages.build(number:1,foreground_color:"#000000",background_color:"#ffffff",third_color:"#555555")
+    super
+  end
+  
 end

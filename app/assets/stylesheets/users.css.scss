@@ -13,8 +13,10 @@
   font-size:1.2em;
 }
 /* partials */
-.user_partial:hover {
-  background-color: darken($bodyBackground, 10%);
+.user_partial.resource_partial{
+  &:hover {
+    background-color: darken($bodyBackground, 10%);
+  }
 }
 .user-works span{
   float:left;

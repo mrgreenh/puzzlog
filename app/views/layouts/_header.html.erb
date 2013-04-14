@@ -39,11 +39,9 @@
 								<i class="icon icon-comment"></i> New Fragment
 							</a>
 							<ul class="dropdown-menu"> 
-								<%
-									# TODO qui ci andrà una query per avere i tipi di frammento più usati
-									# TODO usare le iconcine dei tipi di frammento quando saranno pronte
+								<% #FragmentType.most_used.limit(5).each do |type|
+									FragmentType.all.each do |type|
 								%>
-								<% FragmentType.most_used.limit(5).each do |type|%>
 								<li>
 									<%= link_to new_fragment_path(fragment_type_id:type.id) do %>
 										<img src="<%= getFragmentTypeIconThumb(type) %>" title="<%= type.name %>"> <%= type.name %>
@@ -52,6 +50,9 @@
 								</li>
 								<% end %>
 								<li><%= link_to 'More...', fragment_types_path(), remote:true %></li>
+								<% if can_create_fragment_types? %>
+								<li><%= link_to 'New type', new_fragment_type_path %></li>
+								<% end %>
 							</ul>
 						</li>
 					<% end %>
@@ -69,8 +70,6 @@
 						      	Articles
 						      </li>
 						      <li>
-						      	<% # TODO perchè funzioni correttamente questo deve essere un link remoto al controller che risponde col javascript che renderizza e apre la finestra! 
-						      	%>
 						      	<%= link_to 'Create', new_article_path, remote: true %>
 						      </li>
 						      <li>

@@ -20,29 +20,20 @@ function closeModal(){
 
 //Popover with partial's controls
 function initializeControlsPopovers(){
-	$(".fragment_container,.fragment_summary,.user_partial,.article_partial").each(function(){
-      $(this).popover({
-      placement:'right',
-      animation:false,
-      trigger: 'manual',
-      content: function(){
-      	//Nascondo alcuni bottoni in determinate situazioni
-      	$(".article_edit_fragments_container .hidden_on_article_editing").css("display","none");
-      	
-      	return $(this).find(".tooltip_content").html();
-      }
-    }).click(function(){
+	$(".fragment_container .controls_popover_toggler,.fragment_summary .controls_popover_toggler,.resource_partial .controls_popover_toggler").click(function(){
+    	//Hiding some buttons in specific situations
+    	$(".article_edit_fragments_container .hidden_on_article_editing").css("display","none");
     	
-	      $(".fragment_container,.fragment_summary,.user_partial,.article_partial").each(function(){
-	        $(this).popover('hide');
-	      });
-	      $(this).popover('toggle');
-	      $(".popover-inner a,.popover-inner input,.popover-inner button").click(function(){
-	        $(this).parents(".popover").hide();
-	      });
-	      
+    	var container = $(this).parents(".resource_partial");
+      	var overlay_content = container.find(".tooltip_content").html();
+    	container.prepend("<div class='popover_overlay'><div class='overlay_content'>"+overlay_content+"</div></div>");
+    	var overlay = container.children(".popover_overlay");
+    	overlay.fadeIn();
+    	overlay.find(".close, .btn").click(function(){
+    		overlay.fadeOut(function(){overlay.remove();});
+    	});
+    	
     });
-  });
 }
 
 $(function(){

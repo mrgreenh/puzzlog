@@ -1,9 +1,14 @@
 <%
-add_to_article ||= false
+add_to_article ||= false # If the summary is shown in the dialog for adding fragments to an article from puzzlebox
 %>
 <li>
-	<div class="row fragment_summary" id="fragment_<%= fragment.id %>">
+	<div class="row fragment_summary resource_partial" id="fragment_<%= fragment.id %>">
 		<% if not add_to_article %>
+			<%= render 'common_partials/editing_header' if can_edit_fragment?(fragment)||can_destroy_fragment?(fragment) %>
+			<div class="hide tooltip_content">
+				<a class='close'>&times;</a>
+				<%= render 'fragments/fragment_controls', remote_bool: true, fragment:fragment %>
+			</div>
 			<div class="span2">
 				<img src="<%= getFragmentTypeIcon(fragment.fragment_type) %>" title="<%= fragment.fragment_type.name %>" class="fragment_type_image hidden-phone">
 				<img src="<%= getFragmentTypeIconThumb(fragment.fragment_type) %>" title="<%= fragment.fragment_type.name %>" class="fragment_type_image visible-phone">
@@ -48,8 +53,6 @@ add_to_article ||= false
 					<i class="icon icon-white icon-arrow-right"></i>
 				<% end %>
 			</div>
-		<% else %>
-			<%= render 'fragments/popover_controls', fragment: fragment, popover_controls: true %>
 		<% end %>
 	</div>
 </li>

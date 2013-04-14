@@ -1,7 +1,14 @@
 <% user ||= @user
 remote_bool = true
 %>
-<div class="row user_partial" class="user" id="user_<%= user.id %>">
+<div class="row resource_partial user_partial" id="user_<%= user.id %>">
+	<!-- Controls for privileged users -->
+	<%= render 'common_partials/editing_header' if can_edit_user?(user)||can_edit_user_priviledges?(user)||can_destroy_user?(user) %>
+	<div class="hide tooltip_content">
+		<a class="close">&times;</a>
+		<%= render 'users/user_controls', user:user, remote_bool: true%>
+	</div>
+	<!-- User's informations to be displayed -->
 	<div class="span2">
 		<%= image_tag user.avatar.url(:thumb), class: 'thumb' %>
 	</div>
@@ -21,10 +28,6 @@ remote_bool = true
 				</p>
 			</div>
 		</div>
-	</div>
-	<div class="hide <%= can_edit_user?(user)||can_edit_user_priviledges?(user)||can_destroy_user?(user) ? 'tooltip_content' : '' %>">
-		<a class="close">&times;</a>
-		<%= render 'users/user_controls', user:user, remote_bool: true%>
 	</div>
 </div>
 <%= render 'users/priviledges_modal', user: user%>

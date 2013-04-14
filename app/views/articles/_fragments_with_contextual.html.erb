@@ -1,0 +1,14 @@
+<div class="span10">
+<% @fragments.each do |frag| %>
+	<div class="row">
+		<div class="span7">
+			<%= render 'fragments/fragment', popover_controls:true, fragment:frag %>
+		</div>
+		<% if frag.public? %>
+		<div class="span3">
+			<!--Contextual content here -->
+		</div>
+		<% end %>
+	</div>
+<% end %>
+</div>

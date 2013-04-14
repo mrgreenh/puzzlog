@@ -79,9 +79,6 @@ imagesgallery.save
 #--------------------------------------------Articoli e frammenti slegati
 User.all.each do |user|
   rand(1..6).times do |n|
-    user.articles.create(title:Faker::Lorem.sentence(rand(1..6)))
-  end
-  rand(1..6).times do |n|
     datetime = randomDateTime
     user.fragments.create(name:Faker::Lorem.sentence(rand(1..6)), fragment_type_id:FragmentType.find_by_name('Title and Paragraph').id, stand_alone:false, public:false, data:FragmentTypes::FragmentTypeTitleParagraph.random_data)
     datetime = randomDateTime
@@ -100,6 +97,9 @@ User.all.each do |user|
     user.fragments.create(name:Faker::Lorem.sentence(rand(1..6)), fragment_type_id:FragmentType.find_by_name('Images Gallery').id, stand_alone:false, public:true, publication_date:datetime, data:FragmentTypes::FragmentTypeImagesGallery.random_data)
     datetime = randomDateTime
     user.fragments.create(name:Faker::Lorem.sentence(rand(1..6)), fragment_type_id:FragmentType.find_by_name('Images Gallery').id, stand_alone:false, public:false, publication_date:datetime, data:FragmentTypes::FragmentTypeImagesGallery.random_data)
+  end
+  rand(1..6).times do |n|
+    tmp = user.articles.create(title:Faker::Lorem.sentence(rand(1..6)))
   end
 end
 

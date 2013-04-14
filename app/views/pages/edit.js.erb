@@ -25,7 +25,7 @@ $(".article_edit_fragments_container").fadeOut(function(){
 	
 	//Puzzle resources
 	<%= render 'fragments/fragments_filling_script' %>
-	$("#fragments_styles").html("<%= escape_javascript(render 'fragments/fragments_styles')%>");
+	$("#fragments_styles").html("<%= escape_javascript(render 'common_partials/customizable_styles')%>");
 	
 	//Fragments initialization
 	initializeAllFragments();

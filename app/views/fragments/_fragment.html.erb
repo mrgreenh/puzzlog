@@ -6,7 +6,13 @@ article_fragment_edit_controls ||= false
 streamlined_fragment ||= false
 fragment_header ||= false
 %>
-<div id="fragment_<%=fragment.id %>" class="fragment_container <%= streamlined_fragment ? 'streamlined_fragment' : '' %>">
+<div id="fragment_<%=fragment.id %>" class="fragment_container resource_partial <%= streamlined_fragment ? 'streamlined_fragment' : '' %>">
+	<%= render 'common_partials/editing_header' if popover_controls&&(can_edit_fragment?(fragment)||can_destroy_fragment?(fragment)) %>
+	<div class="hide tooltip_content">
+		<a class='close'>&times;</a>
+		<%= render 'fragments/fragment_controls', remote_bool: true, fragment:fragment %>
+	</div>
+	
 	<%= render 'fragments/fragment_header', fragment: fragment if fragment_header %>
 	
 	<% if not edit %>
@@ -19,9 +25,7 @@ fragment_header ||= false
 	
 	<% end %>
 	
-	<%= render 'fragments/popover_controls', fragment: fragment, popover_controls: popover_controls %>
-	
-	<!--Controlli utilizzati nell'editing articolo -->
+	<!--Controls used in article editing -->
 	<% if article_fragment_edit_controls 
 		relationship = fragment.page_fragment_relationships.find_by_page_id(@page.id)
 	%>

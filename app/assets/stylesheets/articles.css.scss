@@ -47,13 +47,19 @@
 .article_partial {
   @include small-diffuse-shade;
   @include rounded_corners;
+  position:relative;
   padding:30px 0px;
   margin: 0px 0px 30px 0px;
   header {
+    background-color:$header_dark_grey;
+    color:$header_light_grey;
     h1{
       font-size:1.3em;
       line-height:1.2em;
     }
+  }
+  .article-summary{
+    @include bottom-small-border;
   }
   footer {
     text-align:center;
@@ -211,7 +217,7 @@
     .article_fragment_edit_controls {
       width:180px;
       position:absolute;
-      right:-40px;
+      
       top:0px;
       display:none;
       li {

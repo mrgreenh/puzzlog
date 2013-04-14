@@ -1,7 +1,14 @@
 <% article ||= @article
 remote_bool = true
 %>
-<section class="article_partial" class="user" id="article_<%= article.id %>">
+<section class="article_partial resource_partial" id="article_<%= article.id %>">
+	<!-- Controls for privileged users -->
+	<%= render 'common_partials/editing_header' if can_edit_article?(article)||can_destroy_article?(article)||can_publish_article?(article) %>
+	<div class="hide tooltip_content">
+		<a class="close">&times;</a>
+		<%= render 'articles/article_controls', article:article, remote_bool: true %>
+	</div>
+	
 	<%= render 'articles/article_header', article:article, page_name: false %>
 	<div class="article-summary">
 		<%= render 'fragments/fragment', fragment: article.first_fragment unless article.pages.count==0||article.first_fragment.nil?%>
@@ -11,8 +18,4 @@ remote_bool = true
 			<%= image_tag '/images/application/page_icons/page_miniature_thumb.png' %> Read more...
 		<% end %>
 	</footer>
-	<div class="hide <%= can_edit_article?(article)||can_destroy_article?(article)||can_publish_article?(article) ? 'tooltip_content' : '' %>">
-		<a class="close">&times;</a>
-		<%= render 'articles/article_controls', article:article, remote_bool: true %>
-	</div>
 </section>

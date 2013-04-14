@@ -10,13 +10,12 @@
 		scss_string =<<EOF
 #{scss_variables}
 #article_#{article.id} {
-	background-color: $background_color;
-	color: $foreground_color;
-	a {
-		color:$third_color;
+	.article-summary{
+			
 	}
 	.fragment_container {
 		background-color: $background_color;
+		color: $foreground_color;
 	}
 	.fragment_type_#{frag_type.id} { #{frag_type.stylesheet}}
 }
