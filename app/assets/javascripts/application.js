@@ -20,7 +20,7 @@
 //= require jquery.validate.min
 //= require jquery.dotdotdot-1.5.1.js
 //= require jquery.dragsort-0.5.1.min.js
-//=require ace/ace
+//= require ace/ace
 //= require ace/theme-dawn.js
 //= require ace/mode-json.js
 //= require ace/mode-scss.js
