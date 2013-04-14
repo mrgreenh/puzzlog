@@ -20,5 +20,5 @@
 //= require jquery.validate.min
 //= require jquery.dotdotdot-1.5.1.js
 //= require jquery.dragsort-0.5.1.min.js
-//= require ace/ace.js
+//= require_tree ../../../vendor/assets/javascripts/ace/
 //= require_tree .
