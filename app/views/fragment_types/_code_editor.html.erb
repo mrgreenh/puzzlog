@@ -26,7 +26,7 @@
 				</li>
 			</ul>
 			
-			<div class="tab-content">
+			<div class="tab-content coding_area_container">
 				<div id="edit_script_editor" class="tab-pane fade in active coding_area javascript_code"></div>
 				<div id="view_script_editor" class="tab-pane fade in coding_area javascript_code"></div>
 			</div>
@@ -43,7 +43,7 @@
 				</li>
 			</ul>
 			
-			<div class="tab-content">
+			<div class="tab-content coding_area_container">
 				<div id="edit_html_editor" class="tab-pane fade in active coding_area html_code"></div>
 				<div id="view_html_editor" class="tab-pane fade in coding_area html_code"></div>
 				<div id="scss_editor" class="tab-pane fade in coding_area scss_code"></div>
@@ -60,7 +60,7 @@
 			
 			<!-- Other options and data faking -->
 			<h3>Default DATA:</h3>
-			<div id="default_data_editor" class="coding_area json_code"></div>
+			<div class="coding_area_container"><div id="default_data_editor" class="coding_area json_code"></div></div>>
 			<fieldset class="form-inline">
 				<%= label_tag 'summary_fields', 'Data\'s fields to be displayed in <noscript>:' %>
 				<%= text_field_tag 'summary_fields', @fragment_type.summary_fields, placeholder: "Separated by comma" %>
@@ -72,7 +72,7 @@
 				<%= text_field_tag 'images',(@fragment_type.images || "0"), class:"resources_quantity_field" %>
 				<%= link_to "Capture", "", id:"capture_images_button", class:"btn btn-small btn-primary" %>
 			</fieldset>
-			<div id="sample_images_editor" class="coding_area json_code resource_code_editor"></div>
+			<div class="coding_area_container"><div id="sample_images_editor" class="coding_area json_code resource_code_editor"></div></div>
 		<fieldset>
 			<%= label_tag 'description', 'Type a description of this fragment type:' %>
 			<%= text_area_tag 'description',@fragment_type.description %>
