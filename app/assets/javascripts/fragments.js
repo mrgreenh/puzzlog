@@ -1,8 +1,8 @@
 var fragments = null;
-var targetFragment = null;
-//Se questo non è nullo, la create della risorsa aggiorna l'hash contenuto nell'oggetto
+var initialized_fragments = [];
+var targetFragment = null; //This is used to understand in which fragment's hash the requested resource has to be added
 
-//Add To Box button -------- Lo lascio nel caso serva vedere come cambiare il contenuto della popup al volo
+//Add To Box button -------- Left here just as a reference in case there is the need to change some popover
 	// function addToBoxPopover(){
 		// $(".add_to_box_button").unbind('click').click(function(){
 			// var popover_content = $(this).next("#add_to_box_popover").html();
@@ -12,10 +12,10 @@ var targetFragment = null;
 			// });
 		// });
 	// }
-//----------------------------------------------Inizializzazione frammento
+//----------------------------------------------Fragment initialization
 function initializeAllFragments(){
 	if(fragments[0]!=null&&fragments[0]!=undefined){
-		//Quando la pagina è renderizzata viene letto l'hash con gli oggetti di ogni frammento, e a seconda del tipo vi associa un oggetto contenente i metodi necessari
+		//When the page is rendered all the fragments hash is read and every fragment is fed to a new object of the right type
 		$(fragments).each(function(){
 			initializeFragment(this);
 		});
@@ -23,15 +23,25 @@ function initializeAllFragments(){
 }
 function initializeFragment(fragment){
 	var type_id = fragment.fragment_type_id;
-	fragments_methods[type_id].edit(fragment);
-	fragments_methods[type_id].view(fragment);
+	var initialized_frag = new fragment_types[type_id](fragment);
+	initialized_fragments.push(initialized_frag); //Initialize object of type fragment_type with data from fragment
 	
-	//Faccio si che la view venga aggiornata ad ogni click sulla relativa tab
-	$("#fragment_"+fragment.id+"_tab a.view_tab_link").click(function(){
-		fragments_methods[type_id].view(fragment);
+	//Inject some useful variables in the fragment
+	fragment.viewSelector = "#fragment_"+fragment.id+"_view";
+	fragment.editSelector = "#fragment_"+fragment.id+"_edit";
+	
+	initialized_frag.initializeView();
+	//Fragments methods are called after clicking on the view or edit tab
+	$("#fragment_"+fragment.id+"_tab a.view_tab_link").each(function(){
+		$(this).click(function(){
+			initialized_frag.view();
+		});
 	});
 	$("#fragment_"+fragment.id+"_tab a.edit_tab_link").click(function(){
-		fragments_methods[type_id].edit(fragment);
+		initialized_frag.edit();
+	});
+	$("#fragment_"+fragment.id+"_edit").each(function(){
+		initialized_frag.initializeEdit();
 	});
 //-------------------Resources management initialization
 	updateResources(fragment);
@@ -41,7 +51,7 @@ function initializeFragment(fragment){
 			targetFragment = fragment;
 		});
 	}
-	//----Inizializzo le tab edit e view
+	//----Initialize edit and view tabs
 	$('#fragment_'+fragment.id+'_tab a').click(function (e) {
 		e.preventDefault();
 		$(this).tab('show');
@@ -94,7 +104,7 @@ function updateResources(fragment){
 	
 }
 
-//Inizializzazione
+//Initialization
 $(function(){ 
 	//---------------------------------------Dot dot dot e altre utility
 	$(".fragment_summary td.table-value p,.fragment_summary td.table-key p").dotdotdot();
@@ -105,7 +115,7 @@ $(function(){
 	//------------------------------------Fragment controls
 	
 	//-------------------New Fragment
-	//Controllo del meccanismo di nominazione frammento
+	//Fragments naming control mechanism
 	$('#new_fragment .fragment_controls .keep_it_button').tooltip({placement:'bottom'});
 	$('#new_fragment .fragment_controls .keep_it_button').popover({
 			content: $(this).find(".name_it_tooltip").html(),
@@ -120,7 +130,7 @@ $(function(){
 		});
 	});
 	
-	//Aggiornamento campo data al submit
+	//Updating data field on submit
 	$("#new_fragment, .edit_fragment").submit(function(){
 		$("#new_fragment #fragment_data, .edit_fragment #fragment_data").val(JSON.stringify(fragments[0].data));
 		$("#new_fragment #fragment_resources_images, .edit_fragment #fragment_resources_images").val(JSON.stringify(fragments[0].images));

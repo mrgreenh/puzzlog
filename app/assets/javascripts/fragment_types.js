@@ -29,8 +29,7 @@ function initializeAceEditors(){
 	
 	if($(".coding_area").length>0){//If we are in the right page! ;)
 		//Filling editors with fragment's code
-		editors["edit_script_editor"].setValue($("#edit_script").val());
-		editors["view_script_editor"].setValue($("#view_script").val());
+		editors["script_editor"].setValue($("#script").val());
 		editors["edit_html_editor"].setValue($("#edit_elements").val());
 		editors["view_html_editor"].setValue($("#view_elements").val());
 		editors["scss_editor"].setValue($("#stylesheet").val());
@@ -63,8 +62,7 @@ function displayImagesCode(){
 
 function initializeFragmentTypeSaving(){
 	$("#fragment_type_form").submit(function(){
-		$("#edit_script").val(editors["edit_script_editor"].getValue());
-		$("#view_script").val(editors["view_script_editor"].getValue());
+		$("#script").val(editors["script_editor"].getValue());
 		$("#edit_elements").val(editors["edit_html_editor"].getValue());
 		$("#view_elements").val(editors["view_html_editor"].getValue());
 		$("#stylesheet").val(editors["scss_editor"].getValue());

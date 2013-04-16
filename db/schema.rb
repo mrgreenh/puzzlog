@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120909173324) do
+ActiveRecord::Schema.define(:version => 20130416162002) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -69,8 +69,6 @@ ActiveRecord::Schema.define(:version => 20120909173324) do
 
   create_table "fragment_types", :force => true do |t|
     t.string   "name"
-    t.text     "edit_script"
-    t.text     "view_script"
     t.text     "edit_elements"
     t.text     "view_elements"
     t.datetime "created_at",          :null => false
@@ -83,6 +81,7 @@ ActiveRecord::Schema.define(:version => 20120909173324) do
     t.integer  "untyped_attachments"
     t.string   "summary_fields"
     t.text     "description"
+    t.text     "script"
   end
 
   create_table "fragment_untyped_attachment_relationships", :force => true do |t|

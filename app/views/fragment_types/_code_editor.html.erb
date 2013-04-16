@@ -16,19 +16,9 @@
 				<%= text_field_tag 'name',@fragment_type.name, placeholder:"!!!Not validated!!!" %>
 			</fieldset>
 		
-			<!-- Scripting tabs -->
-			<ul class="nav nav-tabs">
-				<li class="active">
-					<a href="#edit_script_editor" data-toggle="tab">Edit Script</a>
-				</li>
-				<li>
-					<a href="#view_script_editor" data-toggle="tab">View Script</a>
-				</li>
-			</ul>
-			
-			<div class="tab-content coding_area_container">
-				<div id="edit_script_editor" class="tab-pane fade in active coding_area javascript_code"></div>
-				<div id="view_script_editor" class="tab-pane fade in coding_area javascript_code"></div>
+			<!-- Script editor -->
+			<div class="coding_area_container">
+				<div id="script_editor" class="coding_area javascript_code"></div>
 			</div>
 			<!-- Markup tabs -->
 			<ul class="nav nav-tabs">
@@ -50,8 +40,7 @@
 			</div>
 			
 			<!-- Hidden fields gathering scripts -->
-			<%= hidden_field_tag 'edit_script', @fragment_type.edit_script %>
-			<%= hidden_field_tag 'view_script', @fragment_type.view_script %>
+			<%= hidden_field_tag 'script', @fragment_type.script %>
 			<%= hidden_field_tag 'edit_elements', @fragment_type.edit_elements %>
 			<%= hidden_field_tag 'view_elements', @fragment_type.view_elements %>
 			<%= hidden_field_tag 'stylesheet', @fragment_type.stylesheet %>

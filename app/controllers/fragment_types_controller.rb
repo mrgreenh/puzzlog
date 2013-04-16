@@ -22,8 +22,21 @@ class FragmentTypesController < ApplicationController
   def new
     @fragment_type = FragmentType.new
     #Some example values to help the developer start programming
-    @fragment_type.edit_script='$("#fragment_"+fragment.id+"_edit input").val(fragment.data.title);'
-    @fragment_type.view_script='$("#fragment_"+fragment.id+"_view p").html(fragment.data.title);'
+    @fragment_type.script=<<EOF
+//viewSelector and editSelector variables contain the ids of the div elements containing the fragment's views
+this.initializeView = function initializeView(){ //This will be called only once, when the fragment is shown
+  
+}
+this.initializeEdit = function initializeEdit(){ //This will be called only once, when the fragment's editing controls are shown
+  
+}
+this.view = function view(){ //Called whenever a user shows the preview tab
+  
+}
+this.edit = function edit(){ //Called whenever a user shows the edit tab
+  
+}
+EOF
     @fragment_type.edit_elements='<input type="text" />'
     @fragment_type.view_elements='<p></p>'
     @fragment_type.stylesheet='&.fragment_view{background-color:#55ff77}&.fragment_edit{background-color:#5533ff}'
@@ -36,8 +49,7 @@ class FragmentTypesController < ApplicationController
     @fragment_type = FragmentType.new(name:params[:name],
                                       edit_elements:params[:edit_elements],
                                       view_elements:params[:view_elements],
-                                      edit_script:params[:edit_script],
-                                      view_script:params[:view_script],
+                                      script:params[:script],
                                       stylesheet:params[:stylesheet],
                                       default_data:params[:default_data],
                                       images:params[:images],
@@ -69,8 +81,7 @@ class FragmentTypesController < ApplicationController
     @fragment_type.assign_attributes(name:params[:name],
                                       edit_elements:params[:edit_elements],
                                       view_elements:params[:view_elements],
-                                      edit_script:params[:edit_script],
-                                      view_script:params[:view_script],
+                                      script:params[:script],
                                       stylesheet:params[:stylesheet],
                                       default_data:params[:default_data],
                                       images:params[:images],
