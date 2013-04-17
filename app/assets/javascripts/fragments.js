@@ -30,18 +30,18 @@ function initializeFragment(fragment){
 	fragment.viewSelector = "#fragment_"+fragment.id+"_view";
 	fragment.editSelector = "#fragment_"+fragment.id+"_edit";
 	
-	initialized_frag.initializeView();
+	if(initialized_frag.initializeView!=undefined) initialized_frag.initializeView();
 	//Fragments methods are called after clicking on the view or edit tab
 	$("#fragment_"+fragment.id+"_tab a.view_tab_link").each(function(){
 		$(this).click(function(){
-			initialized_frag.view();
+			if(initialized_frag.view!=undefined) initialized_frag.view();
 		});
 	});
 	$("#fragment_"+fragment.id+"_tab a.edit_tab_link").click(function(){
-		initialized_frag.edit();
+		if(initialized_frag.edit!=undefined) initialized_frag.edit();
 	});
 	$("#fragment_"+fragment.id+"_edit").each(function(){
-		initialized_frag.initializeEdit();
+		if(initialized_frag.initializeEdit!=undefined) initialized_frag.initializeEdit();
 	});
 //-------------------Resources management initialization
 	updateResources(fragment);

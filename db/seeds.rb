@@ -55,8 +55,7 @@ end
 #--------------------------------------------Tipi frammento (implementare moduli sopra)
 titleandparagraph = FragmentType.new(edit_elements:FragmentTypes::FragmentTypeTitleParagraph.edit_elements,
                     view_elements:FragmentTypes::FragmentTypeTitleParagraph.view_elements,
-                    edit_script:FragmentTypes::FragmentTypeTitleParagraph.edit_script,
-                    view_script:FragmentTypes::FragmentTypeTitleParagraph.view_script,
+                    script:FragmentTypes::FragmentTypeTitleParagraph.script,
                     stylesheet:FragmentTypes::FragmentTypeTitleParagraph.stylesheet,
                     default_data:FragmentTypes::FragmentTypeTitleParagraph.default_data,
                     name:"Title and Paragraph",
@@ -66,8 +65,7 @@ titleandparagraph.save
 
 imagesgallery = FragmentType.new(edit_elements:FragmentTypes::FragmentTypeImagesGallery.edit_elements,
                     view_elements:FragmentTypes::FragmentTypeImagesGallery.view_elements,
-                    edit_script:FragmentTypes::FragmentTypeImagesGallery.edit_script,
-                    view_script:FragmentTypes::FragmentTypeImagesGallery.view_script,
+                    script:FragmentTypes::FragmentTypeImagesGallery.script,
                     stylesheet:FragmentTypes::FragmentTypeImagesGallery.stylesheet,
                     default_data:FragmentTypes::FragmentTypeImagesGallery.default_data,
                     name:"Images Gallery",
