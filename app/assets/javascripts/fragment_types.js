@@ -9,6 +9,7 @@ $(function(){
 });
 
 function initializeAceEditors(){
+	require("ace/config").set("packaged", false);
 	$(".coding_area").each(function(){
 		var id = $(this).attr("id");
 		var editor = ace.edit(id);
