@@ -23,6 +23,8 @@
 //= require ace/ace
 //= require ace/theme-textmate.js
 //= require ace/theme-dawn.js
+//= require ace/worker-json.js
+//= require ace/worker-javascript.js
 //= require ace/mode-json.js
 //= require ace/mode-scss.js
 //= require ace/mode-html.js
