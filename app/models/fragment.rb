@@ -1,7 +1,8 @@
 class Fragment < ActiveRecord::Base
-  attr_accessible :data, :fragment_type_id, :stand_alone, :name, :public, :publication_date, :user_id
+  attr_accessible :data, :content, :fragment_type_id, :stand_alone, :name, :public, :publication_date, :user_id
 
   validates_presence_of :data
+  validates_presence_of :contents
   validates_presence_of :fragment_type_id
   
   has_many :page_fragment_relationships, dependent: :destroy
@@ -22,7 +23,7 @@ class Fragment < ActiveRecord::Base
       logger.debug fragment_images
       self.fragment_image_relationships.destroy_all
       fragment_images.each do |id, image|
-        if FragmentImage.find(image["id"]).user == self.user||has_role?('superadmin') # TODO da aggiornare quando ci sarà la possibilità di collaborazione, potrebbe servire un modo più ordinato di salvare le risorse per poter usare i privilegi
+        if FragmentImage.find(image["id"]).user == self.user||has_role?('superadmin') # TODO To update when there will be collaboration possibilities, it will have to be possible to save privileges differently
           self.fragment_image_relationships.create(fragment_image_id:image["id"])
         end
       end
