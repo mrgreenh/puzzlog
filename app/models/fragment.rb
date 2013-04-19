@@ -2,7 +2,7 @@ class Fragment < ActiveRecord::Base
   attr_accessible :data, :content, :fragment_type_id, :stand_alone, :name, :public, :publication_date, :user_id
 
   validates_presence_of :data
-  validates_presence_of :contents
+  #validates_presence_of :contents
   validates_presence_of :fragment_type_id
   
   has_many :page_fragment_relationships, dependent: :destroy
