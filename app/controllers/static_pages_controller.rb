@@ -10,7 +10,7 @@ include FragmentsHelper
     
     #per caricare gli script e gli stili
     @fragments = article_summaries_fragments(@articles)+streamline_fragments
-    @fragment_types = getFragmentTypes(@fragments)
+    @fragment_types = getFragmentTypes(@fragments+streamline_fragments)
   end
   
   def streamline

@@ -77,14 +77,12 @@ EOF
   end
   
   def self.default_data
-    data=<<EOF
-{"title":"Titolo d'esempio","paragraph":"Contenuto paragrafo!"} 
-EOF
+    data={"title"=>"Titolo d'esempio","paragraph"=>"Contenuto paragrafo!"}
     
   end
   
   def self.random_data
-    "{\"title\":\"#{Faker::Lorem.sentence(rand(1..5))}\",\"paragraph\":\"#{Faker::Lorem.sentence(rand(10..20))}\"}"
+    {"title"=>Faker::Lorem.sentence(rand(1..5)),"paragraph"=>Faker::Lorem.sentence(rand(10..20))}
   end
 end
 
@@ -217,14 +215,12 @@ EOF
   end
   
   def self.default_data
-    data=<<EOF
-{"title":"Untitled Gallery"}
-EOF
+    data={"title"=>"Untitled Gallery"}
     
   end
   
   def self.random_data
-    "{\"title\":\"#{Faker::Lorem.sentence(rand(1..5))}\"}"
+    {"title"=>Faker::Lorem.sentence(rand(1..5))}
   end
 end
 

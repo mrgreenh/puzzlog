@@ -16,6 +16,7 @@ class FragmentsController < ApplicationController
 
   def create
     @fragment = current_user.fragments.build(params[:fragment])
+    
     if params.has_key?(:publish_submit)
       @fragment.public = true
       @fragment.publication_date = Time::now

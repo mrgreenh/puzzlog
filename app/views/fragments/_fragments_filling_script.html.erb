@@ -1,13 +1,5 @@
 <% if !@fragment_types.nil? %>
 	fragments = <%= raw(@fragments.to_json) %>;
 	
-	fragment_types = {
-		<% @fragment_types.each do |k,frag_type| %>
-			<% if not frag_type.nil? %>
-				<%= k %>: function(fragment){
-						<%= raw(frag_type.script) %>
-				},
-			<% end %>
-		<% end %>
-	};
+	<%= render 'fragment_types/fragment_types_filling_script' %>
 <% end %>

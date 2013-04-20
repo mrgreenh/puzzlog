@@ -1,6 +1,6 @@
 class FragmentType < ActiveRecord::Base
-  attr_accessible :script, :edit_elements, :name, :view_elements, :stylesheet, :default_data, :images, :sounds, :videos, :untyped_attachments, :summary_fields, :description
-
+  attr_accessible :default_data, :script, :edit_elements, :name, :view_elements, :stylesheet, :images, :sounds, :videos, :untyped_attachments, :summary_fields, :description
+  
   has_many :fragments
   
   validates :name, presence: true, uniqueness: { case_sensitive:false, message:"This name has already been used" }
@@ -10,6 +10,21 @@ class FragmentType < ActiveRecord::Base
         :group => 'fragment_types.id',
         :order => 'count(*) desc'
   # scope :most_used, find_by_sql('select ft.* from fragments f, fragment_types ft where f.fragment_type_id=ft.id group by ft.id order by count(*) DESC')
+  
+  def default_data_to_JSON
+    ActiveSupport::JSON.decode(self.default_data)
+  end
+  
+  def default_data=(val)
+    if val.kind_of? String
+      begin
+        val = ActiveSupport::JSON.decode(val)
+      rescue
+        val = {}
+      end
+    end
+    write_attribute(:default_data, val)
+  end
   
   def has_images?
     !self.images.nil? && self.images > 0

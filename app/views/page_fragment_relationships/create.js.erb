@@ -2,20 +2,7 @@
 	frag_type = @fragment.fragment_type
 %>
 
-fragments_methods = {
-	<% @fragment_types.each do |k,frag_type| %>
-		<%= k %>: {
-			view:function(fragment){
-				$("#fragment_"+fragment.id+"_view *").unbind();//Per evitare che all'aggiornamento della view si debba fare l'unbind di ogni evento per poi riassociarlo
-				<%= raw(frag_type.view_script.to_s) %>
-				},
-			edit:function(fragment){
-				$("#fragment_"+fragment.id+"_edit *").unbind();
-				<%= raw(frag_type.edit_script.to_s) %>
-				},
-		},
-	<% end %>
-};
+<%= render 'fragment_types/fragment_types_filling_script' %>
 
 $("#fragments_styles").html("<%= escape_javascript(render 'common_partials/customizable_styles')%>");
 

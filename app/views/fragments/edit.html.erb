@@ -4,7 +4,7 @@
 		<%= render 'fragments/fragment', fragment: @fragment, edit:true %>
 		<%= form_for @fragment, validate: true do |form| %>
 			<%= form.hidden_field :data %>
-			<!-- Dati riguardanti le risorse -->
+			<!-- Data regarding resources -->
 			<% if @fragment.fragment_type.has_images? %>
 				<%= hidden_field_tag 'fragment_resources[images]' %>
 			<% end %>
