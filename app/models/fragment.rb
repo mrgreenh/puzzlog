@@ -1,8 +1,7 @@
 class Fragment < ActiveRecord::Base
-  attr_accessible :data, :content, :fragment_type_id, :stand_alone, :name, :public, :publication_date, :user_id
+  attr_accessible :data, :fragment_type_id, :stand_alone, :name, :public, :publication_date, :user_id
 
   validates_presence_of :data
-  validates_presence_of :contents
   validates_presence_of :fragment_type_id
   
   has_many :page_fragment_relationships, dependent: :destroy
@@ -32,7 +31,7 @@ class Fragment < ActiveRecord::Base
   
   def getSummaryHash
     keys = self.fragment_type.summary_fields.split(",")
-    json_data = ActiveSupport::JSON.decode(self.data)
+    json_data = self.data
     summaryHash = Hash.new()
     keys.each do |v|
       summaryHash[v] = json_data[v]
@@ -42,7 +41,7 @@ class Fragment < ActiveRecord::Base
   
   def as_json(options={})
     result = super(options)
-    result[:data] = ActiveSupport::JSON.decode(self.data)
+    result[:data] = self.data
     
     #Resources
     result[:images] = Hash.new()
@@ -59,4 +58,16 @@ class Fragment < ActiveRecord::Base
     end
     result
   end
+  
+  def data=(val)
+    if val.kind_of? String
+      begin
+        val = ActiveSupport::JSON.decode(val)
+      rescue
+        val = {}
+      end
+    end
+    write_attribute(:data, val)
+  end
+  
 end

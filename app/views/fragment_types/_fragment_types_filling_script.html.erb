@@ -1,0 +1,9 @@
+fragment_types = {
+	<% @fragment_types.each do |k,frag_type| %>
+		<% if not frag_type.nil? %>
+			<%= k %>: function(fragment){
+					<%= raw(frag_type.script) %>
+			},
+		<% end %>
+	<% end %>
+};

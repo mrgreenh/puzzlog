@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130419145314) do
+ActiveRecord::Schema.define(:version => 20130419164429) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -74,7 +74,6 @@ ActiveRecord::Schema.define(:version => 20130419145314) do
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
     t.text     "stylesheet"
-    t.text     "default_data"
     t.integer  "images"
     t.integer  "sounds"
     t.integer  "videos"
@@ -82,6 +81,7 @@ ActiveRecord::Schema.define(:version => 20130419145314) do
     t.string   "summary_fields"
     t.text     "description"
     t.text     "script"
+    t.hstore   "default_data"
   end
 
   create_table "fragment_untyped_attachment_relationships", :force => true do |t|
@@ -124,13 +124,12 @@ ActiveRecord::Schema.define(:version => 20130419145314) do
     t.integer  "fragment_type_id"
     t.string   "name"
     t.boolean  "stand_alone"
-    t.text     "data"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
     t.integer  "user_id"
     t.datetime "publication_date"
     t.boolean  "public"
-    t.hstore   "content"
+    t.hstore   "data"
   end
 
   create_table "page_fragment_relationships", :force => true do |t|
