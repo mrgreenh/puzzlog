@@ -194,7 +194,9 @@ EOF
     max-width:30%;
     overflow:hidden;
     height:80px;
-    margin:2px;
+    border-width:2px;
+    border-style:solid;
+    border-color:$background-color;
   }
   
   & .thumbs li.selected{

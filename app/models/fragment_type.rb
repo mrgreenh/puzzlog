@@ -12,7 +12,7 @@ class FragmentType < ActiveRecord::Base
   # scope :most_used, find_by_sql('select ft.* from fragments f, fragment_types ft where f.fragment_type_id=ft.id group by ft.id order by count(*) DESC')
   
   def default_data_to_JSON
-    ActiveSupport::JSON.decode(self.default_data)
+    ActiveSupport::JSON.encode(self.default_data)
   end
   
   def default_data=(val)
