@@ -108,14 +108,23 @@ EOF
   
   #privileges
   def fragment_type_create_filter
-    can_create_fragment_types?
+    if not can_create_fragment_types?
+      flash[:errors] = "You can't create fragment types"
+      redirect_to root_path
+    end
   end
   
   def fragment_type_destroy_filter
-    can_destroy_fragment_type?
+    if not can_destroy_fragment_type?
+      flash[:errors] = "You can't destroy this fragment type"
+      redirect_to root_path
+    end
   end
   
   def fragment_type_edit_filter
-    can_edit_fragment_type?
+    if not can_edit_fragment_type?
+      flash[:errors] = "You can't edit this fragment type"
+      redirect_to root_path
+    end
   end
 end
