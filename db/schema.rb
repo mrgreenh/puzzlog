@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130419164429) do
+ActiveRecord::Schema.define(:version => 20130421203048) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -131,6 +131,8 @@ ActiveRecord::Schema.define(:version => 20130419164429) do
     t.boolean  "public"
     t.hstore   "data"
   end
+
+  add_index "fragments", ["data"], :name => "fragments_gist_data"
 
   create_table "page_fragment_relationships", :force => true do |t|
     t.integer  "page_id"
