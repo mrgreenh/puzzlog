@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130421203048) do
+ActiveRecord::Schema.define(:version => 20130428221355) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20130421203048) do
     t.string   "fragment_resource_file_content_type"
     t.integer  "fragment_resource_file_file_size"
     t.datetime "fragment_resource_file_updated_at"
+    t.hstore   "data"
   end
 
   create_table "fragment_sound_relationships", :force => true do |t|
@@ -58,13 +59,7 @@ ActiveRecord::Schema.define(:version => 20130421203048) do
     t.string   "fragment_resource_file_content_type"
     t.integer  "fragment_resource_file_file_size"
     t.datetime "fragment_resource_file_updated_at"
-  end
-
-  create_table "fragment_sounds_relationships", :force => true do |t|
-    t.integer  "fragment_id"
-    t.integer  "fragment_sound_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.hstore   "data"
   end
 
   create_table "fragment_types", :force => true do |t|
@@ -100,6 +95,7 @@ ActiveRecord::Schema.define(:version => 20130421203048) do
     t.string   "fragment_resource_file_content_type"
     t.integer  "fragment_resource_file_file_size"
     t.datetime "fragment_resource_file_updated_at"
+    t.hstore   "data"
   end
 
   create_table "fragment_video_relationships", :force => true do |t|
@@ -118,6 +114,7 @@ ActiveRecord::Schema.define(:version => 20130421203048) do
     t.string   "fragment_resource_file_content_type"
     t.integer  "fragment_resource_file_file_size"
     t.datetime "fragment_resource_file_updated_at"
+    t.hstore   "data"
   end
 
   create_table "fragments", :force => true do |t|
@@ -160,6 +157,44 @@ ActiveRecord::Schema.define(:version => 20130421203048) do
     t.text     "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "user_bags", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "user_box_image_relationships", :force => true do |t|
+    t.integer  "fragment_resource_id"
+    t.integer  "user_id"
+    t.integer  "bag_id"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  create_table "user_box_sound_relationships", :force => true do |t|
+    t.integer  "fragment_resource_id"
+    t.integer  "user_id"
+    t.integer  "bag_id"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  create_table "user_box_untyped_attachment_relationships", :force => true do |t|
+    t.integer  "fragment_resource_id"
+    t.integer  "user_id"
+    t.integer  "bag_id"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  create_table "user_box_video_relationships", :force => true do |t|
+    t.integer  "fragment_resource_id"
+    t.integer  "user_id"
+    t.integer  "bag_id"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
   end
 
   create_table "user_role_relationships", :force => true do |t|

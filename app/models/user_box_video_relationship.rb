@@ -1,0 +1,3 @@
+class UserBoxVideoRelationship < UserBoxResourceRelationship
+
+end

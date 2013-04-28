@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  fragment_image_id: 
+  user_id: 
+  bag_id: 1
+
+two:
+  fragment_image_id: 
+  user_id: 
+  bag_id: 1

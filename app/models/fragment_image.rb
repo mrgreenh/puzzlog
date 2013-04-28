@@ -8,7 +8,7 @@ class FragmentImage < FragmentResource
   :url => "/images/uploads/fragment_images/:id/:style/:filename",
   :path => ":rails_root/public/images/uploads/fragment_images/:id/:style/:filename"
   
-  validates_attachment :fragment_resource_file, :presence => {message:"You didn't specify any image for some fields!"},
+  validates_attachment :fragment_resource_file,
   :content_type => { :content_type => /^image\/(jpg|jpeg|pjpeg|png|x-png|gif)$/, :message => 'file type is not allowed (only jpeg/png/gif images)' },
   :size => { :in => 0..9.megabytes }
   

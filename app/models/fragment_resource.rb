@@ -1,7 +1,7 @@
 class FragmentResource < ActiveRecord::Base
   self.abstract_class = true
 
-  attr_accessible :description, :user_id, :fragment_resource_file
+  attr_accessible :description, :user_id, :fragment_resource_file, :data
   
   validates_presence_of :user_id
   

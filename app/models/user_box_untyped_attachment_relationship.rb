@@ -1,0 +1,3 @@
+class UserBoxUntypedAttachmentRelationship < UserBoxResourceRelationship
+ 
+end

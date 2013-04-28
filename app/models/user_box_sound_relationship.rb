@@ -1,0 +1,3 @@
+class UserBoxSoundRelationship < UserBoxResourceRelationship
+
+end

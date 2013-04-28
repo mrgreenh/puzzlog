@@ -33,6 +33,18 @@ class User < ActiveRecord::Base
   has_many :fragment_sounds
   has_many :fragment_videos
   has_many :fragment_untyped_attachments
+  
+#Box Resources
+  has_many :user_box_image_relationships
+  has_many :user_box_sound_relationships
+  has_many :user_box_video_relationships
+  has_many :user_box_untyped_attachment_relationships
+  
+  has_many :box_images, through: :user_box_image_relationships, source: :fragment_image
+  has_many :box_sounds, through: :user_box_sound_relationships, source: :fragment_resource_id
+  has_many :box_videos, through: :user_box_video_relationships, source: :fragment_resource_id
+  has_many :box_untyped_attachments, through: :user_box_untyped_attachment_relationships, source: :fragment_resource_id
+  
 
   def create_remember_token
     self.update_attribute(:remember_token, SecureRandom.urlsafe_base64)
