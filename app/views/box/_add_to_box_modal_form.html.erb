@@ -1,0 +1,17 @@
+<div class="add_to_box_controls">
+	<% if not @add_to_box #If we are not obliged to add thi image to the box
+	%>
+		<label class="checkbox" for="add_to_box" id="add_to_box_checkbox_label">
+			<input type="checkbox" name="add_to_box" id="add_to_box_checkbox"> Add image to Puzzle Box
+		</label>
+	<% else %>
+		<%= hidden_field_tag 'add_to_box', true %>
+	<% end %>
+	<select name="selected_bag" id="bag_selector" class="<%= 'hide' unless @add_to_box %>">
+			<option value="-1">Choose a bag</option>
+			<% current_user.bags.each do |bag| %>
+				<option value="<%= bag.id %>"><%= bag.name %></option>
+			<% end %>
+	</select>
+	<a href="#" class="btn btn-success <%= 'hide' unless @add_to_box %>" id="new_bag_modal_form_button">New</a>
+</div>

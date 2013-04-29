@@ -1,0 +1,19 @@
+<% provide :title, "Puzzle Box" %>
+<div class="container-fluid puzzle_box_container" id="puzzle_box_fragments_container">
+		<div class="row resource_box_controls" id="fragment_images_box_controls">
+			<div class="span12">
+				<% if can_create_fragment_resources? %>
+					<%= link_to new_fragment_image_path(add_to_box:true), remote:true, class:"btn btn-success" do %>
+						<i class="icon icon-white icon-upload"></i> Upload Images
+					<% end %>
+				<% end %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span12">
+				<ul class="thumbnails">
+				 <%= render @box_images %>
+				</ul>
+			</div>
+		</div>
+</div>

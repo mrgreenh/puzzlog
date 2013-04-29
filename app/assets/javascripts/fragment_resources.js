@@ -22,3 +22,5 @@ function addResourceUploaderRemover(){
 		$(this).parent().remove();
 	});
 }
+
+

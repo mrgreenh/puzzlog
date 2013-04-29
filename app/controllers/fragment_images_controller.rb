@@ -2,6 +2,7 @@ class FragmentImagesController < ApplicationController
   include ApplicationHelper
   include FragmentResourcesHelper
   include ArticlesHelper
+  include BagsHelper
   
   before_filter :fragment_resource_create_filter, only:[:new,:create]
   before_filter :fragment_resource_destroy_filter, only: :destroy
@@ -9,6 +10,7 @@ class FragmentImagesController < ApplicationController
   before_filter :fragment_resource_view_filter, only: [:show]
   
   def new
+    @add_to_box = params[:add_to_box]
     respond_to do |format|
       format.js
     end
@@ -18,11 +20,18 @@ class FragmentImagesController < ApplicationController
     @created_images = Hash.new
     params[:fragment_resource].each do |image|
       fragment_image = FragmentImage.new(fragment_resource_file:image[1]["file"],user_id:current_user.id,description:image[1]["description"])
+      
       if fragment_image.save
         flash[:success] = "Images saved!"
+        if params[:add_to_box]
+           bag_id = bagAssignment(params);
+           if current_user.user_box_image_relationships.create(resource_id:fragment_image.id,bag_id:bag_id)
+             flash[:success] = flash[:success]+" It's kept safe in bag '#{Bag.find(bag_id).name}'."
+           end
+        end
         @created_images[fragment_image.id] = fragment_image.as_json(only: [:id,:description])
       else
-        flash[:errors] = "There has been some problem with some images you uploaded."
+        flash[:errors] = "There has been some problem, try again."
       end
     end
     

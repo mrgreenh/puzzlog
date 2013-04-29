@@ -1,9 +1,5 @@
 @import 'variables';
 
-.remove_upload_button {
-  margin-left: -18px;
-}
-
 .fragment_resource_panel_controls{
   margin-bottom:10px;
   text-align:center;
@@ -20,6 +16,18 @@
 }
 
 .modal-body{
+  /*Uploading an image*/
+ .fragment_resources_upload_container{
+     padding:0px 20px;
+     .resource_uploading_fields{
+       width:250px;
+       margin:0px auto;
+     }
+    .remove_upload_button {
+      margin-left: -18px;
+    }
+ }
+  /*Choosing from box*/
   .modal_index{
   max-height:300px;
   overflow: scroll;
@@ -31,4 +39,17 @@
   .choose_from_box_controls {
     text-align:center;
   }
+  /*Add to box controls*/
+ .add_to_box_controls{
+   margin: 0px 0px 10px 0px;
+   overflow:hidden;
+      #add_to_box_checkbox_label {
+        margin:10px 0px 0px 0px;
+      }
+      select#bag_selector,a#new_bag_modal_form_button,#new_bag_name_modal_form_field{
+        margin:15px 5px 0px 0px;
+        float:left;
+      }
+       
+    }
 }

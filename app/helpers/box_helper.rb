@@ -1,0 +1,3 @@
+module BoxHelper
+  
+end
