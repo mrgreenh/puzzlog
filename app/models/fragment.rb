@@ -18,8 +18,6 @@ class Fragment < ActiveRecord::Base
   def buildResources(fragment_resources_params)
     if self.fragment_type.has_images?
       fragment_images = ActiveSupport::JSON.decode(fragment_resources_params[:images])
-      logger.debug fragment_resources_params
-      logger.debug fragment_images
       self.fragment_image_relationships.destroy_all
       fragment_images.each do |id, image|
         if FragmentImage.find(image["id"]).user == self.user||has_role?('superadmin') # TODO To update when there will be collaboration possibilities, it will have to be possible to save privileges differently

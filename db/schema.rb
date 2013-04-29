@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130428221355) do
+ActiveRecord::Schema.define(:version => 20130429084554) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -23,6 +23,15 @@ ActiveRecord::Schema.define(:version => 20130428221355) do
   end
 
   add_index "articles", ["title"], :name => "index_articles_on_title", :unique => true
+
+  create_table "bags", :force => true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "bags", ["user_id", "name"], :name => "index_bags_on_user_id_and_name", :unique => true
 
   create_table "fragment_image_relationships", :force => true do |t|
     t.integer  "fragment_id"
@@ -159,43 +168,55 @@ ActiveRecord::Schema.define(:version => 20130428221355) do
     t.datetime "updated_at",  :null => false
   end
 
-  create_table "user_bags", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "user_box_fragment_relationships", :force => true do |t|
+    t.integer  "resource_id"
+    t.integer  "user_id"
+    t.integer  "bag_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
+
+  add_index "user_box_fragment_relationships", ["user_id", "resource_id"], :name => "box_fragment_unique_index_on_user_id_resource_id", :unique => true
 
   create_table "user_box_image_relationships", :force => true do |t|
-    t.integer  "fragment_resource_id"
+    t.integer  "resource_id"
     t.integer  "user_id"
     t.integer  "bag_id"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
+
+  add_index "user_box_image_relationships", ["user_id", "resource_id"], :name => "index_user_box_image_relationships_on_user_id_and_resource_id", :unique => true
 
   create_table "user_box_sound_relationships", :force => true do |t|
-    t.integer  "fragment_resource_id"
+    t.integer  "resource_id"
     t.integer  "user_id"
     t.integer  "bag_id"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
+
+  add_index "user_box_sound_relationships", ["user_id", "resource_id"], :name => "index_user_box_sound_relationships_on_user_id_and_resource_id", :unique => true
 
   create_table "user_box_untyped_attachment_relationships", :force => true do |t|
-    t.integer  "fragment_resource_id"
+    t.integer  "resource_id"
     t.integer  "user_id"
     t.integer  "bag_id"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
+  add_index "user_box_untyped_attachment_relationships", ["user_id", "resource_id"], :name => "box_untyped_attachment_unique_index_on_user_id_resource_id", :unique => true
+
   create_table "user_box_video_relationships", :force => true do |t|
-    t.integer  "fragment_resource_id"
+    t.integer  "resource_id"
     t.integer  "user_id"
     t.integer  "bag_id"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
+
+  add_index "user_box_video_relationships", ["user_id", "resource_id"], :name => "index_user_box_video_relationships_on_user_id_and_resource_id", :unique => true
 
   create_table "user_role_relationships", :force => true do |t|
     t.integer  "user_id"
