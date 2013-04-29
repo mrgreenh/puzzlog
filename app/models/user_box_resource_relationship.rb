@@ -6,7 +6,7 @@ class UserBoxResourceRelationship < ActiveRecord::Base
   validates_presence_of :user_id,:resource_id,:bag_id
   validates_uniqueness_of :user_id, scope: :resource_id
   
-  belongs_to :user, dependent: :destroy
-  belongs_to :bag, dependent: :destroy
+  belongs_to :user
+  belongs_to :bag
   
 end

@@ -6,11 +6,11 @@ class Bag < ActiveRecord::Base
     
     belongs_to :user
     
-    has_many :user_box_image_relationships
-    has_many :user_box_sound_relationships
-    has_many :user_box_video_relationships
-    has_many :user_box_untyped_attachment_relationships
-    has_many :user_box_fragment_relationships
+    has_many :user_box_image_relationships, dependent: :destroy
+    has_many :user_box_sound_relationships, dependent: :destroy
+    has_many :user_box_video_relationships, dependent: :destroy
+    has_many :user_box_untyped_attachment_relationships, dependent: :destroy
+    has_many :user_box_fragment_relationships, dependent: :destroy
     
     has_many :box_images, through: :user_box_image_relationships, source: :fragment_image
     has_many :box_sounds, through: :user_box_sounds_relationships, source: :fragment_sound

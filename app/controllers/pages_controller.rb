@@ -43,13 +43,16 @@ class PagesController < ApplicationController
         p.number-=1
         p.save
       end
-      @page = @article.pages.order('number ASC').first
-      @fragments = @page.ordered_fragments
-      @fragment_types = getFragmentTypes(@fragments)
-      respond_to do |format|
-        format.html {render 'articles/edit'}
-        format.js { render 'pages/edit' }
-      end
+    else
+      page.page_fragment_relationships.destroy_all
+      page.update_attributes(name:"")
+    end
+    @page = @article.pages.order('number ASC').first
+    @fragments = @page.ordered_fragments
+    @fragment_types = getFragmentTypes(@fragments)
+    respond_to do |format|
+      format.html {render 'articles/edit'}
+      format.js { render 'pages/edit' }
     end
   end
   

@@ -35,17 +35,17 @@ class User < ActiveRecord::Base
   has_many :fragment_untyped_attachments
   
 #Box Resources
-  has_many :user_box_image_relationships
-  has_many :user_box_sound_relationships
-  has_many :user_box_video_relationships
-  has_many :user_box_untyped_attachment_relationships
-  has_many :user_box_fragment_relationships
+  has_many :user_box_image_relationships, dependent: :destroy
+  has_many :user_box_sound_relationships, dependent: :destroy
+  has_many :user_box_video_relationships, dependent: :destroy
+  has_many :user_box_untyped_attachment_relationships, dependent: :destroy
+  has_many :user_box_fragment_relationships, dependent: :destroy
   
-  has_many :box_images, through: :user_box_image_relationships, source: :fragment_image
-  has_many :box_sounds, through: :user_box_sound_relationships, source: :fragment_sound
-  has_many :box_videos, through: :user_box_video_relationships, source: :fragment_video
-  has_many :box_untyped_attachments, through: :user_box_untyped_attachment_relationships, source: :fragment_untyped_attachment
-  has_many :box_fragments, through: :user_box_fragment_relationships, source: :fragment
+  has_many :box_images, through: :user_box_image_relationships, source: :fragment_image, dependent: :destroy
+  has_many :box_sounds, through: :user_box_sound_relationships, source: :fragment_sound, dependent: :destroy
+  has_many :box_videos, through: :user_box_video_relationships, source: :fragment_video, dependent: :destroy
+  has_many :box_untyped_attachments, through: :user_box_untyped_attachment_relationships, source: :fragment_untyped_attachment, dependent: :destroy
+  has_many :box_fragments, through: :user_box_fragment_relationships, source: :fragment, dependent: :destroy
   
   has_many :bags
 
