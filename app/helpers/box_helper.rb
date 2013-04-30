@@ -1,3 +1,3 @@
 module BoxHelper
-  
+
 end

@@ -1,3 +1,28 @@
-// Place all the styles related to the PuzzleBox controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "variables";
+@import "mixins";
+
+#puzzle_box_fragments_container{
+  #box_bags_sidebar_nav{
+    margin-top:50px;
+    li{
+      @include gentle_occlusion
+      }
+    #bag_none_link{
+        font-weigt:bold;
+     }
+    a{
+      border-style:dashed;
+    }
+  }
+  .resource_box_controls{
+    @include rounded_bottom_corners;
+    @include very_gentle_shade;
+    @include dashed_borders;
+    border-width:0px 1px 1px 1px;
+    background-color:white;
+    padding: 5px 0px;
+  }
+  #box_resources_list_container{
+    margin-top:50px;
+  }
+}

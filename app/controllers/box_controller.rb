@@ -1,5 +1,8 @@
 class BoxController < ApplicationController
+include BagsHelper
+
   def show
-    @box_images = current_user.box_images
+    @resources = resourcesFromBag
+    @current_bag_id = "none"
   end
 end

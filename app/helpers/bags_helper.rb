@@ -15,6 +15,15 @@ module BagsHelper
     return bag_id
   end
   
+  def resourcesFromBag(bag_id=nil)
+    if not bag_id.nil?
+      return current_user.bags.find(bag_id).box_images
+    else
+      return current_user.box_images
+    end
+  end
+  
+  
   #privileges
   def can_create_bags?
     has_role?('superadmin')||has_role?('writer')
