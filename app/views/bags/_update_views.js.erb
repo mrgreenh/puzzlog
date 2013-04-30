@@ -1,0 +1,13 @@
+//In this view make sure the box view is consistent with user actions
+<% if @current_bag_id=="none"||@current_bag_id==nil %>
+	$.ajax({
+	type: "GET",
+	url: "/box",
+	});
+<% else %>
+	$.ajax({
+	type: "GET",
+	url: "/bags/<%= @current_bag_id %>",
+	});
+<% end %>
+$("#box_bags_sidebar_nav_container").html("<%= escape_javascript(render 'bags/box_bags_sidebar_nav') %>");

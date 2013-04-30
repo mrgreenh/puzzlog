@@ -3,7 +3,7 @@ module BagsHelper
      if can_edit_bag?(params[:selected_bag])
       bag_id = params[:selected_bag]
      else
-       bag_id = -1;
+       bag_id = "-1";
      end
     
       
@@ -25,6 +25,10 @@ module BagsHelper
   
   
   #privileges
+  def can_view_bag?(bag=Bag.find(params[:id]))
+    has_role?('superadmin')||bag.user == current_user
+  end
+  
   def can_create_bags?
     has_role?('superadmin')||has_role?('writer')
   end

@@ -1,23 +1,20 @@
 <% provide :title, "Puzzle Box" %>
 <div class="container-fluid puzzle_box_container" id="puzzle_box_fragments_container">
-		<div class="span2 nav" data-spy="affix">
-			<ul class="nav nav-tabs nav-stacked" id="box_bags_sidebar_nav">
-				<li<%= " class='active'" if @current_bag_id=="none" %>><%= link_to 'All', '/box', remote: true, id:"bag_none_link" %></li>
-				<% current_user.bags.each do |bag| %>
-					<li<%= " class='active'" if bag.id == @current_bag_id.to_i %>>
-						<%= link_to bag.name, bag_path(bag), remote: true, id: "bag_#{bag.id}_link"%>
-					</li>
-				<% end %>
-			</ul>
+		<div class="span2 nav" data-spy="affix" id="box_bags_sidebar_nav_container">
+			<%= render 'bags/box_bags_sidebar_nav' %>
 		</div>
 		<div class="span10 offset2">
-			<div class="row resource_box_controls" data-spy="affix" id="fragment_images_box_controls">
+			<div class="row resource_box_controls" data-spy="affix" id="box_items_controls">
 				<div class="span10">
-					<% if can_create_fragment_resources? %>
-						<%= link_to new_fragment_image_path(add_to_box:true), remote:true, class:"btn btn-success" do %>
+				
+					<div class="box_controls_bar_section">
+						<%= link_to new_fragment_image_path(add_to_box:true), remote:true, class:"btn btn-mini btn-success" do %>
 							<i class="icon icon-white icon-upload"></i> Upload Images
-						<% end %>
-					<% end %>
+						<% end %>	
+					</div>
+				
+					<%= render 'bags/bag_related_controls' %>
+					
 				</div>
 			</div>
 			<div class="row">

@@ -1,0 +1,14 @@
+<div id="bag_related_controls" class="box_controls_bar_section">
+	<ul>
+		<li>
+			<% if not @current_bag_id=="none"%>
+				<%= link_to 'Delete Bag', bag_path(@current_bag_id), method: :delete, confirm: "Are you sure you want to delete this bag? You will lose all the things you stored in it.", class:"btn btn-mini btn-danger bag_control_icon" if can_destroy_bag?(@current_bag_id) %>	
+			<% end %>
+		</li>
+		<li>
+			<% if not @current_bag_id=="none"%>
+				<%= link_to 'Rename Bag', edit_bag_path(@current_bag_id), remote:true, class:"btn btn-mini bag_control_icon" if can_edit_bag?(@current_bag_id) %>	
+			<% end %>
+		</li>
+	</ul>
+</div>

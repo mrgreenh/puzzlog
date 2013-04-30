@@ -1,6 +1,1 @@
-$("#box_resources_list_container").slideUp(function(){
-	$("#box_resources_list_container ul").html("<%= escape_javascript(render @resources) %>");
-	$("#box_bags_sidebar_nav li").removeClass("active");
-	$("#box_bags_sidebar_nav #bag_<%= escape_javascript(@current_bag_id) %>_link").parent("li").addClass("active");
-	$("#box_resources_list_container").slideDown();
-});
+<%= render 'bags/show' %>

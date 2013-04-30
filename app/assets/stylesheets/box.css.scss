@@ -1,8 +1,15 @@
 @import "variables";
 @import "mixins";
 
+.bag_edit_form{
+  text-align:center;
+  width:100%;
+}
+
 #puzzle_box_fragments_container{
-  #box_bags_sidebar_nav{
+  #box_bags_sidebar_nav_container{
+    text-align:center;
+    #box_bags_sidebar_nav{
     margin-top:50px;
     li{
       @include gentle_occlusion
@@ -12,7 +19,13 @@
      }
     a{
       border-style:dashed;
+     }
     }
+    #new_bag_button{
+        width:50px;
+        margin:0px auto;
+      }
+  
   }
   .resource_box_controls{
     @include rounded_bottom_corners;
@@ -21,6 +34,16 @@
     border-width:0px 1px 1px 1px;
     background-color:white;
     padding: 5px 0px;
+    .box_controls_bar_section{
+      float:left;
+      width:45%;
+      text-align:center;
+      margin: 0px auto;
+      a,li{
+        margin:0px 5px;
+        float:left;
+      }
+    }
   }
   #box_resources_list_container{
     margin-top:50px;

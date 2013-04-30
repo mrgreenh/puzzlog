@@ -1,7 +1,4 @@
 modalWindow("","<%= escape_javascript(render 'layouts/flash_messages') %>");
 
-//Update the object that might have requested the upload
-fragmentImagesInjection(<%=@created_images.to_json%>);
-
 //Update anything in the page regarding bags
 <%= render 'bags/update_views' %>

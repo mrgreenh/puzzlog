@@ -7,6 +7,13 @@ function stateful_loading(element){
 	bottone.attr("disabled","disabled");
 }
 
+//Flash messages slide up after some seconds
+function flashMessages(){
+	timeoutID = window.setTimeout(function(){
+		$("#flash_messages_container").slideUp();
+	}, 5000);
+}
+
 //Funzione che mostra il contenuto passatogli in una finestra modale
 function modalWindow(title,content){
 	$("#genericModalWindow h3").html(title);
@@ -38,4 +45,5 @@ function initializeControlsPopovers(){
 
 $(function(){
 	initializeControlsPopovers();
+	flashMessages();
 });

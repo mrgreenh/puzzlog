@@ -37,7 +37,7 @@ FragmentsProject::Application.routes.draw do
   
   #PuzzleBox
   match '/box', to: 'box#show'
-  resources :bags, only: [:show]
+  resources :bags, only: [:show, :destroy, :edit, :update, :new, :create]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,0 +1,15 @@
+<% @bag ||= Bag.new
+	@method ||= :post
+ %>
+<div class="bag_edit_form">
+<%= form_for @bag, validate:true, remote:true, method: @method do |object| %>
+		<fieldset class='control-group <%= @bag.errors[:name].any? ? 'error' : '' %>'>
+		<%= text_field_tag 'name', @bag.name, placeholder:'What does it contain?', class:'required name', autofocus:true %>
+		<span class='help-inline'><%= @bag.errors[:name].any? ? @bag.errors[:name].first.capitalize : '' %></span>
+		</fieldset>
+
+		<div class="form-action">
+		<%= submit_tag "Save", class:'btn btn-primary', "data-loading-text" => "Creating..." %>
+		</div>
+<% end %>
+</div>
