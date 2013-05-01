@@ -8,12 +8,9 @@
 
 #puzzle_box_fragments_container{
   #box_bags_sidebar_nav_container{
+    margin-top:50px;
     text-align:center;
     #box_bags_sidebar_nav{
-    margin-top:50px;
-    li{
-      @include gentle_occlusion
-      }
     #bag_none_link{
         font-weigt:bold;
      }
