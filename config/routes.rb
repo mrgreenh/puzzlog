@@ -1,4 +1,5 @@
 FragmentsProject::Application.routes.draw do
+
   get "puzzle_box/show"
 
   root to: 'static_pages#home'
@@ -38,7 +39,13 @@ FragmentsProject::Application.routes.draw do
   #PuzzleBox
   match '/box', to: 'box#show'
   resources :bags, only: [:show, :destroy, :edit, :update, :new, :create]
-
+  resources :user_box_image_relationships do
+    collection do
+      delete 'destroy_multiple'
+      put 'update_multiple'
+      get 'edit_multiple'
+    end
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

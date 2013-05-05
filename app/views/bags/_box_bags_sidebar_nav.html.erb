@@ -1,11 +1,7 @@
-<%
-	@current_bag_id ||= "none"
-%>
-
 <ul class="nav nav-tabs nav-stacked" id="box_bags_sidebar_nav">
-	<li<%= " class='active'" if @current_bag_id=="none" %>><%= link_to 'All', '/box', remote: true, id:"bag_none_link", class:"select_bag_link" %></li>
+	<li<%= " class='active'" if @current_bag_id.nil? %>><%= link_to 'All', '/box', remote: true, id:"bag__link", class:"select_bag_link" %></li>
 	<% current_user.bags.each do |bag| %>
-		<li<%= " class='active'" if bag.id == @current_bag_id.to_i %>>
+		<li<%= " class='active'" if !@current_bag_id.nil? and bag.id == @current_bag_id.to_i %>>
 			<%= link_to bag.name, bag_path(bag), remote: true, id: "bag_#{bag.id}_link", class:"select_bag_link"%>
 		</li>
 	<% end %>

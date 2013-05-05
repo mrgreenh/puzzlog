@@ -1,6 +1,6 @@
 $("#box_items_controls #bag_related_controls").replaceWith("<%= escape_javascript(render 'bags/bag_related_controls') %>");
 $("#box_resources_list_container").slideUp(function(){
-	$("#box_resources_list_container ul").html("<%= escape_javascript(render @resources) %>");
+	$("#box_resources_list_container").html("<%= escape_javascript(render 'bags/box_resources') %>");
 	$("#box_bags_sidebar_nav li").removeClass("active");
 	$("#box_bags_sidebar_nav #bag_<%= escape_javascript(@current_bag_id) %>_link").parent("li").addClass("active");
 	$("#box_resources_list_container").slideDown();

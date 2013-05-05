@@ -23,6 +23,15 @@ module BagsHelper
     end
   end
   
+  def moveBoxResources(relationship_ids = params[:user_box_image_relationships], bag_id)
+    success = true
+    relationship_ids.each do |id|
+      if not UserBoxImageRelationship.find(id).update_attributes(bag_id:bag_id)
+        success = false
+        break
+      end
+    end
+  end
   
   #privileges
   def can_view_bag?(bag=Bag.find(params[:id]))

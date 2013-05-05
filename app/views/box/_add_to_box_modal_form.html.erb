@@ -1,3 +1,7 @@
+<%
+	@new_bag_button = true if @new_bag_button.nil?
+%>
+
 <div class="add_to_box_controls">
 	<% if not @add_to_box #If we are not obliged to add thi image to the box
 	%>
@@ -8,10 +12,10 @@
 		<%= hidden_field_tag 'add_to_box', true %>
 	<% end %>
 	<select name="selected_bag" id="bag_selector" class="<%= 'hide' unless @add_to_box %>">
-			<option value="-1">Choose a bag</option>
+			<option value="-1">Puzzle Box</option>
 			<% current_user.bags.each do |bag| %>
 				<option value="<%= bag.id %>"><%= bag.name %></option>
 			<% end %>
 	</select>
-	<a href="#" class="btn btn-success <%= 'hide' unless @add_to_box %>" id="new_bag_modal_form_button">New</a>
+	<a href="#" class="btn btn-success <%= 'hide' unless @new_bag_button and @add_to_box %>" id="new_bag_modal_form_button">New</a>
 </div>

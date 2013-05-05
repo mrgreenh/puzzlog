@@ -12,6 +12,15 @@
 							<i class="icon icon-white icon-upload"></i> Upload Images
 						<% end %>	
 					</div>
+					
+					<ul id="box_resources_related_controls" class="box_controls_bar_section">
+							<li>
+								<%= link_to "Remove", "#", class:"btn btn-small", id:'box_resources_remove_button', confirm:'Are you sure you want to remove this image from your box? It will still be visible in the fragments where you used it.' %>
+							</li>
+							<li>
+								<%= link_to "Move", 'user_box_image_relationships/edit_multiple', class:"btn btn-small", id:'box_resources_move_button', remote: true %>
+							</li>
+					</ul>
 				
 					<%= render 'bags/bag_related_controls' %>
 					
@@ -19,9 +28,7 @@
 			</div>
 			<div class="row">
 				<div class="span10" id="box_resources_list_container">
-					<ul class="thumbnails">
-					 <%= render @resources %>
-					</ul>
+					<%= render 'bags/box_resources' %>
 				</div>
 			</div>
 		</div>
