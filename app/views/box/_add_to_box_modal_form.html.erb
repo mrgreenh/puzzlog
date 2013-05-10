@@ -3,10 +3,10 @@
 %>
 
 <div class="add_to_box_controls">
-	<% if not @add_to_box #If we are not obliged to add thi image to the box
+	<% if not @add_to_box #If we are not obliged to add this to the box
 	%>
 		<label class="checkbox" for="add_to_box" id="add_to_box_checkbox_label">
-			<input type="checkbox" name="add_to_box" id="add_to_box_checkbox"> Add image to Puzzle Box
+			<input type="checkbox" name="add_to_box" id="add_to_box_checkbox"> Add it to Puzzle Box
 		</label>
 	<% else %>
 		<%= hidden_field_tag 'add_to_box', true %>

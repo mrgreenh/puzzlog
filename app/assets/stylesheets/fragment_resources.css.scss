@@ -1,5 +1,15 @@
 @import 'variables';
 
+.box_resource_container{
+  .multiple_selection_checkbox{
+    position:absolute;
+    top: 0px;
+    left: 0px;
+  }
+  height:150px;
+}
+
+/*Potentially old box styles*/
 .fragment_resource_panel_controls{
   margin-bottom:10px;
   text-align:center;

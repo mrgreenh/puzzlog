@@ -28,6 +28,7 @@
     @include rounded_bottom_corners;
     @include very_gentle_shade;
     @include dashed_borders;
+    z-index:100;
     border-width:0px 1px 1px 1px;
     background-color:white;
     padding: 5px 0px;

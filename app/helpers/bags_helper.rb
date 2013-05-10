@@ -17,9 +17,13 @@ module BagsHelper
   
   def resourcesFromBag(bag_id=nil)
     if not bag_id.nil?
-      return current_user.bags.find(bag_id).box_images
+      resources = current_user.bags.find(bag_id).box_images + current_user.bags.find(bag_id).box_fragments
+      resources.sort_by(&:created_at)
+      return resources
     else
-      return current_user.box_images
+      resources = current_user.box_images + current_user.box_fragments
+      resources.sort_by(&:created_at)
+      return resources
     end
   end
   

@@ -121,6 +121,11 @@ h3.popover-title{
     }
   }
 
+.controls_popover_toggler{
+  position:absolute;
+  right:0px;
+}
+
 .popover_overlay{
   z-index:1000;
   color:white;

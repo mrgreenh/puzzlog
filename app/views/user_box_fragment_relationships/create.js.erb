@@ -1,0 +1,3 @@
+<%= render 'common_partials/flash_messages_popup' %>
+$("#fragment_<%= @fragment.id %> .tooltip_content").html("<a class='close'>&times;</a><%= escape_javascript(render 'fragments/fragment_controls', remote_bool: true, article_editing: true, fragment:@fragment) %>");
+$("#fragment_<%= @fragment.id %>+.fragment-controls").html("<%= escape_javascript(render 'fragments/fragment_controls', remote_bool: false, article_editing: true, fragment:@fragment) %>");

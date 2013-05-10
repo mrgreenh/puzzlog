@@ -48,11 +48,43 @@
   }
 }
 .fragment_summary{
-  h4 {
-    display:inline;
+  margin:0px 0px;
+  width:370px;
+  height:150px;
+  border-style:dashed;
+  border-width: 1px;
+  border-color:$header_light_grey;
+  @include rounded_corners;
+  float:left;
+  .fragment_type_image{
+    float:left;
   }
-  img {
-    margin-right:15px;
+  header{
+    padding: 0px 10px;
+    background-color:transparent;
+    h4 {
+      float:left;
+      width:270px;
+      overflow:hidden;
+    }
+  }
+  
+  ul.summary_hash_container{
+    height:40px;
+    width:270px;
+    overflow:hidden;
+  }
+  
+  ul.fragment_summary_images{
+    margin-left:20px;
+    clear:both;
+    li{
+      float:left;
+      margin-left: -20px;
+      img{
+        @include rotated_image;
+      }
+    }
   }
   td.table-value, td.table-key{
     p{

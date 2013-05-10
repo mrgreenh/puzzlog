@@ -19,8 +19,8 @@ FragmentsProject::Application.routes.draw do
   
   #Fragments
   resources :fragments
-  match 'fragments/add_to_puzzle_box/:id', to:'fragments#add_to_puzzle_box', as: 'add_fragment_to_puzzle_box'
-  match 'fragments/remove_from_puzzle_box/:id', to:'fragments#remove_from_puzzle_box', as: 'remove_fragment_from_puzzle_box'
+  #match 'fragments/add_to_puzzle_box/:id', to:'fragments#add_to_puzzle_box', as: 'add_fragment_to_puzzle_box'
+  #match 'fragments/remove_from_puzzle_box/:id', to:'fragments#remove_from_puzzle_box', as: 'remove_fragment_from_puzzle_box'
   
   #Other pages
   match '/streamline', to: 'static_pages#streamline', as: 'streamline'
@@ -39,6 +39,7 @@ FragmentsProject::Application.routes.draw do
   #PuzzleBox
   match '/box', to: 'box#show'
   resources :bags, only: [:show, :destroy, :edit, :update, :new, :create]
+  resources :user_box_fragment_relationships, only: [:new, :create]
   resources :user_box_image_relationships do
     collection do
       delete 'destroy_multiple'

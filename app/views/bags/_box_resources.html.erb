@@ -2,6 +2,13 @@
 <%= form_tag destroy_multiple_user_box_image_relationships_path, id:"box_resources_form", method: :delete, remote: :true do %>
 	<%= hidden_field_tag 'bag_id', @current_bag_id.to_s %>
 	<ul class="thumbnails">
-	 <%= render @resources %>
+	 <% @resources.sort_by(&:created_at).each do |resource| 
+		 	if resource.class.name=="Fragment" %>
+		 		<%= render 'fragments/fragment_summary', fragment: resource %>
+		 	<% else %>
+		 		<%= render resource %> 
+		 	<% end
+	 	end
+	 %>
 	</ul>
 <% end %>

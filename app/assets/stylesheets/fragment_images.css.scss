@@ -1,4 +1,7 @@
+@import 'mixins';
 .fragment_image.thumbnail{
+  border-style: dashed;
+  @include rounded_corners;
   p, .fragment_image_controls{
     font-size:15px;
     color:#5f5f5f;

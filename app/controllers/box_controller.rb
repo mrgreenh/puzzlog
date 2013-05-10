@@ -7,7 +7,7 @@ before_filter :box_view_filter, only: :show
     @resources = resourcesFromBag
     @current_bag_id = nil
     respond_to do |format|
-      format.js
+      format.js { render 'bags/show' }
       format.html
     end
   end

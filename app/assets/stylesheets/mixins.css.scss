@@ -78,3 +78,10 @@
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33f2f5f6', endColorstr='#4dc8d7dc',GradientType=0 ); /* IE6-9 */
 
 }
+
+/* Transforms */
+@mixin rotated_image{
+  transform: rotate(-30deg);
+  -ms-transform: rotate(-30deg); /* IE 9 */
+  -webkit-transform: rotate(-30deg); /* Safari and Chrome */
+}

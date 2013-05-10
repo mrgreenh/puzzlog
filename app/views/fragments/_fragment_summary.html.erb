@@ -9,46 +9,37 @@ add_to_article ||= false # If the summary is shown in the dialog for adding frag
 				<a class='close'>&times;</a>
 				<%= render 'fragments/fragment_controls', remote_bool: true, fragment:fragment %>
 			</div>
-			<div class="span2">
-				<img src="<%= getFragmentTypeIcon(fragment.fragment_type) %>" title="<%= fragment.fragment_type.name %>" class="fragment_type_image hidden-phone">
-				<img src="<%= getFragmentTypeIconThumb(fragment.fragment_type) %>" title="<%= fragment.fragment_type.name %>" class="fragment_type_image visible-phone">
-			</div>
+			<%= check_box_tag "user_box_resource_relationships[fragments][]", "current_user.user_box_fragment_relationships.find_by_resource_id(fragment.id).id", false, class:"multiple_selection_checkbox" %>
 		<% end %>
-		<div class="span4">
-			<div class="row">
-				<div class="span4">
-					<% if add_to_article %>
+		<div>
+			<header>
+					<div>
 						<img src="<%= getFragmentTypeIconThumb(fragment.fragment_type) %>" title="<%= fragment.fragment_type.name %>" class="fragment_type_image">
-					<% end %>
-						<h4><%= link_to fragment.name, fragment_path(fragment) %></h4>
-				</div>
-			</div>
-			<div class="row">
-				<div class="span4">
-					<table class="table table-striped table-bordered table-hover">
-					  <tbody>
-					  	<% fragment.getSummaryHash.each do |k,v| %>
-						  	<tr>
-						      <td class="table-key"><p><%= k %>:</p></td>
-						      <td class="table-value"><p><%= v %></p></td>
-						    </tr>
-					  	<% end %>
-					  	<% if fragment.fragment_type.has_images? %>
-					  		<tr>
-					  			<td colspan="2">
-					  				<% fragment.images.each do |image| %>
-					  					<%= image_tag image.fragment_resource_file.url(:mini) %>
-					  				<% end %>
-					  			</td>
-					  		</tr>
-					  	<% end %>
-					  </tbody>
-					</table>
-				</div>
-			</div>
+					</div>
+					<h4><%= link_to fragment.name, fragment_path(fragment) %></h4>
+			</header>
+		  	<ul class="summary_hash_container">
+			  	<% fragment.getSummaryHash.each do |k,v| %>
+				  	
+				   <li><strong><%= k %>:</strong>
+				   <%= v %></li>
+				    
+			  	<% end %>
+		  	</ul>
+		  	<% if fragment.fragment_type.has_images? %>
+		  		<ul class="fragment_summary_images">
+		  				<% 	n = 0;
+		  					fragment.images.each do |image|
+		  					n+=1;
+		  					break if n>9
+		  					%>
+		  					<li><%= image_tag image.fragment_resource_file.url(:mini) %></li>
+		  				<% end %>
+		  		</ul>
+		  	<% end %>
 		</div>
 		<% if add_to_article %>	
-			<div class="span1">
+			<div>
 				<%= link_to page_fragment_relationships_path(page_id:@page.id, fragment_id:fragment.id), method: :post, remote:true, class:'btn btn-success add_fragment_button' do %>
 					<i class="icon icon-white icon-arrow-right"></i>
 				<% end %>

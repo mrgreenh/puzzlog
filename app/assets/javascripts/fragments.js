@@ -107,7 +107,7 @@ function updateResources(fragment){
 //Initialization
 $(function(){ 
 	//---------------------------------------Dot dot dot e altre utility
-	$(".fragment_summary td.table-value p,.fragment_summary td.table-key p").dotdotdot();
+	$(".fragment_summary td.table-value p,.fragment_summary td.table-key p,.fragment_summary ul.summary_hash_container").dotdotdot();
 	$(".move_to_page_button, .detach_fragment_button").tooltip({placement:'right'});
 	//---------------------------------------Fragments initializer
 	initializeAllFragments();

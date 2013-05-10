@@ -1,0 +1,2 @@
+module UserBoxResourceRelationshipsHelper
+end

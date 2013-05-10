@@ -10,8 +10,8 @@ class BagsController < ApplicationController
     @resources = resourcesFromBag(params[:id])
     @current_bag_id = params[:id]
     respond_to do |format|
-      format.js { render 'box/show' }
-      format.html { render 'box/show' }
+      format.js
+      format.html
     end
   end
   

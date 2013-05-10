@@ -2,7 +2,7 @@
 fragment_image ||= @fragment_image
 detach_button ||= false
 %>
- <li class="span2" id="fragment_image_<%= fragment_image.id %>" data-image-id="<%= fragment_image.id %>" data-image-json="<%= fragment_image.as_json.to_json %>">
+ <li class="span2 resource_partial box_resource_container" id="fragment_image_<%= fragment_image.id %>" data-image-id="<%= fragment_image.id %>" data-image-json="<%= fragment_image.as_json.to_json %>">
     <div class="fragment_image thumbnail">
         <%= image_tag fragment_image.fragment_resource_file.url(:thumb), alt:fragment_image.description %>
         <p>
@@ -13,7 +13,7 @@ detach_button ||= false
 	        	<%= link_to edit_fragment_image_path(fragment_image), remote:true  do %>
 	        		<i class="icon icon-edit"></i>
 	        	<% end %>
-	        	<%= check_box_tag "user_box_image_relationships[]", current_user.user_box_image_relationships.find_by_resource_id(fragment_image.id).id %>
+	        	<%= check_box_tag "user_box_image_relationships[]", current_user.user_box_image_relationships.find_by_resource_id(fragment_image.id).id, false, class:"multiple_selection_checkbox" %>
         	<% end %>
         </div>
     </div>
