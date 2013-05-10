@@ -26,7 +26,7 @@ class UserBoxImageRelationshipsController < ApplicationController
     @resources = resourcesFromBag(bag_id)
     @current_bag_id = bag_id
     respond_to do |format|
-      format.js
+      format.js { render 'bags/show' }
     end
   end
   
@@ -42,7 +42,7 @@ class UserBoxImageRelationshipsController < ApplicationController
     @current_bag_id = params[:bag_id]
     @resources = resourcesFromBag(@current_bag_id.empty??nil:@current_bag_id)
     respond_to do |format|
-      format.js
+      format.js { render 'bags/show' }
     end
   end
   
