@@ -13,7 +13,7 @@ detach_button ||= false
 	        	<%= link_to edit_fragment_image_path(fragment_image), remote:true  do %>
 	        		<i class="icon icon-edit"></i>
 	        	<% end %>
-	        	<%= check_box_tag "user_box_image_relationships[]", current_user.user_box_image_relationships.find_by_resource_id(fragment_image.id).id, false, class:"multiple_selection_checkbox" %>
+	        	<%= check_box_tag "user_box_resource_relationships[fragment_images][]", current_user.user_box_image_relationships.find_by_resource_id(fragment_image.id).id, false, class:"multiple_selection_checkbox" %>
         	<% end %>
         </div>
     </div>

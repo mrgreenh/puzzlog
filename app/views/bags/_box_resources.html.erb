@@ -1,8 +1,14 @@
 <%= render 'layouts/flash_messages' %>
-<%= form_tag destroy_multiple_user_box_image_relationships_path, id:"box_resources_form", method: :delete, remote: :true do %>
+<%= form_tag "", id:"box_resources_form", remote: :true do %>
 	<%= hidden_field_tag 'bag_id', @current_bag_id.to_s %>
 	<ul class="thumbnails">
-	 <% @resources.sort_by(&:created_at).each do |resource| 
+	 <% @resources.sort_by{ |resource|
+        if resource.class.name=="FragmentImage"
+          current_user.user_box_image_relationships.find_by_resource_id(resource.id).created_at
+        elsif resource.class.name=="Fragment"
+          current_user.user_box_fragment_relationships.find_by_resource_id(resource.id).created_at
+        end
+      }.reverse.each do |resource| 
 		 	if resource.class.name=="Fragment" %>
 		 		<%= render 'fragments/fragment_summary', fragment: resource %>
 		 	<% else %>

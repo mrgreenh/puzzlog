@@ -4,10 +4,18 @@ class FragmentImagesController < ApplicationController
   include ArticlesHelper
   include BagsHelper
   
-  before_filter :fragment_resource_create_filter, only:[:new,:create]
+  before_filter :fragment_resource_create_filter, only:[:new,:create,:search_new]
   before_filter :fragment_resource_destroy_filter, only: :destroy
   before_filter :fragment_resource_edit_filter, only: [:edit, :update]
   before_filter :fragment_resource_view_filter, only: [:show]
+  
+  def search_new
+    @add_to_box = params[:add_to_box]
+    
+    respond_to do |format|
+      format.js
+    end
+  end
   
   def new
     @add_to_box = params[:add_to_box]

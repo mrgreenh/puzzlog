@@ -122,11 +122,12 @@ $(function(){
 			placement: 'top',
 			trigger:'manual'
 		});
-	$('#new_fragment .fragment_controls .keep_it_button').click(function(){
-		$("#new_fragment #fragment_stand_alone").val(true);
-		$("#name_fragment").slideDown();
+	$('#new_fragment .fragment_controls .save_to_box_button').click(function(){
+		$("#choose_bag").slideDown();
+		$("#save_to_box").val("true");
+		addNewBagButton();
 		$(this).fadeOut(function(){
-			$("#save_fragment").fadeIn();
+			$("#save_button").fadeIn();
 		});
 	});
 	

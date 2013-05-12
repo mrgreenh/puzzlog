@@ -1,5 +1,6 @@
 <%
 add_to_article ||= false # If the summary is shown in the dialog for adding fragments to an article from puzzlebox
+@multiple_selection ||= false
 %>
 <li>
 	<div class="row fragment_summary resource_partial" id="fragment_<%= fragment.id %>">
@@ -9,14 +10,18 @@ add_to_article ||= false # If the summary is shown in the dialog for adding frag
 				<a class='close'>&times;</a>
 				<%= render 'fragments/fragment_controls', remote_bool: true, fragment:fragment %>
 			</div>
-			<%= check_box_tag "user_box_resource_relationships[fragments][]", "current_user.user_box_fragment_relationships.find_by_resource_id(fragment.id).id", false, class:"multiple_selection_checkbox" %>
+			<%= check_box_tag "user_box_resource_relationships[fragments][]", current_user.user_box_fragment_relationships.find_by_resource_id(fragment.id).id, false, class:"multiple_selection_checkbox" if @multiple_selection==true
+			%>
 		<% end %>
 		<div>
 			<header>
 					<div>
 						<img src="<%= getFragmentTypeIconThumb(fragment.fragment_type) %>" title="<%= fragment.fragment_type.name %>" class="fragment_type_image">
 					</div>
-					<h4><%= link_to fragment.name, fragment_path(fragment) %></h4>
+					<strong><%= fragment.fragment_type.name %></strong>
+						<%= link_to fragment_path(fragment) do %>
+							<i class="icon icon-eye-open icon-black"></i>
+						<% end %>
 			</header>
 		  	<ul class="summary_hash_container">
 			  	<% fragment.getSummaryHash.each do |k,v| %>

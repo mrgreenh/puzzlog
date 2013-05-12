@@ -1,6 +1,7 @@
 class BagsController < ApplicationController
   include BagsHelper
   
+  before_filter {@multiple_selection=true}
   before_filter :bag_create_filter, only:[:new,:create]
   before_filter :bag_destroy_filter, only: :destroy
   before_filter :bag_edit_filter, only: [:edit, :update]

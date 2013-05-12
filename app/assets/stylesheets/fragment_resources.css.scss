@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'mixins';
 
 .box_resource_container{
   .multiple_selection_checkbox{
@@ -37,6 +38,12 @@
       margin-left: -18px;
     }
  }
+ /*Search an image*/
+  .new_image_search_results_container{
+     height:200px;
+     width:100%;
+   }
+ 
   /*Choosing from box*/
   .modal_index{
   max-height:300px;

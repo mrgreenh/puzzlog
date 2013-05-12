@@ -6,6 +6,6 @@ function addNewBagButton(){
 
 function showBagSelector(){
 	$("#add_to_box_checkbox").click(function(){
-		$("#bag_selector, #new_bag_modal_form_button").toggleClass("hide");
+		$(".modal-body #bag_selector, .modal-body #new_bag_modal_form_button").toggleClass("hide");
 	});
 }

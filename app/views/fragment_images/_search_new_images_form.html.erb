@@ -1,0 +1,17 @@
+<div class="new_image_search_container">
+	<%= form_tag fragment_images_path, method: :post, remote:true, multipart:true, class:"form-inline" do %>
+		<%= text_field_tag 'new_image_search', '', placeholder: "Search on..."%>
+		<%= link_to "Social networks", "#", class:"btn btn-primary", id: "search_on_social_networks_button" %>
+		<%= link_to "Google", "#", class:"btn btn-primary", id: "search_on_google_images_button" %>
+		<div class="new_image_search_results_container">
+			
+		</div>
+		<div class="form-actions">
+			<%= render 'box/add_to_box_modal_form' %>
+			<div>
+				<%= submit_tag 'Add', class:'btn btn-primary upload_button', "data-loading-text" => "Uploading..." %>
+			</div>
+		</div>
+	<% end %>
+</div>
+	

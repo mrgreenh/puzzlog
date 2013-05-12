@@ -2,6 +2,7 @@ class FragmentImage < FragmentResource
   
   has_many :fragment_image_relationships, dependent: :destroy
   has_many :fragments, through: :fragment_image_relationships, source: :fragment
+  has_many :user_box_image_relationships, foreign_key: :resource_id
   
   has_attached_file :fragment_resource_file,:styles => {:big=>"1920x1920>", :medium => "800x800>", :thumb => "128x128>", :mini =>"60x60>" }, :source_file_options => { :all => '-auto-orient' },
   :default_url=>"/images/application/missing_avatar.png",

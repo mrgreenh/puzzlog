@@ -1,6 +1,7 @@
 class BoxController < ApplicationController
 include BagsHelper
 
+before_filter {@multiple_selection=true}
 before_filter :box_view_filter, only: :show
 
   def show

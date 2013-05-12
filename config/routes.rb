@@ -33,6 +33,7 @@ FragmentsProject::Application.routes.draw do
   
   #Fragment Resources
   resources :fragment_images
+  match 'search_new_fragment_image', to: 'fragment_images#search_new', as: 'search_new_fragment_image'
   resources :fragment_image_relationships, only: [:new]
   resources :fragment_types, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   
@@ -40,7 +41,7 @@ FragmentsProject::Application.routes.draw do
   match '/box', to: 'box#show'
   resources :bags, only: [:show, :destroy, :edit, :update, :new, :create]
   resources :user_box_fragment_relationships, only: [:new, :create]
-  resources :user_box_image_relationships do
+  resources :user_box_resource_relationships do
     collection do
       delete 'destroy_multiple'
       put 'update_multiple'

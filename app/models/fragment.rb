@@ -7,6 +7,8 @@ class Fragment < ActiveRecord::Base
   has_many :page_fragment_relationships, dependent: :destroy
   has_many :pages, through: :page_fragment_relationships, source: :page
   
+  has_many :user_box_fragment_relationships, foreign_key: :resource_id
+  
   belongs_to :fragment_type
   
   belongs_to :user

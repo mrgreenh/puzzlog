@@ -1,6 +1,7 @@
 class FragmentsController < ApplicationController
   include ApplicationHelper
   include FragmentsHelper
+  include BagsHelper
   
   before_filter :fragment_create_filter, only:[:new,:create]
   before_filter :fragment_destroy_filter, only: :destroy
@@ -11,6 +12,7 @@ class FragmentsController < ApplicationController
   def new
     @fragment = Fragment.new(fragment_type_id:params[:fragment_type_id],data:FragmentType.find(params[:fragment_type_id]).default_data, user_id:current_user.id)
     @fragment_types = getFragmentTypes([@fragment])
+    @add_to_box=true
     @fragments = [@fragment.as_json(only:[:id,:name,:fragment_type_id,:data])]
   end
 
@@ -23,6 +25,11 @@ class FragmentsController < ApplicationController
     end
     
     if @fragment.save
+      
+      if params[:save_to_box]=="true"
+        current_user.user_box_fragment_relationships.create(resource_id:@fragment.id, bag_id:bagAssignment(params))
+      end
+      
       @fragment.buildResources(params[:fragment_resources]) unless params[:fragment_resources].nil?
       
       redirect_to fragment_path(@fragment)
@@ -90,8 +97,8 @@ class FragmentsController < ApplicationController
       respond_to do |format|
         format.js
         format.html {
-          flash[:success] = "Frammento eliminato..."
-          redirect_to fragments_path}
+          flash[:success] = "Fragment deleted..."
+          redirect_to root_path}
       end
     end
   end

@@ -9,16 +9,19 @@
 				
 					<div class="box_controls_bar_section">
 						<%= link_to new_fragment_image_path(add_to_box:true), remote:true, class:"btn btn-mini btn-success" do %>
-							<i class="icon icon-white icon-upload"></i> Upload Images
+							<i class="icon icon-white icon-picture"></i> Upload
+						<% end %>	
+						<%= link_to search_new_fragment_image_path(add_to_box:true), remote:true, class:"btn btn-mini btn-success" do %>
+							<i class="icon icon-white icon-picture"></i> Search
 						<% end %>	
 					</div>
 					
 					<ul id="box_resources_related_controls" class="box_controls_bar_section">
 							<li>
-								<%= link_to "Remove", "#", class:"btn btn-small", id:'box_resources_remove_button', confirm:'Are you sure you want to remove this image from your box? It will still be visible in the fragments where you used it.' %>
+								<%= link_to "Remove Selected", "#", class:"btn btn-small", id:'box_resources_remove_button' %>
 							</li>
 							<li>
-								<%= link_to "Move", 'user_box_image_relationships/edit_multiple', class:"btn btn-small", id:'box_resources_move_button', remote: true %>
+								<%= link_to "Move Selected", 'user_box_resource_relationships/edit_multiple', class:"btn btn-small", id:'box_resources_move_button', remote: true %>
 							</li>
 					</ul>
 				

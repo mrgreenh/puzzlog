@@ -18,23 +18,31 @@ module BagsHelper
   def resourcesFromBag(bag_id=nil)
     if not bag_id.nil?
       resources = current_user.bags.find(bag_id).box_images + current_user.bags.find(bag_id).box_fragments
-      resources.sort_by(&:created_at)
       return resources
     else
       resources = current_user.box_images + current_user.box_fragments
-      resources.sort_by(&:created_at)
       return resources
     end
   end
   
-  def moveBoxResources(relationship_ids = params[:user_box_image_relationships], bag_id)
+  def moveBoxResources(relationships = params[:user_box_resource_relationships], bag_id)
     success = true
-    relationship_ids.each do |id|
+    relationships[:fragment_images].each do |id|
       if not UserBoxImageRelationship.find(id).update_attributes(bag_id:bag_id)
         success = false
-        break
       end
-    end
+    end unless relationships[:fragment_images].nil?
+    relationships[:fragments].each do |id|
+      if not UserBoxFragmentRelationship.find(id).update_attributes(bag_id:bag_id)
+        success = false
+      end
+    end unless relationships[:fragments].nil?
+    return success
+  end
+  
+  def destroyBoxResources(relationships = params[:user_box_resource_relationships])
+    UserBoxImageRelationship.destroy(relationships[:fragment_images]) unless relationships[:fragment_images].nil?
+    UserBoxFragmentRelationship.destroy(relationships[:fragments]) unless relationships[:fragments].nil?
   end
   
   #privileges
