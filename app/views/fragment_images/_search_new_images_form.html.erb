@@ -1,9 +1,9 @@
 <div class="new_image_search_container">
-	<%= form_tag fragment_images_path, method: :post, remote:true, multipart:true, class:"form-inline" do %>
+	<%= form_tag create_searched_fragment_image_path, method: :post, remote:true, multipart:true, class:"form-inline" do %>
 		<%= text_field_tag 'new_image_search', '', placeholder: "Search on..."%>
 		<%= link_to "Social networks", "#", class:"btn btn-primary", id: "search_on_social_networks_button" %>
 		<%= link_to "Google", "#", class:"btn btn-primary", id: "search_on_google_images_button" %>
-		<div class="new_image_search_results_container">
+		<div id="new_image_search_results_container">
 			
 		</div>
 		<div class="form-actions">

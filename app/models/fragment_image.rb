@@ -9,20 +9,40 @@ class FragmentImage < FragmentResource
   :url => "/images/uploads/fragment_images/:id/:style/:filename",
   :path => ":rails_root/public/images/uploads/fragment_images/:id/:style/:filename"
   
-  validates_attachment :fragment_resource_file, presence:true,
+  validates_attachment :fragment_resource_file,
   :content_type => { :content_type => /^image\/(jpg|jpeg|pjpeg|png|x-png|gif)$/, :message => 'file type is not allowed (only jpeg/png/gif images)' },
   :size => { :in => 0..9.megabytes }
   
   def as_json(options={})
     result = super(options)
-    result[:big] = self.fragment_resource_file.url(:big)
-    result[:medium] = self.fragment_resource_file.url(:medium)
-    result[:thumb] = self.fragment_resource_file.url(:thumb)
-    result[:mini] = self.fragment_resource_file.url(:mini)
+    result = assignImagesUrls(result)
     if self.id.nil?
       result[:id] = ''
     end
-    result
+    return result
   end
+  
+  #Images URLS getters
+  def getImageUrl(size)
+    result = assignImagesUrls
+    return result[size]
+  end
+  
+  private
+    
+    def assignImagesUrls(result={})
+      if !self.fragment_resource_file_file_name.nil? and !self.fragment_resource_file_file_name.blank?
+        result[:big] = self.fragment_resource_file.url(:big)
+        result[:medium] = self.fragment_resource_file.url(:medium)
+        result[:thumb] = self.fragment_resource_file.url(:thumb)
+        result[:mini] = self.fragment_resource_file.url(:mini)
+      else
+        result[:big] = self.data["originalUrl"]
+        result[:medium] = self.data["originalUrl"]
+        result[:thumb] = self.data["thumbUrl"]
+        result[:mini] = self.data["thumbUrl"]
+      end
+      return result
+    end
   
 end

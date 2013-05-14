@@ -34,7 +34,9 @@ FragmentsProject::Application.routes.draw do
   #Fragment Resources
   resources :fragment_images
   match 'search_new_fragment_image', to: 'fragment_images#search_new', as: 'search_new_fragment_image'
+  post 'create_from_search', to: 'fragment_images#create_from_search', as: 'create_searched_fragment_image'
   resources :fragment_image_relationships, only: [:new]
+  resources :user_box_image_relationships, only:[:new, :create]
   resources :fragment_types, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   
   #PuzzleBox

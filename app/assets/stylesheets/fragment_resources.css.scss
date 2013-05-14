@@ -2,13 +2,13 @@
 @import 'mixins';
 
 .box_resource_container{
-  .multiple_selection_checkbox{
+  height:150px;
+}
+.multiple_selection_checkbox{
     position:absolute;
     top: 0px;
     left: 0px;
-  }
-  height:150px;
-}
+ }
 
 /*Potentially old box styles*/
 .fragment_resource_panel_controls{
@@ -39,11 +39,25 @@
     }
  }
  /*Search an image*/
-  .new_image_search_results_container{
+  #new_image_search_results_container{
      height:200px;
      width:100%;
+     overflow:auto;
+    .image_search_result_container{
+      li{
+        position:relative;
+      }
+      img{
+        max-width:130px;
+        max-height:130px;
+      }
+      p{
+        width:130px;
+        font-size:12px;
+        line-height:13px;
+      }
+    }
    }
- 
   /*Choosing from box*/
   .modal_index{
   max-height:300px;

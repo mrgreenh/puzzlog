@@ -1,0 +1,5 @@
+<%= form_tag user_box_image_relationships_path(), method: :post, remote: :true do %>
+	<%= hidden_field_tag "id", @fragment_image.id %>
+	<%= render 'box/add_to_box_modal_form' %>
+	<%= submit_tag 'Add', class:"btn btn-success", id:"add_box_resource_confirm_button" %>
+<% end %>

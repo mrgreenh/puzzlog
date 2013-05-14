@@ -2,6 +2,7 @@ class PageFragmentRelationshipsController < ApplicationController
   include ArticlesHelper
   include PageFragmentRelationshipsHelper
   include FragmentsHelper
+  include BagsHelper
   
   #-----------------------------------------------------Privileges
   before_filter :page_fragment_relationship_create_filter, only:[:new,:create]
@@ -11,7 +12,12 @@ class PageFragmentRelationshipsController < ApplicationController
   def new
     @page = Page.find(params[:page_id])
     if params[:from_box]
-      @summary_fragments = current_user.fragments.where("stand_alone=?", true).order('updated_at DESC')
+      @resources = resourcesFromBag(nil,"fragment")
+      @current_bag_id = nil
+      @resource_type = "fragment"
+      @multiple_selection = true
+      @add_to_article = params[:add_to_article]
+      @page_id = @page.id
       respond_to do |format|
         format.js
       end

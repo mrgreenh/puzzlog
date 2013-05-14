@@ -2,10 +2,12 @@ class UserBoxFragmentRelationshipsController < ApplicationController
   include BagsHelper
   include UserBoxFragmentRelationshipsHelper
   
+  before_filter :create_user_box_fragment_relationships_filter, only: [:new, :create]
+  
   def new
      @fragment = Fragment.find(params[:id])
      @add_to_box = true
-     @new_bag_button = false
+     @new_bag_button = true
      respond_to do |format|
        format.js
      end
@@ -24,6 +26,14 @@ class UserBoxFragmentRelationshipsController < ApplicationController
      
      respond_to do |format|
       format.js
+    end
+  end
+  
+  #privileges
+  def create_user_box_fragment_relationships_filter
+    if not can_create_user_box_fragment_relationships?
+      flash[:errors] = "You don't have the privileges"
+      redirect_to root_path
     end
   end
 end

@@ -43,6 +43,9 @@ function initializeControlsPopovers(){
     });
 }
 
+//-----------Dot dot dot
+$(".fragment_summary td.table-value p,.fragment_summary td.table-key p,.fragment_summary ul.summary_hash_container, .thumbnail p").dotdotdot();
+
 $(function(){
 	initializeControlsPopovers();
 	flashMessages();

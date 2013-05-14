@@ -1,4 +1,4 @@
-$("#fragment_<%= @page_fragment_relationship.fragment.id %>").slideUp(function(){
+$(".article_edit_container #fragment_<%= @page_fragment_relationship.fragment.id %>").slideUp(function(){
 	$(this).popover('hide');
 	$(".tooltip").remove();
 	$(this).remove();

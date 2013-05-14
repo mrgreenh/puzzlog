@@ -1,10 +1,10 @@
 <%
-add_to_article ||= false # If the summary is shown in the dialog for adding fragments to an article from puzzlebox
+@add_to_article ||= false # If the summary is shown in the dialog for adding fragments to an article from puzzlebox
 @multiple_selection ||= false
 %>
 <li>
 	<div class="row fragment_summary resource_partial" id="fragment_<%= fragment.id %>">
-		<% if not add_to_article %>
+		<% if not @add_to_article %>
 			<%= render 'common_partials/editing_header' if can_edit_fragment?(fragment)||can_destroy_fragment?(fragment) %>
 			<div class="hide tooltip_content">
 				<a class='close'>&times;</a>
@@ -38,14 +38,14 @@ add_to_article ||= false # If the summary is shown in the dialog for adding frag
 		  					n+=1;
 		  					break if n>9
 		  					%>
-		  					<li><%= image_tag image.fragment_resource_file.url(:mini) %></li>
+		  					<li><%= image_tag image.getImageUrl(:mini) %></li>
 		  				<% end %>
 		  		</ul>
 		  	<% end %>
 		</div>
-		<% if add_to_article %>	
+		<% if @add_to_article %>	
 			<div>
-				<%= link_to page_fragment_relationships_path(page_id:@page.id, fragment_id:fragment.id), method: :post, remote:true, class:'btn btn-success add_fragment_button' do %>
+				<%= link_to page_fragment_relationships_path(page_id:@page_id, fragment_id:fragment.id), method: :post, remote:true, class:'btn btn-success add_fragment_button' do %>
 					<i class="icon icon-white icon-arrow-right"></i>
 				<% end %>
 			</div>

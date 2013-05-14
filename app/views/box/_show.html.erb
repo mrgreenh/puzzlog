@@ -1,0 +1,16 @@
+<div class="container-fluid choose_from_puzzle_box_container row hide" id="puzzle_box_fragments_container">
+		<div class="span2 nav" id="box_bags_sidebar_nav_container">
+			<%= render 'bags/box_bags_sidebar_nav', :controls=>false%>
+		</div>
+		<div class="span10" id="box_resources_list_container">
+			<%= render 'bags/box_resources' %>
+		</div>
+</div>
+<div class="addFromBoxConfirmationContainer">
+	<%= link_to '#', class:"btn btn-success", id:"addItemsFromBoxConfirmationButton" do %>
+		<i class="icon-white icon-arrow-down"></i> Add selected <i class="icon-white icon-arrow-down"></i>
+	<% end unless @add_to_article #which is true if I'll display the green buttons on each fragment %>
+	<%= link_to 'javascript:closeBoxContainer();', class:"btn btn-danger", id:"addImagesFromBoxConfirmationButton" do %>
+		<i class="icon-white icon-remove"></i> Close
+	<% end %>
+</div>

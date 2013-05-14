@@ -19,12 +19,6 @@
 			<% end %>
 			
 			<div class="fragment_controls form-actions well" id="fragment_<%=@fragment.id%>_controls">
-				<div class="form-horizontal" id="name_fragment_<%=@fragment.id%>">
-					<div class="control-group">
-						<%= form.label :name, 'Name:', class:'control-label' %>
-						<%= form.text_field :name %>
-					</div>
-				</div>
 				<%= form.submit "Save", name:'save_it_submit', class:'btn btn-info', id: "save_fragment_#{@fragment.id}"%>
 			</div>
 		<% end %>

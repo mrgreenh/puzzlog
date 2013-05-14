@@ -15,12 +15,24 @@ module BagsHelper
     return bag_id
   end
   
-  def resourcesFromBag(bag_id=nil)
+  def resourcesFromBag(bag_id=nil,resource_type=nil)
     if not bag_id.nil?
-      resources = current_user.bags.find(bag_id).box_images + current_user.bags.find(bag_id).box_fragments
+      if resource_type.nil?
+        resources = current_user.bags.find(bag_id).box_fragments + current_user.bags.find(bag_id).box_images
+      elsif !resource_type.nil? and resource_type=="fragment_image"
+        resources = current_user.bags.find(bag_id).box_images
+      elsif !resource_type.nil? and resource_type=="fragment"
+        resources = current_user.bags.find(bag_id).box_fragments
+      end
       return resources
     else
-      resources = current_user.box_images + current_user.box_fragments
+      if resource_type.nil?
+        resources = current_user.box_fragments + current_user.box_images
+      elsif !resource_type.nil? and resource_type=="fragment_image"
+        resources = current_user.box_images
+      elsif !resource_type.nil? and resource_type=="fragment"
+        resources = current_user.box_fragments
+      end
       return resources
     end
   end

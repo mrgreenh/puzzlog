@@ -4,7 +4,7 @@ class FragmentImagesController < ApplicationController
   include ArticlesHelper
   include BagsHelper
   
-  before_filter :fragment_resource_create_filter, only:[:new,:create,:search_new]
+  before_filter :fragment_resource_create_filter, only:[:new,:create,:search_new,:create_from_search]
   before_filter :fragment_resource_destroy_filter, only: :destroy
   before_filter :fragment_resource_edit_filter, only: [:edit, :update]
   before_filter :fragment_resource_view_filter, only: [:show]
@@ -28,18 +28,10 @@ class FragmentImagesController < ApplicationController
     @created_images = Hash.new
     params[:fragment_resource].each do |image|
       fragment_image = FragmentImage.new(fragment_resource_file:image[1]["file"],user_id:current_user.id,description:image[1]["description"])
-    
+      
       if fragment_image.save
         flash[:success] = "Images saved!"
-        if params[:add_to_box]
-           bag_id = bagAssignment(params);
-           if current_user.user_box_image_relationships.create(resource_id:fragment_image.id,bag_id:bag_id) and bag_id.to_i>-1
-             flash[:success] = flash[:success]+" It's kept safe in bag '#{Bag.find(bag_id).name}'."
-             @current_bag_id = bag_id #Necessary in case we are adding it to some bag and want to update it
-           else
-             @current_bag_id="none"
-           end
-        end
+        imagesBagAssignment(fragment_image)
         @created_images[fragment_image.id] = fragment_image.as_json(only: [:id,:description])
       else
         flash[:errors] = "There has been some problem, try again."
@@ -49,7 +41,29 @@ class FragmentImagesController < ApplicationController
     @fragment_images = current_user.fragment_images.order('updated_at DESC')
     respond_to do |format|
       format.js
-      format.html {render 'index'}
+    end
+  end
+
+  def create_from_search
+    @created_images = Hash.new
+    params[:search_results].each do |result|
+      image = ActiveSupport::JSON.decode(result)
+      logger.debug("---------------------------------------------"+image.to_s)
+      description = image["description"]
+      image.delete("description");
+      fragment_image = FragmentImage.new(user_id:current_user.id, description:description, data:image);
+      
+      if fragment_image.save
+        flash[:success] = "Images saved!"
+        imagesBagAssignment(fragment_image)
+        @created_images[fragment_image.id] = fragment_image.as_json(only: [:id,:description])
+      else
+        flash[:errors] = "There has been some problem, try again"
+      end
+    end
+    @fragment_images = current_user.fragment_images.order('updated_at DESC')
+    respond_to do |format|
+      format.js {render 'create'}
     end
   end
 
@@ -101,6 +115,20 @@ class FragmentImagesController < ApplicationController
   end
   
   private
+    
+    def imagesBagAssignment(fragment_image)
+      if params[:add_to_box]
+           bag_id = bagAssignment(params);
+           if current_user.user_box_image_relationships.create(resource_id:fragment_image.id,bag_id:bag_id) and bag_id.to_i>-1
+             flash[:success] = flash[:success]+" It's kept safe in bag '#{Bag.find(bag_id).name}'."
+             @current_bag_id = bag_id #Necessary in case we are adding it to some bag and want to update it
+           else
+             @current_bag_id="none"
+           end
+        end
+    end
+    
+    #Privileged
     
     def fragment_resource_create_filter
         if not can_create_fragment_resources?

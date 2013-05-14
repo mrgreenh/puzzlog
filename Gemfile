@@ -18,7 +18,7 @@ gem 'aws-sdk', '~> 1.3.4'
 gem 'heroku'
 gem "remotipart", "~> 1.0"
 gem "activerecord-postgres-hstore", "0.3.0"
-
+gem "yajl-ruby"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

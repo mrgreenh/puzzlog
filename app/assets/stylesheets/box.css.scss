@@ -47,3 +47,25 @@
     margin-top:50px;
   }
 }
+
+/*Add from box*/
+#puzzle_box_fragments_container.choose_from_puzzle_box_container{
+  height:300px;
+  background-color:#f8ffdd;
+  overflow:hidden;
+  #box_bags_sidebar_nav_container,#box_resources_list_container{
+    margin:0px 10px;
+    height:300px;
+    overflow:auto;
+  }
+}
+.addFromBoxConfirmationContainer{
+  width:100%;
+  background-color:#332200;
+  text-align:center;
+  border-bottom:#775500 solid 2px;
+  border-top:#775500 solid 2px;
+  .btn{
+    margin:5px auto;
+  }
+}

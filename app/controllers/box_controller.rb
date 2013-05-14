@@ -5,8 +5,11 @@ before_filter {@multiple_selection=true}
 before_filter :box_view_filter, only: :show
 
   def show
-    @resources = resourcesFromBag
+    @resources = resourcesFromBag(params[:id],params[:resource_type])
     @current_bag_id = nil
+    @multiple_selection = true
+    @add_to_article = params[:add_to_article]
+    @page_id = params[:page_id]
     respond_to do |format|
       format.js { render 'bags/show' }
       format.html

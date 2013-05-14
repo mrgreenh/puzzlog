@@ -3,10 +3,14 @@
 %>
 <div class="fragment_images_panel_controls fragment_resource_panel_controls">
 	<%= link_to new_fragment_image_relationship_path(fragment_id:fragment.id||""), remote:true, id:"fragment_#{fragment.id}_images_add_button", class:'btn btn-primary' do %>
-		<i class="icon icon-white icon-plus"></i> Add from Puzzle Box
+		<i class="icon icon-white icon-plus"></i> From Puzzle Box
 	<% end %>
 	
 	<%= link_to new_fragment_image_path, remote:true, id:"fragment_#{fragment.id}_images_upload_button", class:'btn btn-success' do %>
-		<i class="icon icon-white icon-arrow-up"></i> Upload Images
+		<i class="icon icon-white icon-arrow-up"></i> Upload
+	<% end %>
+	
+	<%= link_to search_new_fragment_image_path, remote:true, id:"fragment_#{fragment.id}_images_upload_button", class:'btn btn-success' do %>
+		<i class="icon icon-white icon-search"></i> Search
 	<% end %>
 </div>

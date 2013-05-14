@@ -9,3 +9,10 @@ function showBagSelector(){
 		$(".modal-body #bag_selector, .modal-body #new_bag_modal_form_button").toggleClass("hide");
 	});
 }
+
+function closeBoxContainer(){
+	$(".choose_from_puzzle_box_container, .addFromBoxConfirmationContainer").slideUp(function(){
+		$(".choose_from_puzzle_box_container, .addFromBoxConfirmationContainer").remove();
+	});
+	return false;
+}

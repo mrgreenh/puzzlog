@@ -1,7 +1,7 @@
 <%if not @fragment1.nil?%>
-$("#fragment_<%= @page_fragment_relationship.fragment.id %>").slideUp(function(){
+$(".article_edit_container #fragment_<%= @page_fragment_relationship.fragment.id %>").slideUp(function(){
 	$("*").popover('hide');
-	$("#fragment_<%= @fragment2.id %>").before($("#fragment_<%= @fragment1.id %>"));	
-	$("#fragment_<%= @page_fragment_relationship.fragment.id %>").slideDown();
+	$(".article_edit_container #fragment_<%= @fragment2.id %>").before($(".article_edit_container #fragment_<%= @fragment1.id %>"));	
+	$(".article_edit_container #fragment_<%= @page_fragment_relationship.fragment.id %>").slideDown();
 });
 <%end%>

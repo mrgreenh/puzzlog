@@ -10,4 +10,15 @@ class FragmentResource < ActiveRecord::Base
   def is_public?
     self.fragments.where('public=?',true).any?
   end
+  
+  def data=(val)
+    if val.kind_of? String
+      begin
+        val = ActiveSupport::JSON.decode(val)
+      rescue
+        val = {}
+      end
+    end
+    write_attribute(:data, val)
+  end
 end

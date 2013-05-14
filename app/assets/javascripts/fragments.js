@@ -61,7 +61,9 @@ function initializeFragment(fragment){
 //------------------------------Resources
 //Images
 function fragmentImageThumbnail(image){
-	var controls = '<a class="detach" data-image-id="'+image.id+'"><i class="icon icon-remove"></i></a>';
+	var boxButton = '<a href="/fragment_images/'+image.id+'/edit" data-remote="true" title="Edit image\'s properties"><i class="icon icon-edit"></i></a>'
+	var detachButton = '<a class="detach" data-image-id="'+image.id+'"><i class="icon icon-remove"></i></a>';
+	var controls = '<ul><li>'+boxButton+'</li><li>'+detachButton+'</li></ul>'
 	var thumbnail = '<img alt="'+image.description+'" src="'+image.thumb+'"><p>'+image.description+'</p>';
 	var thumbnailContainer = '<li data-image-id="'+image.id+'" class="span2 fragment_editor_resource_container" id="fragment_image_'+image.id+'"><div class="fragment_image thumbnail">'+thumbnail+controls+'</div></li>';
 	return thumbnailContainer;
@@ -95,7 +97,7 @@ function updateResources(fragment){
 		$("#fragment_"+fragment.id+"_images .thumbnails").append(fragmentImageThumbnail(image));
 	});
 	$("#fragment_"+fragment.id+"_images .detach").click(function(){
-		var imageId = $(this).parents("li").attr("data-image-id");
+		var imageId = $(this).parents("li.fragment_editor_resource_container").attr("data-image-id");
 		$(this).parents("li").slideUp(function(){
 			$(this).remove();
 		});
@@ -106,8 +108,7 @@ function updateResources(fragment){
 
 //Initialization
 $(function(){ 
-	//---------------------------------------Dot dot dot e altre utility
-	$(".fragment_summary td.table-value p,.fragment_summary td.table-key p,.fragment_summary ul.summary_hash_container").dotdotdot();
+	//---------------------------------------Move to page e detach fragment controls
 	$(".move_to_page_button, .detach_fragment_button").tooltip({placement:'right'});
 	//---------------------------------------Fragments initializer
 	initializeAllFragments();

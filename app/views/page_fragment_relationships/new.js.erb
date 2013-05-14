@@ -1,9 +1,7 @@
 <% if params[:from_box] %>
 
-modalWindow("Choose a fragment:","<%= escape_javascript(render 'page_fragment_relationships/choose_from_puzzle_box') %>")
-$(".modal_index .fragment_summary").click(function(){
-	
-});
+<%= render 'box/add_from_box' %>
+addFragmentsFromBoxConfirmationButton();
 
 <% else %>
 

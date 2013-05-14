@@ -86,6 +86,9 @@
       margin-left: -20px;
       img{
         @include rotated_image;
+        @include gentle-shade;
+        max-width:60px;
+        max-height:60px;
       }
     }
   }
