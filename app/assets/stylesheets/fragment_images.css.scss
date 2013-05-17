@@ -2,6 +2,10 @@
 .fragment_image.thumbnail{
   border-style: dashed;
   @include rounded_corners;
+  overflow:hidden;
+  li{
+    float:left;
+  }
   img{
     max-width:130px;
     max-height:100px;
@@ -18,4 +22,15 @@
 
 form.edit_fragment_image{
   text-align:center;
+}
+form.edit_fragment_image{
+  fieldset{
+    margin: 5px auto;
+  }
+  img{
+    max-height:250px;
+  }
+  .media_fragment_form{
+    width:25px;
+  } 
 }

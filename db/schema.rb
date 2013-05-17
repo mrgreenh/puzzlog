@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130429084554) do
+ActiveRecord::Schema.define(:version => 20130514205841) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(:version => 20130429084554) do
     t.integer  "fragment_resource_file_file_size"
     t.datetime "fragment_resource_file_updated_at"
     t.hstore   "data"
+    t.string   "media_fragment"
   end
 
   create_table "fragment_sound_relationships", :force => true do |t|

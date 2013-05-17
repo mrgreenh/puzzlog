@@ -1,0 +1,15 @@
+<%= render 'common_partials/flash_messages_popup' %>
+//Update anything in the page regarding bags
+<%= render 'bags/update_views' %>
+
+//Update miniature in fragment editing
+$(fragments).each(function(){
+	var current_fragment = this;
+	for(image in this.images){
+		if(this.images[image].id==<%= @fragment_image.id %>){
+				this.images[image]=<%= raw(@fragment_image.to_json(only: [:id,:description])) %>;
+				updateResources(current_fragment);
+				console.log("update resources");
+			}
+	}
+});

@@ -35,6 +35,7 @@ class PageFragmentRelationshipsController < ApplicationController
       @fragment = Fragment.create(fragment_type_id:params[:fragment_type_id],data:FragmentType.find(params[:fragment_type_id]).default_data,user_id:current_user.id)
     else
       @fragment = Fragment.find(params[:fragment_id])
+      flash[:success] = "Fragment added to the bottom of the page!"
     end
     @page.page_fragment_relationships.build(fragment_id:@fragment.id,
                                             ordering_number:@page.page_fragment_relationships.count+1)

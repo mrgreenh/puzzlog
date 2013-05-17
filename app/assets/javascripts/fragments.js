@@ -61,9 +61,11 @@ function initializeFragment(fragment){
 //------------------------------Resources
 //Images
 function fragmentImageThumbnail(image){
-	var boxButton = '<a href="/fragment_images/'+image.id+'/edit" data-remote="true" title="Edit image\'s properties"><i class="icon icon-edit"></i></a>'
+	var boxButton = '<a href="/fragment_images/'+image.id+'/edit" class="btn btn-small" data-remote="true" title="Edit image\'s properties"><i class="icon icon-edit"></i></a>'
+	var croppedIcon = "";
+	if(mediaFragmentReg.test(image.thumb)) croppedIcon = "<i class='icon icon-resize-small'></i>";
 	var detachButton = '<a class="detach" data-image-id="'+image.id+'"><i class="icon icon-remove"></i></a>';
-	var controls = '<ul><li>'+boxButton+'</li><li>'+detachButton+'</li></ul>'
+	var controls = '<ul><li>'+boxButton+'</li><li>'+croppedIcon+'</li><li>'+detachButton+'</li></ul>'
 	var thumbnail = '<img alt="'+image.description+'" src="'+image.thumb+'"><p>'+image.description+'</p>';
 	var thumbnailContainer = '<li data-image-id="'+image.id+'" class="span2 fragment_editor_resource_container" id="fragment_image_'+image.id+'"><div class="fragment_image thumbnail">'+thumbnail+controls+'</div></li>';
 	return thumbnailContainer;

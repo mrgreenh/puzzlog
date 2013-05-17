@@ -1,3 +1,5 @@
+var mediaFragmentReg = /#xywh\=percent\:[0-9]+,[0-9]+,[0-9]+,[0-9]+/i;
+
 function initializeNewImageSearch(){
 	initializeSocialSearch();
 	addNewBagButton();
@@ -5,6 +7,7 @@ function initializeNewImageSearch(){
 	
 	//Google search
 	initializeGoogleSearch();
+	
 }
 
 //-----------------------------------------------------------Social Search
@@ -49,7 +52,7 @@ function initializeGoogleSearch(){
 			var query = $("input#new_image_search").val();
 			$.ajax({
 			  dataType: "json",
-			  url: "https://www.googleapis.com/customsearch/v1?key=AIzaSyBUqlpqXeRQzuXSC0sFuKoOGiGb4PbmrrU&cx=014696709631244279916:wshv_v_wnoy&q="+encodeURIComponent(query)+"&searchType=image&fileType=jpg&imgSize=medium&alt=json",
+			  url: "https://www.googleapis.com/customsearch/v1?key=AIzaSyBUqlpqXeRQzuXSC0sFuKoOGiGb4PbmrrU&cx=014696709631244279916:wshv_v_wnoy&q="+encodeURIComponent(query)+"&searchType=image&fileType=jpg&imgSize=large&imgSize=xlarge&alt=json",
 			  success: function(data){
 			  	showImageSearchResults(data.items,"google");
 			  }
@@ -93,4 +96,57 @@ function parseImageSearchResults(data,dataSource){
 		});
 	}
 	return results;
+}
+
+//Media fragment functionalities
+function getImageMediaFragmentCoordinatesButton(){
+	$("#apply_image_media_fragment_button").click(function(){
+		parseMediaFragment();
+		return false;
+	});
+	$("#remove_image_media_fragment_button").click(function(){
+		removeImageMediaFragment();
+		return false;
+	});
+}
+
+function parseMediaFragment(){
+		var mediaFragmentParameters = "#xywh=percent:";
+		var x = $(".edit_fragment_image input#x").val();
+		if(isNaN(x)||x>100||x<0) x=0;
+		var y = $(".edit_fragment_image input#y").val();
+		if(isNaN(y)||y>100||y<0) y=0;
+		var w = $(".edit_fragment_image input#w").val();
+		if(isNaN(w)||w>100||w<0||w>(100-x)) w=100;
+		var h = $(".edit_fragment_image input#h").val();
+		if(isNaN(h)||h>100||h<0||h>(100-y)) h=100;
+		var oldURI = $(".edit_fragment_image img").attr("data-original-uri");
+		if(oldURI==undefined) oldURI = $(".edit_fragment_image img").attr("src");
+		var newMediaFragment = mediaFragmentParameters+x+","+y+","+w+","+h;
+		var newURI = oldURI.split(mediaFragmentParameters)[0]+newMediaFragment;
+		$(".edit_fragment_image img").attr("src",newURI);
+		$(".edit_fragment_image img").attr("data-original-uri",newURI);
+		if(mediaFragmentReg.test(newURI)) $(".edit_fragment_image #fragment_image_media_fragment").val(newMediaFragment);
+		else $(".edit_fragment_image #fragment_image_media_fragment").val("");
+		$(".edit_fragment_image img").attr("style","");
+		applyImageMediaFragments(".edit_fragment_image img");
+		updateMediaFragmentFields();
+}
+
+function updateMediaFragmentFields(){
+	var mediaFragmentValue = $(".edit_fragment_image #fragment_image_media_fragment").val();
+	if(mediaFragmentReg.test(mediaFragmentValue)){ //Parse media fragment already applied to image
+		var coordinates = mediaFragmentValue.split(":")[1].split(",");
+		var i=0;
+		$(".edit_fragment_image input.media_fragment_form").each(function(){
+			$(this).val(coordinates[i]);
+			i++;
+		});
+	}
+}
+
+function removeImageMediaFragment(){
+	$("#fragment_image_media_fragment").val("");
+	$(".edit_fragment_image .media_fragment_form").val("");
+	parseMediaFragment();
 }

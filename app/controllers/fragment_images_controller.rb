@@ -78,14 +78,14 @@ class FragmentImagesController < ApplicationController
   def update
     @fragment_image = FragmentImage.find(params[:id])
     if @fragment_image.update_attributes(params[:fragment_image])
-      flash[:success] = "Image description updated to \"#{@fragment_image.description}\""
+      flash[:success] = "Image updated to \"#{@fragment_image.description}\""
     else
       flash[:errors] = "There has been a problem while updating your images."
     end
     
     @fragment_images = current_user.fragment_images.order('updated_at DESC')
     respond_to do |format|
-      format.js { render action: 'create'} #Tanto per ora sono uguali
+      format.js
     end
   end
 

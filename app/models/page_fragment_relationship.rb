@@ -6,7 +6,7 @@ class PageFragmentRelationship < ActiveRecord::Base
   
   def destroy
     no_other_relationships = self.fragment.page_fragment_relationships.count==1
-    if no_other_relationships&&!self.fragment.stand_alone&&self.fragment.publication_date.nil?
+    if no_other_relationships&&!self.fragment.user_box_fragment_relationships.any?&&self.fragment.publication_date.nil?
       self.fragment.delete
     end
     relationships = self.page.page_fragment_relationships.where('ordering_number>?',self.ordering_number).order('ordering_number ASC')

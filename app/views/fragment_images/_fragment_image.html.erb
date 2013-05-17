@@ -10,8 +10,11 @@ detach_button ||= false
         </p>
         <div class="fragment_image_controls">
         	<% if can_edit_fragment_resource?(fragment_image) %>
-	        	<%= link_to edit_fragment_image_path(fragment_image), remote:true  do %>
+	        	<%= link_to edit_fragment_image_path(fragment_image), class:'btn btn-small', remote:true  do %>
 	        		<i class="icon icon-edit"></i>
+	        	<% end %>
+	        	<% if not fragment_image.media_fragment.blank? %>
+	        		<i class="icon icon-resize-small"></i><%= fragment_image.media_fragment %>
 	        	<% end %>
 	        	<%= check_box_tag "user_box_resource_relationships[fragment_images][]", current_user.user_box_image_relationships.find_by_resource_id(fragment_image.id).id, false, class:"multiple_selection_checkbox" %>
         	<% end %>

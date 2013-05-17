@@ -27,4 +27,6 @@
 //= require ace/mode-scss.js
 //= require ace/mode-html.js
 //= require ace/mode-javascript.js
+//= require mediafragments.js
+//= require my_xywh.js
 //= require_tree .

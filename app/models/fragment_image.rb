@@ -1,5 +1,5 @@
 class FragmentImage < FragmentResource
-  
+  attr_accessible :media_fragment
   has_many :fragment_image_relationships, dependent: :destroy
   has_many :fragments, through: :fragment_image_relationships, source: :fragment
   has_many :user_box_image_relationships, foreign_key: :resource_id
@@ -41,6 +41,9 @@ class FragmentImage < FragmentResource
         result[:medium] = self.data["originalUrl"]
         result[:thumb] = self.data["thumbUrl"]
         result[:mini] = self.data["thumbUrl"]
+      end
+      result.each do |k,v|
+        result[k] = "#{v}#{self.media_fragment||''}" if k==:big||k==:medium||k==:thumb||k==:mini
       end
       return result
     end

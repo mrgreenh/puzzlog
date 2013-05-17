@@ -1,1 +1,9 @@
-modalWindow("Rename your image!","<%= escape_javascript(render 'fragment_images/edit_form') %>")
+modalWindow("Rename your image!","<%= escape_javascript(render 'fragment_images/edit_form') %>");
+
+//Media fragments editor
+$("#genericModalWindow").on('shown',function(){
+	updateMediaFragmentFields();
+	getImageMediaFragmentCoordinatesButton();
+	parseMediaFragment();
+	$("#genericModalWindow").unbind('shown');
+});

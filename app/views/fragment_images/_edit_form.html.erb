@@ -1,9 +1,23 @@
 <div class="well">
 	<%= form_for @fragment_image, remote:true do |form| %>
-		<%= image_tag @fragment_image.getImageUrl(:thumb), alt:@fragment_image.description %>
-		<fieldset>
+		<%= image_tag @fragment_image.getImageUrl(:medium), alt:@fragment_image.description, class:"fragment_image_edit_form_preview" %>
+		<fieldset class="form-inline">
 			<%= form.label :description, 'Description:' %>
 			<%= form.text_field :description %>
+		</fieldset>
+		<fieldset class="form-inline">
+			Crop (%):
+			<%= text_field_tag :x, nil, placeholder:"x", class:"media_fragment_form" %>
+			<%= text_field_tag :y, nil, placeholder:"y", class:"media_fragment_form" %>
+			<%= text_field_tag :w, nil, placeholder:"w", class:"media_fragment_form" %>
+			<%= text_field_tag :h, nil, placeholder:"h", class:"media_fragment_form" %>
+			<%= link_to "#", class:"btn btn-small", id:"apply_image_media_fragment_button" do %>
+				<i class="icon-black icon-resize-small"></i>
+			<% end %>
+			<%= link_to "#", class:"btn btn-small", id:"remove_image_media_fragment_button" do %>
+				<i class="icon-black icon-remove"></i>
+			<% end %>
+			<%= form.hidden_field :media_fragment %>
 		</fieldset>
 		
 		<div class="form-actions">
