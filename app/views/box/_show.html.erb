@@ -10,7 +10,7 @@
 	<%= link_to '#', class:"btn btn-success", id:"addItemsFromBoxConfirmationButton" do %>
 		<i class="icon-white icon-arrow-down"></i> Add selected <i class="icon-white icon-arrow-down"></i>
 	<% end unless @add_to_article #which is true if I'll display the green buttons on each fragment %>
-	<%= link_to 'javascript:closeBoxContainer();', class:"btn btn-danger", id:"addImagesFromBoxConfirmationButton" do %>
+	<%= link_to '#', class:"btn btn-danger", id:"addFromBoxCloseButton" do %>
 		<i class="icon-white icon-remove"></i> Close
 	<% end %>
 </div>

@@ -1,3 +1,5 @@
 closeBoxContainer();
 $(".main_container").prepend("<%= escape_javascript(render 'box/show') %>");
-$(".choose_from_puzzle_box_container").slideDown();
+$(".choose_from_puzzle_box_container").slideDown(function(){
+	$("#addFromBoxCloseButton").click(closeBoxContainer);
+});
