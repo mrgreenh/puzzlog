@@ -3,62 +3,53 @@
 <header class="navbar navbar-fixed-top">
 	<nav class="navbar-inner">
         <div class="container">
-        	<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-		      <span class="icon-bar"></span>
-		      <span class="icon-bar"></span>
-		      <span class="icon-bar"></span>
-		    </a>
-        	<%= link_to 'PuzzLog', root_path, class: 'brand' %>
-        	<div class="nav-collapse">
+        	<%= link_to 'PuzzLog', root_path, class: 'brand hidden-phone' %>
+        	<div class="pull-right">
 				<ul class="nav">
-					<li>
-						<%= link_to 'Staff', users_path %>
-					</li>
-					<li class="divider-vertical"></li>
 				  <% if not signed_in? %>
 				  <li><a data-toggle="modal" href="#modalLogin" ><i class="icon-user"></i></a></li>
 				  
 				<% else signed_in? %>
-					<% if can_create_fragments? %> <!-- allora mostro creazione frammenti e puzzle box -->
-						<li><a href="/box"><i class="icon icon-folder-open"></i>Box</a></li>
+					<% if can_create_fragments? and !@article_editing %> <!-- allora mostro creazione frammenti e puzzle box -->
+						<% FragmentType.most_used.limit(5).each do |type|
+						%>
+							<li>
+								<%= link_to new_fragment_path(fragment_type_id:type.id), title:type.name, class:"create_fragment_button hidden-phone" do %>
+									<img src="<%= getFragmentTypeIconThumb(type) %>" title="<%= type.name %>">
+								<% end %>
+							</li>
+						<% end %>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								<b class="caret"></b>
-								<i class="icon icon-comment"></i> New Fragment
+								<b class="caret"></b> More
 							</a>
 							<ul class="dropdown-menu"> 
-								<% #FragmentType.most_used.limit(5).each do |type|
-									FragmentType.all.each do |type|
-								%>
-								<li>
-									<%= link_to new_fragment_path(fragment_type_id:type.id) do %>
-										<img src="<%= getFragmentTypeIconThumb(type) %>" title="<%= type.name %>"> <%= type.name %>
-										<li class="divider"></li>
-									<% end %>
-								</li>
-								<% end %>
-								<li><%= link_to 'More...', fragment_types_path(), remote:true %></li>
+								<li><%= link_to 'Complete list', fragment_types_path(), remote:true %></li>
 								<% if can_create_fragment_types? %>
 								<li><%= link_to 'New type', new_fragment_type_path %></li>
 								<% end %>
 							</ul>
 						</li>
+						<li class="divider-vertical"></li>
+						<li>
+						      <%= link_to new_article_path, remote: true do %>
+						      	<i class="icon-file"></i>New Article
+						      <% end %>
+						</li>
+						<li class="divider-vertical"></li>
+						<li><a href="/box"><i class="icon icon-folder-open"></i> Box</a></li>
+						<li class="divider-vertical"></li>
 					<% end %>
 					<li class="dropdown">
-					    <a href="#"
-					          class="dropdown-toggle"
-					          data-toggle="dropdown">
-					          <b class="caret"></b>
-					          <i class="icon-cog"></i> Manage
-					    </a>
-					    <ul class="dropdown-menu">
-					      <% if can_create_articles?
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	          				<%=current_user.name%>
+	          				<b class="caret"></b>
+	    				</a>
+						<ul class="dropdown-menu">
+							<% if can_create_articles?
 					      %>
 						      <li class="nav-header">
 						      	Articles
-						      </li>
-						      <li>
-						      	<%= link_to 'Create', new_article_path, remote: true %>
 						      </li>
 						      <li>
 						      	<%= link_to 'Manage', articles_path %>
@@ -88,8 +79,11 @@
 					      <li>
 					      	<%= link_to 'Signout', signout_path, method: "delete" %>
 					      </li>
-					    </ul>
-					 </li>
+						</ul>
+					</li>
+					<li>
+						<%= image_tag current_user.avatar.url(:thumb), class:"hidden-phone"%>
+					</li>
 				<% end %>
 				</ul>
 			</div>

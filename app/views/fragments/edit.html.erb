@@ -1,6 +1,6 @@
 <% provide :title, "Edit #{@fragment.name}" %>
 <div class="row">
-	<div class="offset3 span6">
+	<div class="offset3 span7">
 		<%= render 'fragments/fragment', fragment: @fragment, edit:true %>
 		<%= form_for @fragment, validate: true do |form| %>
 			<%= form.hidden_field :data %>

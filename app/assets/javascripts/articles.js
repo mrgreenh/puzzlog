@@ -100,7 +100,6 @@ function initializeArticleNaming(){
 }
 
 function initializeArticleFragmentEditControls(){
-	$(".move_to_page_button, .detach_fragment_button").tooltip({placement:'right'});
 	$(".article_edit_fragments_container .fragment_container").mouseover(function(){
 		$(".article_fragment_edit_controls").css("display","none");
 		$(this).find(".article_fragment_edit_controls").first().show();

@@ -31,6 +31,7 @@ class ArticlesController < ApplicationController
 
   def edit
     @article = Article.find(params[:id])
+    @article_editing=true
     @page = @article.pages.order('number ASC').first
     @fragments = @page.ordered_fragments
     @fragment_types = getFragmentTypes(@fragments)

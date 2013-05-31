@@ -2,12 +2,12 @@
 <% # TODO fare un parziale articles styles che prende il colore della prima pagina e ci compila lo stile del primo frammento di ogni articolo, da usare per renderizzare il sommario dell'articolo
 %>
 <div class="row">
-	<header class="offset2 span7">
+	<header class="offset3 span7">
 		<%= pluralize(current_user.articles.count,'article') %>.
 	</header>
 </div>
 <div class="row">
-	<div class="offset2 span7">
+	<div class="offset3 span7">
 		<div class="centered_content"><%= will_paginate @articles %></div>
 			<%= render @articles %>
 		<div class="centered_content"><%= will_paginate @articles %></div>

@@ -22,9 +22,9 @@
 				</div>
 			</aside>
 		</div>
-		<div class="span7">
+		<div class="span8">
 			<div class="row">
-				<div class="span7">
+				<div class="span8">
 					<div class="article_title_editing_controls">
 						<h1 class="article_title"><%= @article.title %></h1>
 						<%= link_to '#', class:'btn btn-small hide article_title_edit_button' do %>
@@ -35,14 +35,14 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="span7">
+				<div class="span8">
 					<div class="article_edit_fragments_container">
 						<%= render @fragments, edit:true, popover_controls: true, article_fragment_edit_controls: true %>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="span3">
+		<div class="span2">
 			<aside class="article_right_controls">
 				<div class="controls_container" data-spy="affix" data-offset-top="0">
 					<div class="article_buttons">

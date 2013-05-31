@@ -49,4 +49,5 @@ $(".fragment_summary td.table-value p,.fragment_summary td.table-key p,.fragment
 $(function(){
 	initializeControlsPopovers();
 	flashMessages();
+	$("li a.create_fragment_button").tooltip({placement:'bottom'});
 });
