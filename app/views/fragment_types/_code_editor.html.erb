@@ -9,11 +9,14 @@
 				submission_method = 'post'
 			end
 		%>
-		<%= form_tag action_path, method:submission_method, id:"fragment_type_form" do %>
+		<%= form_tag action_path, method:submission_method, multipart:true, id:"fragment_type_form" do %>
 			<%= submit_tag "Save and preview", class:"btn btn-success btn-primary submit_button" %>
 			<fieldset class="form-inline">
 				<%= label_tag 'name', 'Fragment type\'s name:' %>
 				<%= text_field_tag 'name',@fragment_type.name, placeholder:"!!!Not validated!!!" %>
+				<%= label_tag 'icon', 'Icon:' %>
+				<%= file_field_tag 'icon', class:'resource_file_field' %>
+				<%= image_tag @fragment_type.icon.url(:thumb), class:"type_icon_thumb" %>
 			</fieldset>
 		
 			<!-- Script editor -->
@@ -49,12 +52,15 @@
 			
 			<!-- Other options and data faking -->
 			<h3>Default DATA:</h3>
-			<div class="coding_area_container"><div id="default_data_editor" class="coding_area json_code"></div></div>>
+			<div class="coding_area_container"><div id="default_data_editor" class="coding_area json_code"></div></div>
 			<fieldset class="form-inline">
 				<%= label_tag 'summary_fields', 'Data\'s fields to be displayed in <noscript>:' %>
 				<%= text_field_tag 'summary_fields', @fragment_type.summary_fields, placeholder: "Separated by comma" %>
 			</fieldset>
-			
+			<fieldset>
+			<%= label_tag 'description', 'Type a description of this fragment type:' %>
+			<%= text_area_tag 'description',@fragment_type.description %>
+			</fieldset>
 			<h3>Sample images:</h3>
 			<fieldset class="form-inline">
 				<%= label_tag 'images', 'Number of images the user can use:' %>
@@ -62,10 +68,6 @@
 				<%= link_to "Capture", "", id:"capture_images_button", class:"btn btn-small btn-primary" %>
 			</fieldset>
 			<div class="coding_area_container"><div id="sample_images_editor" class="coding_area json_code resource_code_editor"></div></div>
-		<fieldset>
-			<%= label_tag 'description', 'Type a description of this fragment type:' %>
-			<%= text_area_tag 'description',@fragment_type.description %>
-		</fieldset>
 		<%= submit_tag "Save and preview", class:"btn btn-success btn-primary submit_button" %>
 		<% end %>
 	</div>

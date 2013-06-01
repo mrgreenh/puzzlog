@@ -1,16 +1,13 @@
 # coding: utf-8
 module FragmentsHelper
   include ArticlesHelper
-  def fragment_type_icon_path
-    fragment_type_icon_path = "/images/application/fragment_type_icons/"
-  end
   
   def getFragmentTypeIcon(fragmentType)
-    filename = fragment_type_icon_path+fragmentType.name.gsub(/\s+/, "").downcase+".png"
+    filename = fragmentType.icon.url(:medium)
   end
   
   def getFragmentTypeIconThumb(fragmentType)
-    filename = fragment_type_icon_path+fragmentType.name.gsub(/\s+/, "").downcase+"_thumb.png"
+     filename = fragmentType.icon.url(:thumb)
   end
   
   def getFragmentTypes(fragments)

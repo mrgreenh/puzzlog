@@ -55,12 +55,17 @@ EOF
                                       images:params[:images],
                                       summary_fields:params[:summary_fields],
                                       description:params[:description])
+   @fragment_type.icon = params[:icon]
                                       
     @sample_images = params[:sample_images]
     
     if not @fragment_type.save
+      flash[:errors] = "Didn't pass validation. May be you didn't enter a name, description and icon, or the name is already used."
       render 'new'
     else
+      @fragment = Fragment.new(fragment_type_id:@fragment_type.id,data:@fragment_type.default_data, user_id:current_user.id)
+      @fragment_types = getFragmentTypes([@fragment])
+      @fragments = [@fragment.as_json(only:[:id,:name,:fragment_type_id,:data])]
       flash[:success] = "Fragment type saved. You can now preview your code."
       render 'edit'
     end
@@ -87,6 +92,7 @@ EOF
                                       images:params[:images],
                                       summary_fields:params[:summary_fields],
                                       description:params[:description])
+    @fragment_type.icon = params[:icon] unless !params[:icon]
     @fragment_type.save
     
     @fragment = Fragment.new(fragment_type_id:@fragment_type.id,data:@fragment_type.default_data, user_id:current_user.id)

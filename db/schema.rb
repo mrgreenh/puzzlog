@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130514205841) do
+ActiveRecord::Schema.define(:version => 20130601125434) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -87,6 +87,10 @@ ActiveRecord::Schema.define(:version => 20130514205841) do
     t.text     "description"
     t.text     "script"
     t.hstore   "default_data"
+    t.string   "icon_file_name"
+    t.string   "icon_content_type"
+    t.integer  "icon_file_size"
+    t.datetime "icon_updated_at"
   end
 
   create_table "fragment_untyped_attachment_relationships", :force => true do |t|

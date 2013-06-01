@@ -1,9 +1,19 @@
 class FragmentType < ActiveRecord::Base
-  attr_accessible :default_data, :script, :edit_elements, :name, :view_elements, :stylesheet, :images, :sounds, :videos, :untyped_attachments, :summary_fields, :description
+  attr_accessible :default_data, :script, :edit_elements, :name, :view_elements, :stylesheet, :images, :sounds, :videos, :untyped_attachments, :summary_fields, :icon, :description
   
   has_many :fragments
   
   validates :name, presence: true, uniqueness: { case_sensitive:false, message:"This name has already been used" }
+  validates_presence_of :description
+  
+  has_attached_file :icon,:styles => {:medium=> "400x400>", :thumb => "128x128>" }, :source_file_options => { :all => '-auto-orient' },
+   :default_url=>"/images/application/missing_avatar.png",
+   :url => "/images/uploads/fragment_types/:id/:style/:filename",
+   :path => ":rails_root/public/images/uploads/fragment_types/:id/:style/:filename"
+   
+  validates_attachment :icon,
+  :content_type => { :content_type => /^image\/(jpg|jpeg|pjpeg|png|x-png|gif)$/, :message => 'file type is not allowed (only jpeg/png/gif images)' },
+  :size => { :in => 0..9.megabytes }
   
   scope :most_used, :select => 'fragment_types.*',
         :joins => :fragments,
