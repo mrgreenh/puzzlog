@@ -14,6 +14,7 @@
 				  
 				<% else signed_in? %>
 					<% if can_create_fragments? and !@article_editing %> <!-- allora mostro creazione frammenti e puzzle box -->
+						<li class="navbar-text hidden-phone">Create a fragment:</li>
 						<% FragmentType.most_used.limit(5).each do |type|
 						%>
 							<li class="hidden-phone">
