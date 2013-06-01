@@ -3,8 +3,9 @@
 <% if not is_blog_initialized? %>
     <%=  render 'static_pages/initialize_blog' %>
 <%  else %>
-<div class="row">
-	<div class="offset3 span7 main_streamline">
+<div class="container">
+	<div class="row">
+	<div class="offset2 span8 main_streamline">
 		<%
 			@streamline_elements.each do |elem| %>
 			<%= render 'articles/article', article:elem if elem.class.name=="Article" %>
@@ -13,8 +14,9 @@
 		%>
 	</div>
 </div>
+</div>
 <div class="row">
-	<div class="offset3 span7">
+	<div class="offset2 span8">
 		<%= render 'static_pages/load_streamline_button'%>
 	</div>
 </div>

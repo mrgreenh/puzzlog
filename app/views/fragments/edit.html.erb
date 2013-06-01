@@ -1,26 +1,28 @@
 <% provide :title, "Edit #{@fragment.name}" %>
-<div class="row">
-	<div class="offset3 span7">
-		<%= render 'fragments/fragment', fragment: @fragment, edit:true %>
-		<%= form_for @fragment, validate: true do |form| %>
-			<%= form.hidden_field :data %>
-			<!-- Data regarding resources -->
-			<% if @fragment.fragment_type.has_images? %>
-				<%= hidden_field_tag 'fragment_resources[images]' %>
+<div class="container">
+	<div class="row">
+		<div class="offset2 span8">
+			<%= render 'fragments/fragment', fragment: @fragment, edit:true %>
+			<%= form_for @fragment, validate: true do |form| %>
+				<%= form.hidden_field :data %>
+				<!-- Data regarding resources -->
+				<% if @fragment.fragment_type.has_images? %>
+					<%= hidden_field_tag 'fragment_resources[images]' %>
+				<% end %>
+				<% if @fragment.fragment_type.has_sounds? %>
+					<%= hidden_field_tag 'fragment_resources[sounds]' %>
+				<% end %>
+				<% if @fragment.fragment_type.has_videos? %>
+					<%= hidden_field_tag 'fragment_resources[videos]' %>
+				<% end %>
+				<% if @fragment.fragment_type.has_untyped_attachments? %>
+					<%= hidden_field_tag 'fragment_resources[untyped_attachments]' %>
+				<% end %>
+				
+				<div class="fragment_controls form-actions well" id="fragment_<%=@fragment.id%>_controls">
+					<%= form.submit "Save", name:'save_it_submit', class:'btn btn-info', id: "save_fragment_#{@fragment.id}"%>
+				</div>
 			<% end %>
-			<% if @fragment.fragment_type.has_sounds? %>
-				<%= hidden_field_tag 'fragment_resources[sounds]' %>
-			<% end %>
-			<% if @fragment.fragment_type.has_videos? %>
-				<%= hidden_field_tag 'fragment_resources[videos]' %>
-			<% end %>
-			<% if @fragment.fragment_type.has_untyped_attachments? %>
-				<%= hidden_field_tag 'fragment_resources[untyped_attachments]' %>
-			<% end %>
-			
-			<div class="fragment_controls form-actions well" id="fragment_<%=@fragment.id%>_controls">
-				<%= form.submit "Save", name:'save_it_submit', class:'btn btn-info', id: "save_fragment_#{@fragment.id}"%>
-			</div>
-		<% end %>
-	</div>
+		</div>
+	</div>	
 </div>

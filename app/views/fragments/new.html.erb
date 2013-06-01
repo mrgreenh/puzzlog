@@ -1,39 +1,42 @@
 <% provide :title, "New fragment" %>
 <h1><%= @fragment.name %></h1>
-<div class="row">
-	<div class="span6 offset3">
-		<div class="fragment_container">
-			<%= render 'fragments/fragment_edit', fragment: @fragment %>
-		</div>
-			<%= form_for @fragment, validate: true do |form| %>
-				<%= form.hidden_field :fragment_type_id %>
-				<%= form.hidden_field :stand_alone, value: false %>
-				<%= form.hidden_field :public, value:false %>
-				<%= form.hidden_field :data %>
-				<!-- Dati riguardanti le risorse -->
-				<% if @fragment.fragment_type.has_images? %>
-					<%= hidden_field_tag 'fragment_resources[images]' %>
-				<% end %>
-				<% if @fragment.fragment_type.has_sounds? %>
-					<%= hidden_field_tag 'fragment_resources[sounds]' %>
-				<% end %>
-				<% if @fragment.fragment_type.has_videos? %>
-					<%= hidden_field_tag 'fragment_resources[videos]' %>
-				<% end %>
-				<% if @fragment.fragment_type.has_untyped_attachments? %>
-					<%= hidden_field_tag 'fragment_resources[untyped_attachments]' %>
-				<% end %>
-				<div class="fragment_controls form-actions well" id="fragment_controls">
-					<div class="hide form-horizontal" id="choose_bag">
-						<%= render 'box/add_to_box_modal_form' %>
-						<%= hidden_field_tag "save_to_box", "false" %>
-					</div>
-					<%= form.submit "Save it to the box", name:'save_it_submit', class:'btn btn-info hide', id: "save_button"%>
-					<%= link_to "Save it in the box", '#', class:'btn btn-primary save_to_box_button', rel:'tooltip', title:'You can use it for building an article later!' %>
-					<% if can_publish_fragment?(@fragment) %>
-					<%= form.submit "Publish!", name:'publish_submit', class:'btn btn-success'%>
+<div class="container">
+	<div class="row">
+		<div class="span6 offset3">
+			<div class="fragment_container">
+				<%= render 'fragments/fragment_edit', fragment: @fragment %>
+			</div>
+				<%= form_for @fragment, validate: true do |form| %>
+					<%= form.hidden_field :fragment_type_id %>
+					<%= form.hidden_field :stand_alone, value: false %>
+					<%= form.hidden_field :public, value:false %>
+					<%= form.hidden_field :data %>
+					<!-- Dati riguardanti le risorse -->
+					<% if @fragment.fragment_type.has_images? %>
+						<%= hidden_field_tag 'fragment_resources[images]' %>
 					<% end %>
-				</div>
-			<% end %>
+					<% if @fragment.fragment_type.has_sounds? %>
+						<%= hidden_field_tag 'fragment_resources[sounds]' %>
+					<% end %>
+					<% if @fragment.fragment_type.has_videos? %>
+						<%= hidden_field_tag 'fragment_resources[videos]' %>
+					<% end %>
+					<% if @fragment.fragment_type.has_untyped_attachments? %>
+						<%= hidden_field_tag 'fragment_resources[untyped_attachments]' %>
+					<% end %>
+					<div class="fragment_controls form-actions well" id="fragment_controls">
+						<div class="hide form-horizontal" id="choose_bag">
+							<%= render 'box/add_to_box_modal_form' %>
+							<%= hidden_field_tag "save_to_box", "false" %>
+						</div>
+						<%= form.submit "Save it to the box", name:'save_it_submit', class:'btn btn-info hide', id: "save_button"%>
+						<%= link_to "Save it in the box", '#', class:'btn btn-primary save_to_box_button', rel:'tooltip', title:'You can use it for building an article later!' %>
+						<% if can_publish_fragment?(@fragment) %>
+						<%= form.submit "Publish!", name:'publish_submit', class:'btn btn-success'%>
+						<% end %>
+					</div>
+				<% end %>
+		</div>
 	</div>
+
 </div>

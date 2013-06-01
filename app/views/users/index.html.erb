@@ -1,8 +1,10 @@
 <% provide :title, full_title("Staff") %>
-<div class="row">
-	<div class="offset3 span6">
-		<div class="centered_content"><%= will_paginate @users %></div>
-			<%= render @users %>
-		<div class="centered_content"><%= will_paginate @users %></div>
+<div class="container">
+	<div class="row">
+		<div class="offset3 span6">
+			<div class="centered_content"><%= will_paginate @users %></div>
+				<%= render @users %>
+			<div class="centered_content"><%= will_paginate @users %></div>
+		</div>
 	</div>
 </div>

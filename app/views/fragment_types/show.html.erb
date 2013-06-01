@@ -1,38 +1,40 @@
 <% provide :title, full_title(@fragment_type.name) %>
-<div class="row user-info-container">
-    <div class="offset2 span8">
-        <div class="hero-unit">
-            <div class="row">
-                <div class="span6">
-                    <h1><%= @fragment_type.name %></h1>
-                </div>
-            </div>
-            <div class="row">
-                <div class="span3">
-                    <%= image_tag getFragmentTypeIcon(@fragment_type) %>
-                </div>
-                <div class="span3">
-                	<div class="row">
-	                	<div class="span3">
-		                    <p>
-		                        <%= @fragment_type.description %>
-		                    </p>
+<div class="container">
+	<div class="row user-info-container">
+	    <div class="offset2 span8">
+	        <div class="hero-unit">
+	            <div class="row">
+	                <div class="span6">
+	                    <h1><%= @fragment_type.name %></h1>
+	                </div>
+	            </div>
+	            <div class="row">
+	                <div class="span3">
+	                    <%= image_tag getFragmentTypeIcon(@fragment_type) %>
+	                </div>
+	                <div class="span3">
+	                	<div class="row">
+		                	<div class="span3">
+			                    <p>
+			                        <%= @fragment_type.description %>
+			                    </p>
+		                    </div>
 	                    </div>
-                    </div>
-                    <div class="row">
-		                <div class="span2">
-		                    <%= link_to new_fragment_path(fragment_type_id:@fragment_type.id), class:"btn btn-success btn-large" do %>
-		                    <i class="icon icon-white icon-comment"></i> Create
-		                    <% end %>
-		                </div>
-		            </div>
-                </div>
-            </div>
-            <div class="row">
-			  	<div class="offset1 span4">
-			  		<%= render 'fragment_types/fragment_type_controls' %>
+	                    <div class="row">
+			                <div class="span2">
+			                    <%= link_to new_fragment_path(fragment_type_id:@fragment_type.id), class:"btn btn-success btn-large" do %>
+			                    <i class="icon icon-white icon-comment"></i> Create
+			                    <% end %>
+			                </div>
+			            </div>
+	                </div>
+	            </div>
+	            <div class="row">
+				  	<div class="offset1 span4">
+				  		<%= render 'fragment_types/fragment_type_controls' %>
+				  	</div>
 			  	</div>
-		  	</div>
-        </div>
-    </div>
+	        </div>
+	    </div>
+	</div>	
 </div>

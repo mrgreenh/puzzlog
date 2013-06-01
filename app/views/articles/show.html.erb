@@ -1,5 +1,5 @@
 <% provide :title, "#{@article.title} | #{@page.number}" %>
-<div class="container-fluid article_view_container">
+<div class="container container-fluid article_view_container">
 	<div class="row">
 		<div class="span2">
 			<aside class="left_article_controls">
@@ -21,8 +21,11 @@
 				<%= render 'articles/fragments_with_contextual', fragments: @fragments %>
 				
 			</article>
-			<div class="span3">
-				
+			<div class="row">
+				<ul class="pager visible-phone">
+					 <li class="previous_page_link_container" class="visible-phone"><%= render 'articles/previous_page_link'%></li>
+					 <li class="next_page_link_container" class="visible-phone"><%= render 'articles/next_page_link'%></li>
+				</ul>
 			</div>
 		</div>
 		<div class="span2">
