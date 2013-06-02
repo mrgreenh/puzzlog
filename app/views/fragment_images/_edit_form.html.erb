@@ -22,9 +22,9 @@
 		
 		<div class="form-actions">
 			<%= form.submit class:'btn btn-primary' %>
-		</div>
 		<%= link_to new_user_box_image_relationship_path(id:@fragment_image.id), remote: true, class:"btn btn-primary add_to_box_button" do %>
-			<i class="icon-white icon-plus"></i>Add to box
+			<i class="icon-white icon-plus"></i> OR add to box
 		<% end unless @fragment_image.user_box_image_relationships.find_by_user_id(current_user.id) %>
+		</div>
 	<% end %>
 </div>

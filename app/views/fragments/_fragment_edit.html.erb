@@ -3,7 +3,7 @@
 	var publication_enabled = <%= can_publish_fragment?(fragment) %>;
 </script>
 <ul class="nav nav-tabs" id="fragment_<%=fragment.id%>_tab">
-  <li class="active"><a href="#fragment_<%=fragment.id%>_view" class="view_tab_link" data-toggle="tab">View</a></li>
+  <li class="active"><a href="#fragment_<%=fragment.id%>_view" class="view_tab_link" data-toggle="tab">Preview</a></li>
   <li><a href="#fragment_<%=fragment.id%>_edit" class="edit_tab_link" data-toggle="tab">Edit</a></li>
   <!-- Resources Tabs -->
   <% if fragment.fragment_type.has_images? %>  
