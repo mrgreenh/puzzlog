@@ -49,7 +49,6 @@
 }
 .fragment_summary{
   margin:0px 0px;
-  width:370px;
   height:150px;
   border-style:dashed;
   border-width: 1px;
@@ -58,18 +57,19 @@
   float:left;
   .fragment_type_image{
     float:left;
-    max-width:80px;
+    max-width:35px;
   }
   header{
     padding: 0px 10px;
     background-color:transparent;
+    font-size:1em;
     h4 {
       float:left;
       width:270px;
       overflow:hidden;
     }
-    strong{
-      font-size: 0.8em;
+    em{
+      font-style:italic;
     }
   }
   

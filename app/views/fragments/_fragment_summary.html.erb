@@ -18,7 +18,7 @@
 					<div>
 						<img src="<%= getFragmentTypeIconThumb(fragment.fragment_type) %>" title="<%= fragment.fragment_type.name %>" class="fragment_type_image">
 					</div>
-					<strong><%= fragment.fragment_type.name %></strong>
+					<strong><%= fragment.fragment_type.name %></strong> <em>by <%= fragment.user.name %></em>
 						<%= link_to fragment_path(fragment) do %>
 							<i class="icon icon-eye-open icon-black"></i>
 						<% end %>
@@ -36,7 +36,7 @@
 		  				<% 	n = 0;
 		  					fragment.images.each do |image|
 		  					n+=1;
-		  					break if n>9
+		  					break if n>6
 		  					%>
 		  					<li><%= image_tag image.getImageUrl(:mini) %></li>
 		  				<% end %>
