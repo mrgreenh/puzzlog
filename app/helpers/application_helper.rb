@@ -12,6 +12,17 @@ module ApplicationHelper
     end
   end
   
+  def base_url
+    "puzzlog.herokuapp.com"
+  end
+  
+  def app_domain
+    "herokuapp.com"
+  end
+  
+  def twitter_id
+    "69243134"
+  end
   
   #------------------------------------Priviledges
   def has_role?(name, user=current_user)

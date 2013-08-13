@@ -89,6 +89,7 @@ class FragmentsController < ApplicationController
     @fragment = Fragment.find(params[:id])
     @fragments = [@fragment]
     @fragment_types = getFragmentTypes(@fragments)
+    @show_og_twitter_meta = true
   end
   
   def destroy

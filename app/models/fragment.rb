@@ -16,6 +16,14 @@ class Fragment < ActiveRecord::Base
   #Fragment resources
   has_many :fragment_image_relationships, dependent: :destroy
   has_many :images, through: :fragment_image_relationships, source: :fragment_image
+
+  def title
+    self.name || self.getSummaryHash["title"]
+  end
+  
+  def description
+    self.getSummaryHash["Description"] || "There is no way to describe this link in a few words, you gotta see this in action on my blog ;)"
+  end
   
   def buildResources(fragment_resources_params)
     if self.fragment_type.has_images?
