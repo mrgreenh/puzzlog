@@ -1,0 +1,22 @@
+<%
+if @show_og_twitter_meta
+%>
+	<!---------------------------------------------------Facebook Open Graph-->
+	<meta property="og:title" content="<%= full_title(@fragment.title) %>" />
+	<meta property="og:description" content="<%= full_title(@fragment.description) %>" />
+	<meta property="og:url" content="http://<%= base_url %>/fragments/<%= @fragment.id %>" />
+	<% if @fragment.fragment_type.has_images? %>
+		<meta property="og:image" content="<%= @fragment.images.first.getImageUrl(:medium) %>"/>
+	<% end %>
+	<!---------------------------------------------------Twitter cards-->
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="<%= twitter_id %>">
+	<meta name="twitter:creator" content="<%= twitter_id %>">
+	<meta name="twitter:domain" content="<%= app_domain %>">
+	<% if @fragment.fragment_type.has_images? %>
+		<meta property="og:image" content="<%= @fragment.images.first.getImageUrl(:medium) %>"/>
+	<% end %>
+	
+<%
+end
+%>
