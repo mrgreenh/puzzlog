@@ -22,7 +22,7 @@ class Fragment < ActiveRecord::Base
   end
   
   def description
-    self.getSummaryHash["Description"] || "There is no way to describe this link in a few words, you gotta see this in action on my blog ;)"
+    self.getSummaryHash["description"] || "There is no way to describe this link in a few words, you gotta see this in action on my blog ;)"
   end
   
   def buildResources(fragment_resources_params)

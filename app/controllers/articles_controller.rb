@@ -91,7 +91,7 @@ class ArticlesController < ApplicationController
     @page = @article.pages.find_by_number(params[:page_number])||@article.pages.order('number ASC').first
     @fragments = @page.ordered_fragments
     @fragment_types = getFragmentTypes(@fragments)
-    
+    @show_og_twitter_meta = true
     respond_to do |format|
       format.html
       format.js
