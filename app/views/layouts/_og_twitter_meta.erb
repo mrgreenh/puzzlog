@@ -10,12 +10,13 @@ if @show_og_twitter_meta
 	<meta name="twitter:domain" content="<%= app_domain %>">
 	<% if not @fragment.nil? %>
 		<% if @fragment.fragment_type.has_images? %>
-		<meta property="og:image" content="<%= @fragment.images.first.getImageUrl(:medium) %>"/>
+		<meta property="og:image" content="<%= @fragment.images.first.getImageUrl(:medium,true) %>"/>
 		<% end %>
 	<% elsif not @article.nil?
-			@article.pages.order("number ASC").first.fragments.each do |frag|
+			@article.pages.order("number ASC").first.page_fragment_relationships.order("ordering_number ASC").each do |rel|
+				frag = rel.fragment
 				if frag.fragment_type.has_images? %>
-				<meta property="og:image" content="<%= frag.images.first.getImageUrl(:medium) %>"/>
+				<meta property="og:image" content="<%= frag.images.first.getImageUrl(:medium,true) %>"/>
 				<% break;
 				end
 			end %>

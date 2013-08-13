@@ -1,3 +1,5 @@
+include ApplicationHelper
+
 class FragmentImage < FragmentResource
   attr_accessible :media_fragment
   has_many :fragment_image_relationships, dependent: :destroy
@@ -23,19 +25,24 @@ class FragmentImage < FragmentResource
   end
   
   #Images URLS getters
-  def getImageUrl(size)
-    result = assignImagesUrls
+  def getImageUrl(size, absolute = false)
+    result = assignImagesUrls({},absolute)
     return result[size]
   end
   
   private
     
-    def assignImagesUrls(result={})
+    def assignImagesUrls(result={}, absolute = false)
       if !self.fragment_resource_file_file_name.nil? and !self.fragment_resource_file_file_name.blank?
         result[:big] = self.fragment_resource_file.url(:big)
         result[:medium] = self.fragment_resource_file.url(:medium)
         result[:thumb] = self.fragment_resource_file.url(:thumb)
         result[:mini] = self.fragment_resource_file.url(:mini)
+        if absolute then
+          result.each do |k,v|
+            result[k] = "http://#{base_url}/#{v}" if k==:big||k==:medium||k==:thumb||k==:mini
+          end
+        end
       else
         result[:big] = self.data["originalUrl"]
         result[:medium] = self.data["originalUrl"]
