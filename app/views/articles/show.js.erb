@@ -22,6 +22,10 @@ $(".article_view_container").fadeOut(function(){
 			//Fragments controls initialization
 			initializeControlsPopovers();
 			initializeArticleViewControls();
+			
+			//Social interactions re-initialized
+			FB.init({xfbml:true})
+			twttr.widgets.load();
 		});
 	});
 	
