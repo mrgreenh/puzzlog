@@ -104,11 +104,23 @@
   }
 }
 /*Fragment interactions*/
-.fragment_interactions{
-  padding:5px 0px;
-  width:100%;
+.fragment_interactions_container{
+  position:absolute;
+  bottom:0px;
+  left:0px;
+  padding:0px;
+  margin:0px;
   height:20px;
-  .fb-like{
-    margin:0px 10px;
+  display:none;
+  .fragment_interactions{
+    padding:5px 0px;
+    width:100%;
+    display:none;
+    .fb-like{
+      margin:0px 10px;
+    }
+  }
+  .fragment_interaction_call{
+    padding:0px 
   }
 }

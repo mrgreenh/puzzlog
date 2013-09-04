@@ -108,15 +108,7 @@ function updateResources(fragment){
 	
 }
 
-//Initialization
-$(function(){ 
-	//---------------------------------------Move to page e detach fragment controls
-	$(".move_to_page_button, .detach_fragment_button").tooltip({placement:'right'});
-	//---------------------------------------Fragments initializer
-	initializeAllFragments();
-	
-	//------------------------------------Fragment controls
-	
+function initializeFragmentControls(){
 	//-------------------New Fragment
 	//Fragments naming control mechanism
 	$('#new_fragment .fragment_controls .keep_it_button').tooltip({placement:'bottom'});
@@ -139,5 +131,22 @@ $(function(){
 		$("#new_fragment #fragment_data, .edit_fragment #fragment_data").val(JSON.stringify(fragments[0].data));
 		$("#new_fragment #fragment_resources_images, .edit_fragment #fragment_resources_images").val(JSON.stringify(fragments[0].images));
 	});
+
+	//Social Interactions
+	/*$(".fragment_view").mouseover(function(){
+		var selector_id = $(this).find(".fragment_interaction_call")[0].id;
+		$("#fragment_472_interaction_call").fadeIn();
+	});*/
+}
+
+//Initialization
+$(function(){ 
+	//---------------------------------------Move to page e detach fragment controls
+	$(".move_to_page_button, .detach_fragment_button").tooltip({placement:'right'});
+	//---------------------------------------Fragments initializer
+	initializeAllFragments();
+	
+	//------------------------------------Fragment controls
+	initializeFragmentControls();	
 
 });

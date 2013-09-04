@@ -57,8 +57,8 @@ class PagesController < ApplicationController
   end
   
   def show
-    @article = Article.find(params[:article_id]) if params[:page_id].nil?
-    @page = Page.find(params[:page_id])||@article.pages.find_by_number(params[:page_number])
+    @article = Article.find(params[:id]) if params[:page_id].nil?
+    @page = params[:page_id].nil? ? @article.pages.find_by_number(params[:page_number]) : Page.find(params[:page_id])
     @article = @page.article unless params[:page_id].nil?
     
     @fragments = @page.ordered_fragments

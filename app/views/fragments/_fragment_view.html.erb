@@ -1,13 +1,11 @@
 <% fragment ||= @fragment
 popover_controls ||= false
-
-share_url = "" #Url to which like and tweets button refer
-share_url = "http://"+base_url+"/fragments/"+fragment.id.to_s
-#if @page.nil?
-#	share_url = "http://"+base_url+"/fragments/"+fragment.id.to_s
-#else
-	#share_url = "http://"+base_url+"/articles/"+@article.id.to_s+"/"+@page.number.to_s+"#fragment_"+fragment.id.to_s+"_view"
-#end
+#Share URL definition
+if @page.nil?
+	share_url = "http://"+base_url+"/fragments/"+fragment.id.to_s
+else
+	share_url = "http://"+base_url+"/articles/"+@article.id.to_s+"/"+@page.number.to_s+"#fragment_"+fragment.id.to_s+"_view"
+end
 %>
 <div class="fragment_type_<%= fragment.fragment_type.id %> fragment_view" id="fragment_<%= fragment.id %>_view" name="fragment_<%= fragment.id %>_view">
 	<%= raw(fragment.fragment_type.view_elements) %>
@@ -15,7 +13,12 @@ share_url = "http://"+base_url+"/fragments/"+fragment.id.to_s
 		<%= render 'fragments/fragment_summary', fragment: fragment %>
 	</noscript>
 </div>
-<div class="fragment_interactions" id="fragment_<%= fragment.id %>_interactions">
-	<div class="fb-like" data-href="<%= share_url %>" data-width="90" data-colorscheme="dark" data-action="recommend" data-show-faces="false" data-layout="button_count" data-send="false"></div>
-	<a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-text="Check this out:" data-url="<%= share_url %>">Tweet</a>
+<div class="fragment_interactions_container">
+	<div class="fragment_interaction_call" id="fragment_<%= fragment.id %>_interaction_call">
+		Share or like this fragment!
+	</div>
+	<div class="fragment_interactions" id="fragment_<%= fragment.id %>_interactions">
+		<div class="fb-like" data-href="<%= share_url %>" data-width="90" data-colorscheme="dark" data-action="recommend" data-show-faces="false" data-layout="button_count" data-send="false"></div>
+		<a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-text="Check this out:" data-url="<%= share_url %>">Tweet</a>
+	</div>
 </div>

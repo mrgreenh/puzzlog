@@ -15,7 +15,7 @@ FragmentsProject::Application.routes.draw do
   resources :pages, only: [:show,:create,:destroy,:edit]
   resources :page_fragment_relationships, only: [:new,:create,:update,:destroy]
   match 'page_fragment_relationships/move_fragment_to_page', to: 'page_fragment_relationships#move_fragment_to_page', as: 'move_fragment_to_page'
-  match 'articles/:article_id/:page_number', to: 'pages#show'
+  match 'articles/:id/:page_number', to: 'pages#show'
   
   #Fragments
   resources :fragments

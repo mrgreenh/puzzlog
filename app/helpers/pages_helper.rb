@@ -20,7 +20,7 @@ module PagesHelper
   def can_view_page?(page=nil)
     if page.nil?
       page = Page.find(params[:page_id]) unless params[:page_id].nil?
-      page = Article.find(params[:article_id]).pages.find_by_number(params[:page_number]) unless params[:page_number].nil?
+      page ||= Article.find(params[:id]).pages.find_by_number(params[:page_number]) unless params[:page_number].nil?
     end
     page.article.public || has_role?('superadmin') || page.user == current_user
   end
