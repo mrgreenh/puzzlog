@@ -11,7 +11,7 @@ gem 'faker'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'paperclip', "~> 3.0"
-gem 'rmagick', '2.13.1'
+#gem 'rmagick', '2.13.1'
 gem 'bootstrap-sass', '~> 2.3.0.1'
 gem 'dynamic_form'
 gem 'aws-sdk', '~> 1.3.4'
