@@ -133,14 +133,14 @@ function initializeFragmentControls(){
 	});
 
 	//Social Interactions
-	$(".fragment_view").mouseover(function(){
+	/*$(".fragment_view").mouseover(function(){
 		var selector_id = $(this).parents(".fragment_container")[0].id;
 		$("#"+selector_id+" .fragment_interactions_container").show();
 	});
 	$(".fragment_view").mouseout(function(){
 		var selector_id = $(this).parents(".fragment_container")[0].id;
 		$("#"+selector_id+" .fragment_interactions_container").hide();
-	});
+	});*/
 }
 
 //Initialization

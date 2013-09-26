@@ -1,5 +1,6 @@
 <% fragment ||= @fragment
 popover_controls ||= false
+also_appears_aside ||= false
 #Share URL definition
 if @page.nil?
 	share_url = "http://"+base_url+"/fragments/"+fragment.id.to_s
@@ -14,11 +15,27 @@ end
 	</noscript>
 </div>
 <div class="fragment_interactions_container">
-	<div class="fragment_interaction_call" id="fragment_<%= fragment.id %>_interaction_call">
-		Share or like this fragment!
-	</div>
 	<div class="fragment_interactions" id="fragment_<%= fragment.id %>_interactions">
 		<div class="fb-like" data-href="<%= share_url %>" data-width="90" data-colorscheme="dark" data-action="recommend" data-show-faces="false" data-layout="button_count" data-send="false"></div>
 		<a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-text="Check this out:" data-url="<%= share_url %>">Tweet</a>
 	</div>
 </div>
+<%
+if also_appears_aside
+	appears_in_articles = fragment.articles(@article)
+	if not appears_in_articles.count==0
+	%>
+		<div class="also_appears_in">
+			<p>Also appears in:</p>
+			<ul>
+				<% appears_in_articles.each do |id, article_metadata| %>
+						<li>
+								<%= link_to article_metadata[:title], article_path(id) %> by <%= article_metadata[:user] %>
+						</li>
+				<% end %>
+			</ul>
+		</div>
+	<%
+	end
+end
+%>

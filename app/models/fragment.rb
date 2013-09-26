@@ -16,7 +16,16 @@ class Fragment < ActiveRecord::Base
   #Fragment resources
   has_many :fragment_image_relationships, dependent: :destroy
   has_many :images, through: :fragment_image_relationships, source: :fragment_image
-
+  
+  def articles(except_article)
+    articles = {}
+    self.pages.order('updated_at DESC').each do |page|
+      article = page.article
+      articles[article.id] = {:title => article.title, :user => article.user.name, :updated_at => article.updated_at} unless !except_article.nil? and except_article.id == article.id
+    end
+    return articles
+  end
+  
   def title
     self.name || self.getSummaryHash["title"]
   end

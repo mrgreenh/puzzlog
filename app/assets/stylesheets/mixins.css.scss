@@ -46,6 +46,11 @@
    box-shadow:  8px 8px 10px 10px rgba(0, 0, 0, 0.2);
 }
 
+@mixin small_sharp_shade{
+  -webkit-box-shadow:  8px 8px 2px 0px rgba(0, 0, 0, 0.3);      
+  box-shadow:  8px 8px 2px 0px rgba(0, 0, 0, 0.3);
+}
+
 @mixin gray_gloss {
   background: -moz-linear-gradient(top,  rgba(255,249,249,0.78) 0%, rgba(229,229,229,0.39) 50%, rgba(206,206,206,0.38) 51%, rgba(224,239,249,0) 100%); /* FF3.6+ */
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,249,249,0.78)), color-stop(50%,rgba(229,229,229,0.39)), color-stop(51%,rgba(206,206,206,0.38)), color-stop(100%,rgba(224,239,249,0))); /* Chrome,Safari4+ */

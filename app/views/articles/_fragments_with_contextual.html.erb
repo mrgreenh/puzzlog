@@ -2,7 +2,7 @@
 <% @fragments.each do |frag| %>
 	<div class="row">
 		<div class="span8">
-			<%= render 'fragments/fragment', popover_controls:true, fragment:frag %>
+			<%= render 'fragments/fragment', popover_controls:true, also_appears_aside:true, fragment:frag %>
 		</div>
 	</div>
 <% end %>

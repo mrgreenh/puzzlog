@@ -1,7 +1,8 @@
-<% # TODO da modificare perchè sia un sommario, con popover sempre attivi
+<%
 fragment ||= @fragment
 edit ||= false
 popover_controls ||= false
+also_appears_aside ||= false
 article_fragment_edit_controls ||= false
 streamlined_fragment ||= false
 fragment_header ||= false
@@ -17,7 +18,7 @@ fragment_header ||= false
 	
 	<% if not edit %>
 	
-		<%= render 'fragments/fragment_view', fragment: fragment %>
+		<%= render 'fragments/fragment_view', fragment: fragment, also_appears_aside:also_appears_aside %>
 	
 	<% else %>
 		
