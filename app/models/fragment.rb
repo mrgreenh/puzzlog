@@ -17,7 +17,7 @@ class Fragment < ActiveRecord::Base
   has_many :fragment_image_relationships, dependent: :destroy
   has_many :images, through: :fragment_image_relationships, source: :fragment_image
   
-  def articles(except_article)
+  def articles(except_article=nil)
     articles = {}
     self.pages.order('updated_at DESC').each do |page|
       article = page.article

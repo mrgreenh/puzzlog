@@ -2,10 +2,11 @@
 fragment ||= @fragment
 edit ||= false
 popover_controls ||= false
-also_appears_aside ||= false
 article_fragment_edit_controls ||= false
 streamlined_fragment ||= false
 fragment_header ||= false
+aside ||= false
+@aside = aside
 %>
 <div id="fragment_<%=fragment.id %>" class="fragment_container resource_partial <%= streamlined_fragment ? 'streamlined_fragment' : '' %>">
 	<%= render 'common_partials/editing_header' if popover_controls&&(can_edit_fragment?(fragment)||can_destroy_fragment?(fragment)) %>
@@ -18,7 +19,7 @@ fragment_header ||= false
 	
 	<% if not edit %>
 	
-		<%= render 'fragments/fragment_view', fragment: fragment, also_appears_aside:also_appears_aside %>
+		<%= render 'fragments/fragment_view', fragment: fragment %>
 	
 	<% else %>
 		

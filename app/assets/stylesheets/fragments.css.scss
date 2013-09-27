@@ -125,18 +125,20 @@
 }
 
 /*Also appears in*/
-.also_appears_in{
-  @include small-sharp-shade;
-  background-color:white;
-  color:black;
-  position:absolute;
-  left:100%;
-  top:40px;
-  width: 35%;
-  p{
-    font-style:italic;
-  }
-  p,ul{
-    margin-left:10px;
+.article_content_container{
+  .fragment_aside{
+    @include small-sharp-shade;
+    background-color:white;
+    color:black;
+    position:absolute;
+    left:100%;
+    top:0px;
+    width: 35%;
+    p{
+     font-style:italic;
+    }
+    p,ul{
+      margin-left:10px;
+    }
   }
 }
