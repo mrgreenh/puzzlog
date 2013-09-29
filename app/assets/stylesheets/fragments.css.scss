@@ -124,6 +124,7 @@
   }
 }
 
+
 /*Also appears in*/
 .article_content_container{
   .fragment_aside{
@@ -141,4 +142,9 @@
       margin-left:10px;
     }
   }
+}
+.fragment_info_box{
+  @include small_sharp_shade;
+  background-color: white;
+  padding:10px;
 }
