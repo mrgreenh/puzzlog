@@ -1,5 +1,7 @@
 FragmentsProject::Application.routes.draw do
 
+  resources :menu_entries
+
   get "puzzle_box/show"
 
   root to: 'static_pages#home'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130601125434) do
+ActiveRecord::Schema.define(:version => 20131001043929) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -144,6 +144,15 @@ ActiveRecord::Schema.define(:version => 20130601125434) do
   end
 
   add_index "fragments", ["data"], :name => "fragments_gist_data"
+
+  create_table "menu_entries", :force => true do |t|
+    t.integer  "article_id"
+    t.integer  "order"
+    t.string   "link_type"
+    t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "page_fragment_relationships", :force => true do |t|
     t.integer  "page_id"
