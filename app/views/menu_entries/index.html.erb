@@ -13,7 +13,7 @@
 				<table>
 				<% @menu_entries.each do |menu_entry| %>
 				  <tr>
-				    <td><%= menu_entry.title %></td>
+				    <td><%= link_to menu_entry.title, article_path(menu_entry.article_id) if menu_entry.link_type == 'article' %></td>
 				    <td><%= link_to move_menu_entry_path({:new_order=>menu_entry.order-1, :id=>menu_entry.id}) do %>
 				    		<i class="icon-arrow-up"></i>
 				    	<% end %>
