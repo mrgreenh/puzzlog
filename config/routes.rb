@@ -1,7 +1,8 @@
 FragmentsProject::Application.routes.draw do
 
   resources :menu_entries
-
+  match 'menu_entries/:id/move', to: 'menu_entries#move', as: 'move_menu_entry'
+  
   get "puzzle_box/show"
 
   root to: 'static_pages#home'
