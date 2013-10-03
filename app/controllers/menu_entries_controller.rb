@@ -1,8 +1,16 @@
 class MenuEntriesController < ApplicationController
+  include MenuEntriesHelper
+  
+  before_filter :menu_entry_create_filter, only:[:new,:create]
+  before_filter :menu_entry_destroy_filter, only: :destroy
+  before_filter :menu_entry_edit_filter, only: [:update]
+  before_filter :menu_entry_view_filter, only: [:show]
+
+
   # GET /menu_entries
   # GET /menu_entries.json
   def index
-    @menu_entries = MenuEntry.where('user_id=?',current_user.id).order('menu_entries.order ASC')
+    @menu_entries = MenuEntry.where('user_id=?',params[:user_id] || current_user.id).order('menu_entries.order ASC') #You should retrieve menus by user
 
     respond_to do |format|
       format.html # index.html.erb
@@ -76,6 +84,7 @@ class MenuEntriesController < ApplicationController
   end
   
   def move
+    user_id = params[:user_id] || current_user.id
     @moved_menu_entry = MenuEntry.find(params[:id])
     position_left  = @moved_menu_entry.order
     position_taken = params[:new_order].to_i
@@ -86,12 +95,15 @@ class MenuEntriesController < ApplicationController
      increment = -1 
      position_taken  = [position_taken,MenuEntry.all.count-1].min
     end
-    @shifted_menu_entries = MenuEntry.where('menu_entries.order>=? AND menu_entries.order<=?',[position_taken,position_left].min,[position_taken,position_left].max)
-    @shifted_menu_entries.each do |entry|
-      entry.update_attributes(:order => entry.order+increment) unless entry == @moved_menu_entry
+    MenuEntry.transaction do
+      @moved_menu_entry.update_attributes(:order => -1)
+      @shifted_menu_entries = MenuEntry.where('menu_entries.order>=? AND menu_entries.order<=?',[position_taken,position_left].min,[position_taken,position_left].max)
+      @shifted_menu_entries.each do |entry|
+        entry.update_attributes(:order => entry.order+increment) unless entry == @moved_menu_entry
+      end
+      @moved_menu_entry.update_attributes(:order => position_taken)
     end
-    @moved_menu_entry.update_attributes(:order => position_taken)
-    @menu_entries = MenuEntry.order('menu_entries.order ASC')
+    @menu_entries = MenuEntry.where('user_id = ?', user_id).order('menu_entries.order ASC')
     
     respond_to do |format| 
       format.html { render 'index' }
@@ -109,4 +121,33 @@ class MenuEntriesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  private
+    
+    def menu_entry_create_filter
+        if not can_create_menu_entry?
+          flash[:errors] = "You can't add this link to your menu."
+          redirect_to root_path
+        end
+      end
+      
+      def menu_entry_edit_filter
+        if not can_edit_menu_entry?
+          flash[:errors] = "You can't modify this menu."
+          redirect_to root_path
+        end
+      end
+      
+      def menu_entry_destroy_filter
+        if not can_destroy_menu_entry?
+          flash[:errors] = "You can't modify this menu"
+          redirect_to root_path
+        end
+      end
+      
+      def menu_entry_view_filter
+        if not can_view_menu_entry?
+          flash[:errors] = "You can't modify this menu"
+          redirect_to root_path
+        end
+      end
 end

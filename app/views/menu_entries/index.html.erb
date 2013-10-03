@@ -11,27 +11,21 @@
 		<div class="row">
 			<div class="span8 offset2">
 				<table>
-				  <tr>
-				    <th>Article</th>
-				    <th>Order</th>
-				    <th>Link type</th>
-				    <th>Title</th>
-				    <th></th>
-				    <th></th>
-				    <th></th>
-				  </tr>
-				
 				<% @menu_entries.each do |menu_entry| %>
 				  <tr>
-				    <td><%= menu_entry.article_id %></td>
-				    <td><%= menu_entry.order %></td>
-				    <td><%= menu_entry.link_type %></td>
 				    <td><%= menu_entry.title %></td>
-				    <td><%= link_to 'Show', menu_entry %></td>
-				    <td><%= link_to 'Edit', edit_menu_entry_path(menu_entry) %></td>
-				    <td><%= link_to 'Move Up', move_menu_entry_path({:new_order=>menu_entry.order-1, :id=>menu_entry.id}) %></td>
-				    <td><%= link_to 'Move Down', move_menu_entry_path({:new_order=>menu_entry.order+1, :id=>menu_entry.id}) %></td>
-				    <td><%= link_to 'Destroy', menu_entry, confirm: 'Are you sure?', method: :delete %></td>
+				    <td><%= link_to move_menu_entry_path({:new_order=>menu_entry.order-1, :id=>menu_entry.id}) do %>
+				    		<i class="icon-arrow-up"></i>
+				    	<% end %>
+				    </td>
+				    <td><%= link_to move_menu_entry_path({:new_order=>menu_entry.order+1, :id=>menu_entry.id}) do %>
+				    		<i class="icon-arrow-down"></i>
+				    	<% end %>
+				    </td>
+				    <td><%= link_to menu_entry, confirm: 'Are you sure?', method: :delete do %>
+				    		<i class="icon-remove"></i>
+				    	<% end %>
+				    </td>
 				  </tr>
 				<% end %>
 				</table>

@@ -15,7 +15,7 @@ module ArticlesHelper
   
   def in_user_menu(article, user = current_user)
     menu_entry = MenuEntry.where('user_id=? and article_id=?', user, article)
-    menu_entry ? true : false
+    menu_entry.count>0 ? true : false
   end
   
   #privileges
