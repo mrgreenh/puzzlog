@@ -1,0 +1,41 @@
+<% provide :title, full_title("Edit Menu") %>
+<div class="offset1 span6">
+	<div class="container-fluid puzzle_box_container" id="puzzle_box_fragments_container">
+		<div class="row">
+			<div class="span8 offset2">
+				<h1>Edit Menu</h1>
+				<p>Changes will take place immediately.</p>
+				<p>To add an article to your website's menu, navigate to that article and add it via its 'edit' menu.'</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span8 offset2">
+				<table>
+				  <tr>
+				    <th>Article</th>
+				    <th>Order</th>
+				    <th>Link type</th>
+				    <th>Title</th>
+				    <th></th>
+				    <th></th>
+				    <th></th>
+				  </tr>
+				
+				<% @menu_entries.each do |menu_entry| %>
+				  <tr>
+				    <td><%= menu_entry.article_id %></td>
+				    <td><%= menu_entry.order %></td>
+				    <td><%= menu_entry.link_type %></td>
+				    <td><%= menu_entry.title %></td>
+				    <td><%= link_to 'Show', menu_entry %></td>
+				    <td><%= link_to 'Edit', edit_menu_entry_path(menu_entry) %></td>
+				    <td><%= link_to 'Move Up', move_menu_entry_path({:new_order=>menu_entry.order-1, :id=>menu_entry.id}) %></td>
+				    <td><%= link_to 'Move Down', move_menu_entry_path({:new_order=>menu_entry.order+1, :id=>menu_entry.id}) %></td>
+				    <td><%= link_to 'Destroy', menu_entry, confirm: 'Are you sure?', method: :delete %></td>
+				  </tr>
+				<% end %>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

@@ -32,9 +32,9 @@
 		</li>
 	<%end%>
 
-	<%if can_publish_article?(article)%>
+	<%if can_publish_article?(article) and not in_user_menu(article)%>
 		<li>
-			<%= link_to menu_entries_path(:menu_entry => {:article_id => article.id, :user_id=>current_user.id, :link_type => 'article'}), method: :post, remote:remote_bool, class:'btn btn-small btn-success hidden_on_article_editing' do %>
+			<%= link_to menu_entries_path(:menu_entry => {:article_id => article.id, :user_id=>current_user.id, :link_type => 'article'}), method: :post, remote:remote_bool, class:'btn btn-small btn-success hidden_on_article_editing add_article_to_menu_button' do %>
 				<i class="icon-bullhorn icon-white"></i> To Menu
 			<% end %>
 		</li>

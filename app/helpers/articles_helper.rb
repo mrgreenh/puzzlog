@@ -12,6 +12,12 @@ module ArticlesHelper
     end
     return fragments
   end
+  
+  def in_user_menu(article, user = current_user)
+    menu_entry = MenuEntry.where('user_id=? and article_id=?', user, article)
+    menu_entry ? true : false
+  end
+  
   #privileges
   def can_create_articles?
     has_role?('superadmin')||has_role?('writer')
