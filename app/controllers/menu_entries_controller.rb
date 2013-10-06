@@ -1,7 +1,7 @@
 class MenuEntriesController < ApplicationController
   include MenuEntriesHelper
   
-  before_filter :menu_entry_create_filter, only:[:new,:create]
+  #before_filter :menu_entry_create_filter, only:[:new,:create]
   before_filter :menu_entry_destroy_filter, only: :destroy
   before_filter :menu_entry_edit_filter, only: [:update]
   before_filter :menu_entry_view_filter, only: [:show]
@@ -54,14 +54,12 @@ class MenuEntriesController < ApplicationController
     @article    = Article.find(params[:menu_entry][:article_id])
 
     respond_to do |format|
-      if @menu_entry.save #Need to enforce the fact that 'article' type requires an article_id
+      if can_create_menu_entry? and @menu_entry.save #Need to enforce the fact that 'article' type requires an article_id
         flash[:success] = "Article added to your blog's menu!"
-        format.html { redirect_to 'index', notice: 'Menu entry was successfully created.' }
-        @message = "right"
+        format.html { redirect_to 'index' }
         format.js
       else
-        flash[:error] = "Impossible to add this article to your blog menu."
-        @message = "wrong"
+        flash[:errors] = "Impossible to add this article to your blog menu. Make sure you created this article and it has been published."
         format.js
       end
     end
@@ -121,14 +119,16 @@ class MenuEntriesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
   private
-    
-    def menu_entry_create_filter
-        if not can_create_menu_entry?
-          flash[:errors] = "You can't add this link to your menu."
-          redirect_to root_path
-        end
-      end
+    # def menu_entry_create_filter
+        # if not can_create_menu_entry?
+          # flash[:errors] = "You can't add this link to your menu."
+          # respond_to do |format|
+            # format.js render 'create'
+          # end
+        # end
+      # end
       
       def menu_entry_edit_filter
         if not can_edit_menu_entry?

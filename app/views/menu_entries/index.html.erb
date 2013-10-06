@@ -4,30 +4,25 @@
 		<div class="row">
 			<div class="span8 offset2">
 				<h1>Edit Menu</h1>
-				<p>Changes will take place immediately.</p>
-				<p>To add an article to your website's menu, navigate to that article and add it via its 'edit' menu.'</p>
+				<p>
+					Changes will take place immediately.
+				</p>
+				<p>
+					To add an article to your website's menu, navigate to that article and add it via its 'edit' menu.'
+				</p>
 			</div>
 		</div>
 		<div class="row">
 			<div class="span8 offset2">
 				<table>
-				<% @menu_entries.each do |menu_entry| %>
-				  <tr>
-				    <td><%= link_to menu_entry.title, article_path(menu_entry.article_id) if menu_entry.link_type == 'article' %></td>
-				    <td><%= link_to move_menu_entry_path({:new_order=>menu_entry.order-1, :id=>menu_entry.id}) do %>
-				    		<i class="icon-arrow-up"></i>
-				    	<% end %>
-				    </td>
-				    <td><%= link_to move_menu_entry_path({:new_order=>menu_entry.order+1, :id=>menu_entry.id}) do %>
-				    		<i class="icon-arrow-down"></i>
-				    	<% end %>
-				    </td>
-				    <td><%= link_to menu_entry, confirm: 'Are you sure?', method: :delete do %>
-				    		<i class="icon-remove"></i>
-				    	<% end %>
-				    </td>
-				  </tr>
-				<% end %>
+					<% @menu_entries.each do |menu_entry| %>
+					<tr>
+						<td><%= link_to menu_entry, confirm: 'Are you sure?', method: :delete do %> <i class="icon-remove"></i> <% end %> </td>
+						<td><%= link_to menu_entry.title, article_path(menu_entry.article_id) if menu_entry.link_type == 'article' %></td>
+						<td><%= link_to move_menu_entry_path({:new_order=>menu_entry.order-1, :id=>menu_entry.id}) do %> <i class="icon-arrow-up"></i> <% end %> </td>
+						<td><%= link_to move_menu_entry_path({:new_order=>menu_entry.order+1, :id=>menu_entry.id}) do %> <i class="icon-arrow-down"></i> <% end %> </td>
+					</tr>
+					<% end %>
 				</table>
 			</div>
 		</div>
