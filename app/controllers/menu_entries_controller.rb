@@ -54,12 +54,12 @@ class MenuEntriesController < ApplicationController
     @article    = Article.find(params[:menu_entry][:article_id])
 
     respond_to do |format|
-      if can_create_menu_entry? and @menu_entry.save #Need to enforce the fact that 'article' type requires an article_id
+      if can_create_menu_entry? and @article.public and @menu_entry.save #Need to enforce the fact that 'article' type requires an article_id
         flash[:success] = "Article added to your blog's menu!"
         format.html { redirect_to 'index' }
         format.js
       else
-        flash[:errors] = "Impossible to add this article to your blog menu. Make sure you created this article and it has been published."
+        flash[:errors] = "Impossible to add this article to your blog menu. Make sure to publish this article first."
         format.js
       end
     end
@@ -121,14 +121,12 @@ class MenuEntriesController < ApplicationController
   end
   
   private
-    # def menu_entry_create_filter
-        # if not can_create_menu_entry?
-          # flash[:errors] = "You can't add this link to your menu."
-          # respond_to do |format|
-            # format.js render 'create'
-          # end
-        # end
-      # end
+    def menu_entry_create_filter
+        if not can_create_menu_entry?
+          flash[:errors] = "You can't add this link to your menu."
+          redirect_to root_path
+        end
+      end
       
       def menu_entry_edit_filter
         if not can_edit_menu_entry?

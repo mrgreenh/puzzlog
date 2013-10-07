@@ -5,7 +5,7 @@ module MenuEntriesHelper
   end
   
   def can_create_menu_entry?(user=current_user, link_type='article', article_id=params[:menu_entry][:article_id])
-    (has_role?('superadmin')||has_role?('writer')) and (not link_type=='article' or (Article.find(article_id).user==user and Article.find(article_id).public))
+    (has_role?('superadmin')||has_role?('writer')) and (not link_type=='article' or Article.find(article_id).user==user)
   end
   
   def can_destroy_menu_entry?(menu_entry=MenuEntry.find(params[:id]))

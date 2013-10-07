@@ -117,6 +117,7 @@ class ArticlesController < ApplicationController
   def unpublish
     @article = Article.find(params[:id])
     if @article.update_attributes(public:false)
+      MenuEntry.find_by_article_id(@article.id).destroy
       flash[:success] = "#{@article.title} unpublished!"
       respond_to do |format|
         format.html do

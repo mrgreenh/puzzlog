@@ -1,2 +1,2 @@
-$("#article_<%= @article.id %> .add_article_to_menu_button").remove();
 modalWindow("","<%= escape_javascript(render 'layouts/flash_messages') %>");
+$("#article_<%= @article.id %> .tooltip_content").html("<a class='close'>&times;</a><%= escape_javascript(render 'articles/article_controls', remote_bool: true, article:@article) %>");
