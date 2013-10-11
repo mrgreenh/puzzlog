@@ -11,16 +11,29 @@ class Article < ActiveRecord::Base
   has_many :menu_entries, dependent: :destroy
   
   belongs_to :user
+
+  def create
+    self.pages.build(number:1,foreground_color:"#000000",background_color:"#ffffff",third_color:"#555555")
+    super
+  end
   
   def first_fragment
     if self.pages.any?
       self.pages.order('number ASC').first.fragments.order('ordering_number ASC').first
     end
   end
-  
-  def create
-    self.pages.build(number:1,foreground_color:"#000000",background_color:"#ffffff",third_color:"#555555")
-    super
+ 
+  def chapters_outline
+    result = []
+    current_chapter = nil
+    sorted_pages = self.pages.order('number ASC')
+    sorted_pages.each do |page|
+      if not page.name.nil? and page.name.size>0
+        result.append({:chapter => page.name, :page_number => page.number})
+      end
+    end
+    return result
   end
+
   
 end

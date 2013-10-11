@@ -88,6 +88,7 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
+    # @article.chapters_outline
     @page = @article.pages.find_by_number(params[:page_number])||@article.pages.order('number ASC').first
     @fragments = @page.ordered_fragments
     @fragment_types = getFragmentTypes(@fragments)
