@@ -21,5 +21,9 @@ class Page < ActiveRecord::Base
       false
     end
   end
+
+  def chapter
+    
+  end
   
 end

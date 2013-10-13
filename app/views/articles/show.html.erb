@@ -7,6 +7,16 @@
 					<ul class="pager">
 					  <li class="previous_page_link_container"><%= render 'articles/previous_page_link'%></li>
 					</ul>
+					<nav>
+						<ul class="nav nav-pills nav-stacked" id="chapters_outline">
+							<% @article.chapters_outline.each do |chapter| %>
+								<li>
+									<%= link_to chapter[:chapter_title], "#" %>									
+								</li>
+
+							<% end %>
+						</ul>
+					</nav>
 				</div>
 			</aside>
 		</div>
@@ -19,7 +29,6 @@
 			</div>
 			<article class="article_view_fragments_container row">
 				<%= render 'articles/fragments_with_contextual', fragments: @fragments %>
-				
 			</article>
 			<div class="row">
 				<ul class="pager visible-phone">

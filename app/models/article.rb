@@ -29,11 +29,10 @@ class Article < ActiveRecord::Base
     sorted_pages = self.pages.order('number ASC')
     sorted_pages.each do |page|
       if not page.name.nil? and page.name.size>0
-        result.append({:chapter => page.name, :page_number => page.number})
+        result.append({:chapter_title => page.name, :page_number => page.number})
       end
     end
     return result
   end
 
-  
 end
