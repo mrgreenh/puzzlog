@@ -3,6 +3,6 @@
 		@next_page = @article.pages.find_by_number(@page.number+1)
 %>
 	<%= link_to page_path(page_id:@next_page.id), remote:true, title:"View next page", class:"next_page_link" do %>
-		Next <i class="icon icon-chevron-right"></i>
+		Page <%= @page.number+1 %> <i class="icon icon-chevron-right"></i>
 	<% end %>
 <% end %>

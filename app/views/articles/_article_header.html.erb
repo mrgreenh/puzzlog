@@ -7,5 +7,5 @@
 <header class="article_header">
 	<h1><%= article.title %></h1>
 	<p><%= time_tag article.publication_date unless article.publication_date.nil?||article.publication_date.blank? %></p><p><strong><%= article.user.name %></strong></p>
-	<h2><%= "."+page.name unless page.name.nil?||page.name.blank?||!page_name %></h2>
+	<h2><%= page.chapter unless page.chapter.nil? %></h2>
 </header>

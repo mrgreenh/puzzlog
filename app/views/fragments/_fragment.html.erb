@@ -21,7 +21,8 @@ aside ||= false
 	
 		<%= render 'fragments/fragment_view', fragment: fragment %>
 	
-	<% else %>
+	<% else #add here non-creator user case handling 
+	%>
 		
 		<%= render 'fragments/fragment_edit', fragment: fragment %>
 	

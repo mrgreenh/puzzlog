@@ -11,9 +11,8 @@
 						<ul class="nav nav-pills nav-stacked" id="chapters_outline">
 							<% @article.chapters_outline.each do |chapter| %>
 								<li>
-									<%= link_to chapter[:chapter_title], "#" %>									
+									<%= link_to chapter[:chapter_title], article_path(:page_number => chapter[:page_number]), :remote => true %>									
 								</li>
-
 							<% end %>
 						</ul>
 					</nav>

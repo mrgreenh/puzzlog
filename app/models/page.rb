@@ -23,7 +23,13 @@ class Page < ActiveRecord::Base
   end
 
   def chapter
-    
+    page_chapter = nil
+    chapters = self.article.chapters_outline
+    chapters.each do |chapter|
+      break if chapter[:page_number]>self.number
+      page_chapter = chapter[:chapter_title] if chapter[:page_number]<=self.number
+    end
+    return page_chapter
   end
   
 end

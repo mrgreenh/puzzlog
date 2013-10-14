@@ -80,7 +80,9 @@
     margin-top:20px;
   }
   #chapters_outline{
+    @include small_sharp_shade;
     background-color:white;
+    width:90%;
   }
   aside{
     min-height:1px;
