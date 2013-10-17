@@ -9,10 +9,10 @@ module MenuEntriesHelper
   end
   
   def can_destroy_menu_entry?(menu_entry=MenuEntry.find(params[:id]))
-    has_role?('superadmin')||MenuEntry.user == current_user
+    has_role?('superadmin')||menu_entry.user_id == current_user.id
   end
   
   def can_edit_menu_entry?(menu_entry=MenuEntry.find(params[:id]))
-    has_role?('superadmin')||menu_entry.user == current_user
+    has_role?('superadmin')||menu_entry.user_id == current_user.id
   end
 end

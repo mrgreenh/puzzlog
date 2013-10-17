@@ -175,7 +175,7 @@ class FragmentsController < ApplicationController
     
       def fragment_publish_filter
         #Qua va detto che il public deve essere diverso da prima, o true se si tratta di un nuovo frammento!
-        if !can_publish_fragment?(Fragment.new(params[:fragment]))&&(params.has_key?(:pubish_submit)||fragment_public_state_change?(params)) 
+        if !can_publish_fragment?(Fragment.new(params[:fragment]))&&params.has_key?(:pubish_submit) 
           flash[:errors] = "You can't publish fragments"
           redirect_to root_path
         end

@@ -7,18 +7,19 @@ module PageFragmentRelationshipsHelper
   end
   #------------------------Privileges
   def can_create_page_fragment_relationship?
-    fragment = true
-    if !params[:fragment_id].nil?
-      fragment = Fragment.find(params[:fragment_id]).user == current_user
+    fragment_is_public = true
+    if not params[:fragment_id].nil?
+      fragment           = Fragment.find(params[:fragment_id])
+      fragment_is_public = fragment.public
     end
-    has_role?('superadmin')||(Page.find(params[:page_id]).user==current_user&&fragment)
+    has_role?('superadmin')||Page.find(params[:page_id]).article.user==current_user||fragment_is_public
   end
   
   def can_destroy_page_fragment_relationship?(page_fragment_relationship=PageFragmentRelationship.find(params[:id]))
-    has_role?('superadmin')||page_fragment_relationship.user == current_user
+    has_role?('superadmin')||page_fragment_relationship.page.article.user == current_user
   end
   
   def can_edit_page_fragment_relationship?(page_fragment_relationship=PageFragmentRelationship.find(params[:id]))
-    has_role?('superadmin')||page_fragment_relationship.user == current_user
+    has_role?('superadmin')||page_fragment_relationship.page.article.user == current_user
   end
 end

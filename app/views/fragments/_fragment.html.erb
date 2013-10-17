@@ -9,7 +9,7 @@ aside ||= false
 @aside = aside
 %>
 <div id="fragment_<%=fragment.id %>" class="fragment_container resource_partial <%= streamlined_fragment ? 'streamlined_fragment' : '' %>">
-	<%= render 'common_partials/editing_header' if popover_controls&&(can_edit_fragment?(fragment)||can_destroy_fragment?(fragment)) %>
+	<%= render 'common_partials/editing_header' if popover_controls&&(can_edit_fragment?(fragment)||can_destroy_fragment?(fragment))||can_create_user_box_fragment_relationships?(fragment) %>
 	<div class="hide tooltip_content">
 		<a class='close'>&times;</a>
 		<%= render 'fragments/fragment_controls', remote_bool: true, fragment:fragment %>
@@ -17,12 +17,11 @@ aside ||= false
 	
 	<%= render 'fragments/fragment_header', fragment: fragment if fragment_header %>
 	
-	<% if not edit %>
+	<% if not edit or (edit and fragment.user!=current_user)%>
 	
 		<%= render 'fragments/fragment_view', fragment: fragment %>
 	
-	<% else #add here non-creator user case handling 
-	%>
+	<% else %>
 		
 		<%= render 'fragments/fragment_edit', fragment: fragment %>
 	

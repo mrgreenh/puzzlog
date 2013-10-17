@@ -3,7 +3,7 @@ popover_controls ||= false
 #Share URL definition
 if @page.nil?
 	share_url = "http://"+base_url+"/fragments/"+fragment.id.to_s
-else
+elsif not @page.nil? and not @article.nil?
 	share_url = "http://"+base_url+"/articles/"+@article.id.to_s+"/"+@page.number.to_s+"#fragment_"+fragment.id.to_s+"_view"
 end
 %>
@@ -15,7 +15,7 @@ end
 </div>
 <% if @aside %>
 	<div class="fragment_aside">
-		<%= render 'fragments/also_appears_in', fragment: fragment %>
+		<%= render 'fragments/additional_infos', fragment: fragment %>
 	</div>
 <% else %>
 	<div class="fragment_interactions_container">

@@ -5,7 +5,7 @@
 	<li<%= " class='active'" if @current_bag_id.nil? %>><%= link_to 'All', box_path(id:nil,resource_type:@resource_type,add_to_article:@add_to_article, page_id:@page_id), remote: true, id:"bag__link", class:"select_bag_link" %></li>
 	<% current_user.bags.each do |bag| %>
 		<li<%= " class='active'" if !@current_bag_id.nil? and bag.id == @current_bag_id.to_i %>>
-			<%= link_to bag.name, bag_path(id:bag,resource_type:@resource_type,add_to_article:@add_to_article, page_id:@page_id), remote: true, id: "bag_#{bag.id}_link", class:"select_bag_link"%>
+			<%= link_to bag.name, bag_path(id:bag.id,resource_type:@resource_type,add_to_article:@add_to_article, page_id:@page_id), remote: true, id: "bag_#{bag.id}_link", class:"select_bag_link"%>
 		</li>
 	<% end %>
 </ul>

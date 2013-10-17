@@ -10,11 +10,11 @@ module PagesHelper
   end
   
   def can_destroy_page?(page=Page.find(params[:id]))
-    has_role?('superadmin')||page.user == current_user
+    has_role?('superadmin')||page.article.user == current_user
   end
   
   def can_edit_page?(page=Page.find(params[:id]))
-    has_role?('superadmin')||page.user == current_user
+    has_role?('superadmin')||page.article.user == current_user
   end
   
   def can_view_page?(page=nil)
@@ -22,6 +22,6 @@ module PagesHelper
       page = Page.find(params[:page_id]) unless params[:page_id].nil?
       page ||= Article.find(params[:id]).pages.find_by_number(params[:page_number]) unless params[:page_number].nil?
     end
-    page.article.public || has_role?('superadmin') || page.user == current_user
+    page.article.public || has_role?('superadmin') || page.article.user == current_user
   end
 end

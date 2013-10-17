@@ -45,13 +45,5 @@ module FragmentsHelper
     has_role?('superadmin') || (has_role?('publisher')&&fragment.user == current_user)
   end
   
-  def fragment_public_state_change?(params)
-    if fragment = Fragment.find_all_by_id(params[:fragment][:id]).first
-      return fragment.public != params[:fragment][:public]
-    else
-      return false
-    end
-  end
-  
 end
 

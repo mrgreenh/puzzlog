@@ -94,6 +94,10 @@ h3.popover-title{
   }
 }
 
+.popover_overlay ul.controls li{
+  width:100%;
+}
+
  ul.controls, ul.user-works {
     list-style-type:none;
     margin:10px auto;
@@ -102,6 +106,7 @@ h3.popover-title{
   ul.controls {
     li{
       float:left;
+      text-align:center;
     }
     .popover &{
       width: 110px;

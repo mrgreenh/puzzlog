@@ -4,7 +4,6 @@ class MenuEntriesController < ApplicationController
   #before_filter :menu_entry_create_filter, only:[:new,:create]
   before_filter :menu_entry_destroy_filter, only: :destroy
   before_filter :menu_entry_edit_filter, only: [:update]
-  before_filter :menu_entry_view_filter, only: [:show]
 
 
   # GET /menu_entries
@@ -13,36 +12,8 @@ class MenuEntriesController < ApplicationController
     @menu_entries = MenuEntry.where('user_id=?',params[:user_id] || current_user.id).order('menu_entries.order ASC') #You should retrieve menus by user
 
     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @menu_entries }
+      format.html
     end
-  end
-
-  # GET /menu_entries/1
-  # GET /menu_entries/1.json
-  def show
-    @menu_entry = MenuEntry.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @menu_entry }
-    end
-  end
-
-  # GET /menu_entries/new
-  # GET /menu_entries/new.json
-  def new
-    @menu_entry = MenuEntry.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @menu_entry }
-    end
-  end
-
-  # GET /menu_entries/1/edit
-  def edit
-    @menu_entry = MenuEntry.find(params[:id])
   end
 
   # POST /menu_entries
@@ -56,10 +27,11 @@ class MenuEntriesController < ApplicationController
     respond_to do |format|
       if can_create_menu_entry? and @article.public and @menu_entry.save #Need to enforce the fact that 'article' type requires an article_id
         flash[:success] = "Article added to your blog's menu!"
-        format.html { redirect_to 'index' }
+        format.html { redirect_to request.referer }
         format.js
       else
         flash[:errors] = "Impossible to add this article to your blog menu. Make sure to publish this article first."
+        format.html { redirect_to request.referer }
         format.js
       end
     end

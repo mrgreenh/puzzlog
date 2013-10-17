@@ -1,6 +1,6 @@
 module BagsHelper
   def bagAssignment(params)
-     if can_edit_bag?(params[:selected_bag])
+     if params[:selected_bag].to_i!=-1 and can_edit_bag?(Bag.find(params[:selected_bag]))
       bag_id = params[:selected_bag]
      else
        bag_id = "-1";
@@ -15,7 +15,7 @@ module BagsHelper
     return bag_id
   end
   
-  def resourcesFromBag(bag_id=nil,resource_type=nil)
+  def resourcesFromBag(bag_id=nil,resource_type=nil)   #This needs to be all refactored, it sucks!!!
     if not bag_id.nil?
       if resource_type.nil?
         resources = current_user.bags.find(bag_id).box_fragments + current_user.bags.find(bag_id).box_images
@@ -58,19 +58,19 @@ module BagsHelper
   end
   
   #privileges
-  def can_view_bag?(bag=Bag.find(params[:id]))
-    has_role?('superadmin')||bag.user == current_user
+  def can_view_bag?(bag=Bag.find(params[:id].to_i))
+    has_role?('superadmin')||bag.id!=-1||bag.user == current_user
   end
   
   def can_create_bags?
-    has_role?('superadmin')||has_role?('writer')
+    has_role?('superadmin')||has_role?('writer')||has_role?('newbie')
   end
   
-  def can_destroy_bag?(bag=Bag.find(params[:id]))
-    has_role?('superadmin')||bag.user == current_user
+  def can_destroy_bag?(bag=Bag.find(params[:id].to_i))
+    has_role?('superadmin')||bag.id!=-1||bag.user == current_user
   end
   
-  def can_edit_bag?(bag=Bag.find(params[:id]))
-    has_role?('superadmin')||bag.user == current_user
+  def can_edit_bag?(bag=Bag.find(params[:id].to_i))
+    has_role?('superadmin')||bag.id!=-1||bag.user == current_user
   end
 end

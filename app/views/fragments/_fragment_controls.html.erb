@@ -1,6 +1,18 @@
 <% fragment ||= @fragment 
 %>
 <ul class="controls fragment-controls expanded-centered">
+	<%if can_create_user_box_fragment_relationships?(fragment) %>
+		<li>
+			<% if not current_user.box_fragments.where("resource_id=?",fragment.id).any?%>
+				<%= link_to new_user_box_fragment_relationship_path(id:fragment.id), class:'btn btn-small btn-primary', remote: true do %>
+					<i class='icon-plus icon-white'></i> PuzzleBox
+				<% end %>
+			<% else %>
+				<i class='icon-ok icon-white'></i> PuzzleBox
+			<% end %>
+		</li>
+	<% end %>
+	
 	<% if !fragment.public&&can_publish_fragment?(fragment) %>
 		<li>
 			<%= form_for fragment, remote:remote_bool do |form| %>
@@ -26,15 +38,7 @@
 			<% end %>
 		</li>
 	<% end %>
-	
-	<%if can_edit_fragment?(fragment) %>
-		<li>
-			<%= link_to new_user_box_fragment_relationship_path(id:fragment.id), class:'btn btn-small btn-primary', remote: true do %>
-				<i class='icon-plus icon-white'></i> PuzzleBox
-			<% end unless current_user.box_fragments.where("resource_id=?",fragment.id).any?%>
-		</li>
-	<% end %>
-	
+		
 	<%if can_edit_fragment?(fragment)%>
 		<li>
 			<%= link_to edit_fragment_path(fragment), class:'btn btn-small btn-info hidden_on_article_editing' do %>
