@@ -11,15 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131003025824) do
+ActiveRecord::Schema.define(:version => 20131017231432) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
     t.boolean  "public"
     t.datetime "publication_date"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.integer  "user_id"
+    t.integer  "cover_fragment_id"
   end
 
   add_index "articles", ["title"], :name => "index_articles_on_title", :unique => true

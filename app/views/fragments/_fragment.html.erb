@@ -9,7 +9,7 @@ aside ||= false
 @aside = aside
 %>
 <div id="fragment_<%=fragment.id %>" class="fragment_container resource_partial <%= streamlined_fragment ? 'streamlined_fragment' : '' %>">
-	<%= render 'common_partials/editing_header' if popover_controls&&(can_edit_fragment?(fragment)||can_destroy_fragment?(fragment))||can_create_user_box_fragment_relationships?(fragment) %>
+	<%= render 'common_partials/editing_header' if popover_controls&&((can_edit_fragment?(fragment)||can_destroy_fragment?(fragment))||can_create_user_box_fragment_relationships?(fragment)) %>
 	<div class="hide tooltip_content">
 		<a class='close'>&times;</a>
 		<%= render 'fragments/fragment_controls', remote_bool: true, fragment:fragment %>
@@ -33,6 +33,11 @@ aside ||= false
 	%>
 		<div class="article_fragment_edit_controls" id="article_fragment_<%= fragment.id %>_edit_controls">
 			<ul>
+				<li>
+					<%= link_to set_article_cover_path(@article,fragment_id:fragment.id), remote:true, class:'set_cover_fragment_button btn btn-small'+(@article.cover_fragment_id==fragment.id ? ' disabled' : '') do%>
+						<i class="icon icon-eye-open"></i>
+					<%end%>
+				</li>
 				<li>
 					<%= link_to page_fragment_relationship_path(id:relationship.id,move:'up'), remote:true, method: :put, class:'btn btn-small' do%>
 						<i class="icon icon-arrow-up"></i>

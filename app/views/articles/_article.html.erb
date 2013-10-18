@@ -11,7 +11,7 @@ remote_bool = true
 	
 	<%= render 'articles/article_header', article:article, page_name: false %>
 	<div class="article-summary">
-		<%= render 'fragments/fragment', fragment: article.first_fragment unless article.pages.count==0||article.first_fragment.nil?%>
+		<%= render 'fragments/fragment', fragment: article.cover_fragment unless article.pages.count==0||article.cover_fragment.nil?%>
 	</div>
 	<footer>
 		<%= link_to article_path(article), class:'read_more_link' do %>

@@ -30,7 +30,7 @@ class MenuEntriesController < ApplicationController
         format.html { redirect_to request.referer }
         format.js
       else
-        flash[:errors] = "Impossible to add this article to your blog menu. Make sure to publish this article first."
+        flash[:errors] = "Impossible to add this article to your blog menu. Make sure it's public and you have the permissions."
         format.html { redirect_to request.referer }
         format.js
       end

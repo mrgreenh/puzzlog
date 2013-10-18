@@ -6,8 +6,8 @@ module ArticlesHelper
   def article_summaries_fragments(articles)
     fragments = []
     articles.each do |a|
-      if not a.first_fragment.nil?
-        fragments = fragments+[a.first_fragment]
+      if not a.cover_fragment.nil?
+        fragments = fragments+[a.cover_fragment]
       end
     end
     return fragments

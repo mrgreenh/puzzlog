@@ -6,7 +6,7 @@ class ArticlesController < ApplicationController
   #-----------------------------------------------------Privileges
   before_filter :article_create_filter, only:[:new,:create]
   before_filter :article_destroy_filter, only: :destroy
-  before_filter :article_edit_filter, only: [:edit, :update]
+  before_filter :article_edit_filter, only: [:edit, :update, :set_cover_fragment]
   before_filter :article_view_filter, only: [:show]
   before_filter :article_publish_filter, only: :publish
   
@@ -128,6 +128,20 @@ class ArticlesController < ApplicationController
         end
         format.js
       end
+    end
+  end
+  
+  def set_cover_fragment
+    @article = Article.find(params[:id])
+    if @fragment = Fragment.find(params[:fragment_id]) and @article.update_attributes(cover_fragment_id:params[:fragment_id])
+      flash[:success] = "This fragment will now be displayed as this article's cover"
+    else
+      flash[:errors]  = "There has been a problem assigning this cover."
+    end
+    
+    respond_to do |format|
+      format.js
+      format.html
     end
   end
   
