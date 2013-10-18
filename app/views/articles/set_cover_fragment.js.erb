@@ -1,0 +1,6 @@
+modalWindow("","<%= escape_javascript(render 'layouts/flash_messages') %>");
+
+<% if not @fragment.nil? %>
+	$(".set_cover_fragment_button").removeClass("disabled");
+	$("#article_fragment_<%= @fragment.id %>_edit_controls .set_cover_fragment_button").addClass("disabled");
+<% end %>

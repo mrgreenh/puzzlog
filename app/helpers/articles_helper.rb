@@ -32,7 +32,7 @@ module ArticlesHelper
   end
   
   def can_view_article?(article=Article.find(params[:id]))
-    article.public || has_role?('superadmin') || article.user == current_user
+    article.public || has_role?('superadmin') || article.user == current_user || !MenuEntry.find_by_article_id(article.id).nil?
   end
   
   def can_publish_article?(article=Article.find(params[:id]))

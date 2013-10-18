@@ -25,12 +25,12 @@ class MenuEntriesController < ApplicationController
     @article    = Article.find(params[:menu_entry][:article_id])
 
     respond_to do |format|
-      if can_create_menu_entry? and @article.public and @menu_entry.save #Need to enforce the fact that 'article' type requires an article_id
+      if can_create_menu_entry? and @menu_entry.save #Need to enforce the fact that 'article' type requires an article_id
         flash[:success] = "Article added to your blog's menu!"
         format.html { redirect_to request.referer }
         format.js
       else
-        flash[:errors] = "Impossible to add this article to your blog menu. Make sure it's public and you have the permissions."
+        flash[:errors] = "Impossible to add this article to your blog menu. Make sure you have the permissions."
         format.html { redirect_to request.referer }
         format.js
       end
