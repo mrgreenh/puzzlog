@@ -11,10 +11,10 @@ FragmentsProject::Application.routes.draw do
   resources :user_role_relationships, only: [:create, :destroy]
   resources :sessions, only:[:new,:create,:destroy]
   
+  match 'articles/:id/set_cover_fragment/', to: 'articles#set_cover_fragment', as: 'set_article_cover'
   resources :articles
   match 'articles/:id/publish', to: 'articles#publish', as: 'publish_article'
   match 'articles/:id/unpublish', to: 'articles#unpublish', as: 'unpublish_article'
-  match 'articles/:id/set_cover_fragment/', to: 'articles#set_cover_fragment', as: 'set_article_cover'
   
   resources :pages, only: [:show,:create,:destroy,:edit]
   resources :page_fragment_relationships, only: [:new,:create,:update,:destroy]

@@ -34,7 +34,7 @@ aside ||= false
 		<div class="article_fragment_edit_controls" id="article_fragment_<%= fragment.id %>_edit_controls">
 			<ul>
 				<li>
-					<%= link_to set_article_cover_path(@article,fragment_id:fragment.id), remote:true, class:'set_cover_fragment_button btn btn-small'+(@article.cover_fragment_id==fragment.id ? ' disabled' : '') do%>
+					<%= link_to "/articles/"+@page.article.id.to_s+"/set_cover_fragment?fragment_id="+fragment.id.to_s, remote:true, class:'set_cover_fragment_button btn btn-small'+(@page.article.cover_fragment_id==fragment.id ? ' disabled' : ''), :title=>'Use this fragment as a cover for this article' do%>
 						<i class="icon icon-eye-open"></i>
 					<%end%>
 				</li>
