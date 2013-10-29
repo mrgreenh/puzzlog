@@ -1,6 +1,7 @@
 module PagesHelper
   def getScssVariables(page)
-    scss_variables = "$background_color: #{page.background_color};$foreground_color: #{page.foreground_color};$third_color: #{page.third_color};"
+    theme = page.theme
+    scss_variables = theme.getSCSSVariables
   end
   
   #privileges

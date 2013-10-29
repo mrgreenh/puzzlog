@@ -1,9 +1,9 @@
 <div class="page_name_editing_controls">
-	<h2 class="page_name"><%= !@page.name.blank? ? @page.name : "(Unnamed Page #{@page.number})" %></h2>
+	<h2 class="page_name"><%= !@page.name.blank? ? @page.name : "(#{@page.chapter || 'Unchaptered Page'})" %></h2>
 	<%= link_to '#', class:'btn btn-small hide page_name_edit_button' do %>
 		<i class="icon icon-edit"></i>
 	<%end%>
-	<%= text_field_tag "pages[#{@page.id}][name]", @page.name, placeholder:"(Unnamed Page #{@page.number})", class:'page_name_edit_field' %>
+	<%= text_field_tag "pages[#{@page.id}][name]", @page.name, placeholder:"( #{@page.chapter || "New Chapter"})", class:'page_name_edit_field' %>
 </div>
 <div class="page_fragments_controls">
 	<ul>
@@ -24,22 +24,9 @@
 </div>
 <div class="page_styling_controls">
 	  <div class="control-group">
-	    <label class="control-label">Background</label>
+	    <label class="control-label">Theme</label>
 	    <div class="controls">
-	      <%= text_field_tag "pages[#{@page.id}][background_color]", @page.background_color, class:'span1', id:"page_background_color_edit_field" %>
+	      <%= link_to 'Choose Theme',  choose_theme_path(@page), class: 'btn btn-primary btn-small', remote: true %>
 	    </div>
 	  </div>
-	  <div class="control-group">
-	    <label class="control-label">Foreground</label>
-	    <div class="controls">
-	      <%= text_field_tag "pages[#{@page.id}][foreground_color]", @page.foreground_color, class:'span1', id:"page_foreground_color_edit_field" %>
-	    </div>
-	  </div>
-	  <div class="control-group">
-	    <label class="control-label">Decorations</label>
-	    <div class="controls">
-	      <%= text_field_tag "pages[#{@page.id}][third_color]", @page.third_color, class:'span1', id:"page_third_color_edit_field" %>
-	    </div>
-	  </div>
-	<%= link_to 'Apply', edit_page_path(@page), remote:true, class:'btn btn-small page_styles_apply_button' %>
 </div>

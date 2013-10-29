@@ -1,0 +1,35 @@
+<h1>Listing themes</h1>
+
+<table class="themes_table">
+  <tr>
+    <th>Foreground color</th>
+    <th>Background color</th>
+    <th>Third color</th>
+    <th>Fourth color</th>
+    <th>Stylesheet</th>
+    <th>Name</th>
+    <th>Preview image</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @themes.each do |theme| %>
+  <tr>
+    <td><%= theme.foreground_color %></td>
+    <td><%= theme.background_color %></td>
+    <td><%= theme.third_color %></td>
+    <td><%= theme.fourth_color %></td>
+    <td><%= theme.stylesheet %></td>
+    <td><%= theme.name %></td>
+    <td><%= theme.preview_image %></td>
+    <td><%= link_to 'Show', theme %></td>
+    <td><%= link_to 'Edit', edit_theme_path(theme) %></td>
+    <td><%= link_to 'Destroy', theme, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Theme', new_theme_path %>

@@ -1,5 +1,5 @@
 class Page < ActiveRecord::Base
-  attr_accessible :number, :name, :foreground_color, :background_color, :third_color, :article_id
+  attr_accessible :number, :name, :foreground_color, :background_color, :third_color, :article_id, :theme_id
   before_destroy :dont_destroy_if_last_page
   
   validates_presence_of :article_id
@@ -9,6 +9,7 @@ class Page < ActiveRecord::Base
   validates :third_color, length: {is:7}
   
   belongs_to :article
+  belongs_to :theme
   has_many :page_fragment_relationships, dependent: :destroy
   has_many :fragments, through: :page_fragment_relationships, source: :fragment
   
@@ -30,6 +31,10 @@ class Page < ActiveRecord::Base
       page_chapter = chapter[:chapter_title] if chapter[:page_number]<=self.number
     end
     return page_chapter
+  end
+  
+  def theme
+    super || Theme.default
   end
   
 end

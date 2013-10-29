@@ -29,4 +29,5 @@
 //= require ace/mode-javascript.js
 //= require mediafragments.js
 //= require my_xywh.js
+//= require LAB.min.js
 //= require_tree .

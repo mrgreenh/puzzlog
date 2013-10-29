@@ -15,7 +15,7 @@ if @show_og_twitter_meta
 	<% elsif not @article.nil?
 			@article.pages.order("number ASC").first.page_fragment_relationships.order("ordering_number ASC").each do |rel|
 				frag = rel.fragment
-				if frag.fragment_type.has_images? %>
+				if frag.fragment_type.has_images? and frag.images.size>0 %>
 				<meta property="og:image" content="<%= frag.images.first.getImageUrl(:medium) %>"/>
 				<% break;
 				end

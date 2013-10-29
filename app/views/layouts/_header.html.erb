@@ -12,7 +12,7 @@
 				  <% if not signed_in? %>
 				  <li><a data-toggle="modal" href="#modalLogin" ><i class="icon-user"></i></a></li>
 				  
-				<% else signed_in? %>
+				<% elsif signed_in? %>
 					<% if can_create_fragments? and !@article_editing %> <!-- allora mostro creazione frammenti e puzzle box -->
 						<li class="navbar-text hidden-phone">Create a fragment:</li>
 						<% FragmentType.most_used.limit(5).each do |type|
@@ -86,6 +86,12 @@
 					      <li>
 					      	<%= link_to 'Blog Settings', menu_entries_path() %>
 					      </li>
+					      <% if can_edit_themes? %>
+						      <li>
+						      	<%= link_to 'Manage Themes', themes_path() %>
+						      </li>					      
+					      <% end %>
+
 					      <li>
 					      	<%= link_to 'Profile', user_path(current_user) %>
 					      </li>

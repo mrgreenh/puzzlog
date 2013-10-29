@@ -5,11 +5,11 @@ class PagesController < ApplicationController
   
   before_filter :page_create_filter, only:[:create]
   before_filter :page_destroy_filter, only: :destroy
-  before_filter :page_edit_filter, only: [:edit]
+  before_filter :page_edit_filter, only: [:edit,:assign_theme]
   before_filter :page_view_filter, only: [:show]
   def create
     @article = Article.find(params[:article_id])
-    page = @article.pages.build(number:@article.pages.count+1,foreground_color:"#000000",background_color:"#ffffff",third_color:"#555555")
+    page = @article.pages.build(number:@article.pages.count+1)
     
     if @article.save
       @page = @article.pages.order('number ASC').last
@@ -70,6 +70,18 @@ class PagesController < ApplicationController
     end
   end
   
+  def assign_theme
+    @page = Page.find(params[:id])
+    @page.update_attributes(:theme_id => params[:theme_id])
+    @page.save
+    @article = @page.article
+    @fragments = @page.ordered_fragments
+    @fragment_types = getFragmentTypes(@fragments)
+    respond_to do |format|
+      format.js { render 'edit' }
+    end
+  end
+
   private
   
     def page_create_filter

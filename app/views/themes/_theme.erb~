@@ -1,0 +1,45 @@
+<%
+	assign_theme_button ||= false
+%>
+<div class="theme_container">
+	<p>
+	  <b>Foreground color:</b>
+	  <%= theme.foreground_color %>
+	</p>
+	
+	<p>
+	  <b>Background color:</b>
+	  <%= theme.background_color %>
+	</p>
+	
+	<p>
+	  <b>Third color:</b>
+	  <%= theme.third_color %>
+	</p>
+	
+	<p>
+	  <b>Fourth color:</b>
+	  <%= theme.fourth_color %>
+	</p>
+	
+	<p>
+	  <b>Stylesheet:</b>
+	  <%= theme.stylesheet %>
+	</p>
+	
+	<p>
+	  <b>Name:</b>
+	  <%= theme.name %>
+	</p>
+	
+	<p>
+	  <b>Preview image:</b>
+	  <%= theme.preview_image %>
+	</p>
+</div>
+<% if not assign_theme_button %>
+   <%= link_to 'Edit', edit_theme_path(theme) %> |
+   <%= link_to 'Back', themes_path %>
+<% else %>
+   <%= link_to 'Assign', '#', class:"btn btn-success btn-small" %>
+<% end %>

@@ -2,7 +2,5 @@
 	<%= hidden_field_tag "pages[#{page.id}][number]", page.number, id:"page_#{page.id}_number_field", class:"page_#{page.id}_hidden_field"%>
 	<%= hidden_field_tag "pages[#{page.id}][name]", page.name, id:"page_#{page.id}_name_field", class:"page_#{page.id}_hidden_field"%>
 	<!-- Page Styling -->
-	<%= hidden_field_tag "pages[#{page.id}][background_color]", page.background_color, id:"page_#{page.id}_background_color_field", class:"page_#{page.id}_hidden_field"%>
-	<%= hidden_field_tag "pages[#{page.id}][foreground_color]", page.foreground_color, id:"page_#{page.id}_foreground_color_field", class:"page_#{page.id}_hidden_field"%>
-	<%= hidden_field_tag "pages[#{page.id}][third_color]", page.third_color, id:"page_#{page.id}_third_color_field", class:"page_#{page.id}_hidden_field"%>
+	<%= hidden_field_tag "pages[#{page.id}][theme_id]", page.theme_id, id:"page_#{page.id}_theme_id_field", class:"page_#{page.id}_hidden_field"%>
 <% end %>

@@ -28,11 +28,7 @@ function saveArticle(callbackFunction){
 		var id = $(this).find(".page_miniature").data("pageId");
 		$("#page_"+id+"_number_field").val(counter);
 	});
-	//Page colors
-	$("#page_"+current_page_id+"_background_color_field").val($("#page_background_color_edit_field").val());
-	$("#page_"+current_page_id+"_foreground_color_field").val($("#page_foreground_color_edit_field").val());
-	$("#page_"+current_page_id+"_third_color_field").val($("#page_third_color_edit_field").val());
-	
+
 	$("form.edit_article").submit();
 
 	if(callbackFunction!=undefined) saveCallbackFunction = callbackFunction;

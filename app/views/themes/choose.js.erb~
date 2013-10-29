@@ -1,0 +1,1 @@
+modalWindow("Choose a theme:","<%= escape_javascript(render @themes, create_page_theme_relationship: true) %>")

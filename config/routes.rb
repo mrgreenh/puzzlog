@@ -1,5 +1,8 @@
 FragmentsProject::Application.routes.draw do
 
+  get 'themes/choose/:page_id', to: 'themes#choose', as: 'choose_theme'
+  resources :themes
+
   resources :menu_entries
   match 'menu_entries/:id/move', to: 'menu_entries#move', as: 'move_menu_entry'
   
@@ -20,7 +23,7 @@ FragmentsProject::Application.routes.draw do
   resources :page_fragment_relationships, only: [:new,:create,:update,:destroy]
   match 'page_fragment_relationships/move_fragment_to_page', to: 'page_fragment_relationships#move_fragment_to_page', as: 'move_fragment_to_page'
   match 'articles/:id/:page_number', to: 'pages#show'
-  
+  match 'pages/:id/theme/:theme_id', to: 'pages#assign_theme', as: 'assign_theme_to_page'
   #Fragments
   resources :fragments
   #match 'fragments/add_to_puzzle_box/:id', to:'fragments#add_to_puzzle_box', as: 'add_fragment_to_puzzle_box'
