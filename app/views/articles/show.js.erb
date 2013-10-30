@@ -1,6 +1,6 @@
 $(".article_view_container").fadeOut(function(){
 	$("body").animate({
-		backgroundColor:$.xcolor.darken('<%= @page.background_color %>',3,10)
+		backgroundColor:$.xcolor.darken('<%= @page.theme.background_color %>',3,10)
 	}, function(){
 		$(".article_view_fragments_container .fragment_container").popover('hide');
 	

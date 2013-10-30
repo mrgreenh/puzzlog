@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131024042045) do
+ActiveRecord::Schema.define(:version => 20131030031238) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -170,12 +170,9 @@ ActiveRecord::Schema.define(:version => 20131024042045) do
 
   create_table "pages", :force => true do |t|
     t.integer  "number"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "article_id"
-    t.string   "foreground_color"
-    t.string   "background_color"
-    t.string   "third_color"
     t.string   "name"
     t.integer  "theme_id"
   end

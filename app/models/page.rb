@@ -1,12 +1,9 @@
 class Page < ActiveRecord::Base
-  attr_accessible :number, :name, :foreground_color, :background_color, :third_color, :article_id, :theme_id
+  attr_accessible :number, :name, :article_id, :theme_id
   before_destroy :dont_destroy_if_last_page
   
   validates_presence_of :article_id
   validates :name, length: {maximum:160, message: "Page name must be shorter of 160 chars."}
-  validates :background_color, length: {is:7}
-  validates :foreground_color, length: {is:7}
-  validates :third_color, length: {is:7}
   
   belongs_to :article
   belongs_to :theme

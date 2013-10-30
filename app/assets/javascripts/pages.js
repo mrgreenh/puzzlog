@@ -23,9 +23,3 @@ function initializePageNaming(){
 		$(".page_name_edit_field").toggle();
 	});
 }
-
-function initializePageStyling(){
-	console.log("Page styling initialized");
-	//$("#page_background_color_edit_field,#page_foreground_color_edit_field,#page_third_color_edit_field").minicolors('destroy');
-	$("#page_background_color_edit_field,#page_foreground_color_edit_field,#page_third_color_edit_field").minicolors();
-}

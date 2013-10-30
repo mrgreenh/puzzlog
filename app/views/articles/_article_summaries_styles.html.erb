@@ -6,7 +6,7 @@
 		frag_type = fragment.fragment_type
 		 
 		scss_variables = "$background_color: #ffffff;$foreground_color: #000000;$third_color: #555555;"
-		scss_variables = getScssVariables(page)
+		scss_variables = page.theme.getSCSSVariables
 		scss_string =<<EOF
 #{scss_variables}
 #article_#{article.id} {
