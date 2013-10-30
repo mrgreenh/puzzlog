@@ -75,7 +75,6 @@ function initializeArticleEditingControls(){
 	
 	initializePageListDragging();
 	initializePageNaming();
-	initializePageStyling();
     
     newArticleValidation(); //Validazione form articolo
 }
