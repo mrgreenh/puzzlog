@@ -56,6 +56,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.assign_attributes(params[:user])
     @user.assign_attributes(name:params[:name],bio:params[:bio])
+    @user_profile = true
     if @user.save
       render 'show'
     else
@@ -64,6 +65,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user_profile = true
     @user = User.find(params[:id])
   end
   

@@ -13,7 +13,7 @@
 				  <li><a data-toggle="modal" href="#modalLogin" ><i class="icon-user"></i></a></li>
 				  
 				<% elsif signed_in? %>
-					<% if can_create_fragments? and !@article_editing and !@fragment_type_editor_menu %> <!-- allora mostro creazione frammenti e puzzle box -->
+					<% if can_create_fragments? and !@article_editing and !@fragment_type_editor_menu and !@user_profile %> <!-- allora mostro creazione frammenti e puzzle box -->
 						<li class="navbar-text hidden-phone">Create a fragment:</li>
 						<% FragmentType.most_used.limit(5).each do |type|
 						%>
@@ -70,7 +70,10 @@
 						      <%= link_to 'Metadata', '#metadata_bookmark' %>
 						</li>
 					<% end %>
-					<% if not @fragment_type_editor_menu %><li class="hidden-phone"><a href="/box"><i class="icon icon-folder-open"></i> Box</a></li><% end %>
+					<% if not @fragment_type_editor_menu and not @user_profile%><li class="hidden-phone"><a href="/box"><i class="icon icon-folder-open"></i> Box</a></li><% end %>
+					<% if @user_profile %>
+					<%= render 'users/user_custom_menu' %>
+					<% end %>
 					<li class="divider-vertical"></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">

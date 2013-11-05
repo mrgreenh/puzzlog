@@ -49,6 +49,8 @@ class User < ActiveRecord::Base
   
   has_many :bags
 
+  has_many :menu_entries
+
   def create_remember_token
     self.update_attribute(:remember_token, SecureRandom.urlsafe_base64)
   end
