@@ -5,7 +5,9 @@ class FragmentType < ActiveRecord::Base
                   :description
   
   has_many :fragments
-  
+  has_many :fragment_type_library_relationships
+  has_many :libraries, through: :fragment_type_library_relationships, source: :library
+
   validates :name, presence: true, uniqueness: { case_sensitive:false, message:"This name has already been used" }
   validates_presence_of :description
   
@@ -24,6 +26,16 @@ class FragmentType < ActiveRecord::Base
         :order => 'count(*) desc'
   # scope :most_used, find_by_sql('select ft.* from fragments f, fragment_types ft where f.fragment_type_id=ft.id group by ft.id order by count(*) DESC')
   
+  def assign_libraries(ids_array)
+    self.fragment_type_library_relationships.destroy_all
+    if not ids_array.nil? then
+        ids_array.each do |id|
+          self.fragment_type_library_relationships.create(:library_id => id)
+          self.save
+        end
+    end
+  end
+
   def default_data_to_JSON
     ActiveSupport::JSON.encode(self.default_data)
   end

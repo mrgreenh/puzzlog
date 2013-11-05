@@ -12,6 +12,9 @@ $(function(){
 function saveArticle(callbackFunction){
 	stateful_loading($(".article_save_button"));
 	//---------------------------Fragments
+        $(initialized_fragments).each(function(){
+	    this.save();
+	});
 	$(fragments).each(function(){
 		$(".edit_article .fragments_hidden_fields #fragment_"+this.id+"_data").val(JSON.stringify(this.data));
 		$(".edit_article .fragments_hidden_fields #fragment_"+this.id+"_images").val(JSON.stringify(this.images));

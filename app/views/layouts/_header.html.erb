@@ -13,7 +13,7 @@
 				  <li><a data-toggle="modal" href="#modalLogin" ><i class="icon-user"></i></a></li>
 				  
 				<% elsif signed_in? %>
-					<% if can_create_fragments? and !@article_editing %> <!-- allora mostro creazione frammenti e puzzle box -->
+					<% if can_create_fragments? and !@article_editing and !@fragment_type_editor_menu %> <!-- allora mostro creazione frammenti e puzzle box -->
 						<li class="navbar-text hidden-phone">Create a fragment:</li>
 						<% FragmentType.most_used.limit(5).each do |type|
 						%>
@@ -53,7 +53,24 @@
 						</li>
 						<li class="divider-vertical hidden-phone"></li>
 					<% end %>
-					<li class="hidden-phone"><a href="/box"><i class="icon icon-folder-open"></i> Box</a></li>
+					<% if @fragment_type_editor_menu then %>
+						<li class="hidden-phone">
+						      <%= link_to 'Sample', '#sample_bookmark' %>
+						</li>
+						<li class="hidden-phone">
+						      <%= link_to 'Scripts', '#script_bookmark' %>
+						</li>
+						<li class="hidden-phone">
+						      <%= link_to 'Markup and CSS', '#html_bookmark' %>
+						</li>
+						<li class="hidden-phone">
+						      <%= link_to 'Libs and Data', '#libraries_bookmark' %>
+						</li>
+						<li class="hidden-phone">
+						      <%= link_to 'Metadata', '#metadata_bookmark' %>
+						</li>
+					<% end %>
+					<% if not @fragment_type_editor_menu %><li class="hidden-phone"><a href="/box"><i class="icon icon-folder-open"></i> Box</a></li><% end %>
 					<li class="divider-vertical"></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -87,11 +104,15 @@
 					      	<%= link_to 'Blog Settings', menu_entries_path() %>
 					      </li>
 					      <% if can_edit_themes? %>
-						      <li>
-						      	<%= link_to 'Manage Themes', themes_path() %>
-						      </li>					      
+						  <li>
+							<%= link_to 'Manage Themes', themes_path() %>
+						  </li>					      
 					      <% end %>
-
+					      <% if can_edit_libraries? %>
+					          <li>
+						    <%= link_to 'Manage Libraries', libraries_path() %>
+						  </li>
+					      <% end %>
 					      <li>
 					      	<%= link_to 'Profile', user_path(current_user) %>
 					      </li>

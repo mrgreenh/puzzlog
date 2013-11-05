@@ -21,20 +21,22 @@ class FragmentTypesController < ApplicationController
   
   def new
     @fragment_type = FragmentType.new
-    #Some example values to help the developer start programming
+    #Some example values to help the developer start programming. This should be moved in the model as a 'default' status.
     @fragment_type.script=<<EOF
 //viewSelector and editSelector variables contain the ids of the div elements containing the fragment's views
-this.initializeView = function initializeView(){ //This will be called only once, when the fragment is shown
+this.initializeView = function(){ //This will be called only once, when the fragment is shown
   
 }
-this.initializeEdit = function initializeEdit(){ //This will be called only once, when the fragment's editing controls are shown
+this.initializeEdit = function(){ //This will be called only once, when the fragment's editing controls are shown
   
 }
-this.view = function view(){ //Called whenever a user shows the preview tab
+this.view = function(){ //Called whenever a user shows the preview tab. It is also called when a user hits "save".
   
 }
-this.edit = function edit(){ //Called whenever a user shows the edit tab
+this.edit = function(){ //Called whenever a user shows the edit tab
   
+}
+this.save = function(){ //Executed when the user hits save. Can be used for updating the view too
 }
 EOF
     @fragment_type.edit_elements='<input type="text" />'
@@ -43,6 +45,7 @@ EOF
     @fragment_type.default_data='{"title":"Start coding now!"}'
     
     @sample_images = ""
+    @fragment_type_editor_menu = true
   end
   
   def create
@@ -79,6 +82,7 @@ EOF
     @fragments = [@fragment.as_json(only:[:id,:name,:fragment_type_id,:data])]
     
     @sample_images = ""
+    @fragment_type_editor_menu = true
   end
   
   def update
@@ -93,14 +97,16 @@ EOF
                                       summary_fields:params[:summary_fields],
                                       description:params[:description])
     @fragment_type.icon = params[:icon] unless !params[:icon]
+    @fragment_type.assign_libraries(params[:libraries])
     @fragment_type.save
     
     @fragment = Fragment.new(fragment_type_id:@fragment_type.id,data:@fragment_type.default_data, user_id:current_user.id)
     @fragment_types = getFragmentTypes([@fragment])
     @fragments = [@fragment.as_json(only:[:id,:name,:fragment_type_id,:data])]
-    
+    @sample_data   = params[:sample_data]
     @sample_images = params[:sample_images]
     
+    @fragment_type_editor_menu = true
     render 'edit'
   end
   

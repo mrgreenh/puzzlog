@@ -1,5 +1,4 @@
 <% if !@fragment_types.nil? %>
 	fragments = <%= raw(@fragments.to_json) %>;
-	
 	<%= render 'fragment_types/fragment_types_filling_script' %>
 <% end %>

@@ -1,3 +1,14 @@
+<!-- Libraries included for fragment types -->
+<%
+   if @fragment_types then
+     libraries = get_fragment_types_libraries(@fragment_types)
+     libraries.each do |id,library|
+%>
+<%= raw(library.setup)  %>
+<%
+     end
+end %>
+<!-- Fragment types scripts -->
 <script>
 	var fragments = [];
 	var fragment_types = {};
@@ -6,6 +17,7 @@
 	
 </script>
 
+<!-- Fragment types css -->
 <style type="text/css" id="fragments_styles">
 	<%= render 'common_partials/customizable_styles' %>
 </style>

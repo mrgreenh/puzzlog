@@ -27,11 +27,11 @@ class Fragment < ActiveRecord::Base
   end
   
   def title
-    self.name || self.getSummaryHash["title"]
+    self.name || self.getSummaryHash["title"] || ""
   end
   
   def description
-    self.getSummaryHash["description"] || "There is no way to describe this link in a few words, you gotta see this in action on my blog ;)"
+    self.getSummaryHash["description"] || "There is no way to describe this link in a few words, you gotta see this in action :)"
   end
   
   def buildResources(fragment_resources_params)
@@ -47,7 +47,7 @@ class Fragment < ActiveRecord::Base
   end
   
   def getSummaryHash
-    keys = self.fragment_type.summary_fields.split(",")
+    keys = self.fragment_type.summary_fields.split(",").map{|s| s.strip}
     json_data = self.data
     summaryHash = Hash.new()
     keys.each do |v|

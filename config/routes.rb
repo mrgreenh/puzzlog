@@ -1,5 +1,7 @@
 FragmentsProject::Application.routes.draw do
 
+  resources :libraries
+
   get 'themes/choose/:page_id', to: 'themes#choose', as: 'choose_theme'
   resources :themes
 

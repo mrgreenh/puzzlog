@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131030031238) do
+ActiveRecord::Schema.define(:version => 20131101225733) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -71,6 +71,13 @@ ActiveRecord::Schema.define(:version => 20131030031238) do
     t.integer  "fragment_resource_file_file_size"
     t.datetime "fragment_resource_file_updated_at"
     t.hstore   "data"
+  end
+
+  create_table "fragment_type_library_relationships", :force => true do |t|
+    t.integer  "fragment_type_id"
+    t.integer  "library_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "fragment_types", :force => true do |t|
@@ -145,6 +152,13 @@ ActiveRecord::Schema.define(:version => 20131030031238) do
   end
 
   add_index "fragments", ["data"], :name => "fragments_gist_data"
+
+  create_table "libraries", :force => true do |t|
+    t.string   "name"
+    t.text     "setup"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "menu_entries", :force => true do |t|
     t.integer  "article_id"

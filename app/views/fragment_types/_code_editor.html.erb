@@ -20,10 +20,12 @@
 			</fieldset>
 		
 			<!-- Script editor -->
+			<span id="script_bookmark"></span>
 			<div class="coding_area_container">
 				<div id="script_editor" class="coding_area javascript_code"></div>
 			</div>
 			<!-- Markup tabs -->
+			<span id="html_bookmark"></span>
 			<ul class="nav nav-tabs">
 				<li class="active">
 					<a href="#edit_html_editor" data-toggle="tab">Edit HTML</a>
@@ -41,7 +43,35 @@
 				<div id="view_html_editor" class="tab-pane fade in coding_area html_code"></div>
 				<div id="scss_editor" class="tab-pane fade in coding_area scss_code"></div>
 			</div>
+			<span id="libraries_bookmark"></span>
+			<h3>Libraries</h3>
+			<% Library.all.each do |library| %>
+			<fieldset class='fragment_type_library_checkbox'>
+			<%= check_box_tag "libraries[]", library.id, @fragment_type.libraries.find_by_id(library.id) %>
+			<%= label_tag library.id, library.name %>
+			<% end %>
+			</fieldset>
 			
+			<!-- Other options and data faking -->
+			<span id="metadata_bookmark"></span>
+			<h3>Default DATA:</h3>
+			<p>Consider adding to your data model a 'title' and a 'description' field. They will be used by the system to help users easily identify their content.</p>
+			<div class="coding_area_container"><div id="default_data_editor" class="coding_area json_code"></div></div>
+			<fieldset class="form-inline">
+				<%= label_tag 'summary_fields', 'Data\'s fields to be displayed in <noscript>:' %>
+				<%= text_field_tag 'summary_fields', @fragment_type.summary_fields, placeholder: "Separated by comma" %>
+			</fieldset>
+			<h3>Sample images:</h3>
+			<fieldset class="form-inline">
+				<%= label_tag 'images', 'Number of images the user can use:' %>
+				<%= text_field_tag 'images',(@fragment_type.images || "0"), class:"resources_quantity_field" %>
+			</fieldset>
+			<div class="coding_area_container"><div id="sample_images_editor" class="coding_area json_code resource_code_editor"></div></div>
+			<fieldset id="fragment_type_description">
+			<%= label_tag 'description', 'Type a description of this fragment type:' %>
+			<%= text_area_tag 'description',@fragment_type.description %>
+			</fieldset>
+
 			<!-- Hidden fields gathering scripts -->
 			<%= hidden_field_tag 'script', @fragment_type.script %>
 			<%= hidden_field_tag 'edit_elements', @fragment_type.edit_elements %>
@@ -49,25 +79,8 @@
 			<%= hidden_field_tag 'stylesheet', @fragment_type.stylesheet %>
 			<%= hidden_field_tag 'default_data', @fragment_type.default_data_to_JSON %>
 			<%= hidden_field_tag 'sample_images', @sample_images %>
-			
-			<!-- Other options and data faking -->
-			<h3>Default DATA:</h3>
-			<div class="coding_area_container"><div id="default_data_editor" class="coding_area json_code"></div></div>
-			<fieldset class="form-inline">
-				<%= label_tag 'summary_fields', 'Data\'s fields to be displayed in <noscript>:' %>
-				<%= text_field_tag 'summary_fields', @fragment_type.summary_fields, placeholder: "Separated by comma" %>
-			</fieldset>
-			<fieldset>
-			<%= label_tag 'description', 'Type a description of this fragment type:' %>
-			<%= text_area_tag 'description',@fragment_type.description %>
-			</fieldset>
-			<h3>Sample images:</h3>
-			<fieldset class="form-inline">
-				<%= label_tag 'images', 'Number of images the user can use:' %>
-				<%= text_field_tag 'images',(@fragment_type.images || "0"), class:"resources_quantity_field" %>
-				<%= link_to "Capture", "", id:"capture_images_button", class:"btn btn-small btn-primary" %>
-			</fieldset>
-			<div class="coding_area_container"><div id="sample_images_editor" class="coding_area json_code resource_code_editor"></div></div>
+			<%= hidden_field_tag 'sample_data', @sample_data %>
+
 		<%= submit_tag "Save and preview", class:"btn btn-success btn-primary submit_button" %>
 		<% end %>
 	</div>

@@ -34,3 +34,10 @@ $coding_area_height:400px;
 .type_icon_thumb{
   max-width:40px;
 }
+
+.fragment_type_library_checkbox {
+    input, label {
+	float:left;
+	margin-right:10px;
+    }
+}

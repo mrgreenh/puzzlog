@@ -5,7 +5,7 @@ $(function(){
 	initializeResourcesFakers();
 	initializeFragmentTypeSaving();
 	displayImagesCode();
-	setSampleImages();
+	setSampleData();
 });
 
 function initializeAceEditors(){
@@ -36,13 +36,8 @@ function initializeAceEditors(){
 		editors["scss_editor"].setValue($("#stylesheet").val());
 		editors["default_data_editor"].setValue($("#default_data").val());
 		editors["sample_images_editor"].setValue($("#sample_images").val());
+	        
 	}
-	
-	//Images JSON capturing
-	$("#capture_images_button").click(function(){
-		editors["sample_images_editor"].setValue(JSON.stringify(fragments[0].images));
-		return false;
-	});
 }
 
 function initializeResourcesFakers(){
@@ -68,13 +63,20 @@ function initializeFragmentTypeSaving(){
 		$("#view_elements").val(editors["view_html_editor"].getValue());
 		$("#stylesheet").val(editors["scss_editor"].getValue());
 		$("#default_data").val(editors["default_data_editor"].getValue());
+	        displayImagesJSON();
 		$("#sample_images").val(editors["sample_images_editor"].getValue());
+	        $("#sample_data").val(JSON.stringify(fragments[0].data));
 	});
 }
 
-function setSampleImages(){
+function setSampleData(){
 	if($(".coding_area").length>0&&$("#sample_images").val().length>0){ //The first clause checks if we are in the right page
-		var images=JSON.parse($("#sample_images").val());
+		var images          = JSON.parse($("#sample_images").val());
 		fragments[0].images = images;
 	}
+}
+
+function displayImagesJSON(){
+	editors["sample_images_editor"].setValue(JSON.stringify(fragments[0].images));
+	return false;
 }
