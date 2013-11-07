@@ -102,8 +102,9 @@ EOF
     
     @fragment = Fragment.new(fragment_type_id:@fragment_type.id,data:@fragment_type.default_data, user_id:current_user.id)
     @fragment_types = getFragmentTypes([@fragment])
-    @fragments = [@fragment.as_json(only:[:id,:name,:fragment_type_id,:data])]
     @sample_data   = params[:sample_data]
+    @fragment.data = @sample_data
+    @fragments = [@fragment.as_json(only:[:id,:name,:fragment_type_id,:data])]
     @sample_images = params[:sample_images]
     
     @fragment_type_editor_menu = true

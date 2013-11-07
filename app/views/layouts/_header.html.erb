@@ -70,7 +70,7 @@
 						      <%= link_to 'Metadata', '#metadata_bookmark' %>
 						</li>
 					<% end %>
-					<% if not @fragment_type_editor_menu and not @user_profile%><li class="hidden-phone"><a href="/box"><i class="icon icon-folder-open"></i> Box</a></li><% end %>
+					<% if not @fragment_type_editor_menu and not @user_profile and not @article_editing%><li class="hidden-phone"><a href="/box"><i class="icon icon-folder-open"></i> Box</a></li><% end %>
 					<% if @user_profile %>
 					<%= render 'users/user_custom_menu' %>
 					<% end %>

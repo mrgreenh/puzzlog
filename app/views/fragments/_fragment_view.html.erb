@@ -14,14 +14,14 @@ end
 	</noscript>
 </div>
 <% if @aside %>
-	<div class="fragment_aside hidden-phone">
-		<%= render 'fragments/additional_infos', fragment: fragment %>
-	</div>
+	<%= render 'fragments/additional_infos', fragment: fragment %>
 <% else %>
+<% if false #Social buttons temporarily deactivated %>
 	<div class="fragment_interactions_container">
 		<div class="fragment_interactions" id="fragment_<%= fragment.id %>_interactions">
 			<div class="fb-like" data-href="<%= share_url %>" data-width="90" data-colorscheme="dark" data-action="recommend" data-show-faces="false" data-layout="button_count" data-send="false"></div>
 			<a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-text="Check this out:" data-url="<%= share_url %>">Tweet</a>
 		</div>
 	</div>
+<% end %>
 <% end %>

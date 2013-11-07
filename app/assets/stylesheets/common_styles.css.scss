@@ -39,6 +39,17 @@ ul {
   margin:0px;
 }
 
+/*Links in general*/
+a,a:visited,a:hover{
+        color: black;
+}
+a,a:visited{
+        text-decoration:underline;
+}
+a:hover{
+        text-decoration:none;
+}
+
 /*images*/
 img.thumb {
   min-width:$thumb_size;
@@ -57,7 +68,7 @@ img.medium{
   color:#444444;
   font-size:1.5em;
   background-color:#ffffff;
-  padding:10px 25px;
+  padding:10px 10px;
   h2 {
     font-size:0.9em;
   }
@@ -65,8 +76,6 @@ img.medium{
 
 /*Conent containers*/
 .hanging_container {
-    @include diffuse_shade;
-    @include rounded_bottom_corners;
     margin-top:0px;
     margin-bottom:20px;
   }
@@ -128,7 +137,7 @@ h3.popover-title{
 
 .controls_popover_toggler{
   position:absolute;
-  right:0px;
+  right:-40px;
 }
 
 .popover_overlay{

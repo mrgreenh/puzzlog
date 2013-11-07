@@ -55,7 +55,8 @@
 /*Add from box*/
 #puzzle_box_fragments_container.choose_from_puzzle_box_container{
   height:300px;
-  background-color:#f8ffdd;
+  background-color:#ffffff;
+  color:black;
   overflow:hidden;
   #box_bags_sidebar_nav_container,#box_resources_list_container{
     margin:0px 10px;
@@ -64,11 +65,12 @@
   }
 }
 .addFromBoxConfirmationContainer{
+  @include diffuse_shade;
   width:100%;
-  background-color:#332200;
+  background-color:#333333;
   text-align:center;
-  border-bottom:#775500 solid 2px;
-  border-top:#775500 solid 2px;
+  border-bottom:#000000 solid 2px;
+  border-top:#000000 solid 2px;
   .btn{
     margin:5px auto;
   }

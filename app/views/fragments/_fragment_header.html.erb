@@ -1,10 +1,11 @@
 <% fragment ||= @fragment %>
 <header>
-	<%= link_to fragment_path(fragment) do %>
-		<i class="icon icon-eye-open icon-white"></i>
-	<%end%> 
-	
 	<% if not fragment.publication_date.nil?||fragment.publication_date.blank? %>
 	<p><strong><%= fragment.user.name %></strong>, <%= time_tag fragment.publication_date %></p>
 	<% end %>
+
+	<%= link_to fragment_path(fragment) do %>
+	[Details]
+	<%end%> 
+
 </header>

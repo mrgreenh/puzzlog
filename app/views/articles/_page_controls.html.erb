@@ -21,12 +21,6 @@
 	<%= link_to page_path(@page), remote:true, method: :delete, :data => { :confirm => 'ADD TO YOUR PUZZLE BOX ALL THE FRAGMENTS YOU WANT TO KEEP BEFORE DELETING THIS PAGE. Continue?' }, class:'btn btn-danger' do %>
 		<i class="icon icon-white icon-trash"></i> Delete page
 	<% end %>
-</div>
-<div class="page_styling_controls">
-	  <div class="control-group">
-	    <label class="control-label">Theme</label>
-	    <div class="controls">
-	      <%= link_to 'Choose Theme',  choose_theme_path(@page), class: 'btn btn-primary btn-small', remote: true %>
-	    </div>
-	  </div>
+	<%= link_to 'Theme',  choose_theme_path(@page), class: 'btn btn-primary theme_button', remote: true %>
+
 </div>

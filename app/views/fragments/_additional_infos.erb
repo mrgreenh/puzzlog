@@ -1,11 +1,14 @@
-<div class="also_appears_in">
-<% if not @article.nil? and fragment.user!=@article.user%>
+<div class="fragment_aside hidden-phone <% if not any_additional_info_rendered(fragment) %> hide <% end %> ">
+<% 
+if not @article.nil? and fragment.user!=@article.user
+%>
 	<p>Fragment by <strong><%= fragment.user.name %></strong></p>
-<% end %>
-<%
+<% end
+
 appears_in_articles = fragment.articles(@article)
 if not appears_in_articles.count==0
 %>
+<div class="also_appears_in">
 		<p>Also appears in:</p>
 		<ul>
 			<% appears_in_articles.each do |id, article_metadata| %>
@@ -17,4 +20,5 @@ if not appears_in_articles.count==0
 <%
 end
 %>
+</div>
 </div>

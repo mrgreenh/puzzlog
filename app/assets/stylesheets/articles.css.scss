@@ -23,52 +23,55 @@
   color:$header_light_grey;
   p {
     font-size: 0.7em;
-    text-align:right;
+    text-align:center;
     margin:0px auto;
-    float:left;
-    width:40%;
+    width:100%;
   }
   h1 {
     font-size:1.5em;
-    line-height:1.2em;
-    width:60%;
-    float:left;
+    line-height:1em;
+    width:100%;
     margin:0px auto;
+    text-align:center;
   }
   h2 {
-    margin-top:10px;
-    float:left;
-    max-width:40%;
+    width:100%;
     color:black;
     line-height:1em;
+    text-align:center;
+      em{
+	  margin-left:10px;
+	  font-style:normal;
+	  color:$light_gray;
+	  font-size:0.8em;
+      }
   }
 }
 
 .article_partial {
-  @include small-diffuse-shade;
-  @include rounded_corners;
   position:relative;
   padding:30px 0px;
   margin: 0px 0px 30px 0px;
   header {
-    background-color:$header_dark_grey;
-    color:$header_light_grey;
+    border-style: none none solid none;
+    border-width:1px;
+    border-color:$delicate-gray;
     h1{
       font-size:1.3em;
-      line-height:1.2em;
+      line-height:1em;
+      text-align:left;
     }
-  }
-  .article-summary{
-    @include bottom-small-border;
+    h2{
+      display:none;
+    }
+    p{
+	text-align:left;
+    }
   }
   footer {
     text-align:center;
-    
     .read_more_link{
-      img {
-        margin:5px auto;
-       }
-      font-size:1.4em;
+      font-size:1.2em;
       &:hover{
         text-decoration:none;
       }
@@ -80,9 +83,12 @@
     margin-top:20px;
   }
   #chapters_outline{
-    @include small_sharp_shade;
-    background-color:white;
+    @include dashed_borders;
     width:90%;
+    ul{
+	width:80%;
+	margin:auto;
+    }
   }
   aside{
     min-height:1px;
@@ -93,15 +99,24 @@
       text-align:left;
     }
   }
-  .pager{
-    .next_page_link_container a, .previous_page_link_container a{
-      width:100px;
+    .next_page_link_container, .previous_page_link_container{
+      width:50%;
+      text-align:center;
+      float:left;
+      margin:20px auto;
+      a{
+	  color:$light_gray;
+    	  font-size:30px;
+    	  text-decoration:none;
+      }
     }
-  }
   
 }
 
 .article_edit_container {
+  .controls_popover_toggler{
+      right:0px;
+  }
   .article_title {
     text-align:center;
   }
@@ -138,17 +153,21 @@
     }
   }
   .page_controls{
+    @include very_gentle_shade;
+    @include dashed_borders;
     color:black;
+    div{
+	width:80%;
+	margin:10px auto;
+    }
     .page_name_editing_controls{
       position:relative;
       .page_name {
       font-size:1.3em;
       line-height:1.3em;
-      width:100%;
       word-wrap: break-word;
       }
       .page_name_edit_field{
-        width:100%;
         display:none;
       }
       .page_name_edit_button {
@@ -172,12 +191,14 @@
       }
     }
   }
-  
+
   ul.pages_list{
      list-style-type:none;
   }
   
   .pages_list_container{
+    @include very_gentle_shade;
+    @include dashed_borders;
     color:black;
     padding:10px;
     ul{
@@ -222,9 +243,8 @@
     .article_fragment_edit_controls {
       width:180px;
       position:absolute;
-      
-      top:0px;
-      right:25px;
+      top:-4px;
+      right:50px;
       display:none;
       li {
         float:left;

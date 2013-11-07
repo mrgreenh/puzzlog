@@ -3,6 +3,6 @@
 		@previous_page = @article.pages.find_by_number(@page.number-1)
 %>
 	<%= link_to page_path(page_id:@previous_page.id), remote:true, title:"View previous page", class:"previous_page_link" do %>
-		<i class="icon icon-chevron-left"></i> Page <%= @page.number-1 %>
+		< <%= @page.number-1 %>
 	<% end %>
 <% end %>

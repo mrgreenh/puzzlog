@@ -23,6 +23,10 @@ module FragmentsHelper
   def fragments_streamline(index=1,number=8)
     Fragment.where('public=?',true).order('publication_date DESC').offset((index.to_i-1)*number.to_i).limit(index.to_i*number.to_i)
   end
+
+  def any_additional_info_rendered(fragment=@fragment)
+    (not @article.nil? and fragment.user!=@article.user) or fragment.articles(@article).any?
+  end
   
   #---------------------------------------Privileges
   def can_create_fragments?
