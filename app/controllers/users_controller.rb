@@ -1,6 +1,11 @@
 # coding: utf-8
 class UsersController < ApplicationController
+  include ApplicationHelper
   include UsersHelper
+  include ArticlesHelper
+  include FragmentsHelper
+
+  ITEMS_PER_LOAD = 4
   
   #--------------------------------------------Priviledges
   before_filter :user_create_filter, only:[:new,:create]
@@ -67,6 +72,11 @@ class UsersController < ApplicationController
   def show
     @user_profile = true
     @user = User.find(params[:id])
+    build_streamline(params[:index],ITEMS_PER_LOAD,@user)
+    respond_to do |format|
+      format.html
+      format.js { render 'common_partials/infinite_scroll' }
+    end
   end
   
   def index

@@ -4,19 +4,14 @@
     <%=  render 'static_pages/initialize_blog' %>
 <%  else %>
 <div class="container">
-	<div class="row">
-	<div class="offset2 span8 main_streamline">
-		<%
-			@streamline_elements.each do |elem| %>
-			<%= render 'articles/article', article:elem if elem.class.name=="Article" %>
-			<%= render 'fragments/fragment', fragment:elem, streamlined_fragment:true, popover_controls:true, fragment_header:true if elem.class.name=="Fragment" %>	
-			<% end
-		%>
-	</div>
-</div>
+    <div class="row">
+	    <div class="offset2 span8 main_streamline">
+		    <%= render 'common_partials/streamline'  %>
+	    </div>
+    </div>
 </div>
 <div class="row">
-	<div class="offset2 span8">
+	<div class="offset5 span2">
 		<%= render 'static_pages/load_streamline_button'%>
 	</div>
 </div>

@@ -20,8 +20,14 @@ module FragmentsHelper
     return fragment_types
   end
   
-  def fragments_streamline(index=1,number=8)
-    Fragment.where('public=?',true).order('publication_date DESC').offset((index.to_i-1)*number.to_i).limit(index.to_i*number.to_i)
+  def fragments_streamline(index=0,count=8,user=nil)
+    if user.nil? then
+      first_query = Fragment.where('public=?',true)
+    else
+      first_query = Fragment.where('public=? AND user_id=?',true,user.id)
+    end
+
+    first_query.order('publication_date DESC').offset((index.to_i)*count.to_i).limit(count.to_i)
   end
 
   def any_additional_info_rendered(fragment=@fragment)

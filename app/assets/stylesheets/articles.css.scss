@@ -83,8 +83,10 @@
     margin-top:20px;
   }
   #chapters_outline{
+    @include very_gentle_shade;
     @include dashed_borders;
     width:90%;
+    border-top-style:none;
     ul{
 	width:80%;
 	margin:auto;

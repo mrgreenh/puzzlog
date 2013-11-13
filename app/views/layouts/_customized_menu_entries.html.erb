@@ -1,0 +1,7 @@
+<ul class="nav">
+  <% get_customized_menu_user.menu_entries.each do |entry| %>
+	<li>
+	  <%= link_to entry.title, article_path(entry.article_id) if entry.link_type=="article" %>
+	</li>
+  <% end %>
+</ul>

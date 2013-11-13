@@ -1,8 +1,12 @@
 <%
 	index ||= @index
-	number ||= @number
-	remote_bool ||= false
+	count ||= @count
+	remote_bool ||= true
 %>
 <div class="streamline_loading_button">
-	<%= link_to 'More', streamline_path(index:index, number:number), class:'btn btn-large btn-primary', remote:remote_bool %>
+  <% if @streamline_elements.size == count then %>
+	<%= link_to '[ More stuff ]', streamline_path(index:index, number:count), class:"load_streamline_button stateful_loading", remote:remote_bool, "data-loading-text" => "Loading..." %>
+   <% else %>
+        <span class="load_streamline_button">No more stuff :(</a>
+   <% end %>
 </div>

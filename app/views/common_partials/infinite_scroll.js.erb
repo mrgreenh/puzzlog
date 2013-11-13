@@ -1,0 +1,19 @@
+$(".main_streamline").fadeOut(function(){
+    $(".main_streamline").scrollTop(0);
+    $(".main_streamline").html("<%= escape_javascript(render 'common_partials/streamline') %>");
+    $(".streamline_loading_button").replaceWith("<%= escape_javascript(render 'static_pages/load_streamline_button') %>")
+    <%= render 'fragments/fragments_filling_script' %>
+    $("#fragments_styles").html("<%= escape_javascript(render 'common_partials/customizable_styles')%>");
+    initializeAllFragments();
+    $(".main_streamline").fadeIn(function(){
+	//These can be refactored in one function call (for articles and streamline)
+	initializeControlsPopovers();
+	initializeArticleViewControls();
+	//Social interactions re-initialized
+        //FB.init({xfbml:true})
+	//twttr.widgets.load();
+    });
+    
+});
+
+

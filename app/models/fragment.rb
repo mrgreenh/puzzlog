@@ -21,7 +21,7 @@ class Fragment < ActiveRecord::Base
     articles = {}
     self.pages.order('updated_at DESC').each do |page|
       article = page.article
-      articles[article.id] = {:title => article.title, :user => article.user.name, :updated_at => article.updated_at} unless !except_article.nil? and except_article.id == article.id
+      articles[article.id] = {:title => article.title, :user => article.user.name, :updated_at => article.updated_at} unless (!except_article.nil? and except_article.id == article.id) or not article.public
     end
     return articles
   end

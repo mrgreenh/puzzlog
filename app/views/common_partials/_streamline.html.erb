@@ -1,0 +1,6 @@
+<%
+  @streamline_elements.each do |elem| %>
+  <%= render 'articles/article', article:elem if elem.class.name=="Article" %>
+  <%= render 'fragments/fragment', fragment:elem, streamlined_fragment:true, popover_controls:true, fragment_header:true if elem.class.name=="Fragment" %>	
+<% end
+%>

@@ -50,4 +50,7 @@ $(function(){
 	initializeControlsPopovers();
 	flashMessages();
 	$("li a.create_fragment_button").tooltip({placement:'bottom'});
+        $(".load_streamline_button").click(function(){
+	    stateful_loading($(this));
+	});
 });

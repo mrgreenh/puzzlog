@@ -6,7 +6,7 @@
 
 @mixin dashed_borders {
   border-style:dashed;
-  border-color:#delicate_gray;
+  border-color:$delicate_gray;
   border-width:1px 1px 1px 1px;
 }
 
