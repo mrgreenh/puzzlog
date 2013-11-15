@@ -1,18 +1,13 @@
-<nav class="navbar-inner">
-<div class="container">
-    <%= link_to get_customized_menu_user.name, user_path(get_customized_menu_user), class: 'brand hidden-phone' if not get_customized_menu_user.nil? %>
+<nav class="customized_menu">
+    <div class="customized_title">
+	<%= link_to get_customized_menu_user.name, user_path(get_customized_menu_user), class: 'brand' if not get_customized_menu_user.nil? %>
+    </div>
     <% if not signed_in? %>
-    <div class="pull-right">
-	<ul class="nav">
-		<li>
-		  <a data-toggle="modal" href="#modalLogin" ><i class="icon-user"></i></a>
-		</li>
-
-	</ul>
+    <div class="right_side hidden-phone">
+	<div class="customized_menu_entries">
+	  <%= render 'layouts/customized_menu_entries' if get_customized_menu_user %>
+	</div>
+	<a data-toggle="modal" class="login_button" href="#modalLogin" ><i class="icon-user"></i></a>
     </div>
     <% end %>
-    <div class="pull-right">
-      <%= render 'layouts/customized_menu_entries' if get_customized_menu_user %>
-    </div>
-</div>
 </nav>

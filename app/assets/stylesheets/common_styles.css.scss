@@ -192,6 +192,33 @@ h3.popover-title{
   }
 }
 
+/*Customized menu*/
+.customized_menu{
+    .customized_title{
+	@include very_gentle_shade;
+	width:30%;
+	float:left;
+	border-radius:0px 30px 30px 0px;
+	padding-right:10px;
+	a{
+	    width:100%;
+	    text-align:right;
+	    text-decoration:none;
+	}
+    }
+    .right_side{
+	@include very_gentle_shade;
+	width:60%;
+	padding-top:3px;
+	float:right;
+	border-radius:35px 0px 0px 35px;
+	.login_button{
+	    float:right;
+	    margin:10px 20px;
+	}
+    }
+}
+
 /*------------------------Tables*/
 table .table-key{
   font-weight:bold;

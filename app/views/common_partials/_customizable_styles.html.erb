@@ -4,16 +4,24 @@
 		scss_variables = @page.theme.getSCSSVariables
 		#----------------------------------------------------Page-level styles
 		page_css =<<EOF
-body {
-	background-color: $background_color;
+body, .article_content_container, .left_article_controls nav #chapters_outline, .article_content_container .fragment_aside, .main_container .article_header, .navbar .customized_menu{
+    color: $foreground-color;
+    background-color:$background-color;
+    border-color: $fourth_color;
+    a, li a {
+	color: $third_color;
+	text-shadow:none;
+    }
 }
-.article_content_container {
-	background-color: $background_color;
-	color: $foreground_color;
+
+.customized_menu{
+    .customized_title, .right_side{
+      background-color: $background_color;
+      -webkit-box-shadow:  3px 3px 2px 2px $fourth_color;     
+      box-shadow:  3px 3px 2px 2px $fourth_color;
+    }
 }
-.article_edit_container h1{
-	color:$foreground_color;
-}
+
 /*Fragment interactions*/
 .fragment_interactions{
 	background-color: darken($background_color,35%);
