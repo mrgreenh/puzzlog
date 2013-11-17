@@ -242,13 +242,17 @@ h3.popover-title{
     .customized_menu_entries{
 	ul.nav{
 	    width:100%;
-	}
-	li{
-	    float:none;
-	    width:100%;
-	    text-align:center;
-	    border-bottom-style:dashed;
-	    border-width:1px;
+	    li{
+		float:none;
+		width:100%;
+		text-align:center;
+		border-bottom-style:dashed;
+		border-width:1px;
+	    }
+	    li.small_mobile_menu_entry a{
+		font-size:0.7em;
+		padding: 2px inherit;
+	    }
 	}
     }
 }
