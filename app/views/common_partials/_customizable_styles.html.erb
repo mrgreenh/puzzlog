@@ -1,56 +1,56 @@
 <%
-     	scss_variables = Theme.default.getSCSSVariables
-	if @page
-		scss_variables = @page.theme.getSCSSVariables
-		#----------------------------------------------------Page-level styles
-		page_css =<<EOF
-body, .article_content_container, .left_article_controls nav #chapters_outline, .article_content_container .fragment_aside, .main_container .article_header, .navbar .customized_menu{
+        scss_variables = Theme.default.getSCSSVariables
+        if @page
+                scss_variables = @page.theme.getSCSSVariables
+                #----------------------------------------------------Page-level styles
+                page_css =<<EOF
+body, .article_content_container, .left_article_controls nav #chapters_outline, .article_content_container .fragment_aside, .main_container .article_header, .navbar .customized_menu, .navbar .customized_mobile_menu{
     color: $foreground-color;
     background-color:$background-color;
-    border-color: $fourth_color;
     a, li a {
-	color: $third_color;
-	text-shadow:none;
+        color: $third_color;
+        text-shadow:none;
+    }
+    a:hover, li a:hover{
+	color: $foreground-color;
     }
 }
 
-.customized_menu{
+.customized_menu, .customized_mobile_menu{
     .customized_title, .right_side{
       background-color: $background_color;
-      -webkit-box-shadow:  3px 3px 2px 2px $fourth_color;     
+      -webkit-box-shadow:  3px 3px 2px 2px $fourth_color;
       box-shadow:  3px 3px 2px 2px $fourth_color;
     }
 }
-
-/*Fragment interactions*/
-.fragment_interactions{
-	background-color: darken($background_color,35%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,darken($background_color,40%)), color-stop(19%,darken($background_color,30%)), color-stop(100%,darken($background_color,25%))); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top, darken($background_color,40%) 0%,darken($background_color,30%) 19%,darken($background_color,25%) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top, #1e5799 0%,#207cca 19%,#7db9e8 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top, #1e5799 0%,#207cca 19%,#7db9e8 100%); /* IE10+ */
-	background: linear-gradient(to bottom, darken($background_color,40%) 0%,darken($background_color,30%) 19%,darken($background_color,25%) 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='darken($background_color,40%)', endColorstr='darken($background_color,25%)',GradientType=0 ); /* IE6-9 */
+.customized_mobile_menu{
+    .customized_menu_entries li{
+	border-color: $fourth_color;
+    }
+    .customized_title{
+	border-color: $fourth_color;
+    }
 }
 
 #{@page.theme.stylesheet}
 EOF
 
-		scss_string = "#{scss_variables} #{page_css}"
-		sass_engine = Sass::Engine.new(scss_string,:syntax => :scss) %>
-		<%= sass_engine.render %>
-	<% end
-	if !@fragment_types.nil?
-  		@fragment_types.each do |k,frag_type|
-			scss_string = "#{scss_variables} .fragment_type_#{k} { #{frag_type.stylesheet}}"
-  			sass_engine = Sass::Engine.new(scss_string,:syntax => :scss) %>
-  			<%= sass_engine.render %>
-	<% end
+                scss_string = "#{scss_variables} #{page_css}"
+                sass_engine = Sass::Engine.new(scss_string,:syntax => :scss) %>
+                <%= sass_engine.render %>
+        <% end
+        if !@fragment_types.nil?
+                @fragment_types.each do |k,frag_type|
+                        scss_string = "#{scss_variables} .fragment_type_#{k} { #{frag_type.stylesheet}}"
+                        sass_engine = Sass::Engine.new(scss_string,:syntax => :scss) %>
+                        <%= sass_engine.render %>
+        <% end
 end
 
-if !@articles.nil?
-	@articles.each do |article| %>
-			<%= render 'articles/article_summaries_styles', article: article %>
-	<% end	
+#This used to apply themes' styles to every article cover in case a theme was used in that fragment's context:
+if !@articles.nil? and false
+         @articles.each do |article| %>
+                         <%= render 'articles/article_summaries_styles', article: article %>
+         <% end
 end
 %>

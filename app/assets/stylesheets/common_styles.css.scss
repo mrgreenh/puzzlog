@@ -26,7 +26,7 @@ textarea{
 .expanded-centered {
   @include centered_content;
   width:100%;
-  
+
 }
 
 .gentle-shade {
@@ -160,7 +160,7 @@ h3.popover-title{
     .close{
       color:white;
       opacity: 1;
-    } 
+    }
   }
 }
 
@@ -194,27 +194,61 @@ h3.popover-title{
 
 /*Customized menu*/
 .customized_menu{
+    .customized_title, .right_side{
+	background-color: white;
+    }
     .customized_title{
-	@include very_gentle_shade;
-	width:30%;
-	float:left;
-	border-radius:0px 30px 30px 0px;
-	padding-right:10px;
-	a{
-	    width:100%;
-	    text-align:right;
-	    text-decoration:none;
-	}
+        @include very_gentle_shade;
+        width:30%;
+        float:left;
+        border-radius:0px 30px 30px 0px;
+        padding-right:10px;
+        a{
+            width:100%;
+            text-align:right;
+            text-decoration:none;
+        }
     }
     .right_side{
-	@include very_gentle_shade;
-	width:60%;
-	padding-top:3px;
-	float:right;
-	border-radius:35px 0px 0px 35px;
-	.login_button{
-	    float:right;
-	    margin:10px 20px;
+        @include very_gentle_shade;
+        width:60%;
+        padding-top:3px;
+        float:right;
+        border-radius:35px 0px 0px 35px;
+        .login_button{
+            float:right;
+            margin:10px 20px;
+        }
+    }
+}
+.customized_mobile_menu{
+    div.customized_title{
+	box-shadow: none;
+	-webkit-box-shadow: none;
+	padding: 10px 0px;
+	border-bottom-style: dashed;
+	border-width:1px;
+	a{
+            text-decoration:none;
+            display:block;
+            &#mobile_title{
+		text-align:center;
+		font-size: 30px;
+		font-weight:bold;
+		border-bottom-style:none;
+            }
+	}
+    }
+    .customized_menu_entries{
+	ul.nav{
+	    width:100%;
+	}
+	li{
+	    float:none;
+	    width:100%;
+	    text-align:center;
+	    border-bottom-style:dashed;
+	    border-width:1px;
 	}
     }
 }

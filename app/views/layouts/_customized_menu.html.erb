@@ -1,13 +1,31 @@
-<nav class="customized_menu">
+<nav class="customized_menu hidden-phone">
     <div class="customized_title">
-	<%= link_to get_customized_menu_user.name, user_path(get_customized_menu_user), class: 'brand' if not get_customized_menu_user.nil? %>
+        <%= link_to get_customized_menu_user.name, user_path(get_customized_menu_user), class: 'brand' if not get_customized_menu_user.nil? %>
     </div>
     <% if not signed_in? %>
-    <div class="right_side hidden-phone">
-	<div class="customized_menu_entries">
-	  <%= render 'layouts/customized_menu_entries' if get_customized_menu_user %>
-	</div>
-	<a data-toggle="modal" class="login_button" href="#modalLogin" ><i class="icon-user"></i></a>
+    <div class="right_side">
+        <div class="customized_menu_entries">
+          <ul class="nav">
+              <%= render 'layouts/customized_menu_entries' if get_customized_menu_user %>
+          </ul>
+        </div>
+        <a data-toggle="modal" class="login_button" href="#modalLogin" ><i class="icon-user"></i>Login</a>
+    </div>
+    <% end %>
+</nav>
+
+<nav class="customized_mobile_menu visible-phone">
+    <div class="customized_title">
+        <%= link_to get_customized_menu_user.name, "#", id:'mobile_title' if not get_customized_menu_user.nil? %>
+        <%= link_to new_session_path do %>Login<% end %>
+    </div>
+    <% if not signed_in? %>
+    <div class="customized_menu_entries hide">
+      <ul class="nav">
+          <li><%= link_to 'Home', user_path(get_customized_menu_user) if not get_customized_menu_user.nil? %></li>
+          <%= render 'layouts/customized_menu_entries' if get_customized_menu_user %>
+          <li><%= link_to new_session_path do %>Login<% end %></li>
+      </ul>
     </div>
     <% end %>
 </nav>

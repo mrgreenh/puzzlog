@@ -1,35 +1,35 @@
 <% provide :title, full_title(@user.name) %>
 <div class="container">
-	<div class="row user-info-container">
-		<div class="offset2 span8">
-			<div class="hero-unit">
-			  <div class="row">
-			  	<div class="span6"><h1><%= @user.name %></h1></div>
-			  </div>
-			  <div class="row">
-			  	<div class="span6"><h2><%= pluralize(@user.articles.count, "article") %>, <%= pluralize(@user.fragments.count, "fragment") %></h2></div>	
-			  </div>
-			  <div class="row">
-			  	<div class="span3"><%= image_tag @user.avatar.url(:medium), class: @user.avatar.exists? ? 'gentle-shade' : '' %></div><div class="span3"><p><%= @user.bio %></p></div>
-			  </div>
-			  <div class="row">
-			  	<div class="offset1 span4">
-			  		<%= render 'users/user_controls', user:@user, remote_bool: false%>
-			  	</div>
-			  </div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="offset2 span8 main_streamline">
-			<%= render 'common_partials/streamline'  %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="offset5 span2">
-			<%= render 'static_pages/load_streamline_button'%>
-		</div>
-	</div>
+  <!--  <div class="row user-info-container">
+                <div class="offset2 span8">
+                        <div class="hero-unit">
+                          <div class="row">
+                                <div class="span6"><h1><%= @user.name %></h1></div>
+                          </div>
+                          <div class="row">
+                                <div class="span6"><h2><%= pluralize(@user.articles.count, "article") %>, <%= pluralize(@user.fragments.count, "fragment") %></h2></div>
+                          </div>
+                          <div class="row">
+                                <div class="span3"><%= image_tag @user.avatar.url(:medium), class: @user.avatar.exists? ? 'gentle-shade' : '' %></div><div class="span3"><p><%= @user.bio %></p></div>
+                          </div>
+                          <div class="row">
+                                <div class="offset1 span4">
+                                        <%= render 'users/user_controls', user:@user, remote_bool: false%>
+                                </div>
+                          </div>
+                        </div>
+                </div>
+        </div> -->
+        <div class="row">
+                <div class="offset2 span8 main_streamline">
+                        <%= render 'common_partials/streamline'  %>
+                </div>
+        </div>
+        <div class="row">
+                <div class="offset5 span2">
+                        <%= render 'static_pages/load_streamline_button'%>
+                </div>
+        </div>
 </div>
 
 <%= render 'users/priviledges_modal', user: @user%>
