@@ -15,3 +15,9 @@
 /tmp
 
 /public/images/uploads
+/test
+
+*~
+*.DS_Store
+*.DS_Store?
+.metadata/
