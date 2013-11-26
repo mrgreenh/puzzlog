@@ -22,7 +22,7 @@ class PageFragmentRelationshipsController < ApplicationController
         format.js
       end
     else
-      @fragment_types = FragmentType.most_used
+      @fragment_types = FragmentType.all
       respond_to do |format|
         format.js
       end
