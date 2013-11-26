@@ -13,7 +13,7 @@ class FragmentImage < FragmentResource
   
   validates_attachment :fragment_resource_file,
   :content_type => { :content_type => /^image\/(jpg|jpeg|pjpeg|png|x-png|gif)$/, :message => 'file type is not allowed (only jpeg/png/gif images)' },
-  :size => { :in => 0..9.megabytes }
+  :size => { :in => 0..14.megabytes }
   
   def as_json(options={})
     result = super(options)

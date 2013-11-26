@@ -34,6 +34,7 @@ class ArticlesController < ApplicationController
     @article_editing=true
     @page = @article.pages.order('number ASC').first
     @fragments = @page.ordered_fragments
+    @include_all_libraries = true #Quick temporary solution
     @fragment_types = getFragmentTypes(@fragments)
   end
 

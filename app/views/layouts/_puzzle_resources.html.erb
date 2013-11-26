@@ -1,13 +1,16 @@
 <!-- Libraries included for fragment types -->
 <%
-   if @fragment_types then
+   libraries = {}
+   if @fragment_types and not @include_all_libraries then
      libraries = get_fragment_types_libraries(@fragment_types)
-     libraries.each do |id,library|
+   elsif @include_all_libraries then
+     Library.all.each{|lib| libraries[lib.id]=lib}
+   end                       
+
+   libraries.each do |id,library|
 %>
 <%= raw(library.setup)  %>
-<%
-     end
-end %>
+<%end %>
 <!-- Fragment types scripts -->
 <script>
 	var fragments = [];

@@ -9,7 +9,7 @@ if @show_og_twitter_meta
 	<meta name="twitter:creator:id" content="<%= twitter_id %>">
 	<meta name="twitter:domain" content="<%= app_domain %>">
 	<% if not @fragment.nil? %>
-		<% if @fragment.fragment_type.has_images? %>
+		<% if @fragment.fragment_type.has_images? and @fragment.images.size>0%>
 		<meta property="og:image" content="<%= @fragment.images.first.getImageUrl(:medium) %>"/>
 		<% end %>
 	<% elsif not @article.nil?

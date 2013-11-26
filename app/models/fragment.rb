@@ -59,7 +59,6 @@ class Fragment < ActiveRecord::Base
   def as_json(options={})
     result = super(options)
     result[:data] = self.data
-    
     #Resources
     result[:images] = Hash.new()
     self.images.each do |image|
@@ -78,11 +77,11 @@ class Fragment < ActiveRecord::Base
   
   def data=(val)
     if val.kind_of? String
-      begin
-        val = ActiveSupport::JSON.decode(val)
-      rescue
+     begin
+        val = JSON.parse(val)
+     rescue
         val = {}
-      end
+     end
     end
     write_attribute(:data, val)
   end

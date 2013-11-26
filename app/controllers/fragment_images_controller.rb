@@ -30,7 +30,8 @@ class FragmentImagesController < ApplicationController
       fragment_image = FragmentImage.new(fragment_resource_file:image[1]["file"],user_id:current_user.id,description:image[1]["description"])
       
       if fragment_image.save
-        flash[:success] = "Images saved!"
+        flash[:success] = "Images saved! Due to a temporary problem in a library used by this functionality, the file upload is not working properly. The uploaded files have been automatically added to your box, you can therefore add the pictures from the box."
+        params[:add_to_box] = true
         imagesBagAssignment(fragment_image)
         @created_images[fragment_image.id] = fragment_image.as_json(only: [:id,:description])
       else
@@ -38,7 +39,7 @@ class FragmentImagesController < ApplicationController
       end
     end
     
-    @fragment_images = current_user.fragment_images.order('updated_at DESC')
+#    @fragment_images = current_user.fragment_images.order('updated_at DESC')
     respond_to do |format|
       format.js
     end
