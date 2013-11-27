@@ -62,6 +62,7 @@ class UsersController < ApplicationController
     @user.assign_attributes(params[:user])
     @user.assign_attributes(name:params[:name],bio:params[:bio])
     @user_profile = true
+    build_streamline(params[:index],ITEMS_PER_LOAD,@user)
     if @user.save
       render 'show'
     else
