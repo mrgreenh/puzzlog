@@ -18,6 +18,8 @@ class UsersController < ApplicationController
     if @user.nil?
       @user = User.new
     end
+    @not_customized_menu = true # quick horrible patch, fix better when it's not late night
+    render 'new'
   end
 
   def create
