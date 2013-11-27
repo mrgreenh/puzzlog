@@ -38,14 +38,16 @@ class PagesController < ApplicationController
     page = Page.find(params[:id])
     deleted_page_number = page.number
     @article = page.article
-    if page.destroy
-      @article.pages.where('number>?', deleted_page_number).each do |p|
-        p.number-=1
-        p.save
+    if @article.pages.count>0
+      if page.destroy
+        @article.pages.where('number>?', deleted_page_number).each do |p|
+          p.number-=1
+          p.save
+        end
+      else
+        page.page_fragment_relationships.destroy_all
+        page.update_attributes(name:"")
       end
-    else
-      page.page_fragment_relationships.destroy_all
-      page.update_attributes(name:"")
     end
     @page = @article.pages.order('number ASC').first
     @fragments = @page.ordered_fragments
@@ -60,7 +62,7 @@ class PagesController < ApplicationController
     @article = Article.find(params[:id]) if params[:page_id].nil?
     @page = params[:page_id].nil? ? @article.pages.find_by_number(params[:page_number]) : Page.find(params[:page_id])
     @article = @page.article unless params[:page_id].nil?
-    
+
     @fragments = @page.ordered_fragments
     @fragment_types = getFragmentTypes(@fragments)
     

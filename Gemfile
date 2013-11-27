@@ -4,7 +4,7 @@ ruby "1.9.3"
 
 gem 'rails', '3.2.1'
 gem 'json'
-gem 'jquery-rails'
+gem 'jquery-rails', "2.3.0" #instead of 3.0.4
 gem 'bcrypt-ruby', '~> 3.0.1'
 gem 'pg'
 gem 'faker'
@@ -16,8 +16,8 @@ gem 'bootstrap-sass', '~> 2.3.2.1'
 gem 'dynamic_form'
 gem 'aws-sdk', '~> 1.3.4'
 gem 'heroku'
-gem "remotipart", "~> 1.0"
-gem "activerecord-postgres-hstore"
+gem "remotipart", "1.0.5" #instead of "~> 1.0"
+gem "activerecord-postgres-hstore", "0.3.0"
 gem "yajl-ruby"
 
 group :assets do

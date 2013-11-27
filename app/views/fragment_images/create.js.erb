@@ -1,10 +1,9 @@
-//This code is a workaround and a temporary patch for remotipart's problem with evaluating the script returned by the server
-</textarea>
-<script>
-	<% @displayed_message = flash[:success] || flash[:errors] %>
+//This is the original code, to place back when remotipart will work again
 
-	var old_class = parent.document.querySelector("#genericModalWindow").className;
-	parent.document.querySelector("#genericModalWindow").className = old_class.replace("in","out");
-	alert("<%= @displayed_message  %>");
-</script>
-<textarea>
+modalWindow("","<%= escape_javascript(render 'layouts/flash_messages') %>");
+
+//Update the object that might have requested the upload
+fragmentImagesInjection(<%= "#{@created_images.to_json}".html_safe %>);
+
+//Update anything in the page regarding bags
+<%= render 'bags/update_views' %>
