@@ -128,6 +128,7 @@ function initializeFragmentControls(){
 	
 	//Updating data field on submit
 	$("#new_fragment, .edit_fragment").submit(function(){
+	        initialized_fragments[0].save();
 		$("#new_fragment #fragment_data, .edit_fragment #fragment_data").val(JSON.stringify(fragments[0].data));
 		$("#new_fragment #fragment_resources_images, .edit_fragment #fragment_resources_images").val(JSON.stringify(fragments[0].images));
 	});
