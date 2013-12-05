@@ -39,6 +39,9 @@ Don't hesistate to contact me if either this installation guide doesn't work for
 
 Have fun!
 
+##License
+(C) Copyright 2013 Carlo Andrea Conte carloandreaconte@icloud.com GPL v2 License
+
 [online]: http://puzzlog.herokuapp.com
 [RVM]: https://rvm.io/rvm/install/
 [RailsInstaller]: http://railsinstaller.org
