@@ -35,10 +35,9 @@ rails s
 Open a browser window and navigate to
 	http://localhost:3000
 	
-Have fun!
-
-For any question carloandreaconte@icloud.com
 Don't hesistate to contact me if either this installation guide doesn't work for you, or you would like to fork/try puzzlog, or any other problem.
+
+Have fun!
 
 [online]: http://puzzlog.herokuapp.com
 [RVM]: https://rvm.io/rvm/install/
