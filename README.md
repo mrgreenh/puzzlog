@@ -14,23 +14,33 @@ Install PostgreSQL (Puzzlog has been developed with version 9.1.3) and create a 
 * Password: "postgres"
 If you want, you can modify these parameters in config/database.yml
 
+Install [ImageMagick]:
+If you are on a mac and you use MacPorts it's as easy as:
+'''
+sudo port install ImageMagick
+'''
+
 Now you are ready to go, you only miss the code:
-	git clone git@heroku.com:puzzlogproject.git
+	git clone https://github.com/mrgreenh/puzzlog.git
 
 Open a terminal window and reach the project folder, then type:
-	bundle install
-	bundle exec rake db:create
-	bundle exec rake db:migrate
-	bundle exec rake db:seed
-	rails s
+```
+bundle install
+bundle exec rake db:create
+bundle exec rake db:migrate
+bundle exec rake db:seed
+rails s
+```
 
 Open a browser window and navigate to
 	http://localhost:3000
 	
 Have fun!
 
-For any question 'carloandreaconte@icloud.com'
+For any question carloandreaconte@icloud.com
+Don't hesistate to contact me if either this installation guide doesn't work for you, or you would like to fork/try puzzlog, or any other problem.
 
 [online]: http://puzzlog.herokuapp.com
 [RVM]: https://rvm.io/rvm/install/
 [RailsInstaller]: http://railsinstaller.org
+[ImageMagick]: http://www.imagemagick.org/script/binary-releases.php#macosx
