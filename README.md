@@ -16,9 +16,9 @@ If you want, you can modify these parameters in config/database.yml
 
 Install [ImageMagick]:
 If you are on a mac and you use MacPorts it's as easy as:
-'''
+```
 sudo port install ImageMagick
-'''
+```
 
 Now you are ready to go, you only miss the code:
 	git clone https://github.com/mrgreenh/puzzlog.git
