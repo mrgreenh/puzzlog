@@ -2,7 +2,7 @@
 	if @page!=@article.pages.order('number ASC').last
 		@next_page = @article.pages.find_by_number(@page.number+1)
 %>
-	<%= link_to page_path(page_id:@next_page.id), remote:true, title:"View next page", class:"next_page_link" do %>
+	<%= link_to article_path(:page_number => @next_page.number), remote:true, title:"View next page", class:"next_page_link" do %>
 		<%= @page.number+1 %> ></i>
 	<% end %>
 <% end %>
