@@ -1,6 +1,10 @@
 <nav class="customized_menu hidden-phone">
     <div class="customized_title">
-        <%= link_to get_customized_menu_user.name, user_path(get_customized_menu_user), class: 'brand' if not @not_customized_menu and not get_customized_menu_user.nil? %>
+      <% if not @not_customized_menu and not get_customized_menu_user.nil? %>
+        <%= link_to get_customized_menu_user.name, user_path(get_customized_menu_user), class: 'brand' %>
+      <% elsif not @not_customized_menu and get_customized_menu_user.nil? %>
+              	<%= link_to 'PuzzLog', root_path, class: 'brand hidden-phone' %>
+      <% end %>
     </div>
     <% if not signed_in? %>
     <div class="right_side">
