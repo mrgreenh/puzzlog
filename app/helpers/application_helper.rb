@@ -38,8 +38,7 @@ module ApplicationHelper
     @streamline_elements = (@articles+streamline_fragments).sort_by(&:publication_date).reverse[lower_limit..upper_limit]
 
     #per caricare gli script e gli stili
-    @fragments = article_summaries_fragments(@articles)+streamline_fragments
-    @fragments = streamline_fragments
+    @fragments = article_summaries_fragments(@streamline_elements.select{|e| e.class.name=="Article"})+@streamline_elements.select{|e| e.class.name=="Fragment"}
     @fragment_types = getFragmentTypes(@fragments)
     
     @index = index.to_i + 1
