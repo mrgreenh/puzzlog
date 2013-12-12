@@ -26,16 +26,25 @@ module ApplicationHelper
   end
 
   def build_streamline(index=0,count=8,user=nil)
-     @articles = ArticlesHelper.streamline(index,(count/2).to_i,user)
-     streamline_fragments = FragmentsHelper.streamline(index,(count/2).to_i,user)
-     @streamline_elements = (@articles+streamline_fragments).sort_by(&:publication_date).reverse
+    index = index.to_i
+    count = count.to_i
+    
+    @articles = ArticlesHelper.streamline(index,user)
+    streamline_fragments = FragmentsHelper.streamline(index,user)
+    
+    lower_limit = index*count
+    upper_limit = (index*count)+count-1
 
-     #per caricare gli script e gli stili
-     @fragments = article_summaries_fragments(@articles)+streamline_fragments
-     @fragment_types = getFragmentTypes(@fragments)
+    @streamline_elements = (@articles+streamline_fragments).sort_by(&:publication_date).reverse[lower_limit..upper_limit]
 
-     @index = index.to_i + 1
-     @count = count
+    #per caricare gli script e gli stili
+    @fragments = article_summaries_fragments(@articles)+streamline_fragments
+    @fragments = streamline_fragments
+    @fragment_types = getFragmentTypes(@fragments)
+    
+    @index = index.to_i + 1
+    @count = count
+    @more_stuff = upper_limit<@streamline_elements.count-1
   end
 
   def get_customized_menu_user

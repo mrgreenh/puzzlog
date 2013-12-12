@@ -4,7 +4,7 @@
 	remote_bool ||= true
 %>
 <div class="streamline_loading_button">
-  <% if @streamline_elements.size == count then %>
+  <% if @more_stuff then %>
 	<%= link_to '[ More stuff ]', streamline_path(index:index, number:count), class:"load_streamline_button stateful_loading", remote:remote_bool, "data-loading-text" => "Loading..." %>
    <% else %>
         <span class="load_streamline_button">No more stuff :(</a>

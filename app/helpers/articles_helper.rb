@@ -1,11 +1,11 @@
 module ArticlesHelper
-  def self.streamline(index=0,count=8,user=nil)
+  def self.streamline(index=0,user=nil)
     if user.nil? then
       first_query = Article.where('public=?', true)
     else
       first_query = Article.where('public=? and user_id=?', true,user.id)
     end
-    first_query.order('publication_date DESC').offset((index.to_i)*count.to_i).limit(count.to_i)
+    first_query
   end
   
   def article_summaries_fragments(articles)
