@@ -27,7 +27,7 @@ module ApplicationHelper
 
   def build_streamline(index=0,count=8,user=nil)
      @articles = ArticlesHelper.streamline(index,(count/2).to_i,user)
-     streamline_fragments = fragments_streamline(index,(count/2).to_i,user)
+     streamline_fragments = FragmentsHelper.streamline(index,(count/2).to_i,user)
      @streamline_elements = (@articles+streamline_fragments).sort_by(&:publication_date).reverse
 
      #per caricare gli script e gli stili

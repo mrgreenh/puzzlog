@@ -20,7 +20,7 @@ module FragmentsHelper
     return fragment_types
   end
   
-  def fragments_streamline(index=0,count=8,user=nil)
+  def self.streamline(index=0,count=8,user=nil)
     if user.nil? then
       first_query = Fragment.where('public=?',true)
     else
