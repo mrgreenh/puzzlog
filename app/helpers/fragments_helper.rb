@@ -26,8 +26,7 @@ module FragmentsHelper
     else
       first_query = Fragment.where('public=? AND user_id=?',true,user.id)
     end
-
-    first_query
+    first_query || []
   end
 
   def any_additional_info_rendered(fragment=@fragment)

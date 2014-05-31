@@ -5,7 +5,7 @@ module ArticlesHelper
     else
       first_query = Article.where('public=? and user_id=?', true,user.id)
     end
-    first_query
+    first_query || []
   end
   
   def article_summaries_fragments(articles)

@@ -43,7 +43,7 @@ module ApplicationHelper
     
     @index = index.to_i + 1
     @count = count
-    @more_stuff = upper_limit<@streamline_elements.count
+    @more_stuff = upper_limit<@streamline_elements.count-1
   end
 
   def get_customized_menu_user
