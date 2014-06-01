@@ -29,6 +29,7 @@ end
 
 group :development, :test do
   gem 'annotate'
+  gem 'debugger'
 end
 
 # To use Jbuilder templates for JSON
