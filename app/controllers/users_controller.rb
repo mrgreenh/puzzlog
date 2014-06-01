@@ -4,8 +4,6 @@ class UsersController < ApplicationController
   include UsersHelper
   include ArticlesHelper
   include FragmentsHelper
-
-  ITEMS_PER_LOAD = 4
   
   #--------------------------------------------Priviledges
   before_filter :user_create_filter, only:[:new,:create]
@@ -64,7 +62,7 @@ class UsersController < ApplicationController
     @user.assign_attributes(params[:user])
     @user.assign_attributes(name:params[:name],bio:params[:bio])
     @user_profile = true
-    build_streamline(params[:index],ITEMS_PER_LOAD,@user)
+    build_streamline(params[:index],nil,@user)
     if @user.save
       render 'show'
     else
@@ -75,7 +73,7 @@ class UsersController < ApplicationController
   def show
     @user_profile = true
     @user = User.find(params[:id])
-    build_streamline(params[:index],ITEMS_PER_LOAD,@user)
+    build_streamline(params[:index],nil,@user)
     respond_to do |format|
       format.html
       format.js { render 'common_partials/infinite_scroll' }
