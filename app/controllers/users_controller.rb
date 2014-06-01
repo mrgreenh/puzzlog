@@ -62,7 +62,7 @@ class UsersController < ApplicationController
     @user.assign_attributes(params[:user])
     @user.assign_attributes(name:params[:name],bio:params[:bio])
     @user_profile = true
-    build_streamline(params[:index],nil,@user)
+    build_streamline(index = params[:index],user = @user)
     if @user.save
       render 'show'
     else
@@ -73,7 +73,7 @@ class UsersController < ApplicationController
   def show
     @user_profile = true
     @user = User.find(params[:id])
-    build_streamline(params[:index],nil,@user)
+    build_streamline(index=params[:index],user=@user)
     respond_to do |format|
       format.html
       format.js { render 'common_partials/infinite_scroll' }

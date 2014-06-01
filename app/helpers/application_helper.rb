@@ -25,9 +25,9 @@ module ApplicationHelper
     "69243134"
   end
 
-  def build_streamline(index=0,count=8,user=nil)
-    index = index.to_i
+  def build_streamline(index=0,count=4,user=nil)
     count = count.to_i
+    index = index.to_i
     @articles = ArticlesHelper.streamline(user)
     streamline_fragments = FragmentsHelper.streamline(user)
     

@@ -8,7 +8,7 @@ include FragmentsHelper
   end
   
   def streamline
-    build_streamline(params[:index])
+    build_streamline(index = params[:index])
     respond_to do |format|
       format.html { render 'home' }
       format.js { render 'common_partials/infinite_scroll' }
